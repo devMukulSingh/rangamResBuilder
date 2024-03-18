@@ -330,8 +330,8 @@ const ExperienceForm = () => {
                                             render={({ field }) => (
                                                 <div className="grid grid-cols-7 gap-2">
                                                     {
-                                                        skills.map(skill => (
-                                                            <FormItem>
+                                                        skills.map((skill,index) => (
+                                                            <FormItem key={index}>
                                                                 <FormControl>
                                                                     <Skill onChange={field.onChange} skill={skill}/>
                                                                 </FormControl>
