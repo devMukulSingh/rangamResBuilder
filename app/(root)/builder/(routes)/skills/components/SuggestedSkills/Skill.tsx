@@ -38,15 +38,23 @@ const Skill: React.FC<SkillProps> = ({
             <div
                 onClick={handleSelect}
                 className={
-                    `p-5
+                    `py-5
+                        px-3
+                        h-12
+                        w-full
+                        flex 
+                        items-center
                          bg-white
-                          rounded-md
+                          rounded-sm
+                          shadow-md
                            cursor-pointer
                             ${skillsFromState.length > 0 && skillsFromState.includes(skill) ?
                         'border-4 border-red-400 transition scale-90' : ''} 
                             `}
             >
-                <h1>{skill}</h1>
+                <h1 className='text-sm text-neutral-500'>
+                    {skill}
+                </h1>
             </div>
 
         </>

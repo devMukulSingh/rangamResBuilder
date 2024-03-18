@@ -7,12 +7,12 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
 import { setTechnicalSkills } from "@/redux/slice/userSlice";
 import { useParams, useRouter } from "next/navigation";
 import { setProgress } from "@/redux/slice/userSlice";
-import Skill from "./Skill";
+import Skill from "../../../../builder/(routes)/skills/components/SuggestedSkills/Skill";
 import { useEffect, useState } from "react";
 import { PlusCircle } from "lucide-react";
 import { setFormComp } from "@/redux/slice/commonSlice";
 import Spinner from "@/components/commons/Spinner";
-import SkillsSkeleton from "./SkillsSkeleton";
+import SkillsSkeleton from "../../../../builder/(routes)/skills/components/SuggestedSkills/SkillsSkeleton";
 import { motion } from "framer-motion"
 
 
@@ -70,71 +70,71 @@ const SkillsForm = () => {
 
     return (
         <motion.div
-        animate={{ x: 1,opacity:[0,1] }}
-        initial={{ x: -150,opacity:0 }}
-        transition={{ duration: 0.2 }}
-      >
-        <div className="p-5 space-y-5">
-            <section>
-                <h1 className=" font-semibold mb-5">Select AI Suggested Skill</h1>
-                <div className="grid grid-cols-2 gap-5" >
-                    {
-                        aiSuggestedSkills.length > 0 ? aiSuggestedSkills.map((skill) => (
-                            <Skill
-                                skill={skill}
-                                key={skill}
-                            />
-                        ))
-                            :
-                            <SkillsSkeleton />
-                    }
-
-                </div>
-
-            </section>
-
-            <Form {...form} >
-                <form onSubmit={form.handleSubmit(onSubmit)} onChange={handleChange}>
-                    <div className="flex flex-col gap-5">
+            animate={{ x: 1, opacity: [0, 1] }}
+            initial={{ x: -150, opacity: 0 }}
+            transition={{ duration: 0.2 }}
+        >
+            <div className="p-5 space-y-5">
+                <section>
+                    <h1 className=" font-semibold mb-5">Select AI Suggested Skill</h1>
+                    <div className="grid grid-cols-2 gap-5" >
                         {
-                            controlledFields.map((item, index) => (
-                                <FormField
-                                    key={index}
-                                    name={`customSkills.${index}.skillName`}
-                                    control={form.control}
-                                    render={({ field }) => (
-                                        <FormItem >
-                                            <FormControl>
-                                                <Input
-                                                    className="bg-white py-8" {...field}
-                                                    placeholder="You didn't find? Enter your skill" />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
+                            aiSuggestedSkills.length > 0 ? aiSuggestedSkills.map((skill) => (
+                                <Skill
+                                    skill={skill}
+                                    key={skill}
                                 />
                             ))
+                                :
+                                <SkillsSkeleton />
                         }
 
-                        <Button
-                            type="button"
-                            onClick={handleAddMore}
-                            variant="ghost"
-                            className="self-start flex items-center gap-2 bg-transparent"
-                        >
-                            <PlusCircle />
-                            Add more Skill
-                        </Button>
-                        <Button
-                            type="submit"
-                            className="w-full py-6">
-                            Next
-                        </Button>
                     </div>
-                </form>
-            </Form>
-        </div>
-    </motion.div>
+
+                </section>
+
+                <Form {...form} >
+                    <form onSubmit={form.handleSubmit(onSubmit)} onChange={handleChange}>
+                        <div className="flex flex-col gap-5">
+                            {
+                                controlledFields.map((item, index) => (
+                                    <FormField
+                                        key={index}
+                                        name={`customSkills.${index}.skillName`}
+                                        control={form.control}
+                                        render={({ field }) => (
+                                            <FormItem >
+                                                <FormControl>
+                                                    <Input
+                                                        className="bg-white py-8" {...field}
+                                                        placeholder="You didn't find? Enter your skill" />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                ))
+                            }
+
+                            <Button
+                                type="button"
+                                onClick={handleAddMore}
+                                variant="ghost"
+                                className="self-start flex items-center gap-2 bg-transparent"
+                            >
+                                <PlusCircle />
+                                Add more Skill
+                            </Button>
+                            <Button
+                                type="submit"
+                                className="w-full py-6">
+                                Next
+                            </Button>
+                        </div>
+                    </form>
+                </Form>
+            </div>
+        </motion.div>
     )
 
 }

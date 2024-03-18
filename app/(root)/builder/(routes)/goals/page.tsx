@@ -52,8 +52,8 @@ const GoalsPage = () => {
 
             <div className='grid grid-cols-4 gap-10 mt-10'>
                 {
-                    goals.map((goal) => (
-                        <SingleGoal goal={goal} />
+                    goals.map((goal,index) => (
+                        <SingleGoal key={index} goal={goal} />
                     ))
                 }
             </div>
