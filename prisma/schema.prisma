@@ -1,0 +1,35 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Profession {
+  id         Int      @id @default(autoincrement())
+  name       String
+  skills     Skills[] @relation("professionToSkills")
+  bio        Bio[]    @relation("professionToBio")
+}
+
+model Skills {
+  id                      Int    @id @default(autoincrement())
+  name                    String
+  professionId            Int
+  profession              Profession  @relation("professionToSkills", fields: [professionId], references: [id])
+}
+
+model Bio{
+  id                Int                 @id@default(autoincrement())
+  point             String              @db.VarChar(500)
+  professionId      Int       
+  profession        Profession          @relation("professionToBio",fields: [professionId],references: [id])
+}
