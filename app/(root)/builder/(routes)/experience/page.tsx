@@ -1,0 +1,48 @@
+import { Button } from '@/components/ui/button'
+import Link from 'next/link'
+import ExperienceForm from '@/app/(root)/builder/(routes)/experience/components/ExperienceForm'
+
+const ExperiencePage = () => {
+
+    return (
+        <div
+            className='
+        flex 
+        flex-col
+        gap-5 
+        border
+        min-h-[calc(100vh-6rem)]
+        px-20
+        py-10
+        w-full
+        '>
+            <h1
+                className='
+                    text-4xl
+                    font-bold
+                '>
+                4/6 Experience
+            </h1>
+            <h1 className='text-xl text-neutral-600'>
+                Your experience tells a story of your career progression. Share the details and let's capture the essence of your expertise together.
+            </h1>
+
+            <ExperienceForm />
+
+            <div className='mt-auto flex justify-between'>
+                <Link href={'/builder/skills'}>
+                    <Button className='w-40'>
+                        Back
+                    </Button>
+                </Link>
+                <Link href={'/builder/prosummary'}>
+                    <Button className='w-40'>
+                        Next
+                    </Button>
+                </Link>
+            </div>
+        </div>
+    )
+}
+
+export default ExperiencePage

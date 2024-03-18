@@ -13,20 +13,23 @@ export interface IpersonalInfo {
 
 export interface Iexperience {
   companyName: string
-  employer: string
-  role: string
-  address: string
+  jobTitle: string
   startDate: string
   endDate: string
-  checkbox: boolean
-  description: string
   id: string
-  bio: string
+  checkboxWorkingStatus: boolean
+  checkboxVolunteering: boolean
+  checkboxInternship: boolean
+  selectedSkills:string[]
+  // address: string
+  // description: string
+  // bio: string
+  // employer: string
 }
 export interface ItechnicalSkills {
   aiGenSkills: string[]
   customSkills: {
-    skillName:string
+    skillName: string
   }[]
 }
 export interface Ieducation {
@@ -37,8 +40,7 @@ export interface Ieducation {
   startDate: string
   endDate: string
   id: string
-  percentage: number,
-
+  percentage: number
 }
 export interface Icontact {
   linkedIn: string
@@ -59,6 +61,6 @@ export interface Iprojects {
   id: string
 }
 
-export interface Iachievements{
-  value:string
+export interface Iachievements {
+  value: string
 }
