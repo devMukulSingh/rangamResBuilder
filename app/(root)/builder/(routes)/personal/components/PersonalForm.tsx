@@ -66,7 +66,7 @@ const PersonalForm = () => {
     });
 
     const onSubmit = async (data: formSchema) => {
-        router.push('/templates');
+        router.push('/builder/goals');
         dispatch(resetForm());
         dispatch(setPersonalInfo(data));
     }

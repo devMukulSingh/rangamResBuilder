@@ -1,4 +1,5 @@
 // 'use client'
+import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
@@ -16,10 +17,10 @@ const Landing = () => {
         <h1 className='text-xl'>RANGAM will help you build an AI-enabled resume to allow employers contact you easily.</h1>
         <h1 className="text-xl mt-5">Experience how our AI technology can swiftly evaluate your background and generate a professional resume in just 10 minutes.  Your resume is crucial - make it stand out.</h1>
         <Link href={'/steps'}>
-          <button
-            className='px-5 py-2 w-52 mt-14 text-white rounded-md bg-red-500'>
+          <Button
+            className='px-5 py-2 w-52 mt-14 text-white rounded-md bg-red-400'>
             Get Started
-          </button>
+          </Button>
         </Link>
       </div>
 

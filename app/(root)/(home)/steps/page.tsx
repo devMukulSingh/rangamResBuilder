@@ -17,7 +17,7 @@ const StepsPage = () => {
                
                 <Link
                     className='ml-auto w-60 h-10'
-                    href={'/builder'}>
+                    href={'/builder/personal'}>
                     <Button className='w-full' >
                         Create a RESUME
                     </Button>
