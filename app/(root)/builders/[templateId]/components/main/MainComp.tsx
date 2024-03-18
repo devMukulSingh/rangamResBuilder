@@ -15,7 +15,9 @@ const MainComp: React.FC<MainCompProps> = ({
 
 
   return (
-    <FormComponent />
+    <>
+ {/* <FormComponent /> */}
+    </>
   )
 }
 
