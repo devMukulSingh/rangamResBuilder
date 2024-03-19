@@ -1,34 +1,32 @@
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import Circle from '@/components/commons/Circle'
-import SuggestedSummary from './components/SuggestedSummary'
-import MainSummary from './components/MainSummary'
 
-const ProSummaryPage = () => {
 
+const EducationPage = () => {
     return (
         <div
             className='
-        flex 
-        flex-col
-        gap-5 
-        border
-        min-h-[calc(100vh-6rem)]
-        px-20
-        py-10
-        w-full
-        '>
+flex 
+flex-col
+gap-5 
+border
+min-h-[calc(100vh-6rem)]
+px-20
+py-10
+w-full
+'>
             <header className='flex flex-col gap-5'>
                 <div className='flex gap-5'>
                     <Circle>
-                        5
+                        6
                     </Circle>
                     <h1
                         className='
-                    text-4xl
-                    font-bold
-                    '>
-                        Professional Summary
+            text-4xl
+            font-bold
+            '>
+                        Education
                     </h1>
                 </div>
                 <h1 className='text-xl text-neutral-600'>
@@ -36,8 +34,7 @@ const ProSummaryPage = () => {
                     and experience or select our generated personalized summary for you.
                 </h1>
             </header>
-
-            <MainSummary />
+            
 
             <div className='mt-auto flex justify-between'>
                 <Link href={'/builder/experience'}>
@@ -55,4 +52,4 @@ const ProSummaryPage = () => {
     )
 }
 
-export default ProSummaryPage
+export default EducationPage

@@ -11,7 +11,7 @@ const Landing = () => {
     //   animate={{ opacity: [0, 1], scale: [0.9, 1] }}
     //   transition={{ duration: 0.4 }}
     // >
-    <div className="px-5 h-[calc(100vh-8.5rem)] w-full md:px-10 lg:px-20 flex flex-col justify-center gap-20 py-10 md:flex-row">
+    <div className="px-5  w-full md:px-10 lg:px-20 flex flex-col justify-center gap-20 py-10 md:flex-row">
       <div className='flex flex-col gap-5 w-2/3'>
         <h1 className='text-4xl font-bold'>Hi Candidate,</h1>
         <h1 className='text-xl'>RANGAM will help you build an AI-enabled resume to allow employers contact you easily.</h1>
@@ -24,12 +24,18 @@ const Landing = () => {
         </Link>
       </div>
 
-      <Image
-        width={100}
-        height={50}
-        className="w-1/3 mt-20 h-fit"
-        src={'./next.svg'}
-        alt="landingImg" />
+      <figure className="
+      relative
+      w-[20rem]
+      h-[20rem]
+      mt-20
+      ">
+        <Image
+          fill
+          className=""
+          src={'/CV.png'}
+          alt="landingImg" />
+      </figure>
     </div>
     // </motion.div>
   )

@@ -18,6 +18,7 @@ const Circle: FC<NumberProps> = ({
                         `
                         bg-red-400
                         flex
+                        shrink-0
                         items-center
                         justify-center
                         text-4xl 

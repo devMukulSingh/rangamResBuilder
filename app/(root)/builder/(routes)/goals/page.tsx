@@ -8,19 +8,19 @@ const GoalsPage = () => {
     const goals = [
         {
             title: 'Fulltime',
-            img: ''
+            img: '/Fulltime.png'
         },
         {
             title: 'Young Professional',
-            img: ''
+            img: '/Young.png'
         },
         {
             title: 'Student',
-            img: ''
+            img: '/Student.png'
         },
         {
             title: 'Others',
-            img: ''
+            img: '/Others.png'
         }
     ]
     return (
@@ -56,7 +56,16 @@ const GoalsPage = () => {
                 for you
             </h1>
 
-            <div className='grid grid-cols-4 gap-10 mt-10'>
+            <div className='
+                grid 
+                lg:grid-cols-4
+                md:grid-cols-3
+                sm:grid-cols-2
+                grid-cols-1 
+                gap-10 
+                mt-10
+                
+                '>
                 {
                     goals.map((goal, index) => (
                         <SingleGoal key={index} goal={goal} />

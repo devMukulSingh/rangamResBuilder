@@ -5,7 +5,7 @@ import Steps from './components/Steps'
 
 const StepsPage = () => {
     return (
-        <div className='flex gap-10 px-20 py-10 h-[calc(100vh-8.25rem)]'>
+        <div className='flex px-20 py-10 '>
 
             <div className='flex flex-col gap-8 w-2/3 '>
 
@@ -13,8 +13,8 @@ const StepsPage = () => {
                     3 steps to create a resume
                 </h1>
 
-               <Steps/>
-               
+                <Steps />
+
                 <Link
                     className='ml-auto w-60 h-10'
                     href={'/builder/personal'}>
@@ -26,11 +26,14 @@ const StepsPage = () => {
             </div>
 
             <figure
-                className='relative w-[30rem] h-[30rem] self-end'>
+                className='
+                relative
+                size-[20rem] 
+                self-center'>
                 <Image
                     fill
                     alt='resumeImg'
-                    src={'./next.svg'} />
+                    src={'/3Steps.png'} />
             </figure>
         </div>
     )
