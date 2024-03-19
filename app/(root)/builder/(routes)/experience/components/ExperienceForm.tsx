@@ -8,9 +8,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
 import { useEffect, useState } from "react";
 import { Plus, PlusCircle, Trash } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
-import { useParams, useRouter } from "next/navigation";
 import { setProgress } from "@/redux/slice/userSlice";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import toast from "react-hot-toast";
 import dynamic from "next/dynamic";
 import { setFormComp } from "@/redux/slice/commonSlice";
@@ -42,7 +40,7 @@ const ExperienceForm = () => {
                     checkboxVolunteering: false,
                     checkboxInternship: false,
                     selectedSkills: [],
-                    description:''
+                    description: ''
                     // employer: '',
                     // address: '',
                     // bio: '',
@@ -128,7 +126,7 @@ const ExperienceForm = () => {
     // }
 
     useEffect(() => {
-        setExpanded(controlledFields[0]?.id);
+        // setExpanded(controlledFields[0]?.id);
     }, [])
 
     // useEffect(() => {
@@ -151,7 +149,7 @@ const ExperienceForm = () => {
     // }, [controlledFields.length]);
     const skills = [
         "HTML", "React", "NEXT", "Express", "ShadcnUI", "Tailwind",
-        "HTML", "React", "NEXT" ,"Swelte"
+        "HTML", "React", "NEXT", "Swelte"
     ]
     return (
         // <motion.div
@@ -341,7 +339,7 @@ const ExperienceForm = () => {
                                                             </FormItem>
                                                         ))
                                                     }
-                                                    <div 
+                                                    <div
                                                         className="
                                                         flex
                                                         items-center
@@ -349,12 +347,12 @@ const ExperienceForm = () => {
                                                         col-span-2
                                                         cursor-pointer
                                                     ">
-                                                        <Plus color="#EF4444"/>
-                                                        <h1 
+                                                        <Plus color="#EF4444" />
+                                                        <h1
                                                             className="
                                                             text-red-500
                                                             ">
-                                                        Load More key responsibility
+                                                            Load More key responsibility
                                                         </h1>
                                                     </div>
                                                 </div>

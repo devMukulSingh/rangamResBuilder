@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks"
 import { setSelectedBio } from "@/redux/slice/userSlice";
-import BioSkeleton from "./BioSkeleton";
+import BioSkeleton from "../../../../builder/(routes)/prosummary/components/BioSkeleton";
 
 
 const SuggestedBio = () => {

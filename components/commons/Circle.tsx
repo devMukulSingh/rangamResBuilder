@@ -1,28 +1,38 @@
+import { cn } from "@/lib/utils"
 import { FC, ReactNode } from "react"
 
 interface NumberProps {
-    children: ReactNode
+    children: ReactNode,
+    className?: string
 }
 
 const Circle: FC<NumberProps> = ({
-    children
+    children,
+    className
 }) => {
     return (
         <>
             <div
-                className='bg-red-400
-                    flex
-                    items-center
-                    justify-center
-                    text-4xl 
-                rounded-full 
-                text-white
-                w-10
-                h-10
-                shadow-md
-                '>
+                className={
+                    cn(
+                        `
+                        bg-red-400
+                        flex
+                        items-center
+                        justify-center
+                        text-4xl 
+                        rounded-full 
+                        text-white
+                        w-10
+                        h-10
+                        shadow-md
+                        `,
+                        className
+                    )
+                }
+            >
                 {children}
-            </div>
+            </div >
         </>
     )
 }
