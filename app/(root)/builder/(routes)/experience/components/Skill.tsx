@@ -1,38 +1,38 @@
 import { useAppDispatch, useAppSelector } from '@/redux/hooks/hooks';
-import { setTechnicalSkills } from '@/redux/slice/userSlice';
 import React, { useEffect, useState } from 'react'
 
 interface SkillProps {
     skill: string,
-    onChange : () => void
-
+    onChange : (skills:string[]) => void,
+    index:number,
+    handleChange : () => void
 }
 
 const Skill: React.FC<SkillProps> = ({
     skill,
+    onChange,
+    handleChange,
+    index
 }) => {
-
-    const [isMounted, setIsMounted] = useState(false);
-    const dispatch = useAppDispatch();
-    const skillsFromState: string[] = useAppSelector(state => state.persistedReducer.technicalSkills?.aiGenSkills) || [];
-
+    
+    if(skill ==='') return null;
+    const skillsFromState:string[] = useAppSelector( state => state.persistedReducer.experience?.[index]?.selectedSkills) || [];
+    
     const handleSelect = () => {
-
+        
         const alreadySelected = skillsFromState.find((item) => item === skill);
         if (alreadySelected) {
             const filtered = skillsFromState.filter(item => item !== skill);
-            dispatch(setTechnicalSkills({ aiGenSkills: filtered }));
+            onChange(filtered)
+            handleChange();
         }
         else {
-            dispatch(setTechnicalSkills({ aiGenSkills: [...skillsFromState, skill] }));
+            onChange([...skillsFromState,skill]);
+            handleChange();
+            
         }
     };
 
-    useEffect(() => {
-        setIsMounted(true);
-    }, []);
-
-    if (!isMounted) return null;
 
     return (
         <>
@@ -40,6 +40,7 @@ const Skill: React.FC<SkillProps> = ({
                 onClick={handleSelect}
                 className={
                     `py-5
+                        transition
                         px-3
                         h-12
                         w-full

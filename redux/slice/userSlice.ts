@@ -11,41 +11,54 @@ import {
 import { createSlice } from '@reduxjs/toolkit'
 
 export interface IinitialState {
-  personalInfo: IpersonalInfo 
+  personalInfo: IpersonalInfo
   experience: Iexperience[] | null
-  technicalSkills: ItechnicalSkills 
+  technicalSkills: ItechnicalSkills
   education: Ieducation[] | null
   contact: Icontact | null
   achievements: Iachievements[] | null
   languages: Ilanguages[] | null
   projects: Iprojects[] | null
   progress: number
-  sidebar: boolean,
-  aiSuggestedSkills:string[],
-  aiSuggestedBio : string[]
+  sidebar: boolean
+  aiSuggestedSkills: string[]
+  aiSuggestedBio: string[]
 }
 
 const initialState: IinitialState = {
-    personalInfo: {
-    fullName: "",
-    email: "",
-    profession: "",
-    address: "",
-    countryCode: "",
-    mobile: "",
-    state: "",
-    dob: "",
-    birthPlace: "",
-    bio: "",
+  personalInfo: {
+    fullName: '',
+    email: '',
+    profession: '',
+    address: '',
+    countryCode: '',
+    mobile: '',
+    state: '',
+    dob: '',
+    birthPlace: '',
+    bio: ''
   },
-  experience: null,
+  experience: [
+    {
+      companyName: '',
+      jobTitle: '',
+      startDate: '',
+      endDate: '',
+      id: '',
+      checkboxWorkingStatus: false,
+      checkboxVolunteering: false,
+      checkboxInternship: false,
+      selectedSkills: [],
+      description: '',
+    }
+  ],
   technicalSkills: {
-    aiGenSkills:[],
+    aiGenSkills: [],
     customSkills: [
       {
-        skillName:''
+        skillName: ''
       }
-    ],
+    ]
   },
   education: null,
   contact: null,
@@ -54,8 +67,8 @@ const initialState: IinitialState = {
   projects: null,
   progress: 10,
   sidebar: true,
-  aiSuggestedSkills:[],
-  aiSuggestedBio:[],
+  aiSuggestedSkills: [],
+  aiSuggestedBio: []
 }
 
 export const userSlice = createSlice({
@@ -69,13 +82,11 @@ export const userSlice = createSlice({
       state.experience = action.payload
     },
     setTechnicalSkills: (state, action) => {
-      if(action.payload.aiGenSkills){
-        state.technicalSkills.aiGenSkills = action.payload.aiGenSkills;
-      }
-      else{
+      if (action.payload.aiGenSkills) {
+        state.technicalSkills.aiGenSkills = action.payload.aiGenSkills
+      } else {
         state.technicalSkills.customSkills = action.payload.customSkills
       }
-
     },
     setEducation: (state, action) => {
       state.education = action.payload
@@ -98,37 +109,28 @@ export const userSlice = createSlice({
       state.progress = state.progress + singleProgress
     },
     resetForm: state => {
-      state.progress = 10;
-      state.achievements = null,
-      state.contact = null,
-      state.education = null,
-      state.experience = null,
-      state.languages = null,
-      state.personalInfo = initialState.personalInfo,
-      state.projects = null,
-      state.technicalSkills={
-        aiGenSkills:[],
-        customSkills:[
-          {
-            skillName:''
-          }
-        ]
-      },
-      state.aiSuggestedSkills = [],
-      state.aiSuggestedBio = []
+      state.progress = 10
+      ;(state.achievements = initialState.achievements),
+        (state.contact = initialState.contact),
+        (state.education = initialState.education),
+        (state.experience = initialState.experience),
+        (state.languages = initialState.languages),
+        (state.personalInfo = initialState.personalInfo),
+        (state.projects = initialState.projects),
+        (state.technicalSkills = initialState.technicalSkills),
+        (state.aiSuggestedSkills = initialState.aiSuggestedSkills),
+        (state.aiSuggestedBio = initialState.aiSuggestedBio)
     },
-    setAiSuggestedSkills : (state,action) => {
-      state.aiSuggestedSkills = action.payload;
+    setAiSuggestedSkills: (state, action) => {
+      state.aiSuggestedSkills = action.payload
     },
-    setAiSuggestedBio : (state,action) => {
-      state.aiSuggestedBio = action.payload;
+    setAiSuggestedBio: (state, action) => {
+      state.aiSuggestedBio = action.payload
     },
-    setSelectedBio : (state,action ) => {
-        state.personalInfo.bio = action.payload;
-      
+    setSelectedBio: (state, action) => {
+      state.personalInfo.bio = action.payload
     }
-  },
-
+  }
 })
 
 export default userSlice.reducer

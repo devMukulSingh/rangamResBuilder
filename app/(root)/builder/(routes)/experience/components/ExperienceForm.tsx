@@ -3,7 +3,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input"
 import { useFieldArray, useForm } from "react-hook-form"
 import { Button } from "@/components/ui/button";
-import { setExperience } from "@/redux/slice/userSlice";
+import { resetForm, setExperience } from "@/redux/slice/userSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
 import { useEffect, useState } from "react";
 import { Plus, PlusCircle, Trash } from "lucide-react";
@@ -21,12 +21,16 @@ import Skill from "./Skill";
 
 
 const ExperienceForm = () => {
-
+    
     const progress = useAppSelector(state => state.persistedReducer.progress);
     const [expanded, setExpanded] = useState<string | false>("");
     const dispatch = useAppDispatch();
-    const experience = useAppSelector(state => state.persistedReducer.experience);
+    const experience = useAppSelector(state => state.persistedReducer.experience) || [];
+    const selectedSkills = useAppSelector(state => state.persistedReducer.technicalSkills.aiGenSkills);
+    const customSkills = useAppSelector(state => state.persistedReducer.technicalSkills.customSkills)
+        .map(item => item.skillName);
 
+    const combinedSkills = [...selectedSkills, ...customSkills];
     const form = useForm({
         defaultValues: {
             experience: experience || [
@@ -62,13 +66,10 @@ const ExperienceForm = () => {
             ...field,
             ...watchFieldsArray[index]
         }
-    })
+    }) || []
 
     const onSubmit = () => {
-        dispatch(setFormComp("Skills"))
-        if (progress <= 22) {
-            dispatch(setProgress())
-        }
+
     }
     const handleChange = () => {
         const experience = form.getValues().experience;
@@ -147,10 +148,7 @@ const ExperienceForm = () => {
     //     }
 
     // }, [controlledFields.length]);
-    const skills = [
-        "HTML", "React", "NEXT", "Express", "ShadcnUI", "Tailwind",
-        "HTML", "React", "NEXT", "Swelte"
-    ]
+
     return (
         // <motion.div
         //     animate={{ x: 1, opacity: [0, 1] }}
@@ -162,7 +160,7 @@ const ExperienceForm = () => {
                 <form onSubmit={form.handleSubmit(onSubmit)} onChange={handleChange} >
                     <div className="flex flex-col gap-5 ">
                         {
-                            (!experience ? controlledFields : experience)?.map((item, index) => {
+                            (controlledFields)?.map((item, index) => {
                                 return (
                                     <>
                                         {/* <div className="flex hover:bg-red-300 items-center bg-red-400 px-5">
@@ -171,7 +169,7 @@ const ExperienceForm = () => {
                                                     onClick={() => handleDelete(index)} />
                                             </div> */}
 
-                                        <div className="grid grid-cols-4 gap-5 w-full">
+                                        <div className="grid grid-cols-3 gap-5 w-full">
 
                                             {/* CompanyName */}
                                             <FormField
@@ -182,7 +180,7 @@ const ExperienceForm = () => {
                                                         <FormLabel>Company</FormLabel>
                                                         <FormControl>
                                                             <Input
-                                                                className="h-14 rounded-sm bg-white"
+                                                                className="h-14 rounded-sm  bg-white"
                                                                 {...field}
                                                                 placeholder="Rangam" />
                                                         </FormControl>
@@ -208,44 +206,46 @@ const ExperienceForm = () => {
                                                 )}
                                             />
                                             {/* checkboxes */}
-                                            <div className="flex flex-col gap-2 justify-end text-neutral-500">
-                                                <FormField
-                                                    name={`experience.${index}.checkboxInternship`}
-                                                    control={form.control}
-                                                    render={({ field }) => (
-                                                        <FormItem className="flex items-center gap-4">
-                                                            <FormControl>
-                                                                <Checkbox
-                                                                    className="size-6 bg-white border-none"
-                                                                    checked={field.value}
-                                                                    onCheckedChange={field.onChange}
-                                                                />
-                                                            </FormControl>
-                                                            <FormLabel>Internship</FormLabel>
-                                                        </FormItem>
-                                                    )}
-                                                />
-                                                <FormField
-                                                    name={`experience.${index}.checkboxVolunteering`}
-                                                    control={form.control}
-                                                    render={({ field }) => (
-                                                        <FormItem className="flex items-center gap-4">
-                                                            <FormControl>
-                                                                <Checkbox
-                                                                    className="size-6 bg-white border-none"
-                                                                    checked={field.value}
-                                                                    onCheckedChange={field.onChange}
-                                                                />
-                                                            </FormControl>
-                                                            <FormLabel>Volunteering</FormLabel>
-                                                        </FormItem>
-                                                    )}
-                                                />
-                                            </div>
+                                            <div className="flex gap-2 items-end text-neutral-500">
+                                                <div className="flex flex-col gap-2 ">
 
-                                            <Button
-                                                size="icon"
-                                                className="
+                                                    <FormField
+                                                        name={`experience.${index}.checkboxInternship`}
+                                                        control={form.control}
+                                                        render={({ field }) => (
+                                                            <FormItem className="flex items-center gap-4">
+                                                                <FormControl>
+                                                                    <Checkbox
+                                                                        className="size-6 bg-white border-none"
+                                                                        checked={field.value}
+                                                                        onCheckedChange={field.onChange}
+                                                                    />
+                                                                </FormControl>
+                                                                <FormLabel>Internship</FormLabel>
+                                                            </FormItem>
+                                                        )}
+                                                    />
+                                                    <FormField
+                                                        name={`experience.${index}.checkboxVolunteering`}
+                                                        control={form.control}
+                                                        render={({ field }) => (
+                                                            <FormItem className="flex items-center gap-4">
+                                                                <FormControl>
+                                                                    <Checkbox
+                                                                        className="size-6 bg-white border-none"
+                                                                        checked={field.value}
+                                                                        onCheckedChange={field.onChange}
+                                                                    />
+                                                                </FormControl>
+                                                                <FormLabel>Volunteering</FormLabel>
+                                                            </FormItem>
+                                                        )}
+                                                    />
+                                                </div>
+
+                                                <Button
+                                                    size="icon"
+                                                    className="
                                                 bg-red-400 
                                                 rounded-full
                                                 h-[4rem]
@@ -254,42 +254,49 @@ const ExperienceForm = () => {
                                                 ml-auto
                                                 
                                                 ">
-                                                <Plus size={50} />
-                                            </Button>
+                                                    <Plus size={50} />
+                                                </Button>
+                                            </div>
+
+
 
                                         </div>
 
 
                                         {/* start and endDate */}
-                                        <div className="grid grid-cols-4 gap-5">
+                                        <div className="grid grid-cols-3 gap-5">
 
-                                            <div className="flex gap-2">
+                                            <div className="flex gap-2 ">
                                                 <FormField
                                                     name={`experience.${index}.startDate`}
                                                     control={form.control}
                                                     render={({ field }) => (
-                                                        <FormItem >
+                                                        <FormItem
+                                                            className=""
+                                                        >
                                                             <FormLabel>Start Date</FormLabel>
                                                             <FormControl>
                                                                 <Input
-                                                                    className="bg-white h-14 rounded-sm" {...field} type="date" />
+                                                                    className="bg-white h-14 rounded-sm"
+                                                                    {...field}
+                                                                    type="month" />
                                                             </FormControl>
                                                             <FormMessage />
                                                         </FormItem>
                                                     )}
                                                 />
                                                 {
-                                                    experience && !experience?.[index]?.checkboxInternship &&
+                                                    experience && !experience?.[index]?.checkboxWorkingStatus &&
                                                     <FormField
                                                         name={`experience.${index}.endDate`}
                                                         control={form.control}
                                                         render={({ field }) => (
-                                                            <FormItem>
+                                                            <FormItem className="">
                                                                 <FormLabel>End Date</FormLabel>
                                                                 <FormControl>
                                                                     <Input
                                                                         placeholder="MM YY"
-                                                                        type="date"
+                                                                        type="month"
                                                                         className="h-14 rounded-sm bg-white" {...field} />
                                                                 </FormControl>
                                                                 <FormMessage />
@@ -331,10 +338,14 @@ const ExperienceForm = () => {
                                             render={({ field }) => (
                                                 <div className="grid grid-cols-6 gap-5">
                                                     {
-                                                        skills.map((skill, index) => (
-                                                            <FormItem key={index}>
+                                                        combinedSkills.map((skill, i) => (
+                                                            <FormItem key={i}>
                                                                 <FormControl>
-                                                                    <Skill onChange={field.onChange} skill={skill} />
+                                                                    <Skill
+                                                                        index={index}
+                                                                        handleChange={handleChange}
+                                                                        onChange={field.onChange}
+                                                                        skill={skill} />
                                                                 </FormControl>
                                                             </FormItem>
                                                         ))

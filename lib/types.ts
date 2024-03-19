@@ -21,7 +21,7 @@ export interface Iexperience {
   checkboxVolunteering: boolean
   checkboxInternship: boolean
   selectedSkills:string[]
-  description: string
+  description: string,
   // address: string
   // bio: string
   // employer: string
