@@ -3,9 +3,16 @@ import Link from 'next/link'
 import Circle from '@/components/commons/Circle'
 import SuggestedSummary from './components/SuggestedSummary'
 import MainSummary from './components/MainSummary'
+import { cookies } from 'next/headers'
+import { ChatGPT } from '@/lib/ChatGPT'
 
-const ProSummaryPage = () => {
+const ProSummaryPage = async() => {
+    const profession = cookies().get('profession')?.value || 'Frontend dev';
 
+    const bioPrompt = `Suggest 4 short bio for ${profession} for resume`;
+    const bio = await ChatGPT(bioPrompt);
+    const parsedBio = bio?.replace(/\d+(\.\s*|\.)?/g, '').split('\n').filter((item: string) => item !== '') || [];
+    
     return (
         <div
             className='
@@ -37,7 +44,7 @@ const ProSummaryPage = () => {
                 </h1>
             </header>
 
-            <MainSummary />
+            <MainSummary parsedBio={parsedBio} />
 
             <div className='mt-auto flex justify-between'>
                 <Link href={'/builder/experience'}>

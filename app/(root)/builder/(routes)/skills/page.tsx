@@ -3,13 +3,12 @@ import Link from 'next/link'
 import Skills from './components/Skills'
 import Circle from '@/components/commons/Circle'
 import { ChatGPT } from '@/lib/ChatGPT'
+import { cookies } from 'next/headers'
 
-const SkillsPage = async ({
-    searchParams
-}: {
-    searchParams: { profession: string }
-}) => {
-    const { profession } = searchParams;
+const SkillsPage = async () => {
+
+    const  profession  = cookies().get('profession')?.value || 'Frontend dev';
+
     const skillPrompt = `My profession is ${profession}, give me a list of 13 technology names used in this profession`;
 
     const skills = await ChatGPT(skillPrompt);

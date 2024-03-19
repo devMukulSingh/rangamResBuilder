@@ -4,16 +4,16 @@ const BioSkeleton = () => {
   return (
     <>
       <li className="flex flex-col">
-        <Skeleton className="h-8 w-full bg-neutral-200" />
+        <Skeleton className="h-20 w-full bg-neutral-200" />
       </li>
       <li className="flex flex-col">
-        <Skeleton className="h-8 w-full bg-neutral-200" />
+        <Skeleton className="h-20 w-full bg-neutral-200" />
       </li>
       <li className="flex flex-col">
-        <Skeleton className="h-8 w-full bg-neutral-200" />
+        <Skeleton className="h-20 w-full bg-neutral-200" />
       </li>
       <li className="flex flex-col">
-        <Skeleton className="h-8 w-full bg-neutral-200" />
+        <Skeleton className="h-20 w-full bg-neutral-200" />
       </li>
     </>
   )

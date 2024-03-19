@@ -2,8 +2,10 @@ import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import ExperienceForm from '@/app/(root)/builder/(routes)/experience/components/ExperienceForm'
 import Circle from '@/components/commons/Circle'
+import { cookies } from 'next/headers'
 
 const ExperiencePage = () => {
+
 
     return (
         <div
@@ -33,15 +35,15 @@ const ExperiencePage = () => {
                 Your experience tells a story of your career progression. Share the details and let's capture the essence of your expertise together.
             </h1>
 
-            <ExperienceForm />
+            <ExperienceForm/>
 
             <div className='mt-auto flex justify-between'>
-                <Link href={'/builder/skills'}>
+                <Link href={`/builder/skills`}>
                     <Button className='w-40'>
                         Back
                     </Button>
                 </Link>
-                <Link href={'/builder/prosummary'}>
+                <Link href={`/builder/prosummary`}>
                     <Button className='w-40'>
                         Next
                     </Button>

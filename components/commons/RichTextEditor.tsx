@@ -29,6 +29,7 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
                 value={value}
                 onChange={onChange}
                 style={{
+                    fontSize:'18px',
                     marginBottom: '3rem',
                     backgroundColor: 'white',
                     // border: 'none',

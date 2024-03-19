@@ -27,6 +27,7 @@ import { cn } from "@/lib/utils";
 import { Check } from "lucide-react";
 import { useState } from "react";
 import { motion } from "framer-motion"
+import axios from "axios";
 
 const PersonalForm = () => {
 
@@ -66,9 +67,10 @@ const PersonalForm = () => {
     });
 
     const onSubmit = async (data: formSchema) => {
-        router.push('/builder/goals');
+        router.push(`/builder/goals?profession=${data.profession}`);
         dispatch(resetForm());
         dispatch(setPersonalInfo(data));
+        await axios.post('/api/set-profession',{profession:data.profession});
     }
     return (
         <motion.div

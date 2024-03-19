@@ -1,10 +1,15 @@
-
 import React from 'react'
 import Circle from '@/components/commons/Circle'
 import Goals from './components/Goals'
 
-const GoalsPage = () => {
 
+const GoalsPage = async({
+    searchParams
+}: {
+    searchParams: { profession:string}
+}) => {
+
+    
     return (
         <div
             className='

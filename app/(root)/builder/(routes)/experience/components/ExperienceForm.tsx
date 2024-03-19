@@ -3,9 +3,9 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input"
 import { useFieldArray, useForm } from "react-hook-form"
 import { Button } from "@/components/ui/button";
-import { resetForm, setExperience } from "@/redux/slice/userSlice";
+import { resetForm, setAiSuggestedBio, setExperience } from "@/redux/slice/userSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { Plus, PlusCircle, Trash } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { setProgress } from "@/redux/slice/userSlice";
@@ -20,8 +20,12 @@ import { motion } from "framer-motion"
 import Skill from "./Skill";
 
 
-const ExperienceForm = () => {
+
+const ExperienceForm = ({
+
+}) => {
     
+
     const progress = useAppSelector(state => state.persistedReducer.progress);
     const [expanded, setExpanded] = useState<string | false>("");
     const dispatch = useAppDispatch();

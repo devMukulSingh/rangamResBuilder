@@ -3,16 +3,19 @@ import { FC, ReactNode } from "react"
 
 interface NumberProps {
     children: ReactNode,
-    className?: string
+    className?: string,
+    onClick? : () => void
 }
 
 const Circle: FC<NumberProps> = ({
     children,
-    className
+    className,
+    onClick
 }) => {
     return (
         <>
             <div
+                onClick={onClick}
                 className={
                     cn(
                         `

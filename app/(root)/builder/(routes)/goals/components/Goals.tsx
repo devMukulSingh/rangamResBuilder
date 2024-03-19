@@ -59,7 +59,7 @@ const Goals = () => {
                     </Button>
                 </Link>
                 <Button
-                    onClick={ () => router.push(`/builder/skills?profession=${profession}`)}
+                    onClick={ () => router.push(`/builder/skills`)}
                     className='w-40'
                     disabled={selected === '' ? true : false}
                 >
