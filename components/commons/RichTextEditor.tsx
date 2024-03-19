@@ -1,5 +1,5 @@
 'use client';
-
+import 'react-quill/dist/quill.snow.css';
 import ReactQuill from "react-quill";
 
 interface RichTextEditorProps {
@@ -24,15 +24,20 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
     }
 
     return (
-        <>
+
             <ReactQuill
                 value={value}
-                onChange={ onChange }
-                style={{ height: '8rem', marginBottom: '3rem' }}
-                theme="snow"
+                onChange={onChange}
+                style={{
+                    marginBottom: '3rem',
+                    backgroundColor: 'white',
+                    // border: 'none',
+                    border:'1px solid white',
+                    outline: 'none',
+                    minHeight:'10rem'
+                }}
                 modules={modules}
             />
-        </>
     )
 }
 

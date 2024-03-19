@@ -17,6 +17,7 @@ import { setFormComp } from "@/redux/slice/commonSlice";
 const RichTextEditor = dynamic(() => import('@/components/commons/RichTextEditor'), {
     ssr: false
 });
+
 import { motion } from "framer-motion"
 import Skill from "./Skill";
 
@@ -40,7 +41,8 @@ const ExperienceForm = () => {
                     checkboxWorkingStatus: false,
                     checkboxVolunteering: false,
                     checkboxInternship: false,
-                    selectedSkills: []
+                    selectedSkills: [],
+                    description:''
                     // employer: '',
                     // address: '',
                     // bio: '',
@@ -75,9 +77,9 @@ const ExperienceForm = () => {
 
         const parsedExperience = experience.map(item => {
             return {
-                // description: item.description
                 // employer: item.employer,
                 // address: item.address,
+                description: item.description,
                 companyName: item.companyName,
                 jobTitle: item.jobTitle,
                 startDate: item.startDate,
@@ -103,10 +105,10 @@ const ExperienceForm = () => {
             checkboxInternship: false,
             selectedSkills: [],
             id: Math.floor(Math.random() * 100).toString(),
+            description: '',
             // bio: '',
             // address: '',
             // employer: '',
-            // description: '',
         });
 
     }
@@ -149,7 +151,7 @@ const ExperienceForm = () => {
     // }, [controlledFields.length]);
     const skills = [
         "HTML", "React", "NEXT", "Express", "ShadcnUI", "Tailwind",
-        "HTML", "React", "NEXT", "Express",
+        "HTML", "React", "NEXT" ,"Swelte"
     ]
     return (
         // <motion.div
@@ -324,22 +326,59 @@ const ExperienceForm = () => {
                                             Great! To highlight your experience and describe it properly, please choose the key responsibilities at this workplace.
                                         </h1>
 
+                                        {/* skills */}
                                         <FormField
                                             name={`experience.${index}.selectedSkills`}
                                             control={form.control}
                                             render={({ field }) => (
-                                                <div className="grid grid-cols-7 gap-2">
+                                                <div className="grid grid-cols-6 gap-5">
                                                     {
-                                                        skills.map((skill,index) => (
+                                                        skills.map((skill, index) => (
                                                             <FormItem key={index}>
                                                                 <FormControl>
-                                                                    <Skill onChange={field.onChange} skill={skill}/>
+                                                                    <Skill onChange={field.onChange} skill={skill} />
                                                                 </FormControl>
                                                             </FormItem>
                                                         ))
                                                     }
+                                                    <div 
+                                                        className="
+                                                        flex
+                                                        items-center
+                                                        gap-2
+                                                        col-span-2
+                                                        cursor-pointer
+                                                    ">
+                                                        <Plus color="#EF4444"/>
+                                                        <h1 
+                                                            className="
+                                                            text-red-500
+                                                            ">
+                                                        Load More key responsibility
+                                                        </h1>
+                                                    </div>
                                                 </div>
 
+                                            )}
+                                        />
+
+                                        {/* description */}
+                                        <FormField
+                                            name={`experience.${index}.description`}
+                                            control={form.control}
+                                            render={({ field }) => (
+                                                <FormItem >
+                                                    <FormControl>
+                                                        <RichTextEditor
+                                                            value={field.value || ''}
+                                                            onChange={(content) => {
+                                                                field.onChange(content);
+                                                                // handleChange();
+                                                            }}
+                                                        />
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
                                             )}
                                         />
                                     </>

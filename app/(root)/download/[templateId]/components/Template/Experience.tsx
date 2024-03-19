@@ -22,7 +22,7 @@ const Experience = () => {
                             {item.companyName}
                         </h1>
                         <div className='flex justify-between'>
-                            <h1>{item?.role}</h1>
+                            {/* <h1>{item?.role}</h1> */}
                             <h1>
                                 {`${item.startDate && format(item?.startDate, "MMM yyyy")} - ${item.endDate && format(item?.endDate, "MMM yyyy")}`}
                             </h1>
