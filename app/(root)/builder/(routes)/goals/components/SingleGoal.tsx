@@ -1,18 +1,34 @@
+'use client'
 import Image from "next/image"
 
 interface SingleGoalProps {
   goal: {
     title: string,
     img: string
-  }
+  },
+  selected: string,
+  setSelected: (selected: string) => void
 }
 
 const SingleGoal: React.FC<SingleGoalProps> = ({
-  goal
+  goal,
+  selected,
+  setSelected
 }) => {
+  const handleGoalSelect = () => {
+    if(selected === goal.title){
+      setSelected("");
+    }
+    else{
+      setSelected(goal.title)
+    }
+  }
   return (
     <div
-      className="flex
+      onClick={handleGoalSelect}
+      className={`
+        transition
+        flex
         cursor-pointer
         flex-col 
         gap-5 
@@ -21,7 +37,10 @@ const SingleGoal: React.FC<SingleGoalProps> = ({
       bg-red-100
       rounded-lg
         h-[18rem]
-        ">
+        ${selected === goal.title ?
+          'border-red-500 border-4 transition scale-90' : ''
+        }
+        `}>
       <figure
         className="
         relative

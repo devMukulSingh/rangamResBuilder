@@ -1,9 +1,20 @@
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-import SkillsList from './components/SkillsList'
+import Skills from './components/Skills'
 import Circle from '@/components/commons/Circle'
+import { ChatGPT } from '@/lib/ChatGPT'
 
-const SkillsPage = () => {
+const SkillsPage = async ({
+    searchParams
+}: {
+    searchParams: { profession: string }
+}) => {
+    const { profession } = searchParams;
+    const skillPrompt = `My profession is ${profession}, give me a list of 13 technology names used in this profession`;
+
+    const skills = await ChatGPT(skillPrompt);
+
+    const parsedSkills = skills?.replace(/\d+(\.\s*|\.)?/g, '').split('\n').filter((item: string) => item !== '') || [];
 
     return (
         <>
@@ -18,25 +29,28 @@ const SkillsPage = () => {
         py-10
         w-full
         '>
-                <div className='flex gap-5'>
-                    <Circle>
-                        3
-                    </Circle>
-                    <h1
-                        className='
+                <header className='flex flex-col gap-5'>
+
+                    <div className='flex gap-5'>
+                        <Circle>
+                            3
+                        </Circle>
+                        <h1
+                            className='
                 text-4xl
                 font-bold
                 '>
-                        Skills
+                            Skills
+                        </h1>
+                    </div>
+
+                    <h1 className='text-xl text-neutral-600'>
+                        We found recommended skills for you. Let's find relevant skills for the job you are applying for. <br />
+                        Listing 6-10 skills is best.
                     </h1>
-                </div>
+                </header>
 
-                <h1 className='text-xl text-neutral-600'>
-                    We found recommended skills for you. Let's find relevant skills for the job you are applying for. <br />
-                    Listing 6-10 skills is best.
-                </h1>
-
-                <SkillsList />
+                <Skills skills={parsedSkills} />
 
                 <div className='mt-auto flex justify-between'>
                     <Link href={'/builder/goals'}>

@@ -1,13 +1,23 @@
+import { useAppDispatch } from '@/redux/hooks/hooks'
+import { setTechnicalSkills } from '@/redux/slice/userSlice'
 import { Trash, Trash2 } from 'lucide-react'
 import React from 'react'
 
 interface SkillProps {
-    skill: string
+    skill: string,
+    selectedSkills:string[]
 }
 
 const Skill: React.FC<SkillProps> = ({
-    skill
+    skill,
+    selectedSkills
 }) => {
+    const dispatch = useAppDispatch();
+    const handleRemoveSkill = () => {
+        const filteredSkills = selectedSkills.filter( ( item) => item!== skill)
+        dispatch(setTechnicalSkills({aiGenSkills:filteredSkills}))
+    }
+    if(skill ==='') return null;
     return (
         <div
             className='
@@ -22,6 +32,7 @@ const Skill: React.FC<SkillProps> = ({
                 {skill}
             </h1>
             <Trash2
+                onClick={ handleRemoveSkill }
                 className='
                 cursor-pointer
                 text-red-500

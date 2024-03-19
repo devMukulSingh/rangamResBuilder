@@ -1,28 +1,10 @@
-import { Button } from '@/components/ui/button'
-import Link from 'next/link'
+
 import React from 'react'
-import SingleGoal from './components/SingleGoal'
 import Circle from '@/components/commons/Circle'
+import Goals from './components/Goals'
 
 const GoalsPage = () => {
-    const goals = [
-        {
-            title: 'Fulltime',
-            img: '/Fulltime.png'
-        },
-        {
-            title: 'Young Professional',
-            img: '/Young.png'
-        },
-        {
-            title: 'Student',
-            img: '/Student.png'
-        },
-        {
-            title: 'Others',
-            img: '/Others.png'
-        }
-    ]
+
     return (
         <div
             className='
@@ -35,56 +17,32 @@ const GoalsPage = () => {
         py-10
         w-full
         '>
-            <div className='flex gap-5'>
-                <Circle>
-                    2
-                </Circle>
-                <h1
-                    className='
+            <header className='flex flex-col gap-5'>
+                <div className='flex gap-5'>
+                    <Circle>
+                        2
+                    </Circle>
+                    <h1
+                        className='
                 text-4xl
                 font-bold
                 '>
-                    Tailor your resume to your career goals
+                        Tailor your resume to your career goals
+                    </h1>
+                </div>
+                <h1 className='text-xl text-neutral-600'>
+                    Select your employment and help us make &nbsp;
+                    <span className='font-bold'>
+                        the most relevant resume
+                    </span>
+                    &nbsp;
+                    for you
                 </h1>
-            </div>
-            <h1 className='text-xl text-neutral-600'>
-                Select your employment and help us make &nbsp;
-                <span className='font-bold'>
-                    the most relevant resume
-                </span>
-                &nbsp;
-                for you
-            </h1>
+            </header>
 
-            <div className='
-                grid 
-                lg:grid-cols-4
-                md:grid-cols-3
-                sm:grid-cols-2
-                grid-cols-1 
-                gap-10 
-                mt-10
-                
-                '>
-                {
-                    goals.map((goal, index) => (
-                        <SingleGoal key={index} goal={goal} />
-                    ))
-                }
-            </div>
+            <Goals />
 
-            <div className='mt-auto flex justify-between'>
-                <Link href={'/builder/personal'}>
-                    <Button className='w-40'>
-                        Back
-                    </Button>
-                </Link>
-                <Link href={'/builder/skills'}>
-                    <Button className='w-40'>
-                        Next
-                    </Button>
-                </Link>
-            </div>
+
         </div>
     )
 }

@@ -7,21 +7,24 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
 import { setTechnicalSkills } from "@/redux/slice/userSlice";
 import { useParams, useRouter } from "next/navigation";
 import { setProgress } from "@/redux/slice/userSlice";
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { PlusCircle } from "lucide-react";
 import { setFormComp } from "@/redux/slice/commonSlice";
 import Spinner from "@/components/commons/Spinner";
 import { motion } from "framer-motion"
 import Skill from "./Skill";
 import SkillsSkeleton from "./SkillsSkeleton";
+import { SkillsProps } from "../Skills";
 
 
-const SuggestedSkils = () => {
+const SuggestedSkills = ({
+
+}) => {
 
     const dispatch = useAppDispatch();
     const progress = useAppSelector(state => state.persistedReducer.progress);
     const customSkills = useAppSelector(state => state.persistedReducer.technicalSkills?.customSkills);
-    // const aiSuggestedSkills = useAppSelector(state => state.persistedReducer.aiSuggestedSkills);
+    const aiSuggestedSkills = useAppSelector(state => state.persistedReducer.aiSuggestedSkills);
 
     const form = useForm({
         defaultValues: {
@@ -67,10 +70,10 @@ const SuggestedSkils = () => {
             skillName: ''
         })
     }
-    const aiSuggestedSkills = [
-        "HTML", "React", "NEXT", "Express", "ShadcnUI", "Tailwind",
-        "HTML", "React", "NEXT", "Express",
-    ]
+    // const aiSuggestedSkills = [
+    //     "HTML", "React", "NEXT", "Express", "ShadcnUI", "Tailwind",
+    //     "HTML", "React", "NEXT", "Express",
+    // ]
     return (
         // <motion.div
         //     animate={{ x: 1, opacity: [0, 1] }}
@@ -90,7 +93,7 @@ const SuggestedSkils = () => {
                 </h1>
                 <div className="grid grid-cols-3  gap-5" >
                     {
-                        aiSuggestedSkills.length > 0 ? aiSuggestedSkills.map((skill) => (
+                        aiSuggestedSkills ? aiSuggestedSkills?.map((skill) => (
                             <>
                                 <Skill
                                     skill={skill}
@@ -153,4 +156,4 @@ const SuggestedSkils = () => {
 
 }
 
-export default SuggestedSkils
+export default SuggestedSkills
