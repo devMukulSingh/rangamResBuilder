@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import React from 'react'
 import SingleGoal from './components/SingleGoal'
+import Circle from '@/components/commons/Circle'
 
 const GoalsPage = () => {
     const goals = [
@@ -34,13 +35,18 @@ const GoalsPage = () => {
         py-10
         w-full
         '>
-            <h1
-                className='
-                    text-4xl
-                    font-bold
+            <div className='flex gap-5'>
+                <Circle>
+                    2
+                </Circle>
+                <h1
+                    className='
+                text-4xl
+                font-bold
                 '>
-                2/6 Tailor your resume to your career goals
-            </h1>
+                    Tailor your resume to your career goals
+                </h1>
+            </div>
             <h1 className='text-xl text-neutral-600'>
                 Select your employment and help us make &nbsp;
                 <span className='font-bold'>
@@ -52,7 +58,7 @@ const GoalsPage = () => {
 
             <div className='grid grid-cols-4 gap-10 mt-10'>
                 {
-                    goals.map((goal,index) => (
+                    goals.map((goal, index) => (
                         <SingleGoal key={index} goal={goal} />
                     ))
                 }

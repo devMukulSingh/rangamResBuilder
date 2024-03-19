@@ -23,13 +23,13 @@ const ExperienceSection: React.FC<ExperienceSectionProps> = ({
                     <div className='flex flex-col gap-5 break-all' key={index}>
                         <div>
                             <h1 className='font-bold'>
-                                {item.role || ''}  {` ${item.address ? `| ${item.address}` : ''} `}
+                                {/* {item.role || ''}  {` ${item.address ? `| ${item.address}` : ''} `} */}
                             </h1>
                             <h1>
                                 {/* {format(item.startDate, "MMM dd")}-{format(item.endDate, "MMM dd")} */}
                             </h1>
                         </div>
-                        <HTMLRenderer htmlString={item.description} />
+                        {/* <HTMLRenderer htmlString={item.description} /> */}
 
                     </div>
                 )

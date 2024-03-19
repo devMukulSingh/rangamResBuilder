@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import ExperienceForm from '@/app/(root)/builder/(routes)/experience/components/ExperienceForm'
+import Circle from '@/components/commons/Circle'
 
 const ExperiencePage = () => {
 
@@ -16,13 +17,18 @@ const ExperiencePage = () => {
         py-10
         w-full
         '>
-            <h1
-                className='
-                    text-4xl
-                    font-bold
+            <div className='flex gap-5'>
+                <Circle>
+                    4
+                </Circle>
+                <h1
+                    className='
+                text-4xl
+                font-bold
                 '>
-                4/6 Experience
-            </h1>
+                    Experience
+                </h1>
+            </div>
             <h1 className='text-xl text-neutral-600'>
                 Your experience tells a story of your career progression. Share the details and let's capture the essence of your expertise together.
             </h1>
