@@ -15,7 +15,6 @@ const Skill: React.FC<SkillProps> = ({
     index
 }) => {
     
-    if(skill ==='') return null;
     const skillsFromState:string[] = useAppSelector( state => state.persistedReducer.experience?.[index]?.selectedSkills) || [];
     
     const handleSelect = () => {
@@ -33,6 +32,7 @@ const Skill: React.FC<SkillProps> = ({
         }
     };
 
+    if(skill ==='') return null;
 
     return (
         <>
