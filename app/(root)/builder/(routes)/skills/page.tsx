@@ -4,6 +4,7 @@ import Skills from './components/Skills'
 import Circle from '@/components/commons/Circle'
 import { ChatGPT } from '@/lib/ChatGPT'
 import { cookies } from 'next/headers'
+import { revalidatePath } from 'next/cache'
 
 const SkillsPage = async () => {
 
@@ -14,6 +15,7 @@ const SkillsPage = async () => {
     const skills = await ChatGPT(skillPrompt);
 
     const parsedSkills = skills?.replace(/\d+(\.\s*|\.)?/g, '').split('\n').filter((item: string) => item !== '') || [];
+    console.log(parsedSkills);
 
     //     const parsedSkills = [
     //   'Agile methodology',

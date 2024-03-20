@@ -3,15 +3,14 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input"
 import { useFieldArray, useForm } from "react-hook-form"
 import { Button } from "@/components/ui/button";
-import { resetForm, setAiSuggestedBio, setExperience } from "@/redux/slice/userSlice";
+import { setExperience } from "@/redux/slice/userSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
-import { FC, useEffect, useState } from "react";
-import { Plus, PlusCircle, Trash, X } from "lucide-react";
+import {  useEffect, useState } from "react";
+import { Plus, X } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { setProgress } from "@/redux/slice/userSlice";
 import toast from "react-hot-toast";
 import dynamic from "next/dynamic";
-import { setFormComp } from "@/redux/slice/commonSlice";
 const RichTextEditor = dynamic(() => import('@/components/commons/RichTextEditor'), {
     ssr: false
 });
@@ -28,7 +27,6 @@ const ExperienceForm = ({
     const dispatch = useAppDispatch();
     const experience = useAppSelector(state => state.persistedReducer.experience) || [];
     const selectedSkills = useAppSelector(state => state.persistedReducer.technicalSkills);
-    console.log(experience);
 
     const form = useForm({
         defaultValues: {
