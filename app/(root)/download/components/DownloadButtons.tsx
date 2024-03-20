@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import { SiMicrosoftword } from "react-icons/si";
 import { BsFiletypePdf } from "react-icons/bs";
 import { saveAs } from "file-saver"
+import { Download } from "lucide-react";
 
 
 const DownloadButtons = () => {
@@ -19,16 +20,18 @@ const DownloadButtons = () => {
 
     }
     return (
-        <main className='flex gap-5'>
-            <Button onClick={handlePdfDownload} >
-                <BsFiletypePdf className='text-xl mr-2' />
-                Download PDF
+        <div className='flex gap-5 w-full'>
+            <Button onClick={ () => globalThis.print()}
+                className="w-[18rem] gap-2 flex" >
+                {/* <BsFiletypePdf className='text-xl mr-2' /> */}
+                Download
+                <Download />
             </Button>
-            <Button onClick={handleWordDownload}>
+            {/* <Button onClick={handleWordDownload}>
                 <SiMicrosoftword className='text-xl mr-2' />
                 Download Word
-            </Button>
-        </main>
+            </Button> */}
+        </div>
     )
 }
 

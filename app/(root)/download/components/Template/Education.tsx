@@ -26,7 +26,7 @@ const Education = () => {
                             <h1>
                                 {` ${item.degree ? `${item?.degree} in ${item.speciality}` : '' } `}
                             </h1>
-                            <h1>{format(item?.endDate,"MMM yyyy")}</h1>
+                            {/* <h1>{format(item?.endDate,"MMM yyyy")}</h1> */}
                         </div>
 
                     </div>

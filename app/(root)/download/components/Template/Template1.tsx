@@ -17,11 +17,11 @@ const Template1 = () => {
                 <div className=' bg-white pb-10  min-w-[40rem] '>
                     <hr className='h-4 bg-blue-400 w-full ' />
                     <div className='flex flex-col gap-5 py-5 px-14  '>
-                        {/* <About />
+                        <About />
                         <Experience />
                         <Education />
                         <Project />
-                        <Skills /> */}
+                        <Skills />
                     </div>
                 </div>
 

@@ -38,12 +38,12 @@ w-full
             <EducationForm />
 
             <div className='mt-auto flex justify-between'>
-                <Link href={'/builder/experience'}>
+                <Link href={'/builder/prosummary'}>
                     <Button className='w-40'>
                         Back
                     </Button>
                 </Link>
-                <Link href={'/builder/education'}>
+                <Link href={'/download'}>
                     <Button className='w-40'>
                         Next
                     </Button>

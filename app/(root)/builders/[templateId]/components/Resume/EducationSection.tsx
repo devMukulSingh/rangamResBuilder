@@ -1,52 +1,52 @@
-import { useAppSelector } from '@/redux/hooks/hooks'
-import { format } from 'date-fns'
-import React from 'react'
+// import { useAppSelector } from '@/redux/hooks/hooks'
+// import { format } from 'date-fns'
+// import React from 'react'
 
-interface EducationSectionProps {
+// interface EducationSectionProps {
 
-}
+// }
 
-const EducationSection: React.FC<EducationSectionProps> = ({
+// const EducationSection: React.FC<EducationSectionProps> = ({
 
-}) => {
-    const education = useAppSelector(state => state.persistedReducer.education);
+// }) => {
+//     const education = useAppSelector(state => state.persistedReducer.education);
 
-    return (
-        <section className='space-y-5 p-5 bg-white'>
-            <h1 className=' text-xl font-semibold'>
-                Education
-            </h1>
-            {
-                education?.map((educationInfo, index) => (
+//     return (
+//         <section className='space-y-5 p-5 bg-white'>
+//             <h1 className=' text-xl font-semibold'>
+//                 Education
+//             </h1>
+//             {
+//                 education?.map((educationInfo, index) => (
 
-                    <div key={index}>
-                        <h1 className=''>
-                            {educationInfo?.schoolName}
-                        </h1>
-                        <div className='flex justify-between'>
-                            <h1>
-                                {educationInfo?.degree}  {`${educationInfo?.fieldOfStudy ? ` in ${educationInfo.fieldOfStudy}` : ''}`}
-                                {
-                                    ` 
-                            ${educationInfo.percentage ?
-                                        ` - ${educationInfo.percentage} CGPA` : ``
-                                    } 
+//                     <div key={index}>
+//                         <h1 className=''>
+//                             {educationInfo?.schoolName}
+//                         </h1>
+//                         <div className='flex justify-between'>
+//                             <h1>
+//                                 {educationInfo?.degree}  {`${educationInfo?.fieldOfStudy ? ` in ${educationInfo.fieldOfStudy}` : ''}`}
+//                                 {
+//                                     ` 
+//                             ${educationInfo.percentage ?
+//                                         ` - ${educationInfo.percentage} CGPA` : ``
+//                                     } 
                         
-                        `
-                                }
-                            </h1>
-                            <h1>
-                                {`${educationInfo?.startDate ? format(educationInfo.startDate, "MMM yyyy") : ''} `}
-                                {`${educationInfo?.endDate ? ` - ${format(educationInfo.endDate, "MMM yyyy")}` : ''}`}
-                            </h1>
-                        </div>
+//                         `
+//                                 }
+//                             </h1>
+//                             <h1>
+//                                 {`${educationInfo?.startDate ? format(educationInfo.startDate, "MMM yyyy") : ''} `}
+//                                 {`${educationInfo?.endDate ? ` - ${format(educationInfo.endDate, "MMM yyyy")}` : ''}`}
+//                             </h1>
+//                         </div>
 
-                    </div>
-                ))
+//                     </div>
+//                 ))
 
-            }
-        </section>
-    )
-}
+//             }
+//         </section>
+//     )
+// }
 
-export default EducationSection
+// export default EducationSection
