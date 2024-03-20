@@ -17,7 +17,7 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({
         <h1 className=' text-xl font-semibold'>
         Technical Skills
     </h1>
-        <div className='grid grid-cols-4 gap-5'>
+        {/* <div className='grid grid-cols-4 gap-5'>
 
             {
                 skills?.aiGenSkills?.map((skill, index) => {
@@ -42,7 +42,7 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({
                 )
                 
             }
-        </div>
+        </div> */}
             </div>
     )
 }

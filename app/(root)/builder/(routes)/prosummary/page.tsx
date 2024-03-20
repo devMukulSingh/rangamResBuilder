@@ -9,7 +9,7 @@ import { ChatGPT } from '@/lib/ChatGPT'
 const ProSummaryPage = async() => {
     const profession = cookies().get('profession')?.value || 'Frontend dev';
 
-    const bioPrompt = `Suggest 4 short bio for ${profession} for resume`;
+    const bioPrompt = `Suggest 3 short bio for ${profession} for resume`;
     const bio = await ChatGPT(bioPrompt);
     const parsedBio = bio?.replace(/\d+(\.\s*|\.)?/g, '').split('\n').filter((item: string) => item !== '') || [];
     

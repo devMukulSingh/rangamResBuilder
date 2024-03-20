@@ -32,7 +32,7 @@ const SuggestedSkills = ({
     const handleAddMore = () => {
         const customSkill = form.getValues().customSkill;
         console.log(customSkill,"customSkill");
-        if (customSkill !==' ') {
+        if (customSkill !=='') {
             const combinedSkills = [...skillFromState, customSkill];
             dispatch(setTechnicalSkills(combinedSkills));
         }

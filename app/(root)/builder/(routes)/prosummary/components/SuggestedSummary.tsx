@@ -4,6 +4,7 @@ import { setSelectedBio } from "@/redux/slice/userSlice";
 import BioSkeleton from "./BioSkeleton"
 import Circle from "@/components/commons/Circle";
 import { Plus } from "lucide-react";
+import SelectComp from "./SelectComp";
 
 
 const SuggestedSummary = () => {
@@ -14,9 +15,13 @@ const SuggestedSummary = () => {
 
     return (
         <div className='flex flex-col gap-3 p-5'>
+            
             <h1 className='font-semibold'>
                 Select Career Field
             </h1>
+
+            <SelectComp/>
+
             <ol className='
                 list-none 
                 text-sm 
