@@ -1,4 +1,3 @@
-import React from 'react'
 import PersonalForm from './components/PersonalForm'
 import TextSection from './components/TextSection'
 

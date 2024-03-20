@@ -11,27 +11,22 @@ const Skill: React.FC<SkillProps> = ({
     skill,
 }) => {
 
-    const [isMounted, setIsMounted] = useState(false);
     const dispatch = useAppDispatch();
-    const skillsFromState: string[] = useAppSelector(state => state.persistedReducer.technicalSkills?.aiGenSkills) || [];
+    const skillsFromState: string[] = useAppSelector(state => state.persistedReducer.technicalSkills) || [];
+
 
     const handleSelect = () => {
-
         const alreadySelected = skillsFromState.find((item) => item === skill);
         if (alreadySelected) {
             const filtered = skillsFromState.filter(item => item !== skill);
-            dispatch(setTechnicalSkills({ aiGenSkills: filtered }));
+            dispatch(setTechnicalSkills(filtered));
         }
         else {
-            dispatch(setTechnicalSkills({ aiGenSkills: [...skillsFromState, skill] }));
+            dispatch(setTechnicalSkills([...skillsFromState, skill] ));
+
         }
     };
 
-    useEffect(() => {
-        setIsMounted(true);
-    }, []);
-
-    if (!isMounted) return null;
 
     return (
         <>

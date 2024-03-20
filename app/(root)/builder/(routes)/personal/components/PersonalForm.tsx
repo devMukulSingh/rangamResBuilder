@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 import { resetForm, setPersonalInfo } from "@/redux/slice/userSlice";
 import { useAppDispatch } from "@/redux/hooks/hooks";
 import { useRouter } from "next/navigation";
-import { countryCodes } from "@/lib/constants";
 import {
     Command,
     CommandEmpty,
@@ -25,13 +24,17 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
 import { Check } from "lucide-react";
-import { useState } from "react";
+import { lazy, Suspense, useState } from "react";
 import { motion } from "framer-motion"
 import axios from "axios";
+import dynamic from "next/dynamic";
+import { IcountryCode } from "@/lib/constants";
+import { countryCodes } from "@/lib/constants";
 
 const PersonalForm = () => {
 
     const [open, setOpen] = useState(false);
+    // const [countryCodes, setCountryCodes] = useState<IcountryCode[]>([]);
     const dispatch = useAppDispatch();
     const router = useRouter();
 
@@ -70,7 +73,7 @@ const PersonalForm = () => {
         router.push(`/builder/goals?profession=${data.profession}`);
         dispatch(resetForm());
         dispatch(setPersonalInfo(data));
-        await axios.post('/api/set-profession',{profession:data.profession});
+        await axios.post('/api/set-profession', { profession: data.profession });
     }
     return (
         <motion.div
@@ -129,86 +132,97 @@ const PersonalForm = () => {
                                 )}
                             />
 
-                            <div className="flex gap-5 w-full">
-                                <FormField
-                                    defaultValue="+91"
-                                    name="countryCode"
-                                    control={form.control}
-                                    render={({ field }) => (
-                                        <FormItem className="w-1/2">
-                                            <FormLabel>Country Code</FormLabel>
-                                            <Popover open={open} onOpenChange={setOpen}>
-                                                <PopoverTrigger asChild >
-                                                    <FormControl>
+                            <Suspense>
+                                <div className="flex gap-5 w-full">
+                                    <FormField
+                                        
+                                        defaultValue="+91"
+                                        name="countryCode"
+                                        control={form.control}
+                                        render={({ field }) => (
+                                            <FormItem className="w-1/2">
+                                                <FormLabel>Country Code</FormLabel>
+                                                <Popover 
+                                                    open={open} 
+                                                    onOpenChange={ setOpen }
+                                                    >
+                                                    <PopoverTrigger 
+                                                        onChange={ () => {
+                                                            // const codes = await (import('@/lib/constants').then( c => c.countryCodes ));
+                                                            // setCountryCodes(codes);
+                                                        }}
+                                                        asChild >
+                                                        <FormControl>
 
-                                                        <Button
-                                                            variant="outline"
-                                                            role="combobox"
-                                                            className={cn(
-                                                                "w-full bg-white justify-between",
-                                                                !field.value && "text-muted-foreground"
-                                                            )}
-                                                        >
-                                                            {
-                                                                countryCodes.find(
-                                                                    (countryCode) => countryCode.mobileCode === field.value
-                                                                )?.mobileCode
-                                                            }
-                                                        </Button>
-                                                    </FormControl>
-                                                </PopoverTrigger>
+                                                            <Button
+                                                                variant="outline"
+                                                                role="combobox"
+                                                                className={cn(
+                                                                    "w-full bg-white justify-between",
+                                                                    !field.value && "text-muted-foreground"
+                                                                )}
+                                                            >
+                                                                {
+                                                                    countryCodes.find(
+                                                                        (countryCode) => countryCode.mobileCode === field.value
+                                                                    )?.mobileCode
+                                                                }
+                                                            </Button>
+                                                        </FormControl>
+                                                    </PopoverTrigger>
 
-                                                <PopoverContent className=" p-0">
-                                                    <Command>
-                                                        <CommandInput placeholder="Search country code..." className="h-9" />
-                                                        <CommandEmpty>No country code found.</CommandEmpty>
-                                                        <CommandGroup >
-                                                            <ScrollArea className="h-72 rounded-md border">
-                                                                {countryCodes.map((code) => (
-                                                                    <CommandItem
-                                                                        key={code.name}
-                                                                        value={code.name}
-                                                                        onSelect={() => {
-                                                                            form.setValue('countryCode', code.mobileCode);
-                                                                            setOpen(false);
-                                                                        }}
-                                                                    >
-                                                                        {code.mobileCode} ({code.name})
-                                                                        <Check
-                                                                            className={cn(
-                                                                                "ml-auto h-4 w-4",
-                                                                                code.mobileCode === field.value ? "opacity-100" : "opacity-0"
-                                                                            )}
-                                                                        />
-                                                                    </CommandItem>
-                                                                ))}
-                                                            </ScrollArea>
-                                                        </CommandGroup>
-                                                    </Command>
-                                                </PopoverContent>
-                                            </Popover>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
+                                                    <PopoverContent className=" p-0">
+                                                        <Command>
+                                                            <CommandInput placeholder="Search country code..." className="h-9" />
+                                                            <CommandEmpty>No country code found.</CommandEmpty>
+                                                            <CommandGroup >
+                                                                <ScrollArea className="h-72 rounded-md border">
+                                                                    {countryCodes.map((code) => (
+                                                                        <CommandItem
+                                                                            key={code.name}
+                                                                            value={code.name}
+                                                                            onSelect={() => {
+                                                                                form.setValue('countryCode', code.mobileCode);
+                                                                                setOpen(false);
+                                                                            }}
+                                                                        >
+                                                                            {code.mobileCode} ({code.name})
+                                                                            <Check
+                                                                                className={cn(
+                                                                                    "ml-auto h-4 w-4",
+                                                                                    code.mobileCode === field.value ? "opacity-100" : "opacity-0"
+                                                                                )}
+                                                                            />
+                                                                        </CommandItem>
+                                                                    ))}
+                                                                </ScrollArea>
+                                                            </CommandGroup>
+                                                        </Command>
+                                                    </PopoverContent>
+                                                </Popover>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
 
-                                <FormField
-                                    name="mobile"
-                                    control={form.control}
-                                    render={({ field }) => (
-                                        <FormItem className="w-1/2" >
-                                            <FormLabel>Mobile</FormLabel>
-                                            <FormControl>
-                                                <Input
-                                                    className="bg-white" {...field}
-                                                    placeholder="9808808098"
-                                                />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
-                            </div>
+                                    <FormField
+                                        name="mobile"
+                                        control={form.control}
+                                        render={({ field }) => (
+                                            <FormItem className="w-1/2" >
+                                                <FormLabel>Mobile</FormLabel>
+                                                <FormControl>
+                                                    <Input
+                                                        className="bg-white" {...field}
+                                                        placeholder="9808808098"
+                                                    />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                </div>
+                            </Suspense>
 
                             <Button
                                 type="submit"

@@ -7,13 +7,29 @@ import { cookies } from 'next/headers'
 
 const SkillsPage = async () => {
 
-    const  profession  = cookies().get('profession')?.value || 'Frontend dev';
+    const profession = cookies().get('profession')?.value || 'Frontend dev';
 
-    const skillPrompt = `My profession is ${profession}, give me a list of 13 technology names used in this profession`;
+    const skillPrompt = `My profession is ${profession}, give me a list of 13 technology names, or skills relevant to this profession in max 3 words`;
+    // const skillPrompt = `List 13 skills relevant to the profession of ${profession} and do not show any tools only show relevant skills that i can showcase on resume`
+    // const skills = await ChatGPT(skillPrompt);
+    
+    // const parsedSkills = skills?.replace(/\d+(\.\s*|\.)?/g, '').split('\n').filter((item: string) => item !== '') || [];
 
-    const skills = await ChatGPT(skillPrompt);
-
-    const parsedSkills = skills?.replace(/\d+(\.\s*|\.)?/g, '').split('\n').filter((item: string) => item !== '') || [];
+    const parsedSkills = [
+  'Agile methodology',
+  'Scrum master',
+  'Gantt charts',
+  'Risk assessment',
+  'Stakeholder management',
+  'Waterfall approach',
+  'Critical path analysis',
+  'Budget tracking',
+  'Communication software',
+  'Resource allocation',
+  'Change management',
+  'Project scheduling',
+  'Collaboration tools'
+]
 
     return (
         <>

@@ -4,11 +4,7 @@ import Skill from './Skill'
 
 const SelectedSkills = () => {
 
-  const selectedSkills = useAppSelector( state => state.persistedReducer.technicalSkills.aiGenSkills)
-  const customSkills = useAppSelector( state => state.persistedReducer.technicalSkills.customSkills)
-                        .map(item => item.skillName);
-
-  const combinedSkills = [...selectedSkills,...customSkills];
+  const selectedSkills = useAppSelector( state => state.persistedReducer.technicalSkills)
   
   return (
     <div className='flex flex-col gap-5'>
@@ -21,7 +17,7 @@ const SelectedSkills = () => {
         </h1>
         <div className='grid grid-cols-3 gap-5'>
           {
-            combinedSkills?.map( (skill:string,index:number) => (
+            selectedSkills?.map( (skill:string,index:number) => (
               <Skill 
                 key={index} 
                 skill={skill}

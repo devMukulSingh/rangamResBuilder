@@ -15,7 +15,7 @@ const Skill: React.FC<SkillProps> = ({
     const dispatch = useAppDispatch();
     const handleRemoveSkill = () => {
         const filteredSkills = selectedSkills.filter( ( item) => item!== skill)
-        dispatch(setTechnicalSkills({aiGenSkills:filteredSkills}))
+        dispatch(setTechnicalSkills(filteredSkills))
     }
     if(skill ==='') return null;
     return (
