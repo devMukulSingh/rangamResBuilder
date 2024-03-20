@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useAppSelector } from '@/redux/hooks/hooks'
+import LinkComp from '@/components/ui/LinkComp'
 
 const Goals = () => {
     const profession = useAppSelector(state => state.persistedReducer.personalInfo.profession);
@@ -58,18 +59,13 @@ const Goals = () => {
                         Back
                     </Button>
                 </Link>
-                <Button
-                    onClick={() => {
-                        router.push(`/builder/skills`)
-                        router.refresh()
-                        }
-                    }
-                    className='w-40'
+                <LinkComp
                     disabled={selected === '' ? true : false}
+                    href={'/builder/skills'}
                 >
                     Next
-                </Button>
-            </div>
+                </LinkComp>
+            </div >
         </>
     )
 }
