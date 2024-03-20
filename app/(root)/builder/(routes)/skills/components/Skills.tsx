@@ -31,7 +31,7 @@ const Skills:FC<SkillsProps> = ({
         px-10
         h-[25rem]
         '>
-
+          
       <SuggestedSkils/>
       <SelectedSkills />
     </div>

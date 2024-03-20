@@ -115,15 +115,17 @@ const ExperienceForm = ({
     }
 
     const handleDelete = (index: number) => {
-        if (controlledFields.length > 0) {
+        if (controlledFields.length > 1) {
             fieldArray.remove(index);
-            // setSelected(controlledFields[controlledFields])
+        }
+        else {
+            toast.error('Profile should have at least one experience field')
         }
     }
+
     useEffect(() => {
         setSelected(controlledFields[0]?.id);
     }, []);
-    console.log(selected);
 
 
     useEffect(() => {
@@ -140,9 +142,7 @@ const ExperienceForm = ({
                 const selectedFieldIndex = controlledFields.length - 1;
                 setSelected(controlledFields[selectedFieldIndex].id)
             }
-            else {
-                toast.error('Profile should have at least one experience field')
-            }
+
         }
 
     }, [controlledFields.length]);
@@ -157,7 +157,7 @@ const ExperienceForm = ({
             <Form {...form} >
                 <form onSubmit={form.handleSubmit(onSubmit)} onChange={handleChange} >
 
-                    <div className="flex ">
+                    <div className="flex">
                         {
                             controlledFields.map((item, index) => (
                                 <Button
@@ -208,7 +208,7 @@ const ExperienceForm = ({
                                 <>
                                     {
                                         item.id === selected &&
-                                        <div className=" bg-red-100 py-5 px-10 flex flex-col gap-5 ">
+                                        <div className=" bg-red-100 py-5 px-10 flex flex-col gap-5 " key={index}>
 
                                             <div className="grid grid-cols-3 gap-5 w-full">
 

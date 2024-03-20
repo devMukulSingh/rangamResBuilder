@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
 import { setTechnicalSkills } from "@/redux/slice/userSlice";
 import { useParams, useRouter } from "next/navigation";
 import { setProgress } from "@/redux/slice/userSlice";
-import { FC, useEffect, useState } from "react";
+import { FC, Suspense, useEffect, useState } from "react";
 import { Plus, PlusCircle } from "lucide-react";
 import { setFormComp } from "@/redux/slice/commonSlice";
 import Spinner from "@/components/commons/Spinner";
@@ -57,6 +57,7 @@ const SuggestedSkills = ({
                     Select AI Suggested Skill
                 </h1>
                 <div className="grid grid-cols-3  gap-5" >
+
                     {
                         aiSuggestedSkills ? aiSuggestedSkills?.map((skill,index) => (
                             <>
@@ -71,6 +72,7 @@ const SuggestedSkills = ({
                             :
                             <SkillsSkeleton />
                     }
+
                     <Form {...form} >
                         <form
                             className="col-span-2"
