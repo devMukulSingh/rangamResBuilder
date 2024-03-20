@@ -48,7 +48,7 @@ const ProSummaryPage = async() => {
 
             <div className='mt-auto flex justify-between'>
                 <Link href={'/builder/experience'}>
-                    <Button className='w-40'>
+                    <Button className='w-40  bg-gray-400 hover:bg-gray-300'>
                         Back
                     </Button>
                 </Link>

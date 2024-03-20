@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation'
 import { useAppSelector } from '@/redux/hooks/hooks'
 
 const Goals = () => {
-    const profession = useAppSelector( state => state.persistedReducer.personalInfo.profession);
+    const profession = useAppSelector(state => state.persistedReducer.personalInfo.profession);
     const [selected, setSelected] = useState("");
     const router = useRouter();
     const goals = [
@@ -54,12 +54,12 @@ const Goals = () => {
 
             <div className='mt-auto flex justify-between'>
                 <Link href={'/builder/personal'}>
-                    <Button className='w-40'>
+                    <Button className='w-40 bg-gray-400 hover:bg-gray-300'>
                         Back
                     </Button>
                 </Link>
                 <Button
-                    onClick={ () => router.push(`/builder/skills`)}
+                    onClick={() => router.push(`/builder/skills`)}
                     className='w-40'
                     disabled={selected === '' ? true : false}
                 >
