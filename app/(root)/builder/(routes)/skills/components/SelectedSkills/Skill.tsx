@@ -5,7 +5,7 @@ import React from 'react'
 
 interface SkillProps {
     skill: string,
-    selectedSkills:string[]
+    selectedSkills: string[]
 }
 
 const Skill: React.FC<SkillProps> = ({
@@ -14,26 +14,29 @@ const Skill: React.FC<SkillProps> = ({
 }) => {
     const dispatch = useAppDispatch();
     const handleRemoveSkill = () => {
-        const filteredSkills = selectedSkills.filter( ( item) => item!== skill)
+        const filteredSkills = selectedSkills.filter((item) => item !== skill)
         dispatch(setTechnicalSkills(filteredSkills))
     }
-    if(skill ==='') return null;
+    if (skill === '') return null;
     return (
         <div
             className='
             bg-white
             flex
             rounded-md
+            items-center
             justify-between
             py-3
             px-4
          '>
-            <h1>
+            <h1 className='text-sm'>
                 {skill}
             </h1>
             <Trash2
-                onClick={ handleRemoveSkill }
+                size={20}
+                onClick={handleRemoveSkill}
                 className='
+                shrink-0
                 cursor-pointer
                 text-red-500
                 '
