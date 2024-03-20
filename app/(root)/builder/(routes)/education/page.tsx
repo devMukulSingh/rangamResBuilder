@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import Circle from '@/components/commons/Circle'
+import EducationForm from './components/EducationForm'
 
 
 const EducationPage = () => {
@@ -30,11 +31,11 @@ w-full
                     </h1>
                 </div>
                 <h1 className='text-xl text-neutral-600'>
-                    Write a short summary telling more about yourself, your strengths <br />
-                    and experience or select our generated personalized summary for you.
+                    Please enter your university/school name.
                 </h1>
             </header>
-            
+
+            <EducationForm />
 
             <div className='mt-auto flex justify-between'>
                 <Link href={'/builder/experience'}>

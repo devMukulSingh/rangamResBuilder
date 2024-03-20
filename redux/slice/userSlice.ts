@@ -52,7 +52,17 @@ const initialState: IinitialState = {
     }
   ],
   technicalSkills: [],
-  education: null,
+  education: [
+    {
+      schoolName: "",
+      degree: "",
+      speciality: "",
+      startDate: "",
+      endDate: "",
+      id: "",
+      checkboxPursuing:false,
+    }
+  ],
   contact: null,
   achievements: null,
   languages: null,

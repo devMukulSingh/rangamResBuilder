@@ -29,13 +29,12 @@ export interface Iexperience {
 
 export interface Ieducation {
   schoolName: string
-  schoolLocation: string
   degree: string
-  fieldOfStudy: string
+  speciality: string
   startDate: string
   endDate: string
-  id: string
-  percentage: number
+  id: string,
+  checkboxPursuing:boolean
 }
 export interface Icontact {
   linkedIn: string

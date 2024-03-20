@@ -24,7 +24,7 @@ const Education = () => {
                         </h1>
                         <div className='flex justify-between'>
                             <h1>
-                                {` ${item.degree ? `${item?.degree} in ${item.fieldOfStudy}` : '' } `}
+                                {` ${item.degree ? `${item?.degree} in ${item.speciality}` : '' } `}
                             </h1>
                             <h1>{format(item?.endDate,"MMM yyyy")}</h1>
                         </div>

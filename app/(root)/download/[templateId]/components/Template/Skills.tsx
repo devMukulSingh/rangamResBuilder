@@ -15,14 +15,14 @@ const Skills = () => {
                 </h1>
             </div>
             <ul className='list-disc pl-8'>
-                <li className='whitespace-normal'>
+                {/* <li className='whitespace-normal'>
                     Tech: {
                         skills.aiGenSkills.map(item => item).join(', ')
                     },
                     {
                         skills.customSkills.map(item => item.skillName).join(', ')
                     }
-                </li>
+                </li> */}
 
             </ul>
         </section>
