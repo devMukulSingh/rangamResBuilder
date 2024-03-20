@@ -12,10 +12,12 @@ export interface SkillsProps{
 const Skills:FC<SkillsProps> = ({
   skills
 }) => {
+  
   const dispatch = useAppDispatch();
     useEffect( () => {
       dispatch(setAiSuggestedSkills(skills));
     },[]);
+
   return (
     <div
       className='

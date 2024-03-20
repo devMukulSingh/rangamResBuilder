@@ -25,7 +25,9 @@ const SuggestedSkills = ({
     const aiSuggestedSkills = useAppSelector(state => state.persistedReducer.aiSuggestedSkills) || [];
     const skillFromState = useAppSelector(state => state.persistedReducer.technicalSkills);
     
-    const form = useForm();
+    const form = useForm({
+
+    });
 
     const handleAddMore = () => {
         const customSkill = form.getValues().customSkill;
@@ -34,7 +36,7 @@ const SuggestedSkills = ({
             const combinedSkills = [...skillFromState, customSkill];
             dispatch(setTechnicalSkills(combinedSkills));
         }
-
+        form.setValue("customSkill","")
     }
 
     return (
@@ -75,7 +77,7 @@ const SuggestedSkills = ({
                            >
                             <div className="gap-5">
                                 <FormField
-                                    name={`customSkill`}
+                                    name="customSkill"
                                     control={form.control}
                                     render={({ field }) => (
                                         <FormItem className="flex gap-5" >
@@ -88,11 +90,7 @@ const SuggestedSkills = ({
                                             <FormMessage />
                                             <Button
                                                 type="button"
-                                                onClick={() => {
-                                                    handleAddMore()
-                                                    field.value = ''
-                                                }
-                                                }
+                                                onClick={ handleAddMore }
                                                 className="
                                                         flex
                                                         gap-2

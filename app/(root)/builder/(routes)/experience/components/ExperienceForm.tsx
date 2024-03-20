@@ -25,16 +25,12 @@ const ExperienceForm = ({
 
 }) => {
     
-
     const progress = useAppSelector(state => state.persistedReducer.progress);
     const [expanded, setExpanded] = useState<string | false>("");
     const dispatch = useAppDispatch();
     const experience = useAppSelector(state => state.persistedReducer.experience) || [];
-    const selectedSkills = useAppSelector(state => state.persistedReducer.technicalSkills.aiGenSkills);
-    const customSkills = useAppSelector(state => state.persistedReducer.technicalSkills.customSkills)
-        .map(item => item.skillName);
+    const selectedSkills = useAppSelector(state => state.persistedReducer.technicalSkills);
 
-    const combinedSkills = [...selectedSkills, ...customSkills];
     const form = useForm({
         defaultValues: {
             experience: experience || [
@@ -342,7 +338,7 @@ const ExperienceForm = ({
                                             render={({ field }) => (
                                                 <div className="grid grid-cols-6 gap-5">
                                                     {
-                                                        combinedSkills.map((skill, i) => (
+                                                        selectedSkills.map((skill, i) => (
                                                             <FormItem key={i}>
                                                                 <FormControl>
                                                                     <Skill
