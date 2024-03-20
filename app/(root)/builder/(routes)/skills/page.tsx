@@ -4,7 +4,6 @@ import Skills from './components/Skills'
 import Circle from '@/components/commons/Circle'
 import { ChatGPT } from '@/lib/ChatGPT'
 import { cookies } from 'next/headers'
-import { Suspense } from 'react'
 
 const SkillsPage = async () => {
 
@@ -65,10 +64,8 @@ const SkillsPage = async () => {
                         Listing 6-10 skills is best.
                     </h1>
                 </header>
-                
-                <Suspense>
-                    <Skills skills={parsedSkills} />
-                </Suspense>
+
+                <Skills skills={parsedSkills} />
 
 
                 <div className='mt-auto flex justify-between'>
