@@ -12,7 +12,7 @@ const Goals = () => {
     const router = useRouter();
     const goals = [
         {
-            title: 'Fulltime',
+            title: 'Experienced',
             img: '/Fulltime.png'
         },
         {

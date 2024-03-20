@@ -1,0 +1,17 @@
+.ql-editor{
+    font-size: 18px;
+    letter-spacing: 0.5px;
+    line-height: 25px;
+    margin-top: 1rem;
+    border: none;
+    padding: 1rem 1rem;
+
+}
+.quill{
+    background: #ffffff;
+    min-height: 10rem;
+}
+.ql-container{
+    background: #ffffff;
+    border: none !important;
+}

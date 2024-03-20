@@ -257,6 +257,7 @@ const ExperienceForm = ({
                                                                 <FormItem className="flex items-center gap-4">
                                                                     <FormControl>
                                                                         <Checkbox
+                                                                            disabled={controlledFields[index].checkboxVolunteering ? true : false}
                                                                             className="size-6 bg-white border-none"
                                                                             checked={field.value}
                                                                             onCheckedChange={field.onChange}
@@ -273,6 +274,7 @@ const ExperienceForm = ({
                                                                 <FormItem className="flex items-center gap-4">
                                                                     <FormControl>
                                                                         <Checkbox
+                                                                            disabled={controlledFields[index].checkboxInternship ? true : false}
                                                                             className="size-6 bg-white border-none"
                                                                             checked={field.value}
                                                                             onCheckedChange={field.onChange}
