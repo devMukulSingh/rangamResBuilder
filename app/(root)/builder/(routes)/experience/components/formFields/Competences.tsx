@@ -11,7 +11,6 @@ const Competences: FC<IExperienceForm> = ({
 }) => {
 
     const aiSuggestedComp = useAppSelector(state => state.persistedReducer.aiSuggestedComp);
-    console.log(aiSuggestedComp);
     
     return (
         <FormField
@@ -24,6 +23,7 @@ const Competences: FC<IExperienceForm> = ({
                             <FormItem key={i}>
                                 <FormControl>
                                     <Competence
+                                        form={form}
                                         index={index}
                                         onChange={field.onChange}
                                         competence={competence} />

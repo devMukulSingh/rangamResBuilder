@@ -107,7 +107,9 @@ const ExperienceForm: FC<ExperienceFormProps> = ({
     }
 
     useEffect(() => {
-        setAiSuggestedComp(parsedCompetences);
+        console.log("indide");
+        
+        dispatch(setAiSuggestedComp(parsedCompetences));
         setSelected(controlledFields[0]?.id);
     }, []);
 

@@ -1,32 +1,41 @@
-import {  useAppSelector } from '@/redux/hooks/hooks';
+import { useAppSelector } from '@/redux/hooks/hooks';
+import { IExperienceForm } from './ExperienceForm';
+import { UseFormReturn } from 'react-hook-form';
+import { Iexperience } from '@/lib/types';
 
 interface competenceProps {
     competence: string,
-    onChange : (competences:string[]) => void,
-    index:number,
+    onChange: (competences: string[]) => void,
+    index: number,
+    form: UseFormReturn<{
+        experience: Iexperience[];
+    }, any, undefined>,
 }
 
 const Competence: React.FC<competenceProps> = ({
     competence,
     onChange,
-    index
+    index,
+    form
 }) => {
-    
-    const competencesFromState:string[] = useAppSelector( state => state.persistedReducer.experience?.[index].competences) || [];
-    
+
+    const competences = form.getValues().experience[index].competences;
+
     const handleSelect = () => {
-        
-        const alreadySelected = competencesFromState.find((item) => item === competence);
+
+        const alreadySelected = competences.find((item) => item === competence);
+
         if (alreadySelected) {
-            const filtered = competencesFromState.filter(item => item !== competence);
+            const filtered = competences.filter(item => item !== competence);
             onChange(filtered)
+
         }
         else {
-            onChange([...competencesFromState,competence]);
+            onChange([...competences, competence]);
         }
     };
 
-    if(competence ==='') return null;
+    if (competence === '') return null;
 
     return (
         <>
@@ -44,7 +53,7 @@ const Competence: React.FC<competenceProps> = ({
                           rounded-sm
                           shadow-md
                            cursor-pointer
-                            ${competencesFromState.length > 0 && competencesFromState.includes(competence) ?
+                            ${competences.includes(competence) ?
                         'border-4 border-red-400 transition scale-90' : ''} 
                             `}
             >

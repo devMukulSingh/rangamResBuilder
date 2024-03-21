@@ -5,7 +5,6 @@ import React from 'react'
 
 const Education = () => {
     const education = useAppSelector(state => state.persistedReducer.education);
-    // console.log(education);
 
     return (
         <section className='space-y-2'>
@@ -25,7 +24,8 @@ const Education = () => {
                         </h1>
                         <div className='flex justify-between'>
                             <h1>
-                                {` ${item.degree ? `${item?.degree} in ${item.speciality}` : ''} `}
+                               Bachelor In Technology in {item?.speciality}
+                                {/* {` ${item.degree ? `${item?.degree} in ${item.speciality}` : ''} `} */}
                             </h1>
                             <h1>
                                 {`${item.startDate ? format(item?.startDate, "MMM yyyy") : ''}`}

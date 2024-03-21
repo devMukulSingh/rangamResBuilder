@@ -1,15 +1,19 @@
-
 import Circle from '@/components/commons/Circle'
-import MainSummary from './components/MainSummary'
 import { cookies } from 'next/headers'
 import { ChatGPT } from '@/lib/ChatGPT'
 import LinkComp from '@/components/ui/LinkComp'
+// import MainSummary from './components/MainSummary'
+import dynamic from 'next/dynamic'
+const MainSummary =  dynamic(() => import('./components/MainSummary'))
+
 
 const ProSummaryPage = async () => {
     const profession = cookies().get('profession')?.value || 'Frontend dev';
 
     const bioPrompt = `Suggest 3 short bio for ${profession} for resume`;
     const bio = await ChatGPT(bioPrompt);
+    console.log(bio);
+    
     const parsedBio = bio?.replace(/\d+(\.\s*|\.)?/g, '').split('\n').filter((item: string) => item !== '') || [];
 
     return (

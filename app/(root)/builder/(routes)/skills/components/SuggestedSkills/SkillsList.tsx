@@ -77,7 +77,6 @@ const SkillsList = () => {
                                         flex
                                         gap-2
                                     ">
-                                        <PlusCircle />
                                         Add
                                     </Button>
                                 </FormItem>

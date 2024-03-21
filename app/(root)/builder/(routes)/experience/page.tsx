@@ -12,7 +12,7 @@ const ExperiencePage = async () => {
     
     const competences = await ChatGPT(prompt);
     const parsedCompetences = competences?.replace(/\d+(\.\s*|\.)?/g, '').split('\n').filter((item: string) => item !== '') || [];
-    // console.log(parsedCompetences);
+    console.log(parsedCompetences);
 
     // const parsedCompetences = [
     //     'Data analysis',

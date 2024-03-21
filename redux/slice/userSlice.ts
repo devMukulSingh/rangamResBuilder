@@ -137,6 +137,7 @@ export const userSlice = createSlice({
       state.personalInfo.bio = action.payload
     },
     setAiSuggestedComp : (state,action) => {
+      
       state.aiSuggestedComp = action.payload;
     }
   }
