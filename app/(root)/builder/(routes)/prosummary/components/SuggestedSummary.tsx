@@ -1,26 +1,25 @@
 'use client'
-import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks"
-import { setSelectedBio } from "@/redux/slice/userSlice";
-import BioSkeleton from "./BioSkeleton"
-import Circle from "@/components/commons/Circle";
-import { Plus } from "lucide-react";
+import { useAppSelector } from "@/redux/hooks/hooks"
 import SelectComp from "./SelectComp";
-
+import dynamic from "next/dynamic";
+import BioSkeleton from "./BioSkeleton";
+const SummaryPoint =  dynamic( () => import ("./SummaryPoint") , {
+    ssr:false,
+    loading: () => <BioSkeleton/>
+});
 
 const SuggestedSummary = () => {
 
-    const dispatch = useAppDispatch();
     const aiSuggestedBio = useAppSelector(state => state.persistedReducer.aiSuggestedBio);
-
 
     return (
         <div className='flex flex-col gap-3 p-5'>
-            
+
             <h1 className='font-semibold'>
                 Select Career Field
             </h1>
 
-            <SelectComp/>
+            <SelectComp />
 
             <ol className='
                 list-none 
@@ -31,35 +30,11 @@ const SuggestedSummary = () => {
                 
                 '>
                 {
-                    aiSuggestedBio.length > 0 ? aiSuggestedBio.map((bio: string, index: number) => (
-                        <li
-                            key={index}
-
-                            className="
-                                min-h-20
-                                relative
-                                bg-white
-                                text-neutral-500
-                                p-4
-                                rounded-sm
-                                "
-                        >
-                            {bio}
-                            <Circle
-                                onClick={() => dispatch(setSelectedBio(bio))}
-                                className="
-                                cursor-pointer
-                                absolute
-                                right-[-20px]
-                                top-[29%]
-                                "
-                            >
-                                <Plus />
-                            </Circle>
-                        </li>
+                    aiSuggestedBio.map((bio: string, index: number) => (
+                        <SummaryPoint bio={bio} key={index} />
+              
                     ))
-                        :
-                        <BioSkeleton />
+
                 }
             </ol>
         </div>

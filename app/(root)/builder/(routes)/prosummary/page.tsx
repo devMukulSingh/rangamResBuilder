@@ -1,7 +1,6 @@
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import Circle from '@/components/commons/Circle'
-import SuggestedSummary from './components/SuggestedSummary'
 import MainSummary from './components/MainSummary'
 import { cookies } from 'next/headers'
 import { ChatGPT } from '@/lib/ChatGPT'

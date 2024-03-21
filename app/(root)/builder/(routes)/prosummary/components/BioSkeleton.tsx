@@ -3,18 +3,16 @@ import { Skeleton } from "@/components/ui/skeleton"
 const BioSkeleton = () => {
   return (
     <>
-      <li className="flex flex-col">
-        <Skeleton className="h-20 w-full bg-neutral-200" />
-      </li>
-      <li className="flex flex-col">
-        <Skeleton className="h-20 w-full bg-neutral-200" />
-      </li>
-      <li className="flex flex-col">
-        <Skeleton className="h-20 w-full bg-neutral-200" />
-      </li>
-      <li className="flex flex-col">
-        <Skeleton className="h-20 w-full bg-neutral-200" />
-      </li>
+    <li>
+
+      <Skeleton className="h-20 w-full bg-white" />
+    </li>
+    <li>
+      <Skeleton className="h-20 w-full bg-white" />
+    </li>
+    <li>
+      <Skeleton className="h-20 w-full bg-white" />
+    </li>
     </>
   )
 }
