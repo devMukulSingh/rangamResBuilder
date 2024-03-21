@@ -1,36 +1,37 @@
 'use client'
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { FieldValues, useFieldArray, useForm } from "react-hook-form"
+import { Form } from "@/components/ui/form"
 import { Button } from "@/components/ui/button";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
 import { setEducation } from "@/redux/slice/userSlice";
 import { useEffect, useState } from "react";
 import { Ieducation } from "@/lib/types";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { useParams, useRouter } from "next/navigation";
-import { setProgress } from "@/redux/slice/userSlice";
-import { Plus, Trash, X } from "lucide-react";
-import toast from "react-hot-toast";
-import { setFormComp } from "@/redux/slice/commonSlice";
+import { FieldValues, useFieldArray, useForm, UseFormReturn } from "react-hook-form"
 import { motion } from "framer-motion"
-import { Checkbox } from "@/components/ui/checkbox";
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select"
+import { Plus, X } from "lucide-react";
+import toast from "react-hot-toast";
+import SchoolName from "./formFields/SchoolName";
+import Speciality from "./formFields/Speciality";
+import StartDate from "./formFields/StartDate";
+import EndDate from "./formFields/EndDate";
+import Degree from "./formFields/Degree";
+import CheckboxPursuing from "./formFields/CheckboxPursuing";
+import LinkComp from "@/components/ui/LinkComp";
+import { useRouter } from "next/navigation";
 
+
+export interface IeducationForm {
+    form: UseFormReturn<{
+        education: Ieducation[];
+    }, any, undefined>,
+    index: number
+}
 
 const EducationForm = () => {
 
     const [selected, setSelected] = useState<string>("");
     const dispatch = useAppDispatch();
-    const progress = useAppSelector(state => state.persistedReducer.progress);
     const education = useAppSelector(state => state.persistedReducer.education);
-
+    const router = useRouter()
 
     const form = useForm({
         defaultValues: {
@@ -62,22 +63,22 @@ const EducationForm = () => {
         }
     })
 
-    const handleChange = () => {
-        const education = form.getValues().education;
-        const parsedEducation = education.map((item) => {
-            return {
-                schoolName: item.schoolName,
-                degree: item.degree,
-                speciality: item.speciality,
-                startDate: item.startDate,
-                endDate: item.endDate,
-                id: item.id,
-            }
-        })
+    // const handleChange = () => {
+    //     const education = form.getValues().education;
+    //     const parsedEducation = education.map((item) => {
+    //         return {
+    //             schoolName: item.schoolName,
+    //             degree: item.degree,
+    //             speciality: item.speciality,
+    //             startDate: item.startDate,
+    //             endDate: item.endDate,
+    //             id: item.id,
+    //         }
+    //     })
 
-        dispatch(setEducation(parsedEducation));
+    //     dispatch(setEducation(parsedEducation));
 
-    }
+    // }
     const handleAddMore = () => {
         const emptyField = {
             schoolName: '',
@@ -95,6 +96,11 @@ const EducationForm = () => {
         if (controlledFields.length > 1) {
             fieldArray.remove(index);
         }
+    }
+    const onSubmit = (data: FieldValues) => {
+        router.push('/download')
+        dispatch(setEducation(data.education));
+        console.log(data.education);
     }
     useEffect(() => {
         setSelected(controlledFields[0]?.id);
@@ -114,7 +120,7 @@ const EducationForm = () => {
 
             if (controlledFields.length > 0) {
                 dispatch(setEducation(controlledFields));
-            const expandedFieldIndex = controlledFields.length - 1;
+                const expandedFieldIndex = controlledFields.length - 1;
 
                 setSelected(controlledFields[expandedFieldIndex].id)
 
@@ -126,6 +132,7 @@ const EducationForm = () => {
 
     }, [controlledFields.length]);
 
+    console.log(education);
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     return (
@@ -137,21 +144,22 @@ const EducationForm = () => {
         <div>
 
             <Form {...form} >
-                <form onChange={handleChange}>
+                <form onSubmit={form.handleSubmit(onSubmit)}>
+                    <div className='flex flex-col gap-5'>
 
-                    <div className="flex">
-                        {
-                            controlledFields.map((item, index) => (
-                                <Button
-                                    type="button"
-                                    key={index}
-                                    onClick={() => setSelected(item.id)}
-                                    className=
-                                    {`
+                        <div className="flex">
+                            {
+                                controlledFields.map((item, index) => (
+                                    <Button
+                                        type="button"
+                                        key={index}
+                                        onClick={() => setSelected(item.id)}
+                                        className=
+                                        {`
                                         ${selected === item.id ?
-                                            'text-neutral-500 bg-red-100 hover:bg-red-100'
-                                            :
-                                            'bg-red-400 hover:bg-red-300'}
+                                                'text-neutral-500 bg-red-100 hover:bg-red-100'
+                                                :
+                                                'bg-red-400 hover:bg-red-300'}
                                         rounded-none
                                         border-r-2
                                         flex 
@@ -159,22 +167,22 @@ const EducationForm = () => {
                                         w-48
                                         items-center 
                                         px-5`
-                                    }
-                                >
-                                    {item?.schoolName || 'School'}
-                                    <X
-                                        className="cursor-pointer ml-auto hover:bg-neutral-400 rounded-full"
-                                        onClick={() => handleDelete(index)}
-                                    />
-                                </Button>
+                                        }
+                                    >
+                                        {item?.schoolName || 'School'}
+                                        <X
+                                            className="cursor-pointer ml-auto hover:bg-neutral-400 rounded-full"
+                                            onClick={() => handleDelete(index)}
+                                        />
+                                    </Button>
 
-                            ))
+                                ))
 
-                        }
-                        <Button
-                            onClick={handleAddMore}
-                            type="button"
-                            className="flex 
+                            }
+                            <Button
+                                onClick={handleAddMore}
+                                type="button"
+                                className="flex 
                                         gap-2
                                         h-12
                                         rounded-none
@@ -182,152 +190,83 @@ const EducationForm = () => {
                                         hover:bg-red-300 
                                         items-center 
                                         bg-red-400 px-5">
-                            Add More
-                            <Plus />
-                        </Button>
-                    </div>
+                                Add More
+                                <Plus />
+                            </Button>
+                        </div>
 
 
-                    {
-                        controlledFields?.map((item: Ieducation, index: number) => {
-                            return (
-                                <>
-                                    {
-                                        item.id === selected &&
-                                        <div className="py-5 px-10  bg-red-100 grid grid-cols-2 gap-5 text-neutral-500" key={index}>
+                        {
+                            ((controlledFields.length === 0) ? education : controlledFields)?.map((item: Ieducation, index: number) => {
+                                return (
+                                    <>
+                                        {
+                                            item.id === selected &&
+                                            <div className="py-5 px-10  bg-red-100 grid grid-cols-2 gap-5 text-neutral-500" key={index}>
 
-                                            {/* schoolName */}
-                                            <FormField
-                                                name={`education.${index}.schoolName`}
-                                                control={form.control}
-                                                render={({ field }) => (
-                                                    <FormItem >
-                                                        <FormLabel>School Name</FormLabel>
-                                                        <FormControl>
-                                                            <Input
-                                                                className="bg-white h-14 rounded-sm" {...field}
-                                                                placeholder="Delhi University" />
-                                                        </FormControl>
-                                                        <FormMessage />
-                                                    </FormItem>
-                                                )}
-                                            />
-                                            {/* speciality */}
-                                            <FormField
-                                                name={`education.${index}.speciality`}
-                                                control={form.control}
-                                                render={({ field }) => (
-                                                    <FormItem >
-                                                        <FormLabel>Speciality</FormLabel>
-                                                        <FormControl>
-                                                            <Input
-                                                                className="bg-white h-14 rounded-sm" {...field}
-                                                                placeholder=""
-                                                            />
-                                                        </FormControl>
-                                                        <FormMessage />
-                                                    </FormItem>
-                                                )}
-                                            />
-
-                                            <div className="flex gap-2">
-
-                                                {/* startDate */}
-                                                <FormField
-                                                    defaultValue="2018-05"
-                                                    name={`education.${index}.startDate`}
-                                                    control={form.control}
-                                                    render={({ field }) => (
-                                                        <FormItem >
-                                                            <FormLabel>Start Date</FormLabel>
-                                                            <FormControl>
-                                                                <Input
-                                                                    className="bg-white h-14 rounded-sm" {...field}
-                                                                    type="month" />
-                                                            </FormControl>
-                                                            <FormMessage />
-                                                        </FormItem>
-                                                    )}
+                                                {/* schoolName */}
+                                                <SchoolName
+                                                    form={form}
+                                                    index={index}
                                                 />
 
-                                                {/* endDate */}
-
-                                                <FormField
-                                                    defaultValue="2018-05"
-                                                    name={`education.${index}.endDate`}
-                                                    control={form.control}
-                                                    render={({ field }) => (
-                                                        <FormItem
-                                                            className={`${form.getValues().education[index].checkboxPursuing ? 'invisible' : 'visible'}`}
-                                                        >
-                                                            <FormLabel>End Date</FormLabel>
-                                                            <FormControl>
-                                                                <Input
-                                                                    type="month"
-                                                                    className="bg-white h-14 rounded-sm" {...field} />
-                                                            </FormControl>
-                                                            <FormMessage />
-                                                        </FormItem>
-                                                    )}
+                                                {/* speciality */}
+                                                <Speciality
+                                                    form={form}
+                                                    index={index}
                                                 />
 
+                                                <div className="flex gap-2">
 
-                                                {/* checkboxPursuing */}
-                                                <FormField
-                                                    name={`education.${index}.checkboxPursuing`}
-                                                    control={form.control}
-                                                    render={({ field }) => (
-                                                        <FormItem className="flex self-end mx-auto gap-2">
-                                                            <FormControl>
-                                                                <Checkbox
-                                                                    className="size-6 bg-white border-none"
-                                                                    checked={field.value}
-                                                                    onCheckedChange={field.onChange}
-                                                                />
-                                                            </FormControl>
-                                                            <FormLabel>Pursuing</FormLabel>
-                                                        </FormItem>
-                                                    )}
+                                                    {/* startDate */}
+
+                                                    <StartDate
+                                                        form={form}
+                                                        index={index}
+                                                    />
+                                                    {/* endDate */}
+                                                    <EndDate
+                                                        form={form}
+                                                        index={index}
+                                                    />
+
+                                                    {/* checkboxPursuing */}
+                                                    <CheckboxPursuing
+                                                        form={form}
+                                                        index={index}
+                                                    />
+                                                </div>
+
+                                                {/* degree */}
+                                                <Degree
+                                                    form={form}
+                                                    index={index}
                                                 />
+
                                             </div>
+                                        }
 
-                                            {/* degree */}
-                                            <FormField
-                                                name={`education.${index}.degree`}
-                                                control={form.control}
-                                                render={({ field }) => (
-                                                    <FormItem >
-                                                        <FormLabel>Degree/Program</FormLabel>
-                                                        <Select
-                                                            onValueChange={field.onChange}
-                                                            defaultValue={field.value}
-                                                        >
-                                                            <FormControl>
-                                                                <SelectTrigger className="bg-white h-14 rounded-sm" >
-                                                                    <SelectValue placeholder="Bachelor in Technology" />
-                                                                </SelectTrigger>
-                                                            </FormControl>
-                                                            <SelectContent>
-                                                                <SelectItem value="light">Bachelor in Technology</SelectItem>
-                                                                <SelectItem value="dark">Bachelor in Technology</SelectItem>
-                                                                <SelectItem value="system">Bachelor in Technology</SelectItem>
-                                                            </SelectContent>
-                                                            <FormMessage />
-                                                        </Select>
-                                                    </FormItem>
-                                                )}
-                                            />
+                                    </>
+                                )
+                            })
+                        }
 
-                                            {/* </CollapsibleContent> */}
-                                            {/* </Collapsible> */}
-                                        </div>
-                                    }
+                        <div className='mt-auto flex justify-between'>
+                            <LinkComp
+                                
+                                className='w-40 bg-gray-400 hover:bg-gray-300'
+                                href={'/builder/prosummary'}>
+                                Back
+                            </LinkComp>
+                            <Button
+                                type="submit"
+                                className='w-40'
+                            >
+                                Next
+                            </Button>
+                        </div>
 
-                                </>
-                            )
-                        })
-                    }
-
+                    </div>
 
                 </form>
             </Form>
