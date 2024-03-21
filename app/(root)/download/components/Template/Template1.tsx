@@ -12,17 +12,24 @@ const Template1 = () => {
         <>
             <div
                 id="template1"
-                className='w-[calc(100vw-53rem)] pb-20 whitespace-nowrap px-5 md:px-10 max-w-[60rem] shrink-0 print:p-0 text-sm'>
+                className='
+                md:w-1/2
+                whitespace-nowrap 
+                shrink-0 
+                text-sm 
+                print:m-0
+                min-w-[40rem]
+                bg-white
+                print:h-screen
+                '>
 
-                <div className=' bg-white pb-10  min-w-[40rem] '>
-                    <hr className='h-4 bg-blue-400 w-full print:hidden ' />
-                    <div className='flex flex-col gap-5 py-5 px-14 print:p-0  '>
-                        <About />
-                        <Experience />
-                        <Education />
-                        {/* <Project /> */}
-                        <Skills />
-                    </div>
+                <hr className='h-4 bg-blue-400 w-full border-none' />
+                <div className='flex flex-col gap-5 py-5 px-14   '>
+                    <About />
+                    <Experience />
+                    <Education />
+                    {/* <Project /> */}
+                    <Skills />
                 </div>
 
             </div>

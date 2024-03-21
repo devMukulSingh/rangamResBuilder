@@ -10,7 +10,7 @@ const Education = () => {
     return (
         <section className='space-y-2'>
             <div className='flex items-center gap-5'>
-                <hr className='h-2 bg-blue-400 w-14' />
+                <hr className='h-2 border-none bg-blue-400 w-14' />
                 <h1 className=' font-bold'>
                     EDUCATION
                 </h1>

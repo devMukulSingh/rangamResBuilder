@@ -10,7 +10,7 @@ const Experience = () => {
     return (
         <section className='space-y-2'>
             <div className='flex items-center gap-5'>
-                <hr className='h-2 bg-blue-400 w-14' />
+                <hr className='h-2 bg-blue-400 w-14 border-none' />
                 <h1 className=' font-bold'>
                     WORK EXPERIENCE
                 </h1>
