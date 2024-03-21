@@ -8,7 +8,7 @@ const Experience = () => {
     const experience = useAppSelector(state => state.persistedReducer.experience);
 
     return (
-        <section className='space-y-1'>
+        <section className='space-y-2'>
             <div className='flex items-center gap-5'>
                 <hr className='h-2 bg-blue-400 w-14' />
                 <h1 className=' font-bold'>
@@ -22,9 +22,11 @@ const Experience = () => {
                             {item.companyName}
                         </h1>
                         <div className='flex justify-between'>
-                            {/* <h1>{item?.role}</h1> */}
+                            <h1>{item?.jobTitle}</h1>
                             <h1>
-                                {`${item.startDate && format(item?.startDate, "MMM yyyy")} - ${item.endDate && format(item?.endDate, "MMM yyyy")}`}
+                                {`${item.startDate ? format(item?.startDate, "MMM yyyy") : ''} `}
+                                {`${item.endDate ? ` - ${format(item?.endDate, "MMM yyyy")}` : ' - present'} `}
+
                             </h1>
                         </div>
                         <HTMLRenderer htmlString={item.description} className="text-amber-400" />

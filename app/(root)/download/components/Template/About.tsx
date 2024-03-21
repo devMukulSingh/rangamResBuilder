@@ -22,27 +22,27 @@ const About = () => {
 
             <div className='flex gap-5 '>
                 <div>
-                    <div className='flex items-center gap-2'>
+                    <div className='flex items-center gap-1'>
                         <Mail size={20} />
                         {personalInfo?.email || 'john@gmail.com'}
                     </div>
 
-                    <div className='flex items-center gap-2'>
+                    {/* <div className='flex items-center gap-2'>
                         <FaLinkedin size={20} />
                         {contact?.linkedIn || 'https://linkedin.com'}
-                    </div>
+                    </div> */}
                 </div>
 
                 <div className='flex flex-col'>
 
-                    <div className='flex items-center gap-2'>
+                    <div className='flex items-center gap-1'>
                         <Phone size={20} />
                         {personalInfo?.mobile || '9808088888'}
                     </div>
-                    <div className='flex items-center gap-2'>
+                    {/* <div className='flex items-center gap-2'>
                         <FaLocationPin size={20} />
                         {personalInfo?.address || 'pune'}
-                    </div>
+                    </div> */}
 
                 </div>
 

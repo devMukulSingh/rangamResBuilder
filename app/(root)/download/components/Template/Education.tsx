@@ -5,9 +5,10 @@ import React from 'react'
 
 const Education = () => {
     const education = useAppSelector(state => state.persistedReducer.education);
+    // console.log(education);
 
     return (
-        <section className='space-y-1'>
+        <section className='space-y-2'>
             <div className='flex items-center gap-5'>
                 <hr className='h-2 bg-blue-400 w-14' />
                 <h1 className=' font-bold'>
@@ -24,9 +25,12 @@ const Education = () => {
                         </h1>
                         <div className='flex justify-between'>
                             <h1>
-                                {` ${item.degree ? `${item?.degree} in ${item.speciality}` : '' } `}
+                                {` ${item.degree ? `${item?.degree} in ${item.speciality}` : ''} `}
                             </h1>
-                            {/* <h1>{format(item?.endDate,"MMM yyyy")}</h1> */}
+                            <h1>
+                                {`${item.startDate ? format(item?.startDate, "MMM yyyy") : ''}`}
+                                {`${item?.endDate ? ` - ${format(item.endDate, "MMM yyyy")}` : ' - present'}`}
+                            </h1>
                         </div>
 
                     </div>

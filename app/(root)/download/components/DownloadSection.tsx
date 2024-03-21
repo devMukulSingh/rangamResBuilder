@@ -3,16 +3,14 @@ import React from 'react'
 import { BiArrowBack } from 'react-icons/bi'
 import DownloadButtons from './DownloadButtons'
 
-interface DownloadSectionProps {
-    templateId: string
-}
 
-const DownloadSection: React.FC<DownloadSectionProps> = ({
-    templateId
+
+const DownloadSection = ({
+
 }) => {
 
     return (
-        <main className='flex flex-col gap-10 md:gap-20 w-full md:w-1/2  h-fit  md:h-[calc(100vh-8.5rem)] '>
+        <main className='flex flex-col gap-10 md:gap-20 w-full md:w-1/2  h-fit  md:h-[calc(100vh-8.5rem)] print:hidden '>
             <Link href={`/builder/education`}>
                 <BiArrowBack
                     className='cursor-pointer'
