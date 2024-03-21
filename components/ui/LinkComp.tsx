@@ -1,23 +1,27 @@
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
 import React, { FC, ReactNode } from 'react'
+import { FieldValues } from 'react-hook-form'
 
 interface LinkProps {
     href: string,
     disabled?: boolean,
     children: ReactNode
-    className?: string
+    className?: string,
+    onClick?: (data:FieldValues) => void
 }
 
 const LinkComp: FC<LinkProps> = ({
     href,
     disabled,
     children,
-    className
+    className,
+    onClick
 }) => {
     return (
 
         <Link
+            onClick={onClick}
             aria-disabled={disabled}
             className={
                 cn(

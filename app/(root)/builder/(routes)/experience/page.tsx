@@ -2,9 +2,28 @@ import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import ExperienceForm from '@/app/(root)/builder/(routes)/experience/components/ExperienceForm'
 import Circle from '@/components/commons/Circle'
+import { cookies } from 'next/headers'
+import { ChatGPT } from '@/lib/ChatGPT'
 
-const ExperiencePage = () => {
+const ExperiencePage = async () => {
 
+    const profession = cookies().get('profession')?.value || 'Frontend dev';
+
+    const prompt = `Generate 7 key competences or responsibilities whose profession is ${profession},in max 3 words`;
+    
+    const competences = await ChatGPT(prompt);
+    const parsedCompetences = competences?.replace(/\d+(\.\s*|\.)?/g, '').split('\n').filter((item: string) => item !== '') || [];
+    // console.log(parsedCompetences);
+
+    // const parsedCompetences = [
+    //     'Data analysis',
+    //     'Machine learning',
+    //     'Statistical modeling',
+    //     'Data visualization',
+    //     'Predictive analytics',
+    //     'Data mining',
+    //     'Big data management'
+    // ]
 
     return (
         <div
@@ -34,20 +53,9 @@ const ExperiencePage = () => {
                 Your experience tells a story of your career progression. Share the details and let's capture the essence of your expertise together.
             </h1>
 
-            <ExperienceForm/>
+            <ExperienceForm parsedCompetences={parsedCompetences} />
 
-            <div className='mt-auto flex justify-between'>
-                <Link href={`/builder/skills`}>
-                    <Button className='w-40 bg-gray-400 hover:bg-gray-300'>
-                        Back
-                    </Button>
-                </Link>
-                <Link href={`/builder/prosummary`}>
-                    <Button className='w-40'>
-                        Next
-                    </Button>
-                </Link>
-            </div>
+
         </div>
     )
 }

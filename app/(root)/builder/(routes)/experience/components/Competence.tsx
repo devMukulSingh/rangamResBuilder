@@ -1,38 +1,32 @@
-import { useAppDispatch, useAppSelector } from '@/redux/hooks/hooks';
-import React, { useEffect, useState } from 'react'
+import {  useAppSelector } from '@/redux/hooks/hooks';
 
-interface SkillProps {
-    skill: string,
-    onChange : (skills:string[]) => void,
+interface competenceProps {
+    competence: string,
+    onChange : (competences:string[]) => void,
     index:number,
-    handleChange : () => void
 }
 
-const Skill: React.FC<SkillProps> = ({
-    skill,
+const Competence: React.FC<competenceProps> = ({
+    competence,
     onChange,
-    handleChange,
     index
 }) => {
     
-    const skillsFromState:string[] = useAppSelector( state => state.persistedReducer.experience?.[index]?.selectedSkills) || [];
+    const competencesFromState:string[] = useAppSelector( state => state.persistedReducer.experience?.[index].competences) || [];
     
     const handleSelect = () => {
         
-        const alreadySelected = skillsFromState.find((item) => item === skill);
+        const alreadySelected = competencesFromState.find((item) => item === competence);
         if (alreadySelected) {
-            const filtered = skillsFromState.filter(item => item !== skill);
+            const filtered = competencesFromState.filter(item => item !== competence);
             onChange(filtered)
-            handleChange();
         }
         else {
-            onChange([...skillsFromState,skill]);
-            handleChange();
-            
+            onChange([...competencesFromState,competence]);
         }
     };
 
-    if(skill ==='') return null;
+    if(competence ==='') return null;
 
     return (
         <>
@@ -50,12 +44,12 @@ const Skill: React.FC<SkillProps> = ({
                           rounded-sm
                           shadow-md
                            cursor-pointer
-                            ${skillsFromState.length > 0 && skillsFromState.includes(skill) ?
+                            ${competencesFromState.length > 0 && competencesFromState.includes(competence) ?
                         'border-4 border-red-400 transition scale-90' : ''} 
                             `}
             >
                 <h1 className='text-sm text-neutral-500'>
-                    {skill}
+                    {competence}
                 </h1>
             </div>
 
@@ -63,4 +57,4 @@ const Skill: React.FC<SkillProps> = ({
     )
 }
 
-export default Skill
+export default Competence

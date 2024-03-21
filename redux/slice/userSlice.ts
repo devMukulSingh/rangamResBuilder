@@ -21,7 +21,8 @@ export interface IinitialState {
   progress: number
   sidebar: boolean
   aiSuggestedSkills: string[]
-  aiSuggestedBio: string[]
+  aiSuggestedBio: string[],
+  aiSuggestedComp : string[]
 }
 
 const initialState: IinitialState = {
@@ -49,6 +50,7 @@ const initialState: IinitialState = {
       checkboxInternship: false,
       selectedSkills: [],
       description: '',
+      competences:[],
     }
   ],
   technicalSkills: [],
@@ -70,7 +72,8 @@ const initialState: IinitialState = {
   progress: 10,
   sidebar: true,
   aiSuggestedSkills: [],
-  aiSuggestedBio: []
+  aiSuggestedBio: [],
+  aiSuggestedComp:[]
 }
 
 export const userSlice = createSlice({
@@ -122,7 +125,8 @@ export const userSlice = createSlice({
         (state.projects = initialState.projects),
         (state.technicalSkills = initialState.technicalSkills),
         (state.aiSuggestedSkills = initialState.aiSuggestedSkills),
-        (state.aiSuggestedBio = initialState.aiSuggestedBio)
+        (state.aiSuggestedBio = initialState.aiSuggestedBio),
+        (state.aiSuggestedComp = initialState.aiSuggestedComp)
     },
     setAiSuggestedSkills: (state, action) => {
       state.aiSuggestedSkills = action.payload
@@ -132,6 +136,9 @@ export const userSlice = createSlice({
     },
     setSelectedBio: (state, action) => {
       state.personalInfo.bio = action.payload
+    },
+    setAiSuggestedComp : (state,action) => {
+      state.aiSuggestedComp = action.payload;
     }
   }
 })
@@ -151,5 +158,6 @@ export const {
   resetForm,
   setAiSuggestedSkills,
   setAiSuggestedBio,
-  setSelectedBio
+  setSelectedBio,
+  setAiSuggestedComp
 } = userSlice.actions
