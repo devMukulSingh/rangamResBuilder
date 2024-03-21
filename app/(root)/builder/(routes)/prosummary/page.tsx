@@ -1,5 +1,4 @@
-import { Button } from '@/components/ui/button'
-import Link from 'next/link'
+
 import Circle from '@/components/commons/Circle'
 import MainSummary from './components/MainSummary'
 import { cookies } from 'next/headers'

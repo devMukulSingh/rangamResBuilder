@@ -1,7 +1,6 @@
 
 import Circle from '@/components/commons/Circle'
 import EducationForm from './components/EducationForm'
-import LinkComp from '@/components/ui/LinkComp'
 
 
 const EducationPage = () => {

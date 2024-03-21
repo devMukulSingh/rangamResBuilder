@@ -63,22 +63,7 @@ const EducationForm = () => {
         }
     })
 
-    // const handleChange = () => {
-    //     const education = form.getValues().education;
-    //     const parsedEducation = education.map((item) => {
-    //         return {
-    //             schoolName: item.schoolName,
-    //             degree: item.degree,
-    //             speciality: item.speciality,
-    //             startDate: item.startDate,
-    //             endDate: item.endDate,
-    //             id: item.id,
-    //         }
-    //     })
 
-    //     dispatch(setEducation(parsedEducation));
-
-    // }
     const handleAddMore = () => {
         const emptyField = {
             schoolName: '',
@@ -202,7 +187,9 @@ const EducationForm = () => {
                                     <>
                                         {
                                             item.id === selected &&
-                                            <div className="py-5 px-10  bg-red-100 grid grid-cols-2 gap-5 text-neutral-500" key={index}>
+                                            <div    
+                                                className="py-5 px-10  bg-red-100 grid grid-cols-2 gap-5 text-neutral-500" 
+                                                key={index}>
 
                                                 {/* schoolName */}
                                                 <SchoolName
@@ -265,6 +252,7 @@ const EducationForm = () => {
                                 Next
                             </Button>
                         </div>
+
 
                     </div>
 

@@ -1,10 +1,13 @@
 'use client'
-import { FC, Suspense, useEffect } from 'react'
+import { FC, useEffect } from 'react'
 import { setAiSuggestedBio, setSelectedBio } from '@/redux/slice/userSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks/hooks'
 import dynamic from 'next/dynamic'
 import BioSkeleton from './BioSkeleton'
 import SuggestedSummary from './SuggestedSummary'
+// const SuggestedSummary = dynamic( () => import( './SuggestedSummary'),{
+//     loading: () => <BioSkeleton/>
+// })
 const RichTextEditor = dynamic(() => import('@/components/commons/RichTextEditor'), {
     ssr: false,
     loading: () => <BioSkeleton />

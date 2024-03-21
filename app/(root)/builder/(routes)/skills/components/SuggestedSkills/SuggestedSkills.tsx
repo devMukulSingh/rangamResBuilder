@@ -4,7 +4,6 @@ import dynamic from "next/dynamic"
 import SkillsSkeleton from "./SkillsSkeleton"
 
 const SkillsList = dynamic( () => import("./SkillsList") ,{
-    ssr:false,
     loading : () => <SkillsSkeleton/>
 })
 

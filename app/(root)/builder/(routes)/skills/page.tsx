@@ -1,8 +1,12 @@
-import Skills from './components/Skills'
 import Circle from '@/components/commons/Circle'
 import { ChatGPT } from '@/lib/ChatGPT'
 import { cookies } from 'next/headers'
 import LinkComp from '@/components/ui/LinkComp'
+import dynamic from 'next/dynamic'
+import SkillsSkeleton from './components/SuggestedSkills/SkillsSkeleton'
+const Skills = dynamic( () => import('./components/Skills'),{
+    loading: () => <SkillsSkeleton/>
+})
 
 const SkillsPage = async () => {
 

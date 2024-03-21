@@ -4,7 +4,6 @@ import SelectComp from "./SelectComp";
 import dynamic from "next/dynamic";
 import BioSkeleton from "./BioSkeleton";
 const SummaryPoint =  dynamic( () => import ("./SummaryPoint") , {
-    ssr:false,
     loading: () => <BioSkeleton/>
 });
 
