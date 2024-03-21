@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import Circle from '@/components/commons/Circle'
 import EducationForm from './components/EducationForm'
+import LinkComp from '@/components/ui/LinkComp'
 
 
 const EducationPage = () => {
@@ -38,16 +39,16 @@ w-full
             <EducationForm />
 
             <div className='mt-auto flex justify-between'>
-                <Link href={'/builder/prosummary'}>
-                    <Button className='w-40 bg-gray-400 hover:bg-gray-300'>
+                <LinkComp
+                    className='w-40 bg-gray-400 hover:bg-gray-300'
+                    href={'/builder/prosummary'}>
                         Back
-                    </Button>
-                </Link>
-                <Link href={'/download'}>
-                    <Button className='w-40'>
+                </LinkComp>
+                <LinkComp
+                    className='w-40' 
+                    href={'/download'}>
                         Next
-                    </Button>
-                </Link>
+                </LinkComp>
             </div>
         </div>
     )

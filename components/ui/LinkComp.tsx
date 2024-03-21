@@ -26,6 +26,7 @@ const LinkComp: FC<LinkProps> = ({
             className={
                 cn(
                     `w-40 
+                h-10
                 bg-red-400 
                 text-primary-foreground 
                 hover:bg-red-300 

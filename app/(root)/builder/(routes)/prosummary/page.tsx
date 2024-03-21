@@ -4,14 +4,15 @@ import Circle from '@/components/commons/Circle'
 import MainSummary from './components/MainSummary'
 import { cookies } from 'next/headers'
 import { ChatGPT } from '@/lib/ChatGPT'
+import LinkComp from '@/components/ui/LinkComp'
 
-const ProSummaryPage = async() => {
+const ProSummaryPage = async () => {
     const profession = cookies().get('profession')?.value || 'Frontend dev';
 
     const bioPrompt = `Suggest 3 short bio for ${profession} for resume`;
     const bio = await ChatGPT(bioPrompt);
     const parsedBio = bio?.replace(/\d+(\.\s*|\.)?/g, '').split('\n').filter((item: string) => item !== '') || [];
-    
+
     return (
         <div
             className='
@@ -46,16 +47,16 @@ const ProSummaryPage = async() => {
             <MainSummary parsedBio={parsedBio} />
 
             <div className='mt-auto flex justify-between'>
-                <Link href={'/builder/experience'}>
-                    <Button className='w-40  bg-gray-400 hover:bg-gray-300'>
-                        Back
-                    </Button>
-                </Link>
-                <Link href={'/builder/education'}>
-                    <Button className='w-40'>
-                        Next
-                    </Button>
-                </Link>
+                <LinkComp
+                    className='w-40  bg-gray-400 hover:bg-gray-300'
+                    href={'/builder/experience'}>
+                    Back
+                </LinkComp>
+                <LinkComp
+                    className='w-40'
+                    href={'/builder/education'}>
+                    Next
+                </LinkComp>
             </div>
         </div>
     )

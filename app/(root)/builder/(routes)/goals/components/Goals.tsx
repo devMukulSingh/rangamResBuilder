@@ -54,11 +54,11 @@ const Goals = () => {
             </div>
 
             <div className='mt-auto flex justify-between'>
-                <Link href={'/builder/personal'}>
-                    <Button className='w-40 bg-gray-400 hover:bg-gray-300'>
-                        Back
-                    </Button>
-                </Link>
+                <LinkComp
+                    className='w-40 bg-gray-400 hover:bg-gray-300'
+                    href={'/builder/personal'}>
+                    Back
+                </LinkComp>
                 <LinkComp
                     disabled={selected === '' ? true : false}
                     href={'/builder/skills'}

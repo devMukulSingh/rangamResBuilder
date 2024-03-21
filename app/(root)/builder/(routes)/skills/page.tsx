@@ -1,10 +1,8 @@
-import { Button } from '@/components/ui/button'
-import Link from 'next/link'
 import Skills from './components/Skills'
 import Circle from '@/components/commons/Circle'
 import { ChatGPT } from '@/lib/ChatGPT'
 import { cookies } from 'next/headers'
-import { revalidatePath } from 'next/cache'
+import LinkComp from '@/components/ui/LinkComp'
 
 const SkillsPage = async () => {
 
@@ -71,16 +69,16 @@ const SkillsPage = async () => {
 
 
                 <div className='mt-auto flex justify-between'>
-                    <Link href={'/builder/goals'}>
-                        <Button className='w-40  bg-gray-400 hover:bg-gray-300'>
-                            Back
-                        </Button>
-                    </Link>
-                    <Link href={'/builder/experience'}>
-                        <Button className='w-40'>
-                            Next
-                        </Button>
-                    </Link>
+                    <LinkComp
+                        className='w-40  bg-gray-400 hover:bg-gray-300'
+                        href={'/builder/goals'}>
+                        Back
+                    </LinkComp>
+                    <LinkComp
+                        className='w-40'
+                        href={'/builder/experience'}>
+                        Next
+                    </LinkComp>
                 </div>
             </div >
         </>
