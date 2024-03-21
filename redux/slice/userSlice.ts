@@ -48,7 +48,6 @@ const initialState: IinitialState = {
       checkboxWorkingStatus: false,
       checkboxVolunteering: false,
       checkboxInternship: false,
-      selectedSkills: [],
       description: '',
       competences:[],
     }

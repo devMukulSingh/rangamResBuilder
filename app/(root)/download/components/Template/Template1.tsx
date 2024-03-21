@@ -21,6 +21,7 @@ const Template1 = () => {
                 min-w-[40rem]
                 bg-white
                 print:h-screen
+                min-h-screen
                 '>
 
                 <hr className='h-4 bg-blue-400 w-full border-none' />

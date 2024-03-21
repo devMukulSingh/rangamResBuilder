@@ -20,7 +20,7 @@ const CheckboxWorkingStatus: FC<IExperienceForm> = ({
             control={form.control}
             render={({ field }) => (
                 <FormItem
-                    className="flex mt-auto  gap-4">
+                    className="flex mt-auto self-center justify-center  gap-4">
                     <FormControl>
                         <Checkbox
                             className="size-6 bg-white border-none"
