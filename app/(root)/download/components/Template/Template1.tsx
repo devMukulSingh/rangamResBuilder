@@ -13,12 +13,13 @@ const Template1 = () => {
             <div
                 id="template1"
                 className='
-                md:w-1/2
+                md:w-2/3
                 whitespace-nowrap 
                 shrink-0 
                 text-sm 
                 print:m-0
-                min-w-[40rem]
+                min-w-[50rem]
+                max-w-[50rem]
                 bg-white
                 print:h-screen
                 print:w-screen
