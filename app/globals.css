@@ -14,12 +14,17 @@
       scrollbar-width: none;  /* Firefox */
 }
 }
+@media print {
+  @page {
+      margin: 0 !important;
+  }
 
+}
 @layer base {
   html,body{
-    -webkit-print-color-adjust: exact !important;   /* Chrome, Safari 6 – 15.3, Edge */
-    color-adjust: exact !important;                 /* Firefox 48 – 96 */
-    print-color-adjust: exact !important;           /* Firefox 97+, Safari 15.4+ */
+     -webkit-print-color-adjust: exact !important;  
+    color-adjust: exact !important;               
+    print-color-adjust: exact !important;          
     background-color: #f9f9f9;
     width: 100%;
   }

@@ -21,11 +21,13 @@ const Template1 = () => {
                 min-w-[40rem]
                 bg-white
                 print:h-screen
+                print:w-screen
+                print:p-0
                 min-h-screen
                 '>
 
                 <hr className='h-4 bg-blue-400 w-full border-none' />
-                <div className='flex flex-col gap-5 py-5 px-14   '>
+                <div className='flex flex-col gap-5 py-5 px-14'>
                     <About />
                     <Experience />
                     <Education />
