@@ -1,30 +1,20 @@
-'use client'
+"use client";
 
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useParams, useRouter } from "next/navigation";
-import { setProgress } from "@/redux/slice/userSlice";
-import { FC, Suspense, useEffect, useState } from "react";
-import { Plus, PlusCircle } from "lucide-react";
-import { setFormComp } from "@/redux/slice/commonSlice";
-import Spinner from "@/components/commons/Spinner";
-import { motion } from "framer-motion";
-import SkillsSkeleton from "./SkillsSkeleton";
-import { SkillsProps } from "../Skills";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
 import { setTechnicalSkills } from "@/redux/slice/userSlice";
-import { FieldValues, useFieldArray, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 const CustomSkill = () => {
-    const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
 
   const form = useForm({});
   const skillFromState = useAppSelector(

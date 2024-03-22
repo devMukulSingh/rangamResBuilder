@@ -1,6 +1,6 @@
 import { useAppDispatch } from '@/redux/hooks/hooks'
 import { setTechnicalSkills } from '@/redux/slice/userSlice'
-import { Trash, Trash2 } from 'lucide-react'
+import {  Trash2 } from 'lucide-react'
 import React from 'react'
 
 interface SkillProps {

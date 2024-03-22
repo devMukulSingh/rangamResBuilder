@@ -1,7 +1,7 @@
 "use client";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
 import { setTechnicalSkills } from "@/redux/slice/userSlice";
-import React, { useEffect, useState } from "react";
+
 
 interface SkillProps {
   skill: string;
