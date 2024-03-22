@@ -11,7 +11,7 @@ const Email:FC<IForm> = ({
         name="email"
         control={form.control}
         render={({ field }) => (
-            <FormItem >
+            <FormItem className="w-full">
                 <FormLabel>Email Address</FormLabel>
                 <FormControl>
                     <Input

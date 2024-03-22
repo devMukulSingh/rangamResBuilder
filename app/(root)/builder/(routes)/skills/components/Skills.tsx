@@ -10,7 +10,8 @@ const Skills = async ({}) => {
         bg-red-100
         rounded-md
         grid
-        grid-cols-2
+        md:grid-cols-2
+        grid-cols-1
         gap-10
         py-5
         px-10

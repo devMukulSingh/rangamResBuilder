@@ -8,7 +8,8 @@ const Steps = () => {
                 <li className='flex gap-3 text-neutral-600 overflow-clip' >
 
                     <div className='flex flex-col gap-2 items-center '>
-                        <span className='border-2 border-red-300 rounded-full w-10 min-h-10 flex items-center justify-center '>
+                        <span 
+                            className='border-2 border-red-300 rounded-full w-10 min-h-10 flex items-center justify-center '>
                             1
                         </span>
                         <Separator
@@ -16,7 +17,7 @@ const Steps = () => {
                             orientation="vertical" />
                     </div>
 
-                    <h1 className='mt-1 text-lg font-semibold'>
+                    <h1 className='mt-1 text-md sm:text-lg font-semibold'>
                         Enter your personal info and help recruiters contact you &nbsp;<br />
                         <span className='underline'>
                             Update Profile
@@ -37,11 +38,11 @@ const Steps = () => {
                     </div>
 
                     <div className='flex flex-col gap-5'>
-                        <h1 className=' text-lg font-semibold mt-1'>
+                        <h1 className=' text-md sm:text-lg font-semibold mt-1'>
                             Take a questionnaire and get the resume
 
                         </h1>
-                        <ul className='list-disc pl-5 text-neutral-500'>
+                        <ul className='list-disc pl-5 sm:text-md text-sm text-neutral-500'>
                             <li>
                                 Enter a desired job title
                             </li>
@@ -66,7 +67,7 @@ const Steps = () => {
                     </div>
 
                     <div className='flex flex-col gap-5'>
-                        <h1 className='mt-1 text-lg font-semibold'>
+                        <h1 className='mt-1 text-md sm:text-lg font-semibold'>
                             Let RANGAM’s AI-tool make the rest!
                         </h1>
                     </div>

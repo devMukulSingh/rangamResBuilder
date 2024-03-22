@@ -98,8 +98,14 @@ const ExperienceForm = () => {
 
   const handleAddMore = () => {
     const currIndex = controlledFields.length - 1;
-    const { companyName, description, startDate, jobTitle,endDate,checkboxWorkingStatus } =
-      form.getValues().experience[currIndex];
+    const {
+      companyName,
+      description,
+      startDate,
+      jobTitle,
+      endDate,
+      checkboxWorkingStatus,
+    } = form.getValues().experience[currIndex];
     if (
       companyName === "" ||
       description === "" ||
@@ -220,7 +226,7 @@ const ExperienceForm = () => {
                       className=" bg-red-100 py-5 px-10 flex flex-col gap-5 "
                       key={index}
                     >
-                      <div className="grid grid-cols-3 gap-5 w-full">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 w-full">
                         {/* CompanyName */}
                         <CompanyName index={index} form={form} />
 
@@ -267,7 +273,7 @@ const ExperienceForm = () => {
                         />
                       </div>
 
-                      <h1 className="text-2xl text-neutral-500 my-5">
+                      <h1 className="text-xl sm:text-2xl text-neutral-500 my-5">
                         Great! To highlight your experience and describe it
                         properly, please choose the key responsibilities at this
                         workplace.

@@ -18,7 +18,7 @@ const SelectedSkills = () => {
       >
         Selected Skills
       </h1>
-      <div className="grid grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {selectedSkills?.map((skill: string, index: number) => (
           <Skill key={index} skill={skill} selectedSkills={selectedSkills} />
         ))}

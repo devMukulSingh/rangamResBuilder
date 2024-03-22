@@ -1,14 +1,14 @@
-'use client'
-import { Form } from "@/components/ui/form"
-import { useForm, UseFormReturn } from "react-hook-form"
+"use client";
+import { Form } from "@/components/ui/form";
+import { useForm, UseFormReturn } from "react-hook-form";
 import * as z from "zod";
-import { zodResolver } from "@hookform/resolvers/zod"
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { resetForm, setPersonalInfo } from "@/redux/slice/userSlice";
 import { useAppDispatch } from "@/redux/hooks/hooks";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
 import Name from "./formFields/Name";
 import Email from "./formFields/Email";
@@ -16,97 +16,99 @@ import Profession from "./formFields/Profession";
 import Mobile from "./formFields/Mobile";
 import FieldSkeleton from "./FieldSkeleton";
 const CountryCode = dynamic(() => import("./formFields/CountryCode"), {
-    ssr: false,
-    loading: () => <FieldSkeleton />
-})
+  ssr: false,
+  loading: () => <FieldSkeleton />,
+});
 
 export interface IForm {
-    form: UseFormReturn<{
-        fullName: string;
-        email: string;
-        profession: string;
-        countryCode: string;
-        mobile: string;
-    }, any, undefined>
+  form: UseFormReturn<
+    {
+      fullName: string;
+      email: string;
+      profession: string;
+      countryCode: string;
+      mobile: string;
+    },
+    any,
+    undefined
+  >;
 }
 
 const PersonalForm = () => {
+  const dispatch = useAppDispatch();
+  const router = useRouter();
 
-    const dispatch = useAppDispatch();
-    const router = useRouter();
+  const schema = z.object({
+    fullName: z
+      .string()
+      .min(3, {
+        message: "Name should be minimum 3 characters",
+      })
+      .max(30, {
+        message: "Name should be max 30 characters",
+      }),
+    email: z.string().email({
+      message: "Please enter valid email",
+    }),
+    profession: z
+      .string()
+      .min(3, {
+        message: "Profession should be minimum 5 characters",
+      })
+      .max(30, {
+        message: "Profession should be max 30 characters",
+      }),
 
-    const schema = z.object({
-        fullName: z.string().min(3, {
-            message: 'Name should be minimum 3 characters'
-        }).max(30, {
-            message: 'Name should be max 30 characters'
-        }),
-        email: z.string().email({
-            message: 'Please enter valid email'
-        }),
-        profession: z.string().min(3, {
-            message: 'Profession should be minimum 5 characters'
-        }).max(30, {
-            message: 'Profession should be max 30 characters'
-        }),
+    countryCode: z.string().min(2, {
+      message: "CountryCode should be minimum 2 numbers",
+    }),
+    mobile: z.string().min(10, {
+      message: "Mobile no should be minimum 10 numbers",
+    }),
+  });
 
-        countryCode: z.string().min(2, {
-            message: 'CountryCode should be minimum 2 numbers'
-        }),
-        mobile: z.string().min(10, {
-            message: 'Mobile no should be minimum 10 numbers'
-        }),
+  type formSchema = z.infer<typeof schema>;
 
+  const form = useForm<formSchema>({
+    resolver: zodResolver(schema),
+  });
 
-    })
+  const onSubmit = async (data: formSchema) => {
+    router.push(`/builder/goals?profession=${data.profession}`);
+    dispatch(resetForm());
+    dispatch(setPersonalInfo(data));
+    await axios.post("/api/set-profession", { profession: data.profession });
+  };
+  return (
+    // <motion.div
+    //     initial={{ opacity: 0 }}
+    //     animate={{ opacity: [0, 1], scale: [0.9, 1] }}
+    //     transition={{ duration: 0.4 }}
+    // >
+    <div className=" text-neutral-500">
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)}>
+          <div className="py-8 px-10 bg-red-100 flex flex-col gap-3 items-start sm:w-4/5 w-full md:ml-auto rounded-lg ">
+            <Name form={form} />
 
-    type formSchema = z.infer<typeof schema>
+            <Email form={form} />
 
-    const form = useForm<formSchema>({
-        resolver: zodResolver(schema)
-    });
+            <Profession form={form} />
 
-    const onSubmit = async (data: formSchema) => {
-        router.push(`/builder/goals?profession=${data.profession}`);
-        dispatch(resetForm());
-        dispatch(setPersonalInfo(data));
-        await axios.post('/api/set-profession', { profession: data.profession });
-    }
-    return (
-        // <motion.div
-        //     initial={{ opacity: 0 }}
-        //     animate={{ opacity: [0, 1], scale: [0.9, 1] }}
-        //     transition={{ duration: 0.4 }}
-        // >
-        <div className=" text-neutral-500">
-            <Form {...form} >
-                <form onSubmit={form.handleSubmit(onSubmit)}>
+            <div className="flex gap-5 w-full">
+              <CountryCode form={form} />
+              <Mobile form={form} />
+            </div>
 
-                    <div className="py-8 px-10 bg-red-100 flex flex-col gap-3 lg:w-4/5 w-full ml-auto rounded-lg ">
+            <Button type="submit" className="w-full py-3 mt-4">
+              Next
+            </Button>
+          </div>
+        </form>
+      </Form>
+    </div>
+    // </motion.div>
+  );
+};
 
-                        <Name form={form} />
-
-                        <Email form={form} />
-
-                        <Profession form={form} />
-
-                        <div className="flex gap-5 w-full">
-                            <CountryCode form={form} />
-                            <Mobile form={form} />
-                        </div>
-
-                        <Button
-                            type="submit"
-                            className="w-full py-3 mt-4">
-                            Next
-                        </Button>
-                    </div>
-                </form>
-            </Form>
-        </div>
-        // </motion.div>
-
-    )
-}
-
-export default PersonalForm
+export default PersonalForm;
