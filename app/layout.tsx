@@ -4,6 +4,7 @@ import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import Providers from "@/redux/providers/Providers";
 import PersistProvider from "@/redux/providers/PersistProvider";
+import QueryProviders from "@/lib/QueryProviders";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,7 +23,9 @@ export default function RootLayout({
       <body className={inter.className}>
         <Providers>
           <PersistProvider>
-            {children}
+            <QueryProviders>
+              {children}
+              </QueryProviders>
             <Toaster />
           </PersistProvider>
         </Providers>

@@ -6,14 +6,6 @@ import { ChatGPT } from '@/lib/ChatGPT'
 
 const ExperiencePage = async () => {
 
-    const profession = cookies().get('profession')?.value || 'Frontend dev';
-
-    const prompt = `Generate 7 key competences or responsibilities whose profession is ${profession},in max 3 words`;
-    
-    const competences = await ChatGPT(prompt);
-    const parsedCompetences = competences?.replace(/\d+(\.\s*|\.)?/g, '').split('\n').filter((item: string) => item !== '') || [];
-    console.log(parsedCompetences);
-
     // const parsedCompetences = [
     //     'Data analysis',
     //     'Machine learning',
@@ -52,7 +44,7 @@ const ExperiencePage = async () => {
                 Your experience tells a story of your career progression. Share the details and let's capture the essence of your expertise together.
             </h1>
 
-            <ExperienceForm parsedCompetences={parsedCompetences} />
+            <ExperienceForm  />
 
 
         </div>
