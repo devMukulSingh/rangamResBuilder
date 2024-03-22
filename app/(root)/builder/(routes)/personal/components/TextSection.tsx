@@ -19,7 +19,7 @@ const TextSection = () => {
                 Your resume is a reflection of your <br />
                 professional identity. <br />
                 <span className=' font-bold'>
-                    Let's make sure it shines
+                    Let's make sure it shines!
                 </span>
             </h1>
         </div>

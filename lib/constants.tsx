@@ -1694,7 +1694,7 @@ export const countryCodes:IcountryCode[] = [
     code: 'US',
     timezone: 'Pacific Standard Time',
     utc: 'UTC-08:00',
-    mobileCode: '+1',
+    mobileCode: '+1 (US)',
   },
   {
     name: 'Uruguay',

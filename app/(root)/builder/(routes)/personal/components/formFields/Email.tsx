@@ -16,7 +16,7 @@ const Email:FC<IForm> = ({
                 <FormControl>
                     <Input
                         className="bg-white" {...field}
-                        placeholder="deepak@gmail.com"
+                        placeholder="Enter your email address"
                     />
                 </FormControl>
                 <FormMessage />

@@ -14,7 +14,8 @@ const Name: FC<IForm> = ({
                 <FormItem >
                     <FormLabel>Full Name</FormLabel>
                     <FormControl>
-                        <Input className="bg-white" {...field} placeholder="Deepak Prakash" />
+                        <Input className="bg-white" {...field} 
+                            placeholder="Enter your full name" />
                     </FormControl>
                     <FormMessage />
                 </FormItem>

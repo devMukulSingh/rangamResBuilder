@@ -28,7 +28,7 @@ const CountryCode: FC<IForm> = ({
 
     return (
         <FormField
-            defaultValue="+91"
+            defaultValue="+1 (US)"
             name="countryCode"
             control={form.control}
             render={({ field }) => (

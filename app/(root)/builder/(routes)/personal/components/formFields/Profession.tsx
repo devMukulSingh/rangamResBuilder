@@ -17,7 +17,7 @@ const Profession: FC<IForm> = ({
                         <Input
 
                             className="bg-white" {...field}
-                            placeholder="Frontend Developer"
+                            placeholder="Specify your desired job title"
                         />
                     </FormControl>
                     <FormMessage />

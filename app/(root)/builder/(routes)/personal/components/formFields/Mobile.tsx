@@ -17,7 +17,7 @@ const Mobile:FC<IForm> = ({
                         <FormControl>
                             <Input
                                 className="bg-white" {...field}
-                                placeholder="9808808098"
+                                placeholder="Mobile number"
                             />
                         </FormControl>
                         <FormMessage />
