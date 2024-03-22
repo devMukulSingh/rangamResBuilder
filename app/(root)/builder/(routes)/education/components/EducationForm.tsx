@@ -71,7 +71,7 @@ const EducationForm = () => {
 
   const handleAddMore = () => {
     const currIndex = controlledFields.length - 1;
-    const { schoolName, speciality, degree, startDate } =
+    const { schoolName, speciality, degree, startDate,checkboxPursuing,endDate } =
       form.getValues().education[currIndex];
     console.log(schoolName, speciality, degree, startDate);
 
@@ -79,7 +79,8 @@ const EducationForm = () => {
       schoolName === "" ||
       degree === "" ||
       startDate === "" ||
-      speciality === ""
+      speciality === "" || 
+      ( endDate === "" && checkboxPursuing===false)
     ) {
       toast.error("Complete previous form first");
     } else {

@@ -98,13 +98,14 @@ const ExperienceForm = () => {
 
   const handleAddMore = () => {
     const currIndex = controlledFields.length - 1;
-    const { companyName, description, startDate, jobTitle } =
+    const { companyName, description, startDate, jobTitle,endDate,checkboxWorkingStatus } =
       form.getValues().experience[currIndex];
     if (
       companyName === "" ||
       description === "" ||
       startDate === "" ||
-      jobTitle === "" 
+      jobTitle === "" ||
+      (endDate === "" && checkboxWorkingStatus === false)
     ) {
       toast.error("Complete previous form first");
     } else {
