@@ -1,94 +1,28 @@
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button";
-import { useParams, useRouter } from "next/navigation";
-import { setProgress } from "@/redux/slice/userSlice";
-import { FC, Suspense, useEffect, useState } from "react";
-import { Plus, PlusCircle } from "lucide-react";
-import { setFormComp } from "@/redux/slice/commonSlice";
-import Spinner from "@/components/commons/Spinner";
-import { motion } from "framer-motion"
+import { cookies } from "next/headers";
 import Skill from "./Skill";
-import SkillsSkeleton from "./SkillsSkeleton";
-import { SkillsProps } from "../Skills";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
-import { setTechnicalSkills } from "@/redux/slice/userSlice";
-import { FieldValues, useFieldArray, useForm } from "react-hook-form"
+import { ChatGPT } from "@/lib/ChatGPT";
+import CustomSkill from "./CustomSkill";
+
+const SkillsList = async() => {
+  const profession = cookies().get("profession")?.value || "Frontend dev";
+  const skillPrompt = `My profession is ${profession}, give me a list of 13 technology names, or skills relevant to this profession in max 3 words`;
+  const skills = await ChatGPT(skillPrompt);
+  const parsedSkills = skills?.replace(/\d+(\.\s*|\.)?/g, '').split('\n').filter((item: string) => item !== '') || [];
+  console.log(parsedSkills);
 
 
-const SkillsList = () => {
-    
-    const dispatch = useAppDispatch();
-    const aiSuggestedSkills = useAppSelector(state => state.persistedReducer.aiSuggestedSkills) || [];
-    const skillFromState = useAppSelector(state => state.persistedReducer.technicalSkills);
 
-    const form = useForm({
+  return (
+    <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2  gap-5 overflow-auto">
+      {parsedSkills?.map((skill, index) => (
+        <>
+          <Skill skill={skill} key={index} />
+        </>
+      ))}
 
-    });
+        <CustomSkill/>
+    </div>
+  );
+};
 
-    const handleAddMore = () => {
-        const customSkill = form.getValues().customSkill;
-        console.log(customSkill, "customSkill");
-        if (customSkill !== '') {
-            const combinedSkills = [...skillFromState, customSkill];
-            dispatch(setTechnicalSkills(combinedSkills));
-        }
-        form.setValue("customSkill", "")
-    }
-    return (
-        <div className="grid grid-cols-3  gap-5" >
-
-            {
-                aiSuggestedSkills ? aiSuggestedSkills?.map((skill, index) => (
-                    <>
-                        <Skill
-                            skill={skill}
-                            key={index}
-                        />
-
-                    </>
-
-                ))
-                    :
-                    <SkillsSkeleton />
-            }
-
-            <Form {...form} >
-                <form
-                    className="col-span-2"
-                >
-                    <div className="gap-5">
-                        <FormField
-                            name="customSkill"
-                            control={form.control}
-                            render={({ field }) => (
-                                <FormItem className="flex gap-5" >
-                                    <FormControl>
-                                        <Input
-                                            className="shadow-md rounded-sm bg-white py-6 w-full" {...field}
-                                            placeholder="You didn't find? Enter your skill"
-                                        />
-                                    </FormControl>
-                                    <FormMessage />
-                                    <Button
-                                        type="button"
-                                        onClick={handleAddMore}
-                                        className="
-                                        flex
-                                        gap-2
-                                    ">
-                                        Add
-                                    </Button>
-                                </FormItem>
-                            )}
-                        />
-
-                    </div>
-                </form>
-            </Form>
-
-        </div>
-    )
-}
-
-export default SkillsList
+export default SkillsList;

@@ -1,69 +1,67 @@
-import { useAppSelector } from '@/redux/hooks/hooks';
-import { IExperienceForm } from './ExperienceForm';
-import { UseFormReturn } from 'react-hook-form';
-import { Iexperience } from '@/lib/types';
+import { useAppSelector } from "@/redux/hooks/hooks";
+import { IExperienceForm } from "./ExperienceForm";
+import { UseFormReturn } from "react-hook-form";
+import { Iexperience } from "@/lib/types";
 
 interface competenceProps {
-    competence: string,
-    onChange: (competences: string[]) => void,
-    index: number,
-    form: UseFormReturn<{
-        experience: Iexperience[];
-    }, any, undefined>,
+  competence: string;
+  onChange: (competences: string[]) => void;
+  index: number;
+  form: UseFormReturn<
+    {
+      experience: Iexperience[];
+    },
+    any,
+    undefined
+  >;
 }
 
 const Competence: React.FC<competenceProps> = ({
-    competence,
-    onChange,
-    index,
-    form
+  competence,
+  onChange,
+  index,
+  form,
 }) => {
+  const competences = form.getValues().experience[index].competences;
 
-    const competences = form.getValues().experience[index].competences;
+  const handleSelect = () => {
+    const alreadySelected = competences.find((item) => item === competence);
 
-    const handleSelect = () => {
+    if (alreadySelected) {
+      const filtered = competences.filter((item) => item !== competence);
+      onChange(filtered);
+    } else {
+      onChange([...competences, competence]);
+    }
+  };
 
-        const alreadySelected = competences.find((item) => item === competence);
+  if (competence === "") return null;
 
-        if (alreadySelected) {
-            const filtered = competences.filter(item => item !== competence);
-            onChange(filtered)
-
-        }
-        else {
-            onChange([...competences, competence]);
-        }
-    };
-
-    if (competence === '') return null;
-
-    return (
-        <>
-            <div
-                onClick={handleSelect}
-                className={
-                    `py-5
+  return (
+    <>
+      <div
+        onClick={handleSelect}
+        className={`py-5
                         transition
                         px-3
-                        h-12
+                        h-16
                         w-full
                         flex 
                         items-center
-                         bg-white
                           rounded-sm
                           shadow-md
                            cursor-pointer
-                            ${competences.includes(competence) ?
-                        'border-4 border-red-400 transition scale-90' : ''} 
+                            ${
+                              competences.includes(competence)
+                                ? "border-2 border-white bg-gray-400 transition scale-90 text-neutral-100"
+                                : " bg-white text-neutral-500"
+                            } 
                             `}
-            >
-                <h1 className='text-sm text-neutral-500'>
-                    {competence}
-                </h1>
-            </div>
+      >
+        <h1 className="text-sm ">{competence}</h1>
+      </div>
+    </>
+  );
+};
 
-        </>
-    )
-}
-
-export default Competence
+export default Competence;

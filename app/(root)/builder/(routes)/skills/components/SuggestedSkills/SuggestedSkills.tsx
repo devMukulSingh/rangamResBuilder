@@ -1,41 +1,43 @@
-'use client'
+import dynamic from "next/dynamic";
+import SkillsSkeleton from "./SkillsSkeleton";
 
-import dynamic from "next/dynamic"
-import SkillsSkeleton from "./SkillsSkeleton"
+const SkillsList = dynamic(() => import("./SkillsList"), {
+  loading: () => <SkillsSkeleton />,
+});
 
-const SkillsList = dynamic( () => import("./SkillsList") ,{
-    loading : () => <SkillsSkeleton/>
-})
+const SuggestedSkills = async() => {
+  
+  return (
+    <>
+      {/* <motion.div
 
-const SuggestedSkills = () => {
 
-    return (
-        // <motion.div
-        //     animate={{ x: 1, opacity: [0, 1] }}
-        //     initial={{ x: -150, opacity: 0 }}
-        //     transition={{ duration: 0.2 }}
-        // >
-        <div className="space-y-5 h-fit ">
-
-            <section>
-                <h1
-                    className=" 
+            animate={{ x: 1, opacity: [0, 1] }}
+            initial={{ x: -150, opacity: 0 }}
+            transition={{ duration: 0.2 }}
+        > */}
+      <div className="space-y-5 overflow-auto no-scrollbar ">
+        <section>
+          <h1
+            className=" 
                         font-semibold 
                         mb-5
                         text-neutral-500
                         text-lg
-                        ">
-                    Select AI Suggested Skill
-                </h1>
+                        "
+          >
+            Select AI Suggested Skill
+          </h1>
 
-                <SkillsList />
+          <SkillsList />
 
-            </section>
+        </section>
+      </div>
 
-        </div>
-        // </motion.div>
-    )
+      {/* </motion.div> */}
+      
+    </>
+  );
+};
 
-}
-
-export default SuggestedSkills
+export default SuggestedSkills;

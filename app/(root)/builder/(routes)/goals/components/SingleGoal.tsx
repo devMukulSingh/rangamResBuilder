@@ -38,7 +38,7 @@ const SingleGoal: React.FC<SingleGoalProps> = ({
       rounded-lg
         h-[18rem]
         ${selected === goal.title ?
-          'border-red-500 border-4 transition scale-90' : ''
+          'bg-red-300 transition scale-90' : ''
         }
         `}>
       <figure
