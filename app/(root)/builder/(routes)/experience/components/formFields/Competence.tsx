@@ -1,5 +1,5 @@
 import { useAppSelector } from "@/redux/hooks/hooks";
-import { IExperienceForm } from "./ExperienceForm";
+import { IExperienceForm } from "../ExperienceForm";
 import { UseFormReturn } from "react-hook-form";
 import { Iexperience } from "@/lib/types";
 

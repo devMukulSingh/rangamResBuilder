@@ -2,17 +2,16 @@ import { FormControl, FormField, FormItem } from "@/components/ui/form";
 import React, { FC, useEffect, useState } from "react";
 import { IExperienceForm } from "../ExperienceForm";
 import { Plus } from "lucide-react";
-import Competence from "../Competence";
+import Competence from "./Competence";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import CompetenceSkeleton from "../CompetenceSkeleton";
 
 const Competences: FC<IExperienceForm> = ({ form, index }) => {
-
   const { isLoading, data, error, isError } = useQuery({
     queryKey: ["competences"],
     queryFn: async () => {
-      const {data} = await axios.get("/api/ai/get-competences");
+      const { data } = await axios.get("/api/ai/get-competences");
       return data;
     },
   });
@@ -27,7 +26,7 @@ const Competences: FC<IExperienceForm> = ({ form, index }) => {
       control={form.control}
       render={({ field }) => (
         <div className="grid grid-cols-6 gap-5">
-          {data?.map((competence:string, i:number) => (
+          {data?.map((competence: string, i: number) => (
             <FormItem key={i}>
               <FormControl>
                 <Competence

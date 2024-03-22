@@ -280,7 +280,8 @@ const ExperienceForm = () => {
                       </h1>
 
                       {/* Competences */}
-                      {/* <Competences index={index} form={form} /> */}
+                      <Competences index={index} form={form} />
+                      
                       {/* description */}
                       <Description index={index} form={form} />
                     </div>
