@@ -25,7 +25,8 @@ import EndDate from "./formFields/EndDate";
 import StartDate from "./formFields/StartDate";
 import LinkComp from "@/components/ui/LinkComp";
 import { useRouter } from "next/navigation";
-
+import * as z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 export interface IExperienceForm {
   form: UseFormReturn<
     {
@@ -44,6 +45,17 @@ const ExperienceForm = () => {
   const experience =
     useAppSelector((state) => state.persistedReducer.experience) || [];
 
+  // const schema = z.object({
+  //   CompanyName: z.string().min(3),
+  //   jobTitle: z.string().min(3),
+  //   endDate: z.string(),
+  //   startDate: z.string().min(3),
+  //   checkboxWorkingStatus: z.boolean(),
+  //   checkboxVolunteering: z.boolean(),
+  //   checkboxInternship: z.boolean(),
+  //   competences: z.string().array().min(1),
+  //   description: z.string().min(10),
+  // });
   const form = useForm({
     defaultValues: {
       experience: experience || [
@@ -80,22 +92,35 @@ const ExperienceForm = () => {
 
   const onSubmit = (data: FieldValues) => {
     router.push("/builder/prosummary");
+    console.log(data);
     dispatch(setExperience(data.experience));
   };
 
   const handleAddMore = () => {
-    fieldArray.append({
-      companyName: "",
-      jobTitle: "",
-      startDate: "",
-      endDate: "",
-      checkboxWorkingStatus: false,
-      checkboxVolunteering: false,
-      checkboxInternship: false,
-      competences: [],
-      id: Math.floor(Math.random() * 100).toString(),
-      description: "",
-    });
+    const currIndex = controlledFields.length - 1;
+    const { companyName, description, startDate, jobTitle } =
+      form.getValues().experience[currIndex];
+    if (
+      companyName === "" ||
+      description === "" ||
+      startDate === "" ||
+      jobTitle === "" 
+    ) {
+      toast.error("Complete previous form first");
+    } else {
+      fieldArray.append({
+        companyName: "",
+        jobTitle: "",
+        startDate: "",
+        endDate: "",
+        checkboxWorkingStatus: false,
+        checkboxVolunteering: false,
+        checkboxInternship: false,
+        competences: [],
+        id: Math.floor(Math.random() * 100).toString(),
+        description: "",
+      });
+    }
   };
 
   const handleDelete = (index: number) => {
@@ -105,7 +130,10 @@ const ExperienceForm = () => {
       toast.error("Profile should have at least one experience field");
     }
   };
-
+  const handleNext = () => {
+    const data = form.getValues().experience;
+    dispatch(setExperience(data));
+  };
   useEffect(() => {
     setSelected(controlledFields[0]?.id);
   }, []);
@@ -136,7 +164,7 @@ const ExperienceForm = () => {
     <>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <div className="flex flex-col gap-5">
+          <div className="flex flex-col ">
             <div className="flex">
               {controlledFields.map((item, index) => (
                 <Button
@@ -166,7 +194,7 @@ const ExperienceForm = () => {
               ))}
               <Button
                 type="button"
-                onClick={handleAddMore}
+                onClick={() => handleAddMore()}
                 className="flex 
                                         gap-2
                                         h-12
@@ -245,7 +273,7 @@ const ExperienceForm = () => {
                       </h1>
 
                       {/* Competences */}
-                      <Competences index={index} form={form} />
+                      {/* <Competences index={index} form={form} /> */}
                       {/* description */}
                       <Description index={index} form={form} />
                     </div>
@@ -253,7 +281,7 @@ const ExperienceForm = () => {
                 </>
               );
             })}
-            <div className="mt-auto flex justify-between h-10">
+            <div className="mt-5 flex justify-between h-10">
               <LinkComp
                 className="w-40 bg-gray-400 hover:bg-gray-300"
                 href={`/builder/skills`}
@@ -264,8 +292,6 @@ const ExperienceForm = () => {
                 Next
               </Button>
             </div>
-
-
           </div>
         </form>
       </Form>
