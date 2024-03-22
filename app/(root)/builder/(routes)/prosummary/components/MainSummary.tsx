@@ -1,35 +1,14 @@
-'use client'
-import { FC, useEffect } from 'react'
-import { setAiSuggestedBio, setSelectedBio } from '@/redux/slice/userSlice'
-import { useAppDispatch, useAppSelector } from '@/redux/hooks/hooks'
 import dynamic from 'next/dynamic'
+import Editor from './Editor'
 import BioSkeleton from './BioSkeleton'
-import SuggestedSummary from './SuggestedSummary'
-// const SuggestedSummary = dynamic( () => import( './SuggestedSummary'),{
-//     loading: () => <BioSkeleton/>
-// })
-const RichTextEditor = dynamic(() => import('@/components/commons/RichTextEditor'), {
-    ssr: false,
-    loading: () => <BioSkeleton />
+const SuggestedSummary = dynamic(() => import('./SuggestedSummary'),{
+    loading : () => <BioSkeleton/>
 })
 
+const MainSummary = ({
 
-interface MainSummaryProps {
-    parsedBio: string[]
-}
-
-const MainSummary: FC<MainSummaryProps> = ({
-    parsedBio
 }) => {
 
-    const dispatch = useAppDispatch();
-
-    useEffect(() => {
-        dispatch(setAiSuggestedBio(parsedBio));
-    }, []);
-
-    const selectedBio = useAppSelector(state => state.persistedReducer.personalInfo.bio);
-    
     return (
         <div className='
              gap-10 
@@ -41,10 +20,7 @@ const MainSummary: FC<MainSummaryProps> = ({
              grid-cols-2
              '>
             <SuggestedSummary />
-            <RichTextEditor
-                value={selectedBio}
-                onChange={(content) => dispatch(setSelectedBio(content))}
-            />
+            <Editor/>
         </div>
     )
 }

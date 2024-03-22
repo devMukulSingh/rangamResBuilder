@@ -1,14 +1,15 @@
+'use client'
 import { useAppDispatch } from '@/redux/hooks/hooks'
 import { setSelectedBio } from '@/redux/slice/userSlice'
 import {  Plus } from 'lucide-react'
 import React, { FC } from 'react'
 import Circle from '@/components/commons/Circle'
 
-interface SummaryPointsProps {
+interface SummaryPointProps {
     bio: string
 }
 
-const SummaryPoints: FC<SummaryPointsProps> = ({
+const SummaryPoint: FC<SummaryPointProps> = ({
     bio
 }) => {
     const dispatch = useAppDispatch();
@@ -41,4 +42,4 @@ const SummaryPoints: FC<SummaryPointsProps> = ({
     )
 }
 
-export default SummaryPoints
+export default SummaryPoint
