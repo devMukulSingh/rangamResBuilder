@@ -8,6 +8,7 @@ const CheckboxPursuing: FC<IeducationForm> = ({
   index
 }) => {
   return (
+
     <FormField
       name={`education.${index}.checkboxPursuing`}
       control={form.control}
@@ -24,6 +25,7 @@ const CheckboxPursuing: FC<IeducationForm> = ({
         </FormItem>
       )}
     />
+
   )
 }
 

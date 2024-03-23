@@ -1,3 +1,5 @@
+import { Button } from "@/components/ui/button";
+import LinkComp from "@/components/ui/LinkComp";
 import dynamic from "next/dynamic";
 const About = dynamic(() => import("./About"), { ssr: false });
 const Experience = dynamic(() => import("./Experience"), { ssr: false });
@@ -7,7 +9,21 @@ const Skills = dynamic(() => import("./Skills"), { ssr: false });
 
 const Template1 = () => {
   return (
-    <>
+    <div className="flex flex-col gap-2">
+      <LinkComp
+        href={'/edit-resume'}
+        className="justify-start
+         font-semi-bold
+          text-blue-500 
+          w-32 
+          print:hidden
+          hover:text-blue-500
+          hover:bg-transparent
+          bg-transparent
+          "
+      >
+        Edit
+      </LinkComp>
       <div
         id="template1"
         className="
@@ -33,7 +49,7 @@ const Template1 = () => {
           <Skills />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

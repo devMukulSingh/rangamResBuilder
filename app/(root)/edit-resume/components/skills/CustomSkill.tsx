@@ -1,5 +1,4 @@
 "use client";
-
 import {
   Form,
   FormControl,
@@ -32,7 +31,7 @@ const CustomSkill = () => {
   return (
     <Form {...form}>
       <form className="col-span-2">
-        <div className="gap-5">
+        <div className="gap-5 mt-auto self-end">
           <FormField
             name="customSkill"
             control={form.control}

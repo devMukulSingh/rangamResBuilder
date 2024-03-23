@@ -20,7 +20,6 @@ export interface IinitialState {
   projects: Iprojects[] | null
   progress: number
   sidebar: boolean
-  aiSuggestedSkills: string[]
   aiSuggestedBio: string[],
   aiSuggestedComp : string[]
 }
@@ -70,7 +69,6 @@ const initialState: IinitialState = {
   projects: null,
   progress: 10,
   sidebar: true,
-  aiSuggestedSkills: [],
   aiSuggestedBio: [],
   aiSuggestedComp:[]
 }
@@ -87,11 +85,7 @@ export const userSlice = createSlice({
     },
     setTechnicalSkills: (state, action) => {
       state.technicalSkills = action.payload;
-      // if (action.payload.aiGenSkills) {
-      //   state.technicalSkills.aiGenSkills = action.payload.aiGenSkills
-      // } else {
-      //   state.technicalSkills.customSkills = action.payload.customSkills
-      // }
+
     },
     setEducation: (state, action) => {
       state.education = action.payload
@@ -123,13 +117,10 @@ export const userSlice = createSlice({
         (state.personalInfo = initialState.personalInfo),
         (state.projects = initialState.projects),
         (state.technicalSkills = initialState.technicalSkills),
-        (state.aiSuggestedSkills = initialState.aiSuggestedSkills),
         (state.aiSuggestedBio = initialState.aiSuggestedBio),
         (state.aiSuggestedComp = initialState.aiSuggestedComp)
     },
-    setAiSuggestedSkills: (state, action) => {
-      state.aiSuggestedSkills = action.payload
-    },
+
     setAiSuggestedBio: (state, action) => {
       state.aiSuggestedBio = action.payload
     },
@@ -137,7 +128,6 @@ export const userSlice = createSlice({
       state.personalInfo.bio = action.payload
     },
     setAiSuggestedComp : (state,action) => {
-      
       state.aiSuggestedComp = action.payload;
     }
   }
@@ -156,7 +146,6 @@ export const {
   setProjects,
   setProgress,
   resetForm,
-  setAiSuggestedSkills,
   setAiSuggestedBio,
   setSelectedBio,
   setAiSuggestedComp

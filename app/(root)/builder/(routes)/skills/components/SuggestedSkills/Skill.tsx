@@ -44,7 +44,7 @@ const Skill: React.FC<SkillProps> = ({ skill }) => {
                             } 
                             `}
       >
-        <h1 className="text-sm">{skill}</h1>
+        <h1 className="text-sm break-words">{skill}</h1>
       </div>
     </>
   );
