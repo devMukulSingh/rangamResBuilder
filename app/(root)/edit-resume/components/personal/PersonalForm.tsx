@@ -8,7 +8,6 @@ import Address from "./formFields/Address";
 import CountryCode from "@/app/(root)/builder/(routes)/personal/components/formFields/CountryCode";
 import Mobile from "@/app/(root)/builder/(routes)/personal/components/formFields/Mobile";
 import City from "./formFields/City";
-import BirthPlace from "./formFields/Birthplace";
 import State from "./formFields/State";
 import DOB from "./formFields/DOB";
 import {
@@ -19,8 +18,8 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { setPersonalInfo } from "@/redux/slice/userSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
-import { setProgress } from "@/redux/slice/userSlice";
 import { useState } from "react";
+import BirthPlace from "./formFields/BirthPlace";
 
 
 const PersonalForm = () => {

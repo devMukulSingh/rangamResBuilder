@@ -26,12 +26,7 @@ import StartDate from "@/app/(root)/builder/(routes)/experience/components/formF
 import EndDate from "@/app/(root)/builder/(routes)/experience/components/formFields/EndDate";
 import Employer from "./formFields/Employer";
 import Address from "./formFields/Address";
-const RichTextEditor = dynamic(
-  () => import("@/components/commons/RichTextEditor"),
-  {
-    ssr: false,
-  }
-);
+
 
 const ExperienceForm = () => {
   const progress = useAppSelector((state) => state.persistedReducer.progress);

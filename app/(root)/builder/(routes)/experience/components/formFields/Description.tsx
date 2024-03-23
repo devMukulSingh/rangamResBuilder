@@ -1,8 +1,10 @@
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import React, { FC } from 'react'
 import { IExperienceForm } from '../ExperienceForm';
-
-import RichTextEditor from '@/components/commons/RichTextEditor';
+import dynamic from 'next/dynamic';
+const RichTextEditor = dynamic(() => import('@/components/commons/RichTextEditor'),{
+    ssr:false
+});
 
 const Description: FC<IExperienceForm> = ({
     form,
