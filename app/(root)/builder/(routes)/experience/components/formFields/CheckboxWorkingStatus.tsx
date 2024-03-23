@@ -19,7 +19,7 @@ const CheckboxWorkingStatus: FC<IExperienceForm> = ({
                     className="flex mt-auto self-center justify-center  gap-4">
                     <FormControl>
                         <Checkbox
-                            className="size-6 bg-white border-none"
+                            className="size-6 bg-white border"
                             checked={field.value}
                             onCheckedChange={field.onChange}
                         />

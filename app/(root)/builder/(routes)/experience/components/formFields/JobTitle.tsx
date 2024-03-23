@@ -19,7 +19,7 @@ const JobTitle: FC<IExperienceForm> = ({ form, index }) => {
       control={form.control}
       render={({ field }) => (
         <FormItem>
-          <FormLabel>jobTitle</FormLabel>
+          <FormLabel>Job title</FormLabel>
           <FormControl>
             <Input
               placeholder="Jr. Frontend Developer"

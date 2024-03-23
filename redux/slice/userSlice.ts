@@ -49,11 +49,14 @@ const initialState: IinitialState = {
       checkboxInternship: false,
       description: '',
       competences:[],
+      address: '',
+      employer: '',
     }
   ],
   technicalSkills: [],
   education: [
     {
+      schoolLocation:"",
       schoolName: "",
       degree: "",
       speciality: "",

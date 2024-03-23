@@ -29,7 +29,7 @@ const CheckboxInternship: FC<IExperienceForm> = ({
               disabled={
                 controlledFields?.[index].checkboxVolunteering ? true : false
               }
-              className="size-6 bg-white border-none"
+              className="size-6 bg-white border"
               checked={field.value}
               onCheckedChange={field.onChange}
             />

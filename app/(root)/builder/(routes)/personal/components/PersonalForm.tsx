@@ -28,6 +28,11 @@ export interface IForm {
       profession: string;
       countryCode: string;
       mobile: string;
+      state?: string,
+      dob?: string,
+      address?: string,
+      birthPlace?: string,
+      city?: string,
     },
     any,
     undefined

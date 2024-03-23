@@ -1,4 +1,4 @@
-import { FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form'
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import React, { FC } from 'react'
 import { IExperienceForm } from '../ExperienceForm';
 
@@ -16,6 +16,7 @@ const Description: FC<IExperienceForm> = ({
             control={form.control}
             render={({ field }) => (
                 <FormItem >
+                    <FormLabel>Description</FormLabel>
                     <FormControl>
                         <RichTextEditor
                             value={field.value || ''}

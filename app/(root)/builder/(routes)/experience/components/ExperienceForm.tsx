@@ -281,7 +281,7 @@ const ExperienceForm = () => {
 
                       {/* Competences */}
                       <Competences index={index} form={form} />
-                      
+
                       {/* description */}
                       <Description index={index} form={form} />
                     </div>

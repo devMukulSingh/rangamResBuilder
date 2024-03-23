@@ -2,13 +2,13 @@ export interface IpersonalInfo {
   fullName: string
   email: string
   profession: string
-  address: string
   countryCode: string
   mobile: string
-  state: string
-  dob: Date | string
-  birthPlace: string
   bio: string
+  state?: string
+  address?: string
+  dob?: Date | string
+  birthPlace?: string
 }
 
 export interface Iexperience {
@@ -21,7 +21,9 @@ export interface Iexperience {
   checkboxVolunteering: boolean
   checkboxInternship: boolean
   description: string,
-  competences:string[]
+  competences:string[],
+  address?: string,
+  employer?: string,
 }
 
 export interface Ieducation {
@@ -31,7 +33,8 @@ export interface Ieducation {
   startDate: string
   endDate: string
   id: string,
-  checkboxPursuing:boolean
+  checkboxPursuing:boolean,
+  schoolLocation?:string
 }
 export interface Icontact {
   linkedIn: string
