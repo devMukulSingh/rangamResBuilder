@@ -13,16 +13,15 @@ const Template1 = () => {
         className="
                 md:w-2/3
                 whitespace-nowrap 
-                shrink-0 
                 text-sm 
                 print:m-0
-                min-w-[50rem]
+                min-w-[45rem]
                 max-w-[50rem]
                 bg-white
                 print:h-screen
                 print:w-screen
                 print:p-0
-                min-h-screen
+                min-h-[100vh]
                 "
       >
         <hr className="h-4 bg-blue-400 w-full border-none" />

@@ -12,7 +12,9 @@ flex-col
 gap-5 
 border
 min-h-[calc(100vh-6rem)]
-px-20
+lg:px-20
+md:px-10
+px-5
 py-10
 w-full
 '>
@@ -23,13 +25,14 @@ w-full
                     </Circle>
                     <h1
                         className='
-            text-4xl
+            sm:text-4xl
+            text-3xl
             font-bold
             '>
                         Education
                     </h1>
                 </div>
-                <h1 className='text-xl text-neutral-600'>
+                <h1 className='text-lg sm:text-xl text-neutral-600'>
                     Please enter your university/school name.
                 </h1>
             </header>

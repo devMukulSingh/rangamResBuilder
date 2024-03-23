@@ -8,7 +8,16 @@ const DownloadPage = ({
   params: { templateId: string }
 }) => {
   return (
-    <main className='md:flex-row flex flex-col gap-20 md:gap-10 w-full py-10 px-10 print:p-0 justify-between '>
+    <main className='md:flex-row 
+    flex 
+    flex-col 
+    gap-20 
+    md:gap-10 w-full 
+    py-10 
+    lg:px-10 
+    px-5
+    print:p-0 
+    justify-between '>
       <DownloadSection />
       <Template1 />
     </main>

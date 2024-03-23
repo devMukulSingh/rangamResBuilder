@@ -15,7 +15,20 @@ const SkillsList = async () => {
   console.log(parsedSkills);
 
   return (
-    <div className="grid  lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-3  gap-5 overflow-auto">
+    <div
+      className="grid 
+      lg:grid-cols-3 
+      md:grid-cols-2 
+      sm:grid-cols-2 
+      grid-cols-1  
+      gap-5 
+      h-[27rem]
+      overflow-auto 
+      pr-3 
+      hidden-scrollbar 
+      hover:custom-scrollbar 
+      "
+    >
       {parsedSkills?.map((skill, index) => (
         <>
           <Skill skill={skill} key={index} />

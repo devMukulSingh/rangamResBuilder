@@ -25,7 +25,7 @@ const Competences: FC<IExperienceForm> = ({ form, index }) => {
       name={`experience.${index}.competences`}
       control={form.control}
       render={({ field }) => (
-        <div className="grid grid-cols-6 gap-5">
+        <div className="grid lg:grid-cols-6 md:grid-cols-3 grid-cols-2 gap-5">
           {data?.map((competence: string, i: number) => (
             <FormItem key={i}>
               <FormControl>

@@ -71,16 +71,22 @@ const EducationForm = () => {
 
   const handleAddMore = () => {
     const currIndex = controlledFields.length - 1;
-    const { schoolName, speciality, degree, startDate,checkboxPursuing,endDate } =
-      form.getValues().education[currIndex];
+    const {
+      schoolName,
+      speciality,
+      degree,
+      startDate,
+      checkboxPursuing,
+      endDate,
+    } = form.getValues().education[currIndex];
     console.log(schoolName, speciality, degree, startDate);
 
     if (
       schoolName === "" ||
       degree === "" ||
       startDate === "" ||
-      speciality === "" || 
-      ( endDate === "" && checkboxPursuing===false)
+      speciality === "" ||
+      (endDate === "" && checkboxPursuing === false)
     ) {
       toast.error("Complete previous form first");
     } else {
@@ -120,7 +126,6 @@ const EducationForm = () => {
     }
     //handling delete collapsible
     else if (education && education.length > controlledFields.length) {
-
       if (controlledFields.length > 0) {
         dispatch(setEducation(controlledFields));
         const expandedFieldIndex = controlledFields.length - 1;
@@ -195,7 +200,7 @@ const EducationForm = () => {
                 <>
                   {item.id === selected && (
                     <div
-                      className="py-5 px-10  bg-red-100 grid grid-cols-2 gap-5 text-neutral-500"
+                      className="py-5 px-10  bg-red-100 grid grid-cols-1 md:grid-cols-2 gap-5 text-neutral-500"
                       key={index}
                     >
                       {/* schoolName */}

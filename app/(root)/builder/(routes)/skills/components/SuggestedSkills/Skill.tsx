@@ -2,7 +2,6 @@
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
 import { setTechnicalSkills } from "@/redux/slice/userSlice";
 
-
 interface SkillProps {
   skill: string;
 }
@@ -26,10 +25,11 @@ const Skill: React.FC<SkillProps> = ({ skill }) => {
     <>
       <div
         onClick={handleSelect}
-        className={`py-5
+        className={`
                     transition
                         px-3
-                        h-12
+                        py-2
+                        min-h-16
                         w-full
                         flex 
                         items-center

@@ -12,10 +12,11 @@ const Skills = async ({}) => {
         grid
         md:grid-cols-2
         grid-cols-1
-        gap-10
+        xl:gap-10
+        gap-5
         py-5
-        px-10
-        h-[30rem]
+        lg:px-10
+        px-5
         "
     >
       <SuggestedSkils />

@@ -5,8 +5,7 @@ const SkillsList = dynamic(() => import("./SkillsList"), {
   loading: () => <SkillsSkeleton />,
 });
 
-const SuggestedSkills = async() => {
-  
+const SuggestedSkills = async () => {
   return (
     <>
       {/* <motion.div
@@ -16,7 +15,7 @@ const SuggestedSkills = async() => {
             initial={{ x: -150, opacity: 0 }}
             transition={{ duration: 0.2 }}
         > */}
-      <div className="space-y-5 overflow-auto no-scrollbar ">
+      <div className="space-y-5 transition-all ">
         <section>
           <h1
             className=" 
@@ -30,12 +29,10 @@ const SuggestedSkills = async() => {
           </h1>
 
           <SkillsList />
-
         </section>
       </div>
 
       {/* </motion.div> */}
-      
     </>
   );
 };
