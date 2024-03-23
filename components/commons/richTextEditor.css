@@ -7,6 +7,7 @@
     padding: 1rem 1rem;
     min-height: 10rem;
 
+
 }
 .quill{
     background: #ffffff;
@@ -14,6 +15,7 @@
 .ql-container{
     background: #ffffff;
     border: none !important;
+    height: auto !important;
 }
 
 @media(max-width:640px){

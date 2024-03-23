@@ -7,11 +7,13 @@ interface RichTextEditorProps {
     value: string | undefined,
     onChange: (value: string) => void,
 
+
 }
 
 const RichTextEditor: React.FC<RichTextEditorProps> = ({
     value,
-    onChange
+    onChange,
+
 }) => {
 
     const modules = {
@@ -29,10 +31,6 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
             <ReactQuill
                 value={value}
                 onChange={onChange}
-                style={{
-                    marginBottom: '3rem',
-                    // border: 'none',
-                }}
                 modules={modules}
             />
     )

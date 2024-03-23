@@ -19,6 +19,7 @@ const MainSummary = ({}) => {
              grid
              md:grid-cols-2
              grid-cols-1
+             
              "
     >
       <SuggestedSummary />
