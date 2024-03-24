@@ -16,7 +16,6 @@ import Profession from "./formFields/Profession";
 import Mobile from "./formFields/Mobile";
 import FieldSkeleton from "./FieldSkeleton";
 const CountryCode = dynamic(() => import("./formFields/CountryCode"), {
-  ssr: false,
   loading: () => <FieldSkeleton />,
 });
 
@@ -28,11 +27,10 @@ export interface IForm {
       profession: string;
       countryCode: string;
       mobile: string;
-      state?: string,
-      dob?: string,
-      address?: string,
-      birthPlace?: string,
-      city?: string,
+      state?: string | undefined;
+      address?: string | undefined;
+      dob?: Date | undefined;
+      birthPlace?: string | undefined;
     },
     any,
     undefined
@@ -70,6 +68,10 @@ const PersonalForm = () => {
     mobile: z.string().min(10, {
       message: "Mobile no should be minimum 10 numbers",
     }),
+    state: z.string().optional(),
+    address: z.string().optional(),
+    dob: z.date().optional(),
+    birthPlace: z.string().optional(),
   });
 
   type formSchema = z.infer<typeof schema>;

@@ -137,10 +137,7 @@ const ExperienceForm = () => {
       toast.error("Profile should have at least one experience field");
     }
   };
-  const handleNext = () => {
-    const data = form.getValues().experience;
-    dispatch(setExperience(data));
-  };
+
   useEffect(() => {
     setSelected(controlledFields[0]?.id);
   }, []);

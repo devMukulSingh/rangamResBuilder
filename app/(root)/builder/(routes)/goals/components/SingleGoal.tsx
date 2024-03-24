@@ -48,7 +48,14 @@ const SingleGoal: React.FC<SingleGoalProps> = ({
         h-full
         "
       >
-        <Image alt="goalImg" fill className="object-contain" src={goal.img} />
+        <Image
+          alt="goalImg"
+          fill
+          className="object-contain"
+          src={goal.img}
+          loading="lazy"
+          // placeholder="blur"
+        />
       </figure>
       <h1
         className="mt-auto

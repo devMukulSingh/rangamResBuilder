@@ -1,16 +1,10 @@
 'use client'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import SingleGoal from './SingleGoal'
-import { Button } from '@/components/ui/button'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import { useAppSelector } from '@/redux/hooks/hooks'
 import LinkComp from '@/components/ui/LinkComp'
 
 const Goals = () => {
-    const profession = useAppSelector(state => state.persistedReducer.personalInfo.profession);
     const [selected, setSelected] = useState("");
-    const router = useRouter();
     const goals = [
         {
             title: 'Experienced',

@@ -1,7 +1,7 @@
 "use client";
-import RichTextEditor from "@/components/commons/RichTextEditor";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
 import { setSelectedBio } from "@/redux/slice/userSlice";
+import RichTextEditor from "@/components/commons/RichTextEditor";
 
 const Editor = () => {
   const dispatch = useAppDispatch();
