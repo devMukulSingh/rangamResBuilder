@@ -29,8 +29,9 @@ export interface IForm {
       mobile: string;
       state?: string | undefined;
       address?: string | undefined;
-      dob?: Date | undefined;
+      dob?: string ;
       birthPlace?: string | undefined;
+      city?: string;
     },
     any,
     undefined
@@ -69,8 +70,9 @@ const PersonalForm = () => {
       message: "Mobile no should be minimum 10 numbers",
     }),
     state: z.string().optional(),
+    city: z.string().optional(),
     address: z.string().optional(),
-    dob: z.date().optional(),
+    dob: z.string().optional(),
     birthPlace: z.string().optional(),
   });
 

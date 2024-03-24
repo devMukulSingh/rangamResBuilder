@@ -7,8 +7,9 @@ export interface IpersonalInfo {
   bio: string
   state?: string
   address?: string
-  dob?: Date | string
+  dob?:  string
   birthPlace?: string
+  city?:string
 }
 
 export interface Iexperience {
