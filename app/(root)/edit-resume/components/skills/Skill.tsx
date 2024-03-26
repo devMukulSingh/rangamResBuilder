@@ -1,6 +1,5 @@
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
 import { setTechnicalSkills } from "@/redux/slice/userSlice";
-import { Trash } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
 interface SkillProps {
@@ -12,19 +11,16 @@ const Skill: React.FC<SkillProps> = ({ skill }) => {
   const dispatch = useAppDispatch();
   const skillsFromState: string[] =
     useAppSelector((state) => state.persistedReducer.technicalSkills) || [];
-  const handleDelete = () => {
-          const filtered = skillsFromState.filter((item) => item !== skill);
-          dispatch(setTechnicalSkills(filtered));
-  }
-  // const handleSelect = () => {
-  //   const alreadySelected = skillsFromState.find((item) => item === skill);
-  //   if (alreadySelected) {
-  //     const filtered = skillsFromState.filter((item) => item !== skill);
-  //     dispatch(setTechnicalSkills(filtered));
-  //   } else {
-  //     dispatch(setTechnicalSkills([...skillsFromState, skill]));
-  //   }
-  // };
+
+  const handleSelect = () => {
+    const alreadySelected = skillsFromState.find((item) => item === skill);
+    if (alreadySelected) {
+      const filtered = skillsFromState.filter((item) => item !== skill);
+      dispatch(setTechnicalSkills(filtered));
+    } else {
+      dispatch(setTechnicalSkills([...skillsFromState, skill]));
+    }
+  };
 
   useEffect(() => {
     setIsMounted(true);
@@ -35,20 +31,20 @@ const Skill: React.FC<SkillProps> = ({ skill }) => {
   return (
     <>
       <div
-        className={`
-        py-5
-        pl-5
-        pr-2
-        flex
-        justify-between
-      bg-white
-        rounded-md
-        `}
+        onClick={handleSelect}
+        className={`p-5
+        transition
+                          rounded-md
+                           cursor-pointer
+                            ${
+                              skillsFromState.length > 0 &&
+                              skillsFromState.includes(skill)
+                                ? "border-4 border-white bg-gray-400 transition scale-90 text-neutral-100"
+                                : " bg-white"
+                            } 
+                            `}
       >
         <h1>{skill}</h1>
-        <Trash
-          onClick={handleDelete} 
-          className="cursor-pointer" size={20} />
       </div>
     </>
   );

@@ -22,6 +22,7 @@ export interface IinitialState {
   sidebar: boolean;
   aiSuggestedBio: string[];
   aiSuggestedComp: string[];
+  aiSuggesedSkills:string[]
 }
 
 const initialState: IinitialState = {
@@ -36,6 +37,7 @@ const initialState: IinitialState = {
     dob: "",
     birthPlace: "",
     bio: "",
+    
   },
   experience: [
     {
@@ -74,6 +76,7 @@ const initialState: IinitialState = {
   sidebar: true,
   aiSuggestedBio: [],
   aiSuggestedComp: [],
+  aiSuggesedSkills:[]
 };
 
 export const userSlice = createSlice({
@@ -132,6 +135,9 @@ export const userSlice = createSlice({
     setAiSuggestedComp: (state, action) => {
       state.aiSuggestedComp = action.payload;
     },
+    setAiSuggestedSkills : (state,action) => {
+      state.aiSuggesedSkills = action.payload;
+    }
   },
 });
 
@@ -151,4 +157,5 @@ export const {
   setAiSuggestedBio,
   setSelectedBio,
   setAiSuggestedComp,
+  setAiSuggestedSkills
 } = userSlice.actions;

@@ -18,7 +18,7 @@ const CustomSkill = () => {
 
   const form = useForm({});
   const skillFromState = useAppSelector(
-    (state) => state.persistedReducer.technicalSkills,
+    (state) => state.persistedReducer.technicalSkills
   );
 
   const handleAddMore = () => {
@@ -32,12 +32,12 @@ const CustomSkill = () => {
   return (
     <Form {...form}>
       <form className="col-span-2">
-        <div className="gap-5">
+        <div className="gap-5 h-full flex w-full">
           <FormField
             name="customSkill"
             control={form.control}
             render={({ field }) => (
-              <FormItem className="flex gap-5">
+              <FormItem className="flex gap-5 w-full items-center">
                 <FormControl>
                   <Input
                     className="shadow-md rounded-sm bg-white py-6 w-full"

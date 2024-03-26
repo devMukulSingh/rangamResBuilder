@@ -1,17 +1,29 @@
-import { cookies } from "next/headers";
+"use client";
 import Skill from "./Skill";
-import { ChatGPT } from "@/lib/ChatGPT";
 import CustomSkill from "./CustomSkill";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import SkillsSkeleton from "./SkillsSkeleton";
+import { setAiSuggestedSkills } from "@/redux/slice/userSlice";
+import { useAppDispatch } from "@/redux/hooks/hooks";
 
-const SkillsList = async () => {
-  const profession = cookies().get("profession")?.value || "Frontend dev";
-  const skillPrompt = `My profession is ${profession}, give me a list of 13 technology names, or skills relevant to this profession in max 3 words`;
-  const skills = await ChatGPT(skillPrompt);
-  const parsedSkills =
-    skills
-      ?.replace(/\d+(\.\s*|\.)?/g, "")
-      .split("\n")
-      .filter((item: string) => item !== "") || [];
+const SkillsList = () => {
+  const dispatch = useAppDispatch();
+  const { isLoading, data, error, isError } = useQuery({
+    queryKey: ["aiSuggestedSkills"],
+    queryFn: async () => {
+      const { data } = await axios.get(`/api/ai/get-skills`);
+      dispatch(setAiSuggestedSkills(data))
+      return data;
+    },
+    staleTime: 5 * 1000,
+    refetchOnWindowFocus: false,
+    
+  });
+  console.log(data);
+  if (isError) {
+    console.log(`Error in GETSkills ${error}`);
+  }
 
   return (
     <div
@@ -28,11 +40,15 @@ const SkillsList = async () => {
       hover:custom-scrollbar 
       "
     >
-      {parsedSkills?.map((skill, index) => (
-        <>
-          <Skill skill={skill} key={index} />
-        </>
-      ))}
+      {isLoading ? (
+        <SkillsSkeleton />
+      ) : (
+        data?.map((skill: string, index: number) => (
+          <>
+            <Skill skill={skill} key={index} />
+          </>
+        ))
+      )}
 
       <CustomSkill />
     </div>

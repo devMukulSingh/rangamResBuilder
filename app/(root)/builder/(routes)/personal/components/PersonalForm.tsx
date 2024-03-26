@@ -124,10 +124,7 @@ const PersonalForm = () => {
               <Mobile form={form} />
             </div>
 
-            <Button
-              type="submit"
-              className="w-full py-3 mt-4"
-            >
+            <Button type="submit" className="w-full py-3 mt-4">
               Next
             </Button>
           </div>

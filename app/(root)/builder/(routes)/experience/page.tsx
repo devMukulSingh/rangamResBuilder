@@ -2,8 +2,6 @@ import ExperienceForm from "@/app/(root)/builder/(routes)/experience/components/
 import Circle from "@/components/commons/Circle";
 
 const ExperiencePage = async () => {
-
-
   return (
     <div
       className="

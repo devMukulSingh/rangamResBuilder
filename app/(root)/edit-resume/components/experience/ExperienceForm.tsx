@@ -219,7 +219,6 @@ const ExperienceForm = () => {
                         </div>
 
                         <Description form={form} index={index} />
-                        
                       </CollapsibleContent>
                     </Collapsible>
                   );

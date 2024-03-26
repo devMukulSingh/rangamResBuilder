@@ -42,7 +42,7 @@ const LinkComp: FC<LinkProps> = ({
                  focus-visible:ring-offset-2 
                  aria-disabled:pointer-events-none 
                  aria-disabled:opacity-50`,
-        className
+        className,
       )}
       href={href}
     >

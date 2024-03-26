@@ -13,27 +13,27 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// model User{
-//   id              Int               @id@default(autoincrement())
-//   personalInfo    PersonalInfo?      @relation("userToPersonalInfo")
-//   skills          Skills[]           @relation("userToSkills")
-//   // experience              
-// }
+model User{
+  id              Int               @id@default(autoincrement())
+  personalInfo    PersonalInfo?      @relation("userToPersonalInfo")
+  skills          Skills[]           @relation("userToSkills")
+  // experience              
+}
 
-// model PersonalInfo{
-//   id                    Int               @id@default(autoincrement())
-//   userId                Int               @unique
-//   user                  User              @relation("userToPersonalInfo",fields: [userId],references: [id])
-//   name                  String
-//   email                 String
-//   jobTitle              String
-//   countryCode           String
-//   mobile                Int
-// }
+model PersonalInfo{
+  id                    Int               @id@default(autoincrement())
+  userId                Int               @unique
+  user                  User              @relation("userToPersonalInfo",fields: [userId],references: [id])
+  name                  String
+  email                 String
+  jobTitle              String
+  countryCode           String
+  mobile                Int
+}
 
-// model Skills{
-//   id                      Int                       @id@default(autoincrement())
-//   skillName               String                    
-//   userId                  Int                        @unique
-//   user                    User                      @relation("userToSkills",fields: [userId],references: [id])
-// }
+model Skills{
+  id                      Int                       @id@default(autoincrement())
+  skillName               String                    
+  userId                  Int                        @unique
+  user                    User                      @relation("userToSkills",fields: [userId],references: [id])
+}

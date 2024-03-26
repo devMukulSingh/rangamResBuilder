@@ -5,8 +5,8 @@ import { motion } from "framer-motion";
 import CustomSkill from "./CustomSkill";
 
 const SkillsForm = () => {
-  const technicalSkills = useAppSelector(
-    (state) => state.persistedReducer.technicalSkills,
+  const aiSuggesedSkills = useAppSelector(
+    (state) => state.persistedReducer.aiSuggesedSkills
   );
 
   return (
@@ -19,7 +19,7 @@ const SkillsForm = () => {
         <section>
           <h1 className=" font-semibold mb-5">Select AI Suggested Skill</h1>
           <div className="grid grid-cols-2 gap-5">
-            {technicalSkills.map((skill) => (
+            {aiSuggesedSkills.map((skill) => (
               <Skill skill={skill} key={skill} />
             ))}
           </div>

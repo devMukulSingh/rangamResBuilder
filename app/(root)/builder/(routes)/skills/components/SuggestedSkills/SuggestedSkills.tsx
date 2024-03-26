@@ -1,9 +1,7 @@
 import dynamic from "next/dynamic";
 import SkillsSkeleton from "./SkillsSkeleton";
+import SkillsList from "./SkillsList";
 
-const SkillsList = dynamic(() => import("./SkillsList"), {
-  loading: () => <SkillsSkeleton />,
-});
 
 const SuggestedSkills = async () => {
   return (
