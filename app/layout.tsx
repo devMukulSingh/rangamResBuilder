@@ -23,9 +23,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <Providers>
           <PersistProvider>
-            <QueryProviders>
-              {children}
-              </QueryProviders>
+            <QueryProviders>{children}</QueryProviders>
             <Toaster />
           </PersistProvider>
         </Providers>

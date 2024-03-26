@@ -1,25 +1,23 @@
-.ql-editor{
-    font-size: 16px;
-    letter-spacing: 0.5px;
-    line-height: 25px;
-    margin-top: 1rem;
-    border: none;
-    padding: 1rem 1rem;
-    min-height: 10rem;
-
-
+.ql-editor {
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  line-height: 25px;
+  margin-top: 1rem;
+  border: none;
+  padding: 1rem 1rem;
+  min-height: 10rem;
 }
-.quill{
-    background: #ffffff;
+.quill {
+  background: #ffffff;
 }
-.ql-container{
-    background: #ffffff;
-    border: none !important;
-    height: auto !important;
+.ql-container {
+  background: #ffffff;
+  border: none !important;
+  height: auto !important;
 }
 
-@media(max-width:640px){
-    .ql-editor{
-        font-size: 14px;
-}
+@media (max-width: 640px) {
+  .ql-editor {
+    font-size: 14px;
+  }
 }

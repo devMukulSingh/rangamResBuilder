@@ -1,14 +1,11 @@
-import React from 'react'
-import DownloadSection from './components/DownloadSection'
-import Template1 from './components/Template/Template1'
+import React from "react";
+import DownloadSection from "./components/DownloadSection";
+import Template1 from "./components/Template/Template1";
 
-const DownloadPage = ({
-  params
-}: {
-  params: { templateId: string }
-}) => {
+const DownloadPage = ({ params }: { params: { templateId: string } }) => {
   return (
-    <main className='md:flex-row 
+    <main
+      className="md:flex-row 
     flex 
     flex-col 
     gap-20 
@@ -17,11 +14,12 @@ const DownloadPage = ({
     lg:px-10 
     px-5
     print:p-0 
-    justify-between '>
+    justify-between "
+    >
       <DownloadSection />
       <Template1 />
     </main>
-  )
-}
+  );
+};
 
-export default DownloadPage
+export default DownloadPage;

@@ -27,13 +27,12 @@ import EndDate from "@/app/(root)/builder/(routes)/experience/components/formFie
 import Employer from "./formFields/Employer";
 import Address from "./formFields/Address";
 
-
 const ExperienceForm = () => {
   const progress = useAppSelector((state) => state.persistedReducer.progress);
   const [expanded, setExpanded] = useState<string | false>("");
   const dispatch = useAppDispatch();
   const experience = useAppSelector(
-    (state) => state.persistedReducer.experience
+    (state) => state.persistedReducer.experience,
   );
 
   const form = useForm({
@@ -228,7 +227,7 @@ const ExperienceForm = () => {
                       </CollapsibleContent>
                     </Collapsible>
                   );
-                }
+                },
               )}
 
               <Button

@@ -1,24 +1,19 @@
-import { cn } from "@/lib/utils"
-import { FC, ReactNode } from "react"
+import { cn } from "@/lib/utils";
+import { FC, ReactNode } from "react";
 
 interface NumberProps {
-    children: ReactNode,
-    className?: string,
-    onClick? : () => void
+  children: ReactNode;
+  className?: string;
+  onClick?: () => void;
 }
 
-const Circle: FC<NumberProps> = ({
-    children,
-    className,
-    onClick
-}) => {
-    return (
-        <>
-            <div
-                onClick={onClick}
-                className={
-                    cn(
-                        `
+const Circle: FC<NumberProps> = ({ children, className, onClick }) => {
+  return (
+    <>
+      <div
+        onClick={onClick}
+        className={cn(
+          `
                         bg-red-400
                         flex
                         shrink-0
@@ -31,14 +26,13 @@ const Circle: FC<NumberProps> = ({
                         h-10
                         shadow-md
                         `,
-                        className
-                    )
-                }
-            >
-                {children}
-            </div >
-        </>
-    )
-}
+          className,
+        )}
+      >
+        {children}
+      </div>
+    </>
+  );
+};
 
-export default Circle
+export default Circle;

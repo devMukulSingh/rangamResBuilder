@@ -1,22 +1,20 @@
-'use client'
-import { useAppDispatch } from '@/redux/hooks/hooks'
-import { setSelectedBio } from '@/redux/slice/userSlice'
-import {  Plus } from 'lucide-react'
-import React, { FC } from 'react'
-import Circle from '@/components/commons/Circle'
+"use client";
+import { useAppDispatch } from "@/redux/hooks/hooks";
+import { setSelectedBio } from "@/redux/slice/userSlice";
+import { Plus } from "lucide-react";
+import React, { FC } from "react";
+import Circle from "@/components/commons/Circle";
 
 interface SummaryPointProps {
-    bio: string
+  bio: string;
 }
 
-const SummaryPoint: FC<SummaryPointProps> = ({
-    bio
-}) => {
-    const dispatch = useAppDispatch();
-    return (
-        <>
-            <li
-                className="
+const SummaryPoint: FC<SummaryPointProps> = ({ bio }) => {
+  const dispatch = useAppDispatch();
+  return (
+    <>
+      <li
+        className="
                                 min-h-20
                                 relative
                                 bg-white
@@ -24,22 +22,22 @@ const SummaryPoint: FC<SummaryPointProps> = ({
                                 p-4
                                 rounded-sm
                                 "
-            >
-                {bio}
-                <Circle
-                    onClick={() => dispatch(setSelectedBio(bio))}
-                    className="
+      >
+        {bio}
+        <Circle
+          onClick={() => dispatch(setSelectedBio(bio))}
+          className="
                                 cursor-pointer
                                 absolute
                                 right-[-20px]
                                 top-[29%]
                                 "
-                >
-                    <Plus />
-                </Circle>
-            </li>
-        </>
-    )
-}
+        >
+          <Plus />
+        </Circle>
+      </li>
+    </>
+  );
+};
 
-export default SummaryPoint
+export default SummaryPoint;

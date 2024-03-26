@@ -1,4 +1,4 @@
-import { Skeleton } from "@/components/ui/skeleton"
+import { Skeleton } from "@/components/ui/skeleton";
 
 const SkillsSkeleton = () => {
   return (
@@ -15,10 +15,8 @@ const SkillsSkeleton = () => {
       <Skeleton className="h-[3rem] w-full bg-white" />
       <Skeleton className="h-[3rem] w-full bg-white" />
       <Skeleton className="h-[3rem] w-full bg-white" />
-
-
     </div>
-  )
-}
+  );
+};
 
-export default SkillsSkeleton
+export default SkillsSkeleton;

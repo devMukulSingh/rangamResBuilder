@@ -1,12 +1,10 @@
-
-import Circle from '@/components/commons/Circle'
-import EducationForm from './components/EducationForm'
-
+import Circle from "@/components/commons/Circle";
+import EducationForm from "./components/EducationForm";
 
 const EducationPage = () => {
-    return (
-        <div
-            className='
+  return (
+    <div
+      className="
 flex 
 flex-col
 gap-5 
@@ -17,31 +15,29 @@ md:px-10
 px-5
 py-10
 w-full
-'>
-            <header className='flex flex-col gap-5'>
-                <div className='flex gap-5'>
-                    <Circle>
-                        6
-                    </Circle>
-                    <h1
-                        className='
+"
+    >
+      <header className="flex flex-col gap-5">
+        <div className="flex gap-5">
+          <Circle>6</Circle>
+          <h1
+            className="
             sm:text-4xl
             text-3xl
             font-bold
-            '>
-                        Education
-                    </h1>
-                </div>
-                <h1 className='text-lg sm:text-xl text-neutral-600'>
-                    Please enter your university/school name.
-                </h1>
-            </header>
-
-            <EducationForm />
-
-
+            "
+          >
+            Education
+          </h1>
         </div>
-    )
-}
+        <h1 className="text-lg sm:text-xl text-neutral-600">
+          Please enter your university/school name.
+        </h1>
+      </header>
 
-export default EducationPage
+      <EducationForm />
+    </div>
+  );
+};
+
+export default EducationPage;

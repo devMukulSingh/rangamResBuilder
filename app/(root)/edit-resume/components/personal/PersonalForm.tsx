@@ -10,9 +10,7 @@ import Mobile from "@/app/(root)/builder/(routes)/personal/components/formFields
 import City from "./formFields/City";
 import State from "./formFields/State";
 import DOB from "./formFields/DOB";
-import {
-  Form
-} from "@/components/ui/form";
+import { Form } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -20,7 +18,6 @@ import { setPersonalInfo } from "@/redux/slice/userSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
 import { useState } from "react";
 import BirthPlace from "./formFields/BirthPlace";
-
 
 const PersonalForm = () => {
   const [open, setOpen] = useState(false);
@@ -46,30 +43,22 @@ const PersonalForm = () => {
       .max(30, {
         message: "Profession should be max 30 characters",
       }),
-    address: z
-      .string()
-      .optional(),
+    address: z.string().optional(),
     countryCode: z.string().min(2, {
       message: "CountryCode should be minimum 2 numbers",
     }),
     mobile: z.string().min(10, {
       message: "Mobile no should be minimum 10 numbers",
     }),
-    city: z
-      .string()
-      .optional(),
-    state: z
-      .string()
-      .optional(),
+    city: z.string().optional(),
+    state: z.string().optional(),
     dob: z.any().optional(),
-    birthPlace: z
-      .string()
-      .optional(),
+    birthPlace: z.string().optional(),
   });
 
   type formSchema = z.infer<typeof schema>;
   const personalInfo = useAppSelector(
-    (state) => state.persistedReducer.personalInfo
+    (state) => state.persistedReducer.personalInfo,
   );
 
   const form = useForm<formSchema>({
@@ -115,7 +104,7 @@ const PersonalForm = () => {
               <Profession form={form} />
 
               {/* address */}
-              <Address form={form}/>
+              <Address form={form} />
 
               <div className="flex gap-5 w-full">
                 {/* countryCode */}

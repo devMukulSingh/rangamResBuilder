@@ -11,7 +11,7 @@ const Template1 = () => {
   return (
     <div className="flex flex-col gap-2">
       <LinkComp
-        href={'/edit-resume'}
+        href={"/edit-resume"}
         className="justify-start
          font-semi-bold
           text-blue-500 

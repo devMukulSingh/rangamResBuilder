@@ -1,14 +1,15 @@
-import React, { FC } from 'react'
-import { IeducationForm } from '../EducationForm'
-import { FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form'
-import { Checkbox } from '@/components/ui/checkbox'
+import React, { FC } from "react";
+import { IeducationForm } from "../EducationForm";
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+} from "@/components/ui/form";
+import { Checkbox } from "@/components/ui/checkbox";
 
-const CheckboxPursuing: FC<IeducationForm> = ({
-  form,
-  index
-}) => {
+const CheckboxPursuing: FC<IeducationForm> = ({ form, index }) => {
   return (
-
     <FormField
       name={`education.${index}.checkboxPursuing`}
       control={form.control}
@@ -25,8 +26,7 @@ const CheckboxPursuing: FC<IeducationForm> = ({
         </FormItem>
       )}
     />
+  );
+};
 
-  )
-}
-
-export default CheckboxPursuing
+export default CheckboxPursuing;

@@ -47,10 +47,10 @@ const Competences: FC<IExperienceForm> = ({ form, index }) => {
             cursor-pointer
         "
           >
-            <Plus color="#EF4444" />
+            <Plus color="#004878" />
             <h1
               className="
-                text-red-500
+                text-[#004878]
                 "
             >
               Load More key responsibility

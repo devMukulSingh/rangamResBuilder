@@ -1,30 +1,34 @@
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
-import React, { FC } from 'react'
-import { IForm } from '../PersonalForm'
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import React, { FC } from "react";
+import { IForm } from "../PersonalForm";
 
-const Mobile:FC<IForm> = ({
-    form
-}) => {
-    return (
-
-            <FormField
-                name="mobile"
-                control={form.control}
-                render={({ field }) => (
-                    <FormItem className="w-1/2" >
-                        <FormLabel>Mobile</FormLabel>
-                        <FormControl>
-                            <Input
-                                className="bg-white" {...field}
-                                placeholder="Mobile number"
-                            />
-                        </FormControl>
-                        <FormMessage />
-                    </FormItem>
-                )}
+const Mobile: FC<IForm> = ({ form }) => {
+  return (
+    <FormField
+      name="mobile"
+      control={form.control}
+      render={({ field }) => (
+        <FormItem className="w-1/2">
+          <FormLabel>Mobile</FormLabel>
+          <FormControl>
+            <Input
+              className="bg-white"
+              {...field}
+              placeholder="Mobile number"
             />
-    )
-}
+          </FormControl>
+          <FormMessage className="text-#B30000" />
+        </FormItem>
+      )}
+    />
+  );
+};
 
-export default Mobile
+export default Mobile;

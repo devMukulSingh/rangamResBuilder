@@ -3,7 +3,7 @@ import SummaryPoint from "./SummaryPoint";
 import { cookies } from "next/headers";
 import { ChatGPT } from "@/lib/ChatGPT";
 
-const SummaryPoints = async() => {
+const SummaryPoints = async () => {
   const profession = cookies().get("profession")?.value || "Frontend dev";
   const bioPrompt = `Suggest 3 short bio for ${profession} for resume`;
   const bio = await ChatGPT(bioPrompt);

@@ -17,7 +17,7 @@ const CustomSkill = () => {
 
   const form = useForm({});
   const skillFromState = useAppSelector(
-    (state) => state.persistedReducer.technicalSkills
+    (state) => state.persistedReducer.technicalSkills,
   );
 
   const handleAddMore = () => {

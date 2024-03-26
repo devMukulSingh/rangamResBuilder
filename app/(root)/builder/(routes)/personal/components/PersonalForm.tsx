@@ -18,6 +18,7 @@ import FieldSkeleton from "./FieldSkeleton";
 const CountryCode = dynamic(() => import("./formFields/CountryCode"), {
   loading: () => <FieldSkeleton />,
 });
+import validator from "validator";
 
 export interface IForm {
   form: UseFormReturn<
@@ -29,7 +30,7 @@ export interface IForm {
       mobile: string;
       state?: string | undefined;
       address?: string | undefined;
-      dob?: string ;
+      dob?: string;
       birthPlace?: string | undefined;
       city?: string;
     },
@@ -44,31 +45,45 @@ const PersonalForm = () => {
 
   const schema = z.object({
     fullName: z
-      .string()
+      .string({
+        required_error: "Full name is required",
+      })
       .min(3, {
-        message: "Name should be minimum 3 characters",
+        message: "Name must be minimum 3 characters",
       })
       .max(30, {
-        message: "Name should be max 30 characters",
+        message: "Name must be max 30 characters",
       }),
-    email: z.string().email({
-      message: "Please enter valid email",
-    }),
+    email: z
+      .string({
+        required_error: "Email is required",
+      })
+      .email({
+        message: "Please enter valid email",
+      }),
     profession: z
-      .string()
+      .string({
+        required_error: "Profession is required",
+      })
       .min(3, {
-        message: "Profession should be minimum 5 characters",
+        message: "Profession must be minimum 5 characters",
       })
       .max(30, {
-        message: "Profession should be max 30 characters",
+        message: "Profession must be max 30 characters",
       }),
-
-    countryCode: z.string().min(2, {
-      message: "CountryCode should be minimum 2 numbers",
-    }),
-    mobile: z.string().min(10, {
-      message: "Mobile no should be minimum 10 numbers",
-    }),
+    countryCode: z
+      .string({
+        required_error: "Country code is required",
+      })
+      .min(2, {
+        message: "CountryCode must be minimum 2 numbers",
+      }),
+    mobile: z
+      .string({
+        required_error: "Mobile no is required",
+        invalid_type_error: "must be a number",
+      })
+      .refine(validator.isMobilePhone),
     state: z.string().optional(),
     city: z.string().optional(),
     address: z.string().optional(),

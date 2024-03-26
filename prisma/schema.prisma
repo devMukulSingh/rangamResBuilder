@@ -13,23 +13,27 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Profession {
-  id         Int      @id @default(autoincrement())
-  name       String
-  skills     Skills[] @relation("professionToSkills")
-  bio        Bio[]    @relation("professionToBio")
-}
+// model User{
+//   id              Int               @id@default(autoincrement())
+//   personalInfo    PersonalInfo?      @relation("userToPersonalInfo")
+//   skills          Skills[]           @relation("userToSkills")
+//   // experience              
+// }
 
-model Skills {
-  id                      Int    @id @default(autoincrement())
-  name                    String
-  professionId            Int
-  profession              Profession  @relation("professionToSkills", fields: [professionId], references: [id])
-}
+// model PersonalInfo{
+//   id                    Int               @id@default(autoincrement())
+//   userId                Int               @unique
+//   user                  User              @relation("userToPersonalInfo",fields: [userId],references: [id])
+//   name                  String
+//   email                 String
+//   jobTitle              String
+//   countryCode           String
+//   mobile                Int
+// }
 
-model Bio{
-  id                Int                 @id@default(autoincrement())
-  point             String              @db.VarChar(500)
-  professionId      Int       
-  profession        Profession          @relation("professionToBio",fields: [professionId],references: [id])
-}
+// model Skills{
+//   id                      Int                       @id@default(autoincrement())
+//   skillName               String                    
+//   userId                  Int                        @unique
+//   user                    User                      @relation("userToSkills",fields: [userId],references: [id])
+// }

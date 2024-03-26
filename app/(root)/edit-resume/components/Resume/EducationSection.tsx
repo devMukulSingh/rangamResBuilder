@@ -21,7 +21,6 @@ const EducationSection: React.FC<EducationSectionProps> = ({}) => {
                   ? ` in ${educationInfo.speciality}`
                   : ""
               }`}
-
               {/* {` 
                             ${
                               educationInfo.percentage

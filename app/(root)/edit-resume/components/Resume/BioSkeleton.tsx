@@ -1,4 +1,4 @@
-import { Skeleton } from "@/components/ui/skeleton"
+import { Skeleton } from "@/components/ui/skeleton";
 
 const BioSkeleton = () => {
   return (
@@ -16,7 +16,7 @@ const BioSkeleton = () => {
         <Skeleton className="h-8 w-full bg-neutral-200" />
       </li>
     </>
-  )
-}
+  );
+};
 
-export default BioSkeleton
+export default BioSkeleton;

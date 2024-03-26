@@ -6,7 +6,7 @@ interface SkillsSectionProps {}
 
 const SkillsSection: React.FC<SkillsSectionProps> = ({}) => {
   const skills = useAppSelector(
-    (state) => state.persistedReducer.technicalSkills
+    (state) => state.persistedReducer.technicalSkills,
   );
 
   return (
