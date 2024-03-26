@@ -28,13 +28,14 @@ const GoalsPage = async ({
             className="
                 sm:text-4xl
                 text-3xl
+                text-[#c75000]
                 font-bold
                 "
           >
             Tailor your resume to your career goals
           </h1>
         </div>
-        <h1 className="text-lg sm:text-xl text-neutral-600">
+        <h1 className="text-lg sm:text-xl text-black">
           Select your employment and help us make &nbsp;
           <span className="font-bold">the most relevant resume</span>
           &nbsp; for you

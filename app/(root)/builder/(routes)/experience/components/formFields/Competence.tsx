@@ -54,7 +54,7 @@ const Competence: React.FC<competenceProps> = ({
                             ${
                               competences.includes(competence)
                                 ? "border-2 border-white bg-gray-400 transition scale-90 text-neutral-100"
-                                : " bg-white text-neutral-500"
+                                : " bg-white text-black"
                             } 
                             `}
       >

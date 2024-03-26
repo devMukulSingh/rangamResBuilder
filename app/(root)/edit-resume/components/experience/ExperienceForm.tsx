@@ -196,34 +196,30 @@ const ExperienceForm = () => {
                                                    `}
                         key={item.id}
                       >
-                        {/* CompanyName */}
                         <CompanyName index={index} form={form} />
 
-                        {/* jobTitle */}
                         <JobTitle index={index} form={form} />
 
-                        {/* checkboxes */}
                         <div className="flex gap-5">
                           <CheckboxInternship index={index} form={form} />
                           <CheckboxVolunteering index={index} form={form} />
                         </div>
 
-                        {/* Employer */}
                         <Employer form={form} index={index} />
-                        {/* Address */}
+
                         <Address form={form} index={index} />
 
-                        {/* start and endDate */}
                         <div className="flex gap-5">
                           <StartDate form={form} index={index} />
                           <EndDate form={form} index={index} />
                         </div>
-                        {/* checkbox */}
+
                         <div className="self-start">
                           <CheckboxWorkingStatus index={index} form={form} />
                         </div>
-                        {/* description */}
+
                         <Description form={form} index={index} />
+                        
                       </CollapsibleContent>
                     </Collapsible>
                   );

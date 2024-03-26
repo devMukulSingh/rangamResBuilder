@@ -4,10 +4,12 @@ import { setSelectedBio } from "@/redux/slice/userSlice";
 import dynamic from "next/dynamic";
 import TextEditorSkeleton from "./TextEditorSkeleton";
 // import RichTextEditor from "@/components/commons/RichTextEditor";
-const RichTextEditor = dynamic( () => import("@/components/commons/RichTextEditor"),{
-  loading : () => <TextEditorSkeleton/>
-});
-
+const RichTextEditor = dynamic(
+  () => import("@/components/commons/RichTextEditor"),
+  {
+    loading: () => <TextEditorSkeleton />,
+  },
+);
 
 const Editor = () => {
   const dispatch = useAppDispatch();

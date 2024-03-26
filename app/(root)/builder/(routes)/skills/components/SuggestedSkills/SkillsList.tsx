@@ -12,7 +12,6 @@ const SkillsList = async () => {
       ?.replace(/\d+(\.\s*|\.)?/g, "")
       .split("\n")
       .filter((item: string) => item !== "") || [];
-  console.log(parsedSkills);
 
   return (
     <div

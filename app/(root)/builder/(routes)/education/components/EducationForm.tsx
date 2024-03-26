@@ -230,7 +230,7 @@ const EducationForm = () => {
 
             <div className="mt-auto flex justify-between">
               <LinkComp
-                className="w-40 bg-gray-400 hover:bg-gray-300"
+                className="w-40 bg-gray-400 text-[#000] hover:bg-gray-300"
                 href={"/builder/prosummary"}
               >
                 Back

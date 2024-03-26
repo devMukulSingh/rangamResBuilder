@@ -25,12 +25,13 @@ w-full
             sm:text-4xl
             text-3xl
             font-bold
+            text-[#c75000]
             "
           >
             Education
           </h1>
         </div>
-        <h1 className="text-lg sm:text-xl text-neutral-600">
+        <h1 className="text-lg sm:text-xl text-black">
           Please enter your university/school name.
         </h1>
       </header>

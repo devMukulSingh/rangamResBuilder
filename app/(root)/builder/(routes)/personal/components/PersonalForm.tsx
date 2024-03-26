@@ -112,7 +112,7 @@ const PersonalForm = () => {
     <div className=" text-neutral-500">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <div className="py-8 px-10 bg-red-100 flex flex-col gap-3 items-start sm:w-4/5 w-full md:ml-auto rounded-lg ">
+          <div className="py-8 px-10 bg-[#E0F3FF] flex flex-col gap-3 items-start sm:w-4/5 w-full md:ml-auto rounded-lg ">
             <Name form={form} />
 
             <Email form={form} />
@@ -124,7 +124,10 @@ const PersonalForm = () => {
               <Mobile form={form} />
             </div>
 
-            <Button type="submit" className="w-full py-3 mt-4">
+            <Button
+              type="submit"
+              className="w-full py-3 mt-4"
+            >
               Next
             </Button>
           </div>

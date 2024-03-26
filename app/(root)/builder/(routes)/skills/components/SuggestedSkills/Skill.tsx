@@ -39,8 +39,8 @@ const Skill: React.FC<SkillProps> = ({ skill }) => {
                             ${
                               skillsFromState.length > 0 &&
                               skillsFromState.includes(skill)
-                                ? "bg-red-300 transition scale-90 text-neutral-100"
-                                : " bg-white  text-neutral-500"
+                                ? "bg-red-300 transition scale-90 text-white"
+                                : " bg-white  text-black"
                             } 
                             `}
       >

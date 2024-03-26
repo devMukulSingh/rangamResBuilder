@@ -21,7 +21,7 @@ const SuggestedSkills = async () => {
             className=" 
                         font-semibold 
                         mb-5
-                        text-neutral-500
+                        text-black
                         text-lg
                         "
           >

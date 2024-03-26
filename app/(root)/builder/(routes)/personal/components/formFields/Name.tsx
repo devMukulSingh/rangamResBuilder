@@ -24,7 +24,7 @@ const Name: FC<IForm> = ({ form }) => {
               placeholder="Enter your full name"
             />
           </FormControl>
-          <FormMessage className="text-#B30000"/>
+          <FormMessage className="text-#B30000" />
         </FormItem>
       )}
     />

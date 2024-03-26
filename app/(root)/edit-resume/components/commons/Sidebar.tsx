@@ -102,7 +102,6 @@ const Sidebar = () => {
         <Button
           className={`mx-10 self-center mt-5 w-4/5`}
           onClick={handleResetForm}
-          variant="destructive"
         >
           Reset
         </Button>

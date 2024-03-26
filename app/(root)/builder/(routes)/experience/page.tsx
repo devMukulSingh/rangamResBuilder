@@ -1,18 +1,8 @@
 import ExperienceForm from "@/app/(root)/builder/(routes)/experience/components/ExperienceForm";
 import Circle from "@/components/commons/Circle";
-import { cookies } from "next/headers";
-import { ChatGPT } from "@/lib/ChatGPT";
 
 const ExperiencePage = async () => {
-  // const parsedCompetences = [
-  //     'Data analysis',
-  //     'Machine learning',
-  //     'Statistical modeling',
-  //     'Data visualization',
-  //     'Predictive analytics',
-  //     'Data mining',
-  //     'Big data management'
-  // ]
+
 
   return (
     <div
@@ -35,12 +25,13 @@ const ExperiencePage = async () => {
                 text-3xl
                 sm:text-4xl
                 font-bold
+                text-[#c75000]
                 "
         >
           Experience
         </h1>
       </div>
-      <h1 className="text-lg sm:text-xl text-neutral-600">
+      <h1 className="text-lg sm:text-xl text-black">
         Your experience tells a story of your career progression. Share the
         details and let's capture the essence of your expertise together.
       </h1>

@@ -25,13 +25,14 @@ const SkillsPage = async () => {
               className="
                 text-4xl
                 font-bold
+                text-[#c75000]
                 "
             >
               Skills
             </h1>
           </div>
 
-          <h1 className="text-lg sm:text-xl text-neutral-600">
+          <h1 className="text-lg sm:text-xl text-black">
             We found recommended skills for you. Let's find relevant skills for
             the job you are applying for. <br />
             Listing 6-10 skills is best.
@@ -42,7 +43,7 @@ const SkillsPage = async () => {
 
         <div className="mt-auto flex justify-between">
           <LinkComp
-            className="w-40  bg-gray-400 hover:bg-gray-300"
+            className="w-40  bg-gray-400 text-[#000] hover:bg-gray-300"
             href={"/builder/goals"}
           >
             Back

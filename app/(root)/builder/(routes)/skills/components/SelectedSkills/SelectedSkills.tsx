@@ -11,7 +11,7 @@ const SelectedSkills = () => {
     <div className="flex flex-col gap-5 ">
       <h1
         className="
-          text-neutral-600 
+          text-black
           font-semibold
           text-lg
           "

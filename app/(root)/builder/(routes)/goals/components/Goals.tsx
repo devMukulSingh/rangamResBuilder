@@ -49,7 +49,7 @@ const Goals = () => {
 
       <div className="mt-auto flex justify-between">
         <LinkComp
-          className="w-40 bg-gray-400 hover:bg-gray-300"
+          className="w-40 bg-[#C7C3C3] text-[#000] hover:bg-gray-300"
           href={"/builder/personal"}
         >
           Back

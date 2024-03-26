@@ -25,9 +25,10 @@ const LinkComp: FC<LinkProps> = ({
       className={cn(
         `w-40 
                 h-10
-                bg-red-400 
+                bg-[#004878]
+                hover:bg-[#0466c8] 
                 text-primary-foreground 
-                hover:bg-red-300 
+                hover
                 inline-flex 
                 items-center 
                 justify-center 
@@ -41,7 +42,7 @@ const LinkComp: FC<LinkProps> = ({
                  focus-visible:ring-offset-2 
                  aria-disabled:pointer-events-none 
                  aria-disabled:opacity-50`,
-        className,
+        className
       )}
       href={href}
     >

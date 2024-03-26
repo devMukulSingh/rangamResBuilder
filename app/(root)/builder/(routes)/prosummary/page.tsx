@@ -26,12 +26,13 @@ const ProSummaryPage = async () => {
             className="
                     text-4xl
                     font-bold
+                    text-[#c75000]
                     "
           >
             Professional Summary
           </h1>
         </div>
-        <h1 className="text-xl text-neutral-600">
+        <h1 className="text-xl text-black">
           Write a short summary telling more about yourself, your strengths{" "}
           <br />
           and experience or select our generated personalized summary for you.
@@ -42,7 +43,7 @@ const ProSummaryPage = async () => {
 
       <div className="mt-auto flex justify-between">
         <LinkComp
-          className="w-40  bg-gray-400 hover:bg-gray-300"
+          className="w-40  bg-gray-400 text-[#000] hover:bg-gray-300"
           href={"/builder/experience"}
         >
           Back

@@ -3,8 +3,8 @@ import React from "react";
 
 const Steps = () => {
   return (
-    <ul className="px-5 flex flex-col gap-5 list-none">
-      <li className="flex gap-3 text-neutral-600 overflow-clip">
+    <ul className="px-5 flex flex-col gap-5 list-none text-black">
+      <li className="flex gap-3 overflow-clip">
         <div className="flex flex-col gap-2 items-center ">
           <span className="border-2 border-red-300 rounded-full w-10 min-h-10 flex items-center justify-center ">
             1
@@ -18,7 +18,7 @@ const Steps = () => {
           <span className="underline">Update Profile</span>
         </h1>
       </li>
-      <li className="flex gap-3 text-neutral-600 overflow-clip">
+      <li className="flex gap-3 overflow-clip">
         <div className="flex flex-col gap-2 items-center ">
           <span className="border-2 border-red-300 rounded-full w-10 min-h-10 flex items-center justify-center ">
             2
@@ -30,7 +30,7 @@ const Steps = () => {
           <h1 className=" text-md sm:text-lg font-semibold mt-1">
             Take a questionnaire and get the resume
           </h1>
-          <ul className="list-disc pl-5 sm:text-md text-sm text-neutral-500">
+          <ul className="list-disc pl-5 sm:text-md text-sm text-black">
             <li>Enter a desired job title</li>
             <li>
               Tell us about your previous experience (only company name, dates
@@ -40,7 +40,7 @@ const Steps = () => {
           </ul>
         </div>
       </li>
-      <li className="flex gap-3 text-neutral-600 overflow-clip">
+      <li className="flex gap-3 overflow-clip">
         <div className="flex flex-col gap-2 items-center">
           <span className="border-2 border-red-300 rounded-full w-10 min-h-10 flex items-center justify-center ">
             3

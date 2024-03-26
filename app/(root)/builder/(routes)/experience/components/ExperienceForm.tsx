@@ -224,13 +224,12 @@ const ExperienceForm = () => {
                       key={index}
                     >
                       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 w-full">
-                        {/* CompanyName */}
+                        
                         <CompanyName index={index} form={form} />
 
-                        {/* jobTitle */}
                         <JobTitle index={index} form={form} />
-                        {/* checkboxes */}
-                        <div className="flex flex-col gap-2 mt-auto text-neutral-500">
+
+                        <div className="flex flex-col gap-2 mt-auto text-black">
                           <CheckboxInternship
                             index={index}
                             form={form}
@@ -244,7 +243,6 @@ const ExperienceForm = () => {
                         </div>
                       </div>
 
-                      {/* start and endDate */}
                       <div className="grid grid-cols-3 gap-5">
                         <div className="flex gap-2 ">
                           <StartDate
@@ -270,16 +268,14 @@ const ExperienceForm = () => {
                         />
                       </div>
 
-                      <h1 className="text-xl sm:text-2xl text-neutral-500 my-5">
+                      <h1 className="text-xl sm:text-2xl text-black my-5">
                         Great! To highlight your experience and describe it
                         properly, please choose the key responsibilities at this
                         workplace.
                       </h1>
 
-                      {/* Competences */}
                       <Competences index={index} form={form} />
 
-                      {/* description */}
                       <Description index={index} form={form} />
                     </div>
                   )}
@@ -288,7 +284,7 @@ const ExperienceForm = () => {
             })}
             <div className="mt-5 flex justify-between h-10">
               <LinkComp
-                className="w-40 bg-gray-400 hover:bg-gray-300"
+                className="w-40 bg-gray-400 text-[#000] hover:bg-gray-300"
                 href={`/builder/skills`}
               >
                 Back

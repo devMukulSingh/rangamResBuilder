@@ -13,7 +13,9 @@ const Landing = () => {
     // >
     <div className="w-full px-5 sm:px-10 lg:px-20 flex flex-col justify-center gap-5 sm:gap-20 py-10 md:flex-row">
       <div className="flex flex-col gap-5 md:w-2/3 w-full">
-        <h1 className="text-3xl sm:text-4xl font-bold">Hi Candidate,</h1>
+        <h1 className="text-3xl sm:text-4xl text-[#c75000] font-bold">
+          Hi Candidate,
+        </h1>
         <h1 className="sm:text-xl text-lg">
           RANGAM will help you build an AI-enabled resume to allow employers
           contact you easily.

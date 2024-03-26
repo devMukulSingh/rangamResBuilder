@@ -14,8 +14,10 @@ const DownloadSection = ({}) => {
         <BiArrowBack className="cursor-pointer" size={30} />
       </Link>
       <section className="flex flex-col gap-5 lg:px-10 md:px-5 px-5 h-full ">
-        <h1 className="text-3xl lg:text-4xl font-bold">Contratulations!</h1>
-        <h1 className="text-xl text-neutral-600">
+        <h1 className="text-3xl lg:text-4xl font-bold text-[#c75000]">
+          Contratulations!
+        </h1>
+        <h1 className="text-xl text-black">
           Your resume is ready for download.
         </h1>
         <DownloadButtons />

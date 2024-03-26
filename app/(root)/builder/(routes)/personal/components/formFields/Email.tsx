@@ -24,7 +24,7 @@ const Email: FC<IForm> = ({ form }) => {
               placeholder="Enter your email address"
             />
           </FormControl>
-          <FormMessage className="text-#B30000"/>
+          <FormMessage className="text-#B30000" />
         </FormItem>
       )}
     />
