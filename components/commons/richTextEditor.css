@@ -5,15 +5,16 @@
   margin-top: 1rem;
   border: none;
   padding: 1rem 1rem;
+  overflow: auto;
   min-height: 10rem;
 }
 .quill {
   background: #ffffff;
 }
 .ql-container {
+  max-height: 30rem;
   background: #ffffff;
   border: none !important;
-  height: auto !important;
 }
 
 @media (max-width: 640px) {

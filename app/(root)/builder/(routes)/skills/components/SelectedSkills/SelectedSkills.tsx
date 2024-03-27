@@ -4,7 +4,7 @@ import Skill from "./Skill";
 
 const SelectedSkills = () => {
   const selectedSkills = useAppSelector(
-    (state) => state.persistedReducer.technicalSkills,
+    (state) => state.persistedReducer.technicalSkills
   );
 
   return (
@@ -25,6 +25,7 @@ const SelectedSkills = () => {
         lg:grid-cols-3 
         gap-5 
         overflow-auto 
+        py-2
         pr-3 
         hidden-scrollbar 
         hover:custom-scrollbar

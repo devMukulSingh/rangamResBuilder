@@ -13,12 +13,11 @@ const SkillsList = () => {
     queryKey: ["aiSuggestedSkills"],
     queryFn: async () => {
       const { data } = await axios.get(`/api/ai/get-skills`);
-      dispatch(setAiSuggestedSkills(data))
+      dispatch(setAiSuggestedSkills(data));
       return data;
     },
     staleTime: 5 * 1000,
     refetchOnWindowFocus: false,
-    
   });
   console.log(data);
   if (isError) {
@@ -35,7 +34,8 @@ const SkillsList = () => {
       gap-5 
       h-[27rem]
       overflow-auto 
-      pr-3 
+      py-2 
+      pr-3
       hidden-scrollbar 
       hover:custom-scrollbar 
       "

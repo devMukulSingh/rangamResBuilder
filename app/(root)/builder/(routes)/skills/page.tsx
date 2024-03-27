@@ -10,7 +10,7 @@ const SkillsPage = async () => {
         flex 
         flex-col
         gap-5 
-        h-[calc(100vh-6rem)]
+        min-h-[calc(100vh-6rem)]
         lg:px-20
         sm:px-15
         px-10

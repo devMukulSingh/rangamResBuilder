@@ -2,6 +2,8 @@
 import { useState } from "react";
 import SingleGoal from "./SingleGoal";
 import LinkComp from "@/components/ui/LinkComp";
+import { setGoal } from "@/redux/slice/userSlice";
+import { useAppDispatch } from "@/redux/hooks/hooks";
 
 const Goals = () => {
   const [selected, setSelected] = useState("");
@@ -23,6 +25,10 @@ const Goals = () => {
       img: "/Others.png",
     },
   ];
+  const dispatch = useAppDispatch();
+  const handleGoalSelect = () => {
+    dispatch(setGoal(selected));
+  }
   return (
     <>
       <div
@@ -55,6 +61,7 @@ const Goals = () => {
           Back
         </LinkComp>
         <LinkComp
+          onClick={ handleGoalSelect }
           disabled={selected === "" ? true : false}
           href={"/builder/skills"}
         >

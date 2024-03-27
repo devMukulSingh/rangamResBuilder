@@ -20,7 +20,7 @@ const Skill: React.FC<SkillProps> = ({ skill }) => {
       dispatch(setTechnicalSkills([...skillsFromState, skill]));
     }
   };
-
+  if(skill === '') return null;
   return (
     <>
       <div

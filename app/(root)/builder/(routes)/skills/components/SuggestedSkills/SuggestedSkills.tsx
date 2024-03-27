@@ -2,7 +2,6 @@ import dynamic from "next/dynamic";
 import SkillsSkeleton from "./SkillsSkeleton";
 import SkillsList from "./SkillsList";
 
-
 const SuggestedSkills = async () => {
   return (
     <>
