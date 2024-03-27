@@ -91,6 +91,7 @@ const ExperienceForm = () => {
     }) || [];
 
   const onSubmit = (data: FieldValues) => {
+
     router.push("/builder/prosummary");
     console.log(data);
     dispatch(setExperience(data.experience));

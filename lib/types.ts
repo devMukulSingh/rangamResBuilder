@@ -59,3 +59,8 @@ export interface Iprojects {
 export interface Iachievements {
   value: string;
 }
+// export interface IaisuggestedComp{
+//   data:string[];
+//   isLoading:boolean;
+//   error:string | null
+// }

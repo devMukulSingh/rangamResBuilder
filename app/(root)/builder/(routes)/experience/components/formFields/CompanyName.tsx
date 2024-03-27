@@ -5,11 +5,8 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { useAppSelector } from "@/redux/hooks/hooks";
 import React, { FC } from "react";
-import Skill from "./Competence";
 import { IExperienceForm } from "../ExperienceForm";
-import { Plus } from "lucide-react";
 import { Input } from "@/components/ui/input";
 
 const CompanyName: FC<IExperienceForm> = ({ form, index }) => {
@@ -24,7 +21,7 @@ const CompanyName: FC<IExperienceForm> = ({ form, index }) => {
             <Input
               className="h-14 rounded-sm  bg-white"
               {...field}
-              placeholder="Rangam"
+              placeholder="Company name"
             />
           </FormControl>
           <FormMessage />

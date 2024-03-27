@@ -1,5 +1,6 @@
 import {
   Iachievements,
+
   Icontact,
   Ieducation,
   Iexperience,
@@ -23,7 +24,7 @@ export interface IinitialState {
   aiSuggestedBio: string[];
   aiSuggestedComp: string[];
   aiSuggesedSkills: string[];
-  goal : string;
+  goal: string;
 }
 
 const initialState: IinitialState = {
@@ -38,7 +39,6 @@ const initialState: IinitialState = {
     dob: "",
     birthPlace: "",
     bio: "",
- 
   },
   experience: [
     {
@@ -78,7 +78,7 @@ const initialState: IinitialState = {
   aiSuggestedBio: [],
   aiSuggestedComp: [],
   aiSuggesedSkills: [],
-  goal: ""
+  goal: "",
 };
 
 export const userSlice = createSlice({
@@ -140,8 +140,11 @@ export const userSlice = createSlice({
     setAiSuggestedSkills: (state, action) => {
       state.aiSuggesedSkills = action.payload;
     },
-    setGoal : (state,action) => {
+    setGoal: (state, action) => {
       state.goal = action.payload;
+    },
+    resetCompetences : ( state) => {
+      state.aiSuggestedComp = initialState.aiSuggestedComp;
     }
   },
 });
@@ -163,5 +166,6 @@ export const {
   setSelectedBio,
   setAiSuggestedComp,
   setAiSuggestedSkills,
-  setGoal
+  setGoal,
+  resetCompetences
 } = userSlice.actions;

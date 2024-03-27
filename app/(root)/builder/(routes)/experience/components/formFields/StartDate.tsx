@@ -5,7 +5,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { IExperienceForm } from "../ExperienceForm";
 import { Input } from "@/components/ui/input";
 
@@ -17,13 +17,12 @@ const StartDate: FC<IExperienceForm> = ({ form, index }) => {
       render={({ field }) => (
         <FormItem className="">
           <FormLabel>Start Date</FormLabel>
-          <FormControl>
-            <Input
-              className="bg-white h-14 rounded-sm"
-              {...field}
-              type="month"
-            />
-          </FormControl>
+          <Input
+            placeholder="MM YY"
+            type="month"
+            className="h-14 rounded-sm bg-white"
+            {...field}
+          />
           <FormMessage />
         </FormItem>
       )}

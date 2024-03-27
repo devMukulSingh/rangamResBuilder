@@ -4,15 +4,14 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest, res: NextResponse) {
   try {
-    const profession = cookies().get("profession")?.value;
-
-    if (!profession)
+    const jobTitle = req.nextUrl.searchParams.get('jobTitle');
+    if (!jobTitle)
       return NextResponse.json(
-        { error: "profession is required" },
+        { error: "jobTitle is required" },
         { status: 400 },
       );
 
-    const prompt = `Generate 7 key competences or responsibilities whose profession is ${profession},in max 3 words`;
+    const prompt = `Generate 7 key competences or responsibilities whose profession is ${jobTitle},in max 3 words`;
 
     const competences = await ChatGPT(prompt);
 
@@ -21,6 +20,17 @@ export async function GET(req: NextRequest, res: NextResponse) {
         ?.replace(/\d+(\.\s*|\.)?/g, "")
         .split("\n")
         .filter((item: string) => item !== "") || [];
+
+    // const parsedCompetences = [
+    //   "NEXTJS",
+    //   "NEXTJS",
+    //   "NEXTJS",
+    //   "NEXTJS",
+    //   "NEXTJS",
+    //   "NEXTJS",
+    //   "NEXTJS",
+
+    // ]
 
     return NextResponse.json(parsedCompetences, { status: 200 });
   } catch (e) {

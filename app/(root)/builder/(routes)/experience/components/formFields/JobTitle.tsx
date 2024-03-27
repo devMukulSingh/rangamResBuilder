@@ -5,24 +5,58 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { useAppSelector } from "@/redux/hooks/hooks";
-import React, { FC } from "react";
-import Skill from "./Competence";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
+import React, { FC, useCallback, useEffect, useState } from "react";
 import { IExperienceForm } from "../ExperienceForm";
-import { Plus } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import axios from "axios";
+import {
+  resetCompetences,
+  setAiSuggestedComp,
+  setExperience,
+} from "@/redux/slice/userSlice";
+import debounce from "debounce";
+import { setCompLoading } from "@/redux/slice/commonSlice";
 
 const JobTitle: FC<IExperienceForm> = ({ form, index }) => {
+  const dispatch = useAppDispatch();
+
+  const onChange = () => {
+    const jobTitle = form.getValues().experience[index].jobTitle;
+    debouncedRequest(jobTitle)
+  }
+  const debouncedRequest = useCallback((jobTitle:string) => {
+    getCompetences(jobTitle);
+  }, []);
+
+  const getCompetences = debounce(async (jobTitle) => {
+    try {
+      dispatch(setCompLoading(true));
+      if (jobTitle.length > 5) {
+        const { data } = await axios.get("/api/ai/get-competences", {
+          params: {
+            jobTitle,
+          },
+        });
+        dispatch(setAiSuggestedComp(data));
+      }
+    } catch (e) {
+      console.log(`Error in getCompetences ${e}`);
+    } finally {
+      dispatch(setCompLoading(false));
+    }
+  }, 2000);
+
   return (
     <FormField
       name={`experience.${index}.jobTitle`}
       control={form.control}
       render={({ field }) => (
-        <FormItem>
+        <FormItem onChange={onChange}>
           <FormLabel>Job title</FormLabel>
           <FormControl>
             <Input
-              placeholder="Jr. Frontend Developer"
+              placeholder="Job title"
               className="bg-white h-14 rounded-sm"
               {...field}
             />

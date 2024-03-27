@@ -5,6 +5,7 @@ export interface IinitialState {
   formComp: string | null;
   bioLoading: boolean;
   skillsLoading: boolean;
+  competenceLoading: boolean;
 }
 
 const initialState: IinitialState = {
@@ -12,6 +13,7 @@ const initialState: IinitialState = {
   formComp: "Personal Information",
   bioLoading: false,
   skillsLoading: false,
+  competenceLoading: false,
 };
 
 const commonSlice = createSlice({
@@ -30,10 +32,13 @@ const commonSlice = createSlice({
     setSkillsLoading: (state, action) => {
       state.skillsLoading = action.payload;
     },
+    setCompLoading: (state, action) => {
+      state.competenceLoading = action.payload;
+    }
   },
 });
 
 export default commonSlice.reducer;
 
-export const { toggleSidebar, setFormComp, setBioLoading, setSkillsLoading } =
+export const { toggleSidebar, setFormComp, setBioLoading, setSkillsLoading, setCompLoading } =
   commonSlice.actions;

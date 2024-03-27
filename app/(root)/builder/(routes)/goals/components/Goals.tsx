@@ -28,7 +28,7 @@ const Goals = () => {
   const dispatch = useAppDispatch();
   const handleGoalSelect = () => {
     dispatch(setGoal(selected));
-  }
+  };
   return (
     <>
       <div
@@ -61,7 +61,7 @@ const Goals = () => {
           Back
         </LinkComp>
         <LinkComp
-          onClick={ handleGoalSelect }
+          onClick={handleGoalSelect}
           disabled={selected === "" ? true : false}
           href={"/builder/skills"}
         >
