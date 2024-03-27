@@ -25,15 +25,13 @@ const RichTextEditor = dynamic(
   () => import("@/components/commons/RichTextEditor"),
   {
     ssr: false,
-  },
+  }
 );
 import { motion } from "framer-motion";
 
 const ProjectsForm = () => {
   const [expanded, setExpanded] = useState<string | false>("");
   const dispatch = useAppDispatch();
-  const router = useRouter();
-  const { templateId } = useParams();
   const progress = useAppSelector((state) => state.persistedReducer.progress);
   const projects = useAppSelector((state) => state.persistedReducer.projects);
 
@@ -84,13 +82,17 @@ const ProjectsForm = () => {
   };
 
   const handleAddMore = () => {
-    const emptyField = {
-      projectName: "",
-      projectUrl: "",
-      description: "",
-      id: Math.floor(Math.random() * 100).toString(),
-    };
-    fieldArray.append(emptyField);
+    if (controlledFields.length < 4) {
+      const emptyField = {
+        projectName: "",
+        projectUrl: "",
+        description: "",
+        id: Math.floor(Math.random() * 100).toString(),
+      };
+      fieldArray.append(emptyField);
+    } else {
+      toast.error("Max 4 pojects allowed");
+    }
   };
   const handleCollapsible = (id: string, isExpanded: boolean) => {
     if (isExpanded) {
@@ -185,7 +187,7 @@ const ProjectsForm = () => {
                               <Input
                                 className="py-8 bg-white"
                                 {...field}
-                                placeholder="eg Google Lance"
+                                placeholder="Google Lance"
                               />
                             </FormControl>
                             <FormMessage />
@@ -204,7 +206,7 @@ const ProjectsForm = () => {
                               <Input
                                 className="py-8 bg-white"
                                 {...field}
-                                placeholder="eg www.google.com"
+                                placeholder="www.google.com"
                               />
                             </FormControl>
                             <FormMessage />

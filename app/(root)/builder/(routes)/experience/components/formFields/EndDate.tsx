@@ -19,7 +19,7 @@ const EndDate: FC<IExperienceForm> = ({ form, index, controlledFields }) => {
       name={`experience.${index}.endDate`}
       control={form.control}
       render={({ field }) => (
-        <FormItem className="">
+        <FormItem className="w-full">
           <FormLabel>End Date</FormLabel>
           <FormControl>
             <Input

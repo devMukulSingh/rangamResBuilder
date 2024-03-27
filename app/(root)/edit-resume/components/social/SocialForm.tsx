@@ -50,12 +50,12 @@ const SocialForm = () => {
                 control={form.control}
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Linkedin Profile Link</FormLabel>
+                    <FormLabel>Linkedin Profile</FormLabel>
                     <FormControl>
                       <Input
                         className="py-8 bg-white"
                         {...field}
-                        placeholder="eg https://johndoe.com"
+                        placeholder="https://johndoe.com"
                       />
                     </FormControl>
                     <FormMessage />
@@ -67,12 +67,12 @@ const SocialForm = () => {
                 control={form.control}
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Twitter Profile Link</FormLabel>
+                    <FormLabel>Twitter Profile</FormLabel>
                     <FormControl>
                       <Input
                         className="py-8 bg-white"
                         {...field}
-                        placeholder="eg https://johndoe.com"
+                        placeholder="https://johndoe.com"
                       />
                     </FormControl>
                     <FormMessage />
@@ -84,10 +84,10 @@ const SocialForm = () => {
                 control={form.control}
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Github Profile Link</FormLabel>
+                    <FormLabel>Github Profile</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="eg https://johndoe.com"
+                        placeholder="https://johndoe.com"
                         className="bg-white py-8 "
                         {...field}
                       />
@@ -101,12 +101,12 @@ const SocialForm = () => {
                 control={form.control}
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Portfolio Link</FormLabel>
+                    <FormLabel>Portfolio</FormLabel>
                     <FormControl>
                       <Input
                         className="py-8 bg-white"
                         {...field}
-                        placeholder="eg https://johndoe.com"
+                        placeholder="https://johndoe.com"
                       />
                     </FormControl>
                     <FormMessage />

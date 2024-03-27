@@ -15,12 +15,11 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 const Sidebar = () => {
-  const [isMounted, setIsMounted] = useState(false);
-  const pathName = usePathname();
   const dispatch = useAppDispatch();
   const sidebar = useAppSelector((state) => state.commonSlice.sidebar);
-
-  const sidebarOptions = [
+  const pathName = usePathname();
+  const [showOptions, setShowOptions] = useState(false);
+  const halfOptions = [
     {
       icon: User,
       title: "Personal Information",
@@ -41,6 +40,10 @@ const Sidebar = () => {
       title: "Education",
       isActive: pathName.endsWith("/education"),
     },
+  ];
+  const [sidebarOptions, setSidebarOptions] = useState(halfOptions);
+
+  const extraOptions = [
     {
       icon: Contact,
       title: "Social Links",
@@ -63,13 +66,8 @@ const Sidebar = () => {
     },
   ];
 
-  const handleResetForm = () => {
-    dispatch(resetForm());
-  };
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-  if (!isMounted) return null;
+  const toggleOptions = () => {};
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -89,7 +87,7 @@ const Sidebar = () => {
                 ${sidebar ? "ml-auto mr-5" : " mr-0 ml-0 mb-5 self-center"}
                 `}
         />
-        <ul>
+        <ul className="">
           {sidebarOptions.map((option) => (
             <SidebarOption
               option={option}
@@ -97,13 +95,20 @@ const Sidebar = () => {
               sidebar={sidebar}
             />
           ))}
+          {showOptions &&
+            extraOptions.map((option) => (
+              <SidebarOption
+                option={option}
+                key={option.title}
+                sidebar={sidebar}
+              />
+            ))}
         </ul>
-        {/* {sidebar && <Progressbar />} */}
         <Button
           className={`mx-10 self-center mt-5 w-4/5`}
-          onClick={handleResetForm}
+          onClick={() => setShowOptions((prev) => !prev)}
         >
-          Reset
+          {showOptions ? "Hide" : "Show More"}
         </Button>
       </div>
     </motion.div>

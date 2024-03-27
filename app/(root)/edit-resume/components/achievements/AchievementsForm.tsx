@@ -14,7 +14,6 @@ import { PlusCircle } from "lucide-react";
 import { setAchievements } from "@/redux/slice/userSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
 import { useFieldArray } from "react-hook-form";
-import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { setProgress } from "@/redux/slice/userSlice";
 import { setFormComp } from "@/redux/slice/commonSlice";
@@ -22,11 +21,9 @@ import { motion } from "framer-motion";
 
 const AchievementsForm = () => {
   const dispatch = useAppDispatch();
-  const router = useRouter();
-  const { templateId } = useParams();
   const progress = useAppSelector((state) => state.persistedReducer.progress);
   const achievements = useAppSelector(
-    (state) => state.persistedReducer.achievements,
+    (state) => state.persistedReducer.achievements
   );
 
   const form = useForm({
@@ -95,7 +92,7 @@ const AchievementsForm = () => {
                             {...field}
                             className="py-8 bg-white"
                             {...field}
-                            placeholder="eg Certificate of Engineering"
+                            placeholder="Certificate of Engineering"
                           />
                         </FormControl>
                         <FormMessage />
@@ -112,7 +109,7 @@ const AchievementsForm = () => {
                 className="flex mr-auto items-center gap-2 bg-transparent"
               >
                 <PlusCircle />
-                Add Achievement/License
+                Add Achievement
               </Button>
               <Button type="submit" className="w-full mt-20 py-6">
                 Next

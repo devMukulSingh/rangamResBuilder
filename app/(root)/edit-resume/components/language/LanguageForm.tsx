@@ -32,9 +32,9 @@ const LanguageForm = () => {
   const form = useForm({
     defaultValues: {
       languageInfo: languages || [
-        { language: "", strength: "" },
-        { language: "", strength: "" },
-        { language: "", strength: "" },
+        { language: "English", strength: "" },
+        { language: "English", strength: "" },
+        { language: "English", strength: "" },
       ],
     },
   });
@@ -97,7 +97,7 @@ const LanguageForm = () => {
                             <FormLabel>Language</FormLabel>
                             <FormControl>
                               <SelectTrigger className="bg-white">
-                                <SelectValue placeholder="language" />
+                                <SelectValue />
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>

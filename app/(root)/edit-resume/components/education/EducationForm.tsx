@@ -200,7 +200,7 @@ const EducationForm = () => {
                                   <Input
                                     className="bg-white"
                                     {...field}
-                                    placeholder="Delhi University"
+                                    placeholder="School Name"
                                   />
                                 </FormControl>
                                 <FormMessage />
@@ -249,7 +249,7 @@ const EducationForm = () => {
                             control={form.control}
                             render={({ field }) => (
                               <FormItem>
-                                <FormLabel>Speciality</FormLabel>
+                                <FormLabel>Specialisation</FormLabel>
                                 <FormControl>
                                   <Input
                                     className="bg-white"
@@ -348,7 +348,7 @@ const EducationForm = () => {
                       </Collapsible>
                     </>
                   );
-                },
+                }
               )}
 
               <div className="flex gap-5">

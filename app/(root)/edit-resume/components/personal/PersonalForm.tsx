@@ -17,7 +17,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { setPersonalInfo } from "@/redux/slice/userSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
 import { useState } from "react";
-import BirthPlace from "./formFields/BirthPlace";
 
 const PersonalForm = () => {
   const [open, setOpen] = useState(false);
@@ -53,12 +52,11 @@ const PersonalForm = () => {
     city: z.string().optional(),
     state: z.string().optional(),
     dob: z.any().optional(),
-    birthPlace: z.string().optional(),
   });
 
   type formSchema = z.infer<typeof schema>;
   const personalInfo = useAppSelector(
-    (state) => state.persistedReducer.personalInfo,
+    (state) => state.persistedReducer.personalInfo
   );
 
   const form = useForm<formSchema>({
@@ -72,9 +70,8 @@ const PersonalForm = () => {
       state: "",
       dob: "",
       address: "",
-      birthPlace: "",
       city: "",
-    },
+    }
   });
 
   const onSubmit = () => {
@@ -119,7 +116,6 @@ const PersonalForm = () => {
               </div>
 
               <div className="flex gap-5 w-full">
-                <BirthPlace form={form} />
                 <DOB form={form} />
               </div>
 

@@ -1846,4 +1846,4 @@ export const languagesData = [
   "Xhosa",
 ];
 
-export const strengths = ["Beginner", "Intermediate", "Proficient"];
+export const strengths = ["Beginner", "Intermediate", "Expert"];

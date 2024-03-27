@@ -204,7 +204,7 @@ const EducationForm = () => {
                       key={index}
                     >
                       <SchoolName form={form} index={index} />
-                      
+
                       <Degree form={form} index={index} />
 
                       <Speciality form={form} index={index} />
