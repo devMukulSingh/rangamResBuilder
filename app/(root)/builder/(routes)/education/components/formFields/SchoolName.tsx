@@ -20,7 +20,7 @@ const SchoolName: FC<IeducationForm> = ({ form, index }) => {
             <Input
               className="bg-white h-14 rounded-sm"
               {...field}
-              placeholder="Delhi University"
+              placeholder="School Name"
             />
           </FormControl>
         </FormItem>

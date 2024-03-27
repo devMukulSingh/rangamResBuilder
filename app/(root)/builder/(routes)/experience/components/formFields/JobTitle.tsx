@@ -23,9 +23,9 @@ const JobTitle: FC<IExperienceForm> = ({ form, index }) => {
 
   const onChange = () => {
     const jobTitle = form.getValues().experience[index].jobTitle;
-    debouncedRequest(jobTitle)
-  }
-  const debouncedRequest = useCallback((jobTitle:string) => {
+    debouncedRequest(jobTitle);
+  };
+  const debouncedRequest = useCallback((jobTitle: string) => {
     getCompetences(jobTitle);
   }, []);
 

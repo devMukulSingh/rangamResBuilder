@@ -1,6 +1,5 @@
 import {
   Iachievements,
-
   Icontact,
   Ieducation,
   Iexperience,
@@ -143,9 +142,9 @@ export const userSlice = createSlice({
     setGoal: (state, action) => {
       state.goal = action.payload;
     },
-    resetCompetences : ( state) => {
+    resetCompetences: (state) => {
       state.aiSuggestedComp = initialState.aiSuggestedComp;
-    }
+    },
   },
 });
 
@@ -167,5 +166,5 @@ export const {
   setAiSuggestedComp,
   setAiSuggestedSkills,
   setGoal,
-  resetCompetences
+  resetCompetences,
 } = userSlice.actions;

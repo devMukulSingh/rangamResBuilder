@@ -34,11 +34,16 @@ const commonSlice = createSlice({
     },
     setCompLoading: (state, action) => {
       state.competenceLoading = action.payload;
-    }
+    },
   },
 });
 
 export default commonSlice.reducer;
 
-export const { toggleSidebar, setFormComp, setBioLoading, setSkillsLoading, setCompLoading } =
-  commonSlice.actions;
+export const {
+  toggleSidebar,
+  setFormComp,
+  setBioLoading,
+  setSkillsLoading,
+  setCompLoading,
+} = commonSlice.actions;

@@ -7,12 +7,13 @@ import CompetenceSkeleton from "../CompetenceSkeleton";
 import { useAppSelector } from "@/redux/hooks/hooks";
 
 const Competences: FC<IExperienceForm> = ({ form, index }) => {
-  
   const aiSuggestedComp = useAppSelector(
-    (state) => state.persistedReducer.aiSuggestedComp
+    (state) => state.persistedReducer.aiSuggestedComp,
   );
 
-  const isLoading = useAppSelector( state => state.commonSlice.competenceLoading);
+  const isLoading = useAppSelector(
+    (state) => state.commonSlice.competenceLoading,
+  );
 
   if (isLoading) return <CompetenceSkeleton />;
 

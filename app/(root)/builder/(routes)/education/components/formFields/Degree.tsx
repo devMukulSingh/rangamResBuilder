@@ -34,15 +34,11 @@ const Degree: FC<IeducationForm> = ({ form, index }) => {
               </SelectTrigger>
             </FormControl>
             <SelectContent>
-              <SelectItem value="Bachelor in Technology">
-                Bachelor in Technology
+              <SelectItem value="Bachelor's degree">
+                Bachelor's degree
               </SelectItem>
-              <SelectItem value="Bachelor in Science">
-                Bachelor in Science
-              </SelectItem>
-              <SelectItem value="Bachelor in Computer applications">
-                Bachelor in Computer applications
-              </SelectItem>
+              <SelectItem value="Master's degree">Master's degree</SelectItem>
+              <SelectItem value="Doctorate degree">Doctorate degree</SelectItem>
             </SelectContent>
           </Select>
         </FormItem>

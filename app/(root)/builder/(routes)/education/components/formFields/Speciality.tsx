@@ -16,7 +16,7 @@ const Speciality: FC<IeducationForm> = ({ form, index }) => {
       control={form.control}
       render={({ field }) => (
         <FormItem>
-          <FormLabel>Speciality</FormLabel>
+          <FormLabel>Specialisation</FormLabel>
           <FormControl>
             <Input
               className="bg-white h-14 rounded-sm"

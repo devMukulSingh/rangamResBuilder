@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest, res: NextResponse) {
   try {
-    const jobTitle = req.nextUrl.searchParams.get('jobTitle');
+    const jobTitle = req.nextUrl.searchParams.get("jobTitle");
     if (!jobTitle)
       return NextResponse.json(
         { error: "jobTitle is required" },

@@ -203,25 +203,17 @@ const EducationForm = () => {
                       className="py-5 px-10  bg-red-100 grid grid-cols-1 md:grid-cols-2 gap-5 text-neutral-500"
                       key={index}
                     >
-                      {/* schoolName */}
                       <SchoolName form={form} index={index} />
+                      
+                      <Degree form={form} index={index} />
 
-                      {/* speciality */}
                       <Speciality form={form} index={index} />
 
                       <div className="flex gap-2">
-                        {/* startDate */}
-
                         <StartDate form={form} index={index} />
-                        {/* endDate */}
                         <EndDate form={form} index={index} />
-
-                        {/* checkboxPursuing */}
                         <CheckboxPursuing form={form} index={index} />
                       </div>
-
-                      {/* degree */}
-                      <Degree form={form} index={index} />
                     </div>
                   )}
                 </>
