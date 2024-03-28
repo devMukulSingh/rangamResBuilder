@@ -2,7 +2,7 @@ import Circle from "@/components/commons/Circle";
 
 const TextSection = () => {
   return (
-    <div className="w-full md:w-1/2 flex flex-col gap-8">
+    <div className=" flex flex-col gap-8">
       <div className="flex gap-5">
         <Circle>1</Circle>
         <h1 className="text-4xl font-bold text-[#c75000]">

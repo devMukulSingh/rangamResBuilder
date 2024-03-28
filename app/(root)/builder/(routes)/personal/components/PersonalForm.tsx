@@ -109,10 +109,10 @@ const PersonalForm = () => {
     //     animate={{ opacity: [0, 1], scale: [0.9, 1] }}
     //     transition={{ duration: 0.4 }}
     // >
-    <div className=" text-neutral-500">
+    <div className=" text-neutral-500 lg:w-fit w-full flex justify-center md:justify-end  items-center">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <div className="py-8 px-10 bg-[#E0F3FF] flex flex-col gap-3 items-start sm:w-4/5 w-full md:ml-auto rounded-lg ">
+          <div className="py-8 px-10 bg-[#E0F3FF] flex flex-col gap-3 w-full md:w-fit  rounded-lg ">
             <Name form={form} />
 
             <Email form={form} />
