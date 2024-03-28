@@ -5,9 +5,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import MonthPicker from "@/components/commons/MonthPicker";
 
 const EndDate: FC<IeducationForm> = ({ form, index }) => {
@@ -22,7 +20,7 @@ const EndDate: FC<IeducationForm> = ({ form, index }) => {
         >
           <FormLabel>End Date</FormLabel>
           <FormControl>
-            <MonthPicker field={field}/>
+            <MonthPicker field={field} />
           </FormControl>
         </FormItem>
       )}

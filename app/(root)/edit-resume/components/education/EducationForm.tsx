@@ -290,7 +290,7 @@ const EducationForm = () => {
                               <FormItem>
                                 <FormLabel>Start Date</FormLabel>
                                 <FormControl>
-                                 <MonthPicker field={field}/>
+                                  <MonthPicker field={field} />
                                 </FormControl>
                                 <FormMessage />
                               </FormItem>
@@ -313,7 +313,7 @@ const EducationForm = () => {
                               >
                                 <FormLabel>End Date</FormLabel>
                                 <FormControl>
-                                  <MonthPicker field={field}/>
+                                  <MonthPicker field={field} />
                                 </FormControl>
                                 <FormMessage />
                               </FormItem>

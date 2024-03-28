@@ -6,31 +6,11 @@ import { ControllerRenderProps } from "react-hook-form";
 import { Ieducation, Iexperience } from "@/lib/types";
 import { FC } from "react";
 
-interface MonthPickerProps {
-  field:
-    | ControllerRenderProps<
-        {
-          education: Ieducation[];
-        },
-        `education.${number}.startDate` | `education.${number}.endDate`
-      >
-    | ControllerRenderProps<
-        {
-          experience: Iexperience[];
-        },
-        `experience.${number}.startDate` | `experience.${number}.endDate`
-      >;
-}
-
-const MonthPicker: FC<MonthPickerProps> = ({ field }) => {
+const MonthPicker: FC<any> = ({ field }) => {
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <DemoContainer components={["DatePicker"]}>
-        <DatePicker
-          className="bg-white"
-          views={["month", "year"]}
-          {...field}
-        />
+        <DatePicker className="bg-white" views={["month", "year"]} {...field} />
       </DemoContainer>
     </LocalizationProvider>
   );

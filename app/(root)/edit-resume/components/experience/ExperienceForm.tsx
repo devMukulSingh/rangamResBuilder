@@ -32,7 +32,7 @@ const ExperienceForm = () => {
   const [expanded, setExpanded] = useState<string | false>("");
   const dispatch = useAppDispatch();
   const experience = useAppSelector(
-    (state) => state.persistedReducer.experience
+    (state) => state.persistedReducer.experience,
   );
 
   const form = useForm({
@@ -222,7 +222,7 @@ const ExperienceForm = () => {
                       </CollapsibleContent>
                     </Collapsible>
                   );
-                }
+                },
               )}
 
               <Button
