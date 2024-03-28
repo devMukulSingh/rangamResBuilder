@@ -109,10 +109,10 @@ const PersonalForm = () => {
     //     animate={{ opacity: [0, 1], scale: [0.9, 1] }}
     //     transition={{ duration: 0.4 }}
     // >
-    <div className=" text-neutral-500 lg:w-fit w-full flex justify-center md:justify-end  items-center">
+    <div className=" text-neutral-500 lg:w-fit w-full flex justify-center md:justify-end h-[30rem] ">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <div className="py-8 px-10 bg-[#E0F3FF] flex flex-col gap-3 w-full md:w-fit  rounded-lg ">
+          <div className="px-10 py-10 bg-[#E0F3FF] flex flex-col gap-3 h-full w-full lg:w-[85%]  rounded-lg ">
             <Name form={form} />
 
             <Email form={form} />
@@ -124,7 +124,7 @@ const PersonalForm = () => {
               <Mobile form={form} />
             </div>
 
-            <Button type="submit" className="w-full py-3 mt-4">
+            <Button type="submit" className="mt-auto w-full py-3">
               Next
             </Button>
           </div>

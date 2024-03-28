@@ -6,10 +6,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
     const { goal } = await req.json();
 
     if (!goal)
-      return NextResponse.json(
-        { error: "goal is requuired" },
-        { status: 400 },
-      );
+      return NextResponse.json({ error: "goal is requuired" }, { status: 400 });
 
     cookies().set("goal", goal);
 

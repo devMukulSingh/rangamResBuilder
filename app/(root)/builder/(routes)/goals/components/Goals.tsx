@@ -27,7 +27,7 @@ const Goals = () => {
     },
   ];
   const dispatch = useAppDispatch();
-  const handleGoalSelect = async() => {
+  const handleGoalSelect = async () => {
     await setGoalInCookies(selected);
     dispatch(setGoal(selected));
   };

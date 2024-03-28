@@ -15,11 +15,11 @@ const Profession: FC<IForm> = ({ form }) => {
       name="profession"
       control={form.control}
       render={({ field }) => (
-        <FormItem className="w-full">
+        <FormItem className="">
           <FormLabel>Desired job title</FormLabel>
           <FormControl>
             <Input
-              className="bg-white"
+              className="bg-white "
               {...field}
               placeholder="Specify your desired job title"
             />

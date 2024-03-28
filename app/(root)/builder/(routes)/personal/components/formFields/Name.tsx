@@ -15,11 +15,11 @@ const Name: FC<IForm> = ({ form }) => {
       name="fullName"
       control={form.control}
       render={({ field }) => (
-        <FormItem className="w-full">
+        <FormItem className="">
           <FormLabel>Full Name</FormLabel>
           <FormControl>
             <Input
-              className="bg-white"
+              className="bg-white "
               {...field}
               placeholder="Enter your full name"
             />

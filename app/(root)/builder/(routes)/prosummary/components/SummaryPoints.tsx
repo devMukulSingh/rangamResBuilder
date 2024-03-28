@@ -4,11 +4,11 @@ import { getSummary } from "@/actions/get-summary";
 
 const SummaryPoints = async () => {
   const summaries = await getSummary();
-      const parsedSummaries =
-        summaries
-          ?.replace(/\d+(\.\s*|\.)?/g, "")
-          .split("\n")
-          .filter((item: string) => item !== "") || [];
+  const parsedSummaries =
+    summaries
+      ?.replace(/\d+(\.\s*|\.)?/g, "")
+      .split("\n")
+      .filter((item: string) => item !== "") || [];
   return (
     <ol
       className="
