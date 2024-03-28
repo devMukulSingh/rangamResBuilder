@@ -1,18 +1,14 @@
 import React from "react";
 import SummaryPoint from "./SummaryPoint";
-import { cookies } from "next/headers";
-import { ChatGPT } from "@/lib/ChatGPT";
+import { getSummary } from "@/actions/get-summary";
 
 const SummaryPoints = async () => {
-  const profession = cookies().get("profession")?.value || "Frontend dev";
-  const bioPrompt = `Suggest 3 short bio for ${profession} for resume`;
-  const bio = await ChatGPT(bioPrompt);
-
-  const parsedBio =
-    bio
-      ?.replace(/\d+(\.\s*|\.)?/g, "")
-      .split("\n")
-      .filter((item: string) => item !== "") || [];
+  const summaries = await getSummary();
+      const parsedSummaries =
+        summaries
+          ?.replace(/\d+(\.\s*|\.)?/g, "")
+          .split("\n")
+          .filter((item: string) => item !== "") || [];
   return (
     <ol
       className="
@@ -23,7 +19,7 @@ const SummaryPoints = async () => {
             mt-2
             "
     >
-      {parsedBio.map((bio: string, index: number) => (
+      {parsedSummaries.map((bio: string, index: number) => (
         <SummaryPoint bio={bio} key={index} />
       ))}
     </ol>

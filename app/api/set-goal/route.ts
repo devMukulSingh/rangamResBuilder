@@ -3,21 +3,21 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest, res: NextResponse) {
   try {
-    const { profession } = await req.json();
+    const { goal } = await req.json();
 
-    if (!profession)
+    if (!goal)
       return NextResponse.json(
-        { error: "Profession is requuired" },
+        { error: "goal is requuired" },
         { status: 400 },
       );
 
-    cookies().set("profession", profession);
+    cookies().set("goal", goal);
 
     return NextResponse.json({ msg: "cookie set" }, { status: 200 });
   } catch (e) {
-    console.log(`Error in POST req set-profession ${e}`);
+    console.log(`Error in POST req set-goal ${e}`);
     return NextResponse.json(
-      { error: `Error in POST req set-profession ${e}` },
+      { error: `Error in POST req set-goal ${e}` },
       { status: 500 },
     );
   }

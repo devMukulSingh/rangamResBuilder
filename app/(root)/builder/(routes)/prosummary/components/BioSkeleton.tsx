@@ -12,6 +12,9 @@ const BioSkeleton = () => {
       <li>
         <Skeleton className="h-28 w-full bg-white" />
       </li>
+      <li>
+        <Skeleton className="h-28 w-full bg-white" />
+      </li>
     </ul>
   );
 };

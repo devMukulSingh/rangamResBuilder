@@ -4,6 +4,7 @@ import SingleGoal from "./SingleGoal";
 import LinkComp from "@/components/ui/LinkComp";
 import { setGoal } from "@/redux/slice/userSlice";
 import { useAppDispatch } from "@/redux/hooks/hooks";
+import { setGoalInCookies } from "@/actions/set-goal";
 
 const Goals = () => {
   const [selected, setSelected] = useState("");
@@ -13,7 +14,7 @@ const Goals = () => {
       img: "/Fulltime.png",
     },
     {
-      title: "Young Professional",
+      title: "Young professional",
       img: "/Young.png",
     },
     {
@@ -26,7 +27,8 @@ const Goals = () => {
     },
   ];
   const dispatch = useAppDispatch();
-  const handleGoalSelect = () => {
+  const handleGoalSelect = async() => {
+    await setGoalInCookies(selected);
     dispatch(setGoal(selected));
   };
   return (

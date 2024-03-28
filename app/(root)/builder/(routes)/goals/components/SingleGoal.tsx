@@ -54,7 +54,6 @@ const SingleGoal: React.FC<SingleGoalProps> = ({
           className="object-contain"
           src={goal.img}
           loading="lazy"
-          // placeholder="blur"
         />
       </figure>
       <h1
