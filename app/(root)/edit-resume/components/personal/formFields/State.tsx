@@ -15,7 +15,7 @@ const State: FC<IForm> = ({ form }) => {
       name="state"
       control={form.control}
       render={({ field }) => (
-        <FormItem>
+        <FormItem className="w-1/2">
           <FormLabel>State</FormLabel>
           <FormControl>
             <Input className="bg-white" {...field} />

@@ -7,23 +7,19 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import MonthPicker from "@/components/commons/MonthPicker";
+
 
 const StartDate: FC<IeducationForm> = ({ form, index }) => {
   return (
     <FormField
-      defaultValue="2018-05"
       name={`education.${index}.startDate`}
       control={form.control}
       render={({ field }) => (
         <FormItem>
           <FormLabel>Start Date</FormLabel>
           <FormControl>
-            <Input
-              className="bg-white h-14 rounded-sm"
-              {...field}
-              type="month"
-            />
+            <MonthPicker field={field}/>
           </FormControl>
         </FormItem>
       )}

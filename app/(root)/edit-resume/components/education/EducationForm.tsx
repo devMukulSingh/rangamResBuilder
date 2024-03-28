@@ -26,6 +26,7 @@ import toast from "react-hot-toast";
 import { setFormComp } from "@/redux/slice/commonSlice";
 import { motion } from "framer-motion";
 import { Checkbox } from "@/components/ui/checkbox";
+import MonthPicker from "@/components/commons/MonthPicker";
 
 const EducationForm = () => {
   const [expanded, setExpanded] = useState<string | false>("");
@@ -289,11 +290,7 @@ const EducationForm = () => {
                               <FormItem>
                                 <FormLabel>Start Date</FormLabel>
                                 <FormControl>
-                                  <Input
-                                    className="bg-white"
-                                    {...field}
-                                    type="month"
-                                  />
+                                 <MonthPicker field={field}/>
                                 </FormControl>
                                 <FormMessage />
                               </FormItem>
@@ -316,11 +313,7 @@ const EducationForm = () => {
                               >
                                 <FormLabel>End Date</FormLabel>
                                 <FormControl>
-                                  <Input
-                                    type="month"
-                                    className="bg-white"
-                                    {...field}
-                                  />
+                                  <MonthPicker field={field}/>
                                 </FormControl>
                                 <FormMessage />
                               </FormItem>
@@ -348,7 +341,7 @@ const EducationForm = () => {
                       </Collapsible>
                     </>
                   );
-                }
+                },
               )}
 
               <div className="flex gap-5">

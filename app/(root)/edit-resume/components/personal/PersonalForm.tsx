@@ -71,7 +71,7 @@ const PersonalForm = () => {
       dob: "",
       address: "",
       city: "",
-    }
+    },
   });
 
   const onSubmit = () => {
@@ -110,7 +110,7 @@ const PersonalForm = () => {
                 <Mobile form={form} />
               </div>
 
-              <div className="flex gap-5">
+              <div className="flex gap-5 w-full">
                 <City form={form} />
                 <State form={form} />
               </div>

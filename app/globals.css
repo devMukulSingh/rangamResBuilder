@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+.css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root.Mui-error
+  .MuiOutlinedInput-notchedOutline {
+  border: none;
+}
+.css-nxo287-MuiInputBase-input-MuiOutlinedInput-input {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='50px' width='120px'><text x='0' y='15' fill='gray' font-size='15'>Type Something...</text></svg>");
+  background-repeat: no-repeat;
+}
+
 @layer utilities {
   /* Hide scrollbar for Chrome, Safari and Opera */
   .no-scrollbar::-webkit-scrollbar {

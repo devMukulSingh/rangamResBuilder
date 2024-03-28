@@ -15,7 +15,7 @@ const City: FC<IForm> = ({ form }) => {
       name="city"
       control={form.control}
       render={({ field }) => (
-        <FormItem>
+        <FormItem className="w-1/2">
           <FormLabel>City</FormLabel>
           <FormControl>
             <Input className="bg-white" {...field} />

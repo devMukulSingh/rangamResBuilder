@@ -209,7 +209,7 @@ const ExperienceForm = () => {
 
                         <Address form={form} index={index} />
 
-                        <div className="flex gap-5">
+                        <div className="flex gap-5 w-full">
                           <StartDate form={form} index={index} />
                           <EndDate form={form} index={index} />
                         </div>

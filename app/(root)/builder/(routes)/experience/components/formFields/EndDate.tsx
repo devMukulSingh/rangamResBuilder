@@ -12,6 +12,7 @@ import { IExperienceForm } from "../ExperienceForm";
 import { Plus } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
+import MonthPicker from "@/components/commons/MonthPicker";
 
 const EndDate: FC<IExperienceForm> = ({ form, index, controlledFields }) => {
   return (
@@ -22,12 +23,7 @@ const EndDate: FC<IExperienceForm> = ({ form, index, controlledFields }) => {
         <FormItem className="w-full">
           <FormLabel>End Date</FormLabel>
           <FormControl>
-            <Input
-              placeholder="MM YY"
-              type="month"
-              className="h-14 rounded-sm bg-white"
-              {...field}
-            />
+            <MonthPicker field={field} />
           </FormControl>
           <FormMessage />
         </FormItem>

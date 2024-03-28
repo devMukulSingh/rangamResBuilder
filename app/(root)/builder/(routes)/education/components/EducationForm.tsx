@@ -109,9 +109,9 @@ const EducationForm = () => {
     }
   };
   const onSubmit = (data: FieldValues) => {
+    console.log(data.education);
     router.push("/download");
     dispatch(setEducation(data.education));
-    console.log(data.education);
   };
   useEffect(() => {
     setSelected(controlledFields[0]?.id);

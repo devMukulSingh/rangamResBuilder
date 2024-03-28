@@ -5,7 +5,7 @@ import Steps from "./components/Steps";
 
 const StepsPage = () => {
   return (
-    <div className="flex md:px-20 sm:px-10 px-5 py-10 ">
+    <div className="flex  lg:px-20 sm:px-10 px-5 py-10 ">
       <div className="flex flex-col gap-8 w-full md:w-2/3 ">
         <h1 className="text-3xl sm:text-4xl font-bold text-[#c75000]">
           3 steps to create a resume
@@ -24,7 +24,7 @@ const StepsPage = () => {
       <figure
         className="
                 relative
-                size-[20rem] 
+                size-[25rem] 
                 self-center
                 hidden
                 md:block

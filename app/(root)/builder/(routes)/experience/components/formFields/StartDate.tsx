@@ -8,6 +8,7 @@ import {
 import React, { FC, useState } from "react";
 import { IExperienceForm } from "../ExperienceForm";
 import { Input } from "@/components/ui/input";
+import MonthPicker from "@/components/commons/MonthPicker";
 
 const StartDate: FC<IExperienceForm> = ({ form, index }) => {
   return (
@@ -17,12 +18,7 @@ const StartDate: FC<IExperienceForm> = ({ form, index }) => {
       render={({ field }) => (
         <FormItem className="w-full">
           <FormLabel>Start Date</FormLabel>
-          <Input
-            placeholder="MM YY"
-            type="month"
-            className="h-14 rounded-sm bg-white"
-            {...field}
-          />
+          <MonthPicker field={field} />
           <FormMessage />
         </FormItem>
       )}

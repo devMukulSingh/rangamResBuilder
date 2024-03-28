@@ -8,6 +8,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import MonthPicker from "@/components/commons/MonthPicker";
 
 const EndDate: FC<IeducationForm> = ({ form, index }) => {
   return (
@@ -21,11 +22,7 @@ const EndDate: FC<IeducationForm> = ({ form, index }) => {
         >
           <FormLabel>End Date</FormLabel>
           <FormControl>
-            <Input
-              type="month"
-              className="bg-white h-14 rounded-sm"
-              {...field}
-            />
+            <MonthPicker field={field}/>
           </FormControl>
         </FormItem>
       )}
