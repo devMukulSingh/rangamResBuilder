@@ -16,7 +16,6 @@ const SuggestedSkills = async () => {
           text-center   
           sm:text-start
                         font-semibold 
-                        mb-5
                         text-black
                         text-lg
                         "

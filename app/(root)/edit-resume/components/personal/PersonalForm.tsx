@@ -87,7 +87,7 @@ const PersonalForm = () => {
       initial={{ x: -150, opacity: 0 }}
       transition={{ duration: 0.3 }}
     >
-      <div className="p-5">
+      <div className="px-5 pt-10 pb-20">
         <Form {...form}>
           <form onChange={handleChange} onSubmit={form.handleSubmit(onSubmit)}>
             <div className="flex flex-col gap-5">

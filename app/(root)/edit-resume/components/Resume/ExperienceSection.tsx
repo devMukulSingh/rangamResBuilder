@@ -23,7 +23,7 @@ const ExperienceSection: React.FC<ExperienceSectionProps> = ({}) => {
             </h1>
             <h1>
               {`${item.startDate ? format(item?.startDate, "MMM yyyy") : ""} `}
-              {`${item.endDate ? ` - ${format(item?.endDate, "MMM yyyy")}` : " - present"} `}
+              {`${!item.endDate && item.startDate ? " - present" : `${item.endDate ? `- ${format(item?.endDate, "MMM yyyy")}` : ""}  `} `}
             </h1>
           </div>
           <HTMLRenderer htmlString={item.description} />

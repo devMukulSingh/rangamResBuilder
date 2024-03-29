@@ -32,7 +32,7 @@ const Skill: React.FC<SkillProps> = ({ skill, selectedSkills }) => {
     >
       <h1 className="text-sm">{skill}</h1>
       <Trash2
-        size={20}
+        size={15}
         onClick={handleRemoveSkill}
         className="
                 shrink-0

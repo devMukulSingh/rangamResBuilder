@@ -25,7 +25,7 @@ const RichTextEditor = dynamic(
   () => import("@/components/commons/RichTextEditor"),
   {
     ssr: false,
-  },
+  }
 );
 import { motion } from "framer-motion";
 
@@ -136,7 +136,7 @@ const ProjectsForm = () => {
       initial={{ x: -150, opacity: 0 }}
       transition={{ duration: 0.2 }}
     >
-      <div className="p-5 w-full">
+      <div className="px-5 py-10 pb-20 w-full">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} onChange={handleChange}>
             <div className="flex flex-col gap-5">

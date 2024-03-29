@@ -12,7 +12,7 @@ const MonthPicker: FC<any> = ({ field, className }) => {
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <DemoContainer components={["DatePicker"]}>
         <DatePicker
-          className={clsx(`bg-white h-14 pt-0 w-auto `, className)}
+          className={clsx(`bg-white pt-0 pb-0 w-auto `, className)}
           views={["month", "year"]}
           {...field}
         />

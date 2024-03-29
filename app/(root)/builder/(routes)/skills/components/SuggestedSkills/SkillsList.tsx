@@ -28,29 +28,35 @@ const SkillsList = () => {
 
   return (
     <div
-      className="grid 
+      className="      
+      max-h-[22rem] 
+      xl:max-h-[27rem]
+      overflow-auto
+      hidden-scrollbar 
+      hover:custom-scrollbar 
+      relative"
+    >
+      <div
+        className="grid 
       2xl:grid-cols-4
       lg:grid-cols-3 
       sm:grid-cols-2 
       grid-cols-1  
       xl:gap-3
-      gap-5 
-      max-h-[27rem]
-      overflow-auto
+      gap-5
+
       py-2 
       pr-3
-      hidden-scrollbar 
-      hover:custom-scrollbar 
-      relative
       "
-    >
-      {data?.map((skill: string, index: number) => (
-        <>
-          <Skill skill={skill} key={index} />
-        </>
-      ))}
+      >
+        {data?.map((skill: string, index: number) => (
+          <>
+            <Skill skill={skill} key={index} />
+          </>
+        ))}
 
-      <CustomSkill />
+        <CustomSkill />
+      </div>
     </div>
   );
 };

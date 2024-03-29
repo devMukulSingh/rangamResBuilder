@@ -249,14 +249,13 @@ const ExperienceForm = () => {
                             form={form}
                             controlledFields={controlledFields}
                           />
-                          {!controlledFields?.[index]
-                            ?.checkboxWorkingStatus && (
+
                             <EndDate
                               index={index}
                               form={form}
                               controlledFields={controlledFields}
                             />
-                          )}
+   
                         </div>
 
                         <CheckboxWorkingStatus

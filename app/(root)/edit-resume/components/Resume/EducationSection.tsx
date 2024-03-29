@@ -36,11 +36,7 @@ const EducationSection: React.FC<EducationSectionProps> = ({}) => {
                   ? format(educationInfo.startDate, "MMM yyyy")
                   : ""
               } `}
-              {`${
-                educationInfo?.endDate
-                  ? ` - ${format(educationInfo.endDate, "MMM yyyy")}`
-                  : ""
-              }`}
+              {`${!educationInfo.endDate && educationInfo.startDate ? " - present" : `${educationInfo.endDate ? `- ${format(educationInfo?.endDate, "MMM yyyy")}` : ""}  `} `}
             </h1>
           </div>
         </div>

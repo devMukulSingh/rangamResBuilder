@@ -4,7 +4,7 @@ import Skill from "./Skill";
 
 const SelectedSkills = () => {
   const selectedSkills = useAppSelector(
-    (state) => state.persistedReducer.technicalSkills,
+    (state) => state.persistedReducer.technicalSkills
   );
 
   return (
@@ -24,14 +24,14 @@ const SelectedSkills = () => {
         sm:grid-cols-2 
         lg:grid-cols-3 
         2xl:grid-cols-4
-        xl:gap-3
+        md:gap-3
         gap-5 
         overflow-auto 
         py-2
         pr-3 
         hidden-scrollbar 
         hover:custom-scrollbar
-        xl:max-h-[20rem]
+        xl:max-h-[22rem]
         max-h-[27rem] 
          "
       >

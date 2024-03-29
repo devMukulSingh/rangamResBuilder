@@ -6,7 +6,7 @@ import CustomSkill from "./CustomSkill";
 
 const SkillsForm = () => {
   const aiSuggesedSkills = useAppSelector(
-    (state) => state.persistedReducer.aiSuggesedSkills,
+    (state) => state.persistedReducer.aiSuggesedSkills
   );
 
   return (
@@ -15,7 +15,7 @@ const SkillsForm = () => {
       initial={{ x: -150, opacity: 0 }}
       transition={{ duration: 0.2 }}
     >
-      <div className="p-5 flex flex-col gap-5 ">
+      <div className="px-5 pt-10 pb-20 flex flex-col gap-5 ">
         <section>
           <h1 className=" font-semibold mb-5">Select AI Suggested Skill</h1>
           <div className="grid grid-cols-2 gap-5">

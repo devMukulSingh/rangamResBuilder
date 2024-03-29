@@ -150,7 +150,10 @@ const LanguageForm = () => {
                 <PlusCircle />
                 Add more language
               </Button>
-              <Button type="submit" className="w-full py-6 self-center mt-20">
+              <Button
+                type="submit"
+                className="w-[15rem] py-6 self-center mt-20"
+              >
                 Submit
               </Button>
             </div>

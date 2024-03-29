@@ -24,7 +24,7 @@ export default function TemplateLayout({
         className={`md:flex-row flex flex-col w-full ${!sidebar ? "ml-[7rem]" : "ml-[18rem] lg:ml-[20rem]"} `}
       >
         <div
-          className={` ${showResume ? "min-w-[25rem]" : "w-full"} no-scrollbar max-h-[calc(100vh-6rem)] overflow-auto`}
+          className={` ${showResume ? "min-w-[25rem]" : "w-full"} no-scrollbar max-h-[calc(100vh-6rem)] overflow-auto `}
         >
           {children}
         </div>
