@@ -6,6 +6,7 @@ export interface IinitialState {
   bioLoading: boolean;
   skillsLoading: boolean;
   competenceLoading: boolean;
+  compDescLoading:boolean
 }
 
 const initialState: IinitialState = {
@@ -14,6 +15,7 @@ const initialState: IinitialState = {
   bioLoading: false,
   skillsLoading: false,
   competenceLoading: false,
+  compDescLoading:false
 };
 
 const commonSlice = createSlice({
@@ -38,6 +40,9 @@ const commonSlice = createSlice({
     setSidebar: (state, action) => {
       state.sidebar = action.payload;
     },
+    setCompDescLoading: (state, action) => {
+      state.compDescLoading = action.payload;
+    },
   },
 });
 
@@ -50,4 +55,5 @@ export const {
   setBioLoading,
   setSkillsLoading,
   setCompLoading,
+  setCompDescLoading
 } = commonSlice.actions;

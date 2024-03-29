@@ -6,7 +6,7 @@ import CustomSkill from "./CustomSkill";
 
 const SkillsForm = () => {
   const aiSuggesedSkills = useAppSelector(
-    (state) => state.persistedReducer.aiSuggesedSkills
+    (state) => state.persistedReducer.aiSuggesedSkills,
   );
 
   return (

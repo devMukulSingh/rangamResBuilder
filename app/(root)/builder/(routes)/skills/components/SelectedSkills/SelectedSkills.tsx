@@ -4,7 +4,7 @@ import Skill from "./Skill";
 
 const SelectedSkills = () => {
   const selectedSkills = useAppSelector(
-    (state) => state.persistedReducer.technicalSkills
+    (state) => state.persistedReducer.technicalSkills,
   );
 
   return (

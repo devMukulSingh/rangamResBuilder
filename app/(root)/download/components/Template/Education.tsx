@@ -24,7 +24,6 @@ const Education = () => {
             <h1>
               {`${item.startDate ? format(item?.startDate, "MMM yyyy") : ""}`}
               {`${!item.endDate && item.startDate ? " - present" : `${item.endDate ? `- ${format(item?.endDate, "MMM yyyy")}` : ""}  `} `}
-              
             </h1>
           </div>
         </div>

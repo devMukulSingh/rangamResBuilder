@@ -15,7 +15,9 @@ const EndDate: FC<IExperienceForm> = ({ form, index, controlledFields }) => {
       name={`experience.${index}.endDate`}
       control={form.control}
       render={({ field }) => (
-        <FormItem className={`w-full ${form.getValues().experience[index].checkboxWorkingStatus ? 'invisible' : ''}`}>
+        <FormItem
+          className={`w-full ${form.getValues().experience[index].checkboxWorkingStatus ? "invisible" : ""}`}
+        >
           <FormLabel>End Date</FormLabel>
           <FormControl>
             <MonthPicker field={field} />

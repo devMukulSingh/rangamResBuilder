@@ -7,6 +7,12 @@
   padding: 1rem 1rem;
   overflow: auto;
 }
+.ql-editor::-webkit-scrollbar {
+  display: none;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  
+}
 .quill {
   min-height: 10rem;
   max-height: 20rem;

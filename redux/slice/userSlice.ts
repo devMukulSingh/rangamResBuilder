@@ -24,6 +24,7 @@ export interface IinitialState {
   aiSuggestedComp: string[];
   aiSuggesedSkills: string[];
   goal: string;
+  aiSuggestedCompDesc : string[],
 }
 
 const initialState: IinitialState = {
@@ -78,6 +79,7 @@ const initialState: IinitialState = {
   aiSuggestedComp: [],
   aiSuggesedSkills: [],
   goal: "",
+  aiSuggestedCompDesc:[]
 };
 
 export const userSlice = createSlice({
@@ -139,6 +141,9 @@ export const userSlice = createSlice({
     setAiSuggestedSkills: (state, action) => {
       state.aiSuggesedSkills = action.payload;
     },
+    setAiSuggestedCompDesc: ( state,action) => {
+      state.aiSuggestedCompDesc.push(action.payload)
+    },
     setGoal: (state, action) => {
       state.goal = action.payload;
     },
@@ -167,4 +172,5 @@ export const {
   setAiSuggestedSkills,
   setGoal,
   resetCompetences,
+  setAiSuggestedCompDesc
 } = userSlice.actions;

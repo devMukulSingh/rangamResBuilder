@@ -27,6 +27,7 @@ import LinkComp from "@/components/ui/LinkComp";
 import { useRouter } from "next/navigation";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import CompetenceDescription from "./CompetenceDescription";
 export interface IExperienceForm {
   form: UseFormReturn<
     {
@@ -250,12 +251,11 @@ const ExperienceForm = () => {
                             controlledFields={controlledFields}
                           />
 
-                            <EndDate
-                              index={index}
-                              form={form}
-                              controlledFields={controlledFields}
-                            />
-   
+                          <EndDate
+                            index={index}
+                            form={form}
+                            controlledFields={controlledFields}
+                          />
                         </div>
 
                         <CheckboxWorkingStatus
@@ -272,6 +272,8 @@ const ExperienceForm = () => {
                       </h1>
 
                       <Competences index={index} form={form} />
+
+                      <CompetenceDescription index={index}/>
 
                       <Description index={index} form={form} />
                     </div>

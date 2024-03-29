@@ -25,7 +25,7 @@ const RichTextEditor = dynamic(
   () => import("@/components/commons/RichTextEditor"),
   {
     ssr: false,
-  }
+  },
 );
 import { motion } from "framer-motion";
 
