@@ -25,31 +25,21 @@ const Resume = () => {
       transition={{ duration: 0.4 }}
     >
       <div
-        className={`max-h-[calc(100vh-6rem)] overflow-auto no-scrollbar ${sidebar ? "w-[calc(100vw-52rem)]" : "w-[calc(100vw-37rem)]"} pb-20  max-w-[60rem] shrink-0`}
+        className={`max-h-[calc(100vh-6rem)] overflow-auto no-scrollbar ${sidebar ? "w-[calc(100vw-47rem)]" : "w-[calc(100vw-37rem)]"} pb-20  max-w-[55rem] shrink-0`}
       >
         <div className="text-neutral-700 pb-10 min-w-[40rem] flex flex-col gap-5 p-5  ">
-          {/* PersonalInfo */}
           <PersonalSection />
-          {/* {
-                        formComp === 'Personal Information' &&
-                        <SuggestedBio />
-                    } */}
 
           <ExperienceSection />
 
-          {/* SKILLS */}
           <SkillsSection />
 
-          {/* Education */}
           <EducationSection />
 
-          {/* Project */}
           <ProjectSection />
 
-          {/* Achievements */}
           <AchievementSection />
 
-          {/* Languages */}
           <LanguageSection />
         </div>
       </div>

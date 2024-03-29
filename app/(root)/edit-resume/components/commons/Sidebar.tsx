@@ -65,9 +65,13 @@ const Sidebar = () => {
       isActive: pathName.endsWith("/language"),
     },
   ];
+  useEffect(() => {
+    if (window.innerWidth <= 1024) {
+      console.log(window.innerWidth);
 
-  const toggleOptions = () => {};
-
+      dispatch(toggleSidebar());
+    }
+  }, []);
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -76,7 +80,7 @@ const Sidebar = () => {
     >
       <div
         className={`flex flex-col h-[calc(100vh-6.5rem)] bg-white py-3 fixed transition-all ${
-          sidebar ? "w-[20rem]" : "w-[7rem]"
+          sidebar ? "w-[18rem] lg:w-[20rem]" : "w-[7rem]"
         }  `}
       >
         <MdOutlineSort

@@ -23,7 +23,7 @@ const AchievementsForm = () => {
   const dispatch = useAppDispatch();
   const progress = useAppSelector((state) => state.persistedReducer.progress);
   const achievements = useAppSelector(
-    (state) => state.persistedReducer.achievements,
+    (state) => state.persistedReducer.achievements
   );
 
   const form = useForm({
@@ -111,9 +111,9 @@ const AchievementsForm = () => {
                 <PlusCircle />
                 Add Achievement
               </Button>
-              <Button type="submit" className="w-full mt-20 py-6">
+              {/* <Button type="submit" className="w-full mt-20 py-6">
                 Next
-              </Button>
+              </Button> */}
             </div>
           </form>
         </Form>

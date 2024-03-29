@@ -47,7 +47,7 @@ const LanguageForm = () => {
   const watchFieldsArray = form.watch("languageInfo");
 
   const onSubmit = () => {
-    router.push(`/download/${templateId}`);
+    router.push(`/download`);
   };
 
   const handleChange = () => {

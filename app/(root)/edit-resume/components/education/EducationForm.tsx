@@ -27,6 +27,7 @@ import { setFormComp } from "@/redux/slice/commonSlice";
 import { motion } from "framer-motion";
 import { Checkbox } from "@/components/ui/checkbox";
 import MonthPicker from "@/components/commons/MonthPicker";
+import LinkComp from "@/components/ui/LinkComp";
 
 const EducationForm = () => {
   const [expanded, setExpanded] = useState<string | false>("");
@@ -149,10 +150,10 @@ const EducationForm = () => {
       initial={{ x: -150, opacity: 0 }}
       transition={{ duration: 0.2 }}
     >
-      <div className="p-5">
+      <div className="py-5 w-full">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} onChange={handleChange}>
-            <div className="flex flex-col gap-10">
+            <div className="flex flex-col gap-10 w-full">
               {(!education ? controlledFields : education)?.map(
                 (item: Ieducation, index: number) => {
                   return (
@@ -341,17 +342,16 @@ const EducationForm = () => {
                       </Collapsible>
                     </>
                   );
-                },
+                }
               )}
 
               <div className="flex gap-5">
-                <Button
-                  type="button"
-                  onClick={handleAddMore}
-                  className="w-full"
-                >
+                <Button type="button" onClick={handleAddMore} className="w-40">
                   Add More
                 </Button>
+                <LinkComp href={"/download"} className="">
+                  Submit
+                </LinkComp>
               </div>
             </div>
           </form>

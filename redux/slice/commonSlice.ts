@@ -35,6 +35,9 @@ const commonSlice = createSlice({
     setCompLoading: (state, action) => {
       state.competenceLoading = action.payload;
     },
+    setSidebar : ( state,action) => {
+      state.sidebar = action.payload;
+    }
   },
 });
 
@@ -42,6 +45,7 @@ export default commonSlice.reducer;
 
 export const {
   toggleSidebar,
+  setSidebar,
   setFormComp,
   setBioLoading,
   setSkillsLoading,

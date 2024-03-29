@@ -114,9 +114,9 @@ const SocialForm = () => {
                 )}
               />
 
-              <Button type="submit" className="w-full py-6">
+              {/* <Button type="submit" className="w-full py-6">
                 Next
-              </Button>
+              </Button> */}
             </div>
           </form>
         </Form>

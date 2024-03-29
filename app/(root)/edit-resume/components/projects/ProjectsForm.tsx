@@ -136,7 +136,7 @@ const ProjectsForm = () => {
       initial={{ x: -150, opacity: 0 }}
       transition={{ duration: 0.2 }}
     >
-      <div className="p-5">
+      <div className="p-5 w-full">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} onChange={handleChange}>
             <div className="flex flex-col gap-5">
@@ -247,9 +247,9 @@ const ProjectsForm = () => {
                 <PlusCircle />
                 Add More Projects
               </Button>
-              <Button type="submit" className="w-full py-6">
+              {/* <Button type="submit" className="w-full py-6">
                 Next
-              </Button>
+              </Button> */}
             </div>
           </form>
         </Form>
