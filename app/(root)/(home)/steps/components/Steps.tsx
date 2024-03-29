@@ -13,9 +13,7 @@ const Steps = () => {
         </div>
 
         <h1 className="mt-1 text-md sm:text-lg font-semibold">
-          Enter your personal info and help recruiters contact you &nbsp;
-          <br />
-          <span className="underline">Update Profile</span>
+          Enter your personal info and help recruiters contact you
         </h1>
       </li>
       <li className="flex gap-3 overflow-clip">

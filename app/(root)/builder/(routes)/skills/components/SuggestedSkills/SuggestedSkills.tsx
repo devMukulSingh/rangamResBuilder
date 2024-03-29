@@ -1,7 +1,4 @@
-import dynamic from "next/dynamic";
-import SkillsSkeleton from "./SkillsSkeleton";
 import SkillsList from "./SkillsList";
-import { Separator } from "@/components/ui/separator";
 
 const SuggestedSkills = async () => {
   return (

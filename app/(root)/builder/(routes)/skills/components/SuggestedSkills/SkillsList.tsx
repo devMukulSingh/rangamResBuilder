@@ -19,7 +19,9 @@ const SkillsList = () => {
     staleTime: 5 * 1000,
     refetchOnWindowFocus: false,
   });
-  console.log(data);
+  if (isLoading) {
+    return <SkillsSkeleton />;
+  }
   if (isError) {
     console.log(`Error in GETSkills ${error}`);
   }
@@ -31,7 +33,7 @@ const SkillsList = () => {
       lg:grid-cols-3 
       sm:grid-cols-2 
       grid-cols-1  
-      2xl:gap-3
+      xl:gap-3
       gap-5 
       max-h-[27rem]
       overflow-auto
@@ -42,15 +44,11 @@ const SkillsList = () => {
       relative
       "
     >
-      {isLoading ? (
-        <SkillsSkeleton />
-      ) : (
-        data?.map((skill: string, index: number) => (
-          <>
-            <Skill skill={skill} key={index} />
-          </>
-        ))
-      )}
+      {data?.map((skill: string, index: number) => (
+        <>
+          <Skill skill={skill} key={index} />
+        </>
+      ))}
 
       <CustomSkill />
     </div>

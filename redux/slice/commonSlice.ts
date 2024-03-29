@@ -35,9 +35,9 @@ const commonSlice = createSlice({
     setCompLoading: (state, action) => {
       state.competenceLoading = action.payload;
     },
-    setSidebar : ( state,action) => {
+    setSidebar: (state, action) => {
       state.sidebar = action.payload;
-    }
+    },
   },
 });
 
