@@ -10,7 +10,13 @@
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='50px' width='120px'><text x='0' y='15' fill='gray' font-size='15'>Type Something...</text></svg>");
   background-repeat: no-repeat;
 }
-
+.css-10o2lyd-MuiStack-root > .MuiTextField-root {
+  min-width: 0 !important;
+}
+.css-nxo287-MuiInputBase-input-MuiOutlinedInput-input {
+  align-items: center;
+  padding: 16px 0px 10px 16px !important;
+}
 @layer utilities {
   /* Hide scrollbar for Chrome, Safari and Opera */
   .no-scrollbar::-webkit-scrollbar {

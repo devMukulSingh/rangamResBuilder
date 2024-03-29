@@ -220,7 +220,7 @@ const ExperienceForm = () => {
                 <>
                   {item.id === selected && (
                     <div
-                      className=" bg-red-100 py-5 px-10 flex flex-col gap-5 "
+                      className=" bg-red-100 py-5 px-5 sm:px-10 flex flex-col gap-5 "
                       key={index}
                     >
                       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 w-full">
@@ -242,8 +242,8 @@ const ExperienceForm = () => {
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-3 gap-5">
-                        <div className="flex gap-2 ">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+                        <div className="flex gap-2 sm:gap-5 lg:gap-1 col-span-2 lg:col-span-1 ">
                           <StartDate
                             index={index}
                             form={form}
@@ -259,7 +259,6 @@ const ExperienceForm = () => {
                           )}
                         </div>
 
-                        {/* checkbox */}
                         <CheckboxWorkingStatus
                           index={index}
                           form={form}

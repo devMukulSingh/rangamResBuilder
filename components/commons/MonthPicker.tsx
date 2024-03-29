@@ -5,13 +5,14 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { ControllerRenderProps } from "react-hook-form";
 import { Ieducation, Iexperience } from "@/lib/types";
 import { FC } from "react";
+import clsx from "clsx";
 
-const MonthPicker: FC<any> = ({ field }) => {
+const MonthPicker: FC<any> = ({ field, className }) => {
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <DemoContainer components={["DatePicker"]}>
         <DatePicker
-          className="bg-white h-14 pt-0"
+          className={clsx(`bg-white h-14 pt-0 w-auto `, className)}
           views={["month", "year"]}
           {...field}
         />

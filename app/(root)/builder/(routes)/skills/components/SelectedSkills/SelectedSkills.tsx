@@ -5,7 +5,7 @@ import { Separator } from "@/components/ui/separator";
 
 const SelectedSkills = () => {
   const selectedSkills = useAppSelector(
-    (state) => state.persistedReducer.technicalSkills
+    (state) => state.persistedReducer.technicalSkills,
   );
 
   return (

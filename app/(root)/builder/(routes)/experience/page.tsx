@@ -10,8 +10,10 @@ const ExperiencePage = async () => {
         gap-5 
         border
         min-h-[calc(100vh-6rem)]
-        px-10
-        sm:px-20
+        lg:px-10
+        md:px-8
+        sm:px-10
+        px-5
         py-10
         w-full
         "
