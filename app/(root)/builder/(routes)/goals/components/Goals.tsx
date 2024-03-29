@@ -11,11 +11,11 @@ const Goals = () => {
   const goals = [
     {
       title: "Experienced",
-      img: "/Fulltime.png",
+      img: "/experienced.png",
     },
     {
       title: "Young professional",
-      img: "/Young.png",
+      img: "/young.png",
     },
     {
       title: "Student",

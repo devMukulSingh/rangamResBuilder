@@ -28,11 +28,12 @@ const SingleGoal: React.FC<SingleGoalProps> = ({
       className={`
         transition
         flex
+        items-center
         cursor-pointer
         flex-col 
         gap-5 
-        px-10
-        py-10
+        px-5
+        py-5
         sm:w-auto
         w-[20rem] 
       bg-red-100
@@ -44,8 +45,8 @@ const SingleGoal: React.FC<SingleGoalProps> = ({
       <figure
         className="
         relative
-        w-full
-        h-full
+        w-[15rem]
+        h-[15rem]
         "
       >
         <Image

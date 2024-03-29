@@ -1,10 +1,11 @@
 "use client";
 import { useAppSelector } from "@/redux/hooks/hooks";
 import Skill from "./Skill";
+import { Separator } from "@/components/ui/separator";
 
 const SelectedSkills = () => {
   const selectedSkills = useAppSelector(
-    (state) => state.persistedReducer.technicalSkills,
+    (state) => state.persistedReducer.technicalSkills
   );
 
   return (
@@ -21,8 +22,10 @@ const SelectedSkills = () => {
       <div
         className="grid 
         grid-cols-1 
-        md:grid-cols-2 
+        sm:grid-cols-2 
         lg:grid-cols-3 
+        2xl:grid-cols-4
+        2xl:gap-3
         gap-5 
         overflow-auto 
         py-2

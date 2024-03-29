@@ -1,6 +1,7 @@
 import dynamic from "next/dynamic";
 import SkillsSkeleton from "./SkillsSkeleton";
 import SkillsList from "./SkillsList";
+import { Separator } from "@/components/ui/separator";
 
 const SuggestedSkills = async () => {
   return (
@@ -13,20 +14,20 @@ const SuggestedSkills = async () => {
             transition={{ duration: 0.2 }}
         > */}
       <div className="space-y-5 transition-all ">
-        <section>
-          <h1
-            className=" 
+        <h1
+          className="
+          text-center   
+          sm:text-start
                         font-semibold 
                         mb-5
                         text-black
                         text-lg
                         "
-          >
-            Select AI Suggested Skill
-          </h1>
+        >
+          Select AI Suggested Skill
+        </h1>
 
-          <SkillsList />
-        </section>
+        <SkillsList />
       </div>
 
       {/* </motion.div> */}

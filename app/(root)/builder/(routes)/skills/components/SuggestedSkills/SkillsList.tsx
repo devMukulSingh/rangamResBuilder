@@ -27,17 +27,19 @@ const SkillsList = () => {
   return (
     <div
       className="grid 
+      2xl:grid-cols-4
       lg:grid-cols-3 
-      md:grid-cols-2 
       sm:grid-cols-2 
       grid-cols-1  
+      2xl:gap-3
       gap-5 
-      h-[27rem]
-      overflow-auto 
+      max-h-[27rem]
+      overflow-auto
       py-2 
       pr-3
       hidden-scrollbar 
       hover:custom-scrollbar 
+      relative
       "
     >
       {isLoading ? (

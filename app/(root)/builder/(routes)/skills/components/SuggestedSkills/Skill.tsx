@@ -29,8 +29,11 @@ const Skill: React.FC<SkillProps> = ({ skill }) => {
                     transition
                         px-3
                         py-2
-                        min-h-16
+                        h-14
+                        sm:min-h-16
                         w-full
+                        sm:justify-normal
+                        justify-center
                         flex 
                         items-center
                           rounded-sm
@@ -44,7 +47,7 @@ const Skill: React.FC<SkillProps> = ({ skill }) => {
                             } 
                             `}
       >
-        <h1 className="text-sm break-words">{skill}</h1>
+        <h1 className=" text-sm break-words">{skill}</h1>
       </div>
     </>
   );

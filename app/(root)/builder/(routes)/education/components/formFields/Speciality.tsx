@@ -21,7 +21,7 @@ const Speciality: FC<IeducationForm> = ({ form, index }) => {
             <Input
               className="bg-white h-14 rounded-sm"
               {...field}
-              placeholder=""
+              placeholder="Computer science"
             />
           </FormControl>
         </FormItem>

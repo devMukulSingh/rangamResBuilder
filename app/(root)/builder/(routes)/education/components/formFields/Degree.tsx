@@ -18,7 +18,7 @@ import {
 const Degree: FC<IeducationForm> = ({ form, index }) => {
   return (
     <FormField
-      defaultValue="Bachelor in Technology"
+      defaultValue="Bachelor's degree"
       name={`education.${index}.degree`}
       control={form.control}
       render={({ field }) => (
@@ -26,7 +26,7 @@ const Degree: FC<IeducationForm> = ({ form, index }) => {
           <FormLabel>Degree/Program</FormLabel>
           <Select
             onValueChange={field.onChange}
-            defaultValue="Bachelor in Technology"
+            defaultValue="Bachelor's degree"
           >
             <FormControl>
               <SelectTrigger className="bg-white h-14 rounded-sm">

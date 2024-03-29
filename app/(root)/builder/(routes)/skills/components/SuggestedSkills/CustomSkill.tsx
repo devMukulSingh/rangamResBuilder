@@ -19,7 +19,7 @@ const CustomSkill = () => {
 
   const form = useForm({});
   const skillFromState = useAppSelector(
-    (state) => state.persistedReducer.technicalSkills,
+    (state) => state.persistedReducer.technicalSkills
   );
 
   const handleAddMore = () => {
@@ -37,7 +37,7 @@ const CustomSkill = () => {
   };
   return (
     <Form {...form}>
-      <form className="col-span-2">
+      <form className="cols-span-1 sm:col-span-2">
         <div className=" flex w-full items-start h-16">
           <FormField
             name="customSkill"
@@ -47,7 +47,7 @@ const CustomSkill = () => {
                 <FormControl>
                   <Input
                     className="shadow-md rounded-sm bg-white h-full py-2 w-full"
-                    onKeyDown={(e) => e.preventDefault()}
+                    onKeyDown={(e) => e.key==='Enter' && e.preventDefault()}
                     onKeyUp={(e) => handleKeyUp(e)}
                     {...field}
                     placeholder="You didn't find? Enter your skill"

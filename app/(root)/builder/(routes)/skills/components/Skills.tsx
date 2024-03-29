@@ -13,7 +13,8 @@ const Skills = async ({}) => {
         md:grid-cols-2
         grid-cols-1
         xl:gap-10
-        gap-5
+        md:gap-5
+        gap-10
         py-5
         lg:px-10
         px-5

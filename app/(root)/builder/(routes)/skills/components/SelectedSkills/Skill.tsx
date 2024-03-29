@@ -24,7 +24,8 @@ const Skill: React.FC<SkillProps> = ({ skill, selectedSkills }) => {
             items-center
             justify-between
             py-2
-            h-16
+            h-14
+            sm:h-16
             pl-4
             pr-2
          "
