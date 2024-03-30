@@ -38,7 +38,12 @@ const JobTitle: FC<IExperienceForm> = ({ form, index }) => {
             jobTitle,
           },
         });
-        dispatch(setAiSuggestedComp(data));
+        const parsedCompetences = data.map( (item:string) => ({
+          name:item,
+          isSelected:false
+        })
+        )
+        form.setValue(`experience.${index}.competences`,parsedCompetences);
       }
     } catch (e) {
       console.log(`Error in getCompetences ${e}`);

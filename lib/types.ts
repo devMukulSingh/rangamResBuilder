@@ -22,7 +22,10 @@ export interface Iexperience {
   checkboxVolunteering: boolean;
   checkboxInternship: boolean;
   description: string;
-  competences: string[];
+  competences: {
+    isSelected:boolean,
+    name:string
+  }[];
   address?: string;
   employer?: string;
 }

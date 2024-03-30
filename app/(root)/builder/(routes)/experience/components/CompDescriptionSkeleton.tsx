@@ -1,10 +1,8 @@
-import { Skeleton } from '@/components/ui/skeleton'
-import React from 'react'
+import { Skeleton } from "@/components/ui/skeleton";
+import React from "react";
 
 const CompDescriptionSkeleton = () => {
-  return (
-        <Skeleton className="bg-white h-20 w-full"/>
-  )
-}
+  return <Skeleton className="bg-white h-20 w-full" />;
+};
 
-export default CompDescriptionSkeleton
+export default CompDescriptionSkeleton;

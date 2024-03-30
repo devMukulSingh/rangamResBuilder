@@ -2,26 +2,26 @@
   font-size: 16px;
   letter-spacing: 0.5px;
   line-height: 25px;
-  margin-top: 1rem;
   border: none;
+  overflow: hidden;
   padding: 1rem 1rem;
-  overflow: auto;
+  max-height: 20rem;
 }
 .ql-editor::-webkit-scrollbar {
   display: none;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  
 }
 .quill {
   min-height: 10rem;
   max-height: 20rem;
-  overflow: hidden;
+  overflow: auto;
 }
 .ql-container {
-  min-height: 10rem;
+  overflow: hidden;
 
-  overflow: auto;
+  max-height: 20rem;
+  min-height: 10rem;
   background: #ffffff;
   border: none !important;
 }

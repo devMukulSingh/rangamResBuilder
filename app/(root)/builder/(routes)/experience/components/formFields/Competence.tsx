@@ -3,11 +3,15 @@ import { UseFormReturn } from "react-hook-form";
 import { Iexperience } from "@/lib/types";
 import { useQuery } from "@tanstack/react-query";
 import axios, { Axios } from "axios";
-import { setAiSuggestedCompDesc } from "@/redux/slice/userSlice";
+import { setAiSuggestedCompDesc, setExperience } from "@/redux/slice/userSlice";
 import { setCompDescLoading } from "@/redux/slice/commonSlice";
+import { useState } from "react";
 
 interface competenceProps {
-  competence: string;
+  competence: {
+    name: string;
+    isSelected: boolean;
+  };
   onChange: (competences: string[]) => void;
   index: number;
   form: UseFormReturn<
@@ -17,6 +21,7 @@ interface competenceProps {
     any,
     undefined
   >;
+  competenceIndex: number;
 }
 
 const Competence: React.FC<competenceProps> = ({
@@ -24,8 +29,8 @@ const Competence: React.FC<competenceProps> = ({
   onChange,
   index,
   form,
+  competenceIndex,
 }) => {
-  console.log("rerennder");
   const dispatch = useAppDispatch();
   const competences = form.getValues().experience[index].competences;
   const profession = useAppSelector(
@@ -39,30 +44,38 @@ const Competence: React.FC<competenceProps> = ({
     queryFn: async () => {
       const { data } = await axios.get(`/api/ai/get-compdescription`, {
         params: {
-          competence,
+          competence: competence.name,
           profession,
         },
       });
       dispatch(setCompDescLoading(isLoading));
-      dispatch(setAiSuggestedCompDesc(data));
+      const previousDescription = form.getValues(
+        `experience.${index}.description`
+      );
+      const descriptionString = previousDescription.concat(data);
+      form.setValue(`experience.${index}.description`, descriptionString);
+      return data;
     },
   });
   if (isError) {
     console.log(`Error in getCompetence Description ${error}`);
   }
   const handleSelect = () => {
-
-    const alreadySelected = competences.find((item) => item === competence);
-    if (alreadySelected) {
-      const filtered = competences.filter((item) => item !== competence);
-      onChange(filtered);
+    if (competence.isSelected) {
+      form.setValue(
+        `experience.${index}.competences.${competenceIndex}.isSelected`,
+        false
+      );
     } else {
-        refetch();
-      onChange([...competences, competence]);
+      form.setValue(
+        `experience.${index}.competences.${competenceIndex}.isSelected`,
+        true
+      );
+      refetch();
     }
   };
 
-  if (competence === "") return null;
+  if (Object.keys(competence).length === 0) return null;
 
   return (
     <>
@@ -79,13 +92,13 @@ const Competence: React.FC<competenceProps> = ({
                           shadow-md
                            cursor-pointer
                             ${
-                              competences.includes(competence)
+                              competence.isSelected
                                 ? "border-2 border-white bg-gray-400 transition scale-90 text-neutral-100"
                                 : " bg-white text-black"
                             } 
                             `}
       >
-        <h1 className="text-sm ">{competence}</h1>
+        <h1 className="text-sm ">{competence.name}</h1>
       </div>
     </>
   );

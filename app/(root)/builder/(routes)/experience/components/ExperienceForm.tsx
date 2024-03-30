@@ -69,7 +69,10 @@ const ExperienceForm = () => {
           checkboxWorkingStatus: false,
           checkboxVolunteering: false,
           checkboxInternship: false,
-          competences: [],
+          competences: [{
+            name:"",
+            isSelected:false
+          }],
           description: "",
         },
       ],
@@ -101,7 +104,6 @@ const ExperienceForm = () => {
     const currIndex = controlledFields.length - 1;
     const {
       companyName,
-      description,
       startDate,
       jobTitle,
       endDate,
@@ -109,7 +111,6 @@ const ExperienceForm = () => {
     } = form.getValues().experience[currIndex];
     if (
       companyName === "" ||
-      description === "" ||
       startDate === "" ||
       jobTitle === "" ||
       (endDate === "" && checkboxWorkingStatus === false)
@@ -124,7 +125,12 @@ const ExperienceForm = () => {
         checkboxWorkingStatus: false,
         checkboxVolunteering: false,
         checkboxInternship: false,
-        competences: [],
+        competences: [
+          {
+          name:"",
+          isSelected:false,
+        }
+      ],
         id: Math.floor(Math.random() * 100).toString(),
         description: "",
       });
@@ -273,7 +279,7 @@ const ExperienceForm = () => {
 
                       <Competences index={index} form={form} />
 
-                      <CompetenceDescription index={index}/>
+                      {/* <CompetenceDescription index={index} /> */}
 
                       <Description index={index} form={form} />
                     </div>

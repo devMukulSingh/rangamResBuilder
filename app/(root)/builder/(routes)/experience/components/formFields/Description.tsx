@@ -8,14 +8,17 @@ import {
 import React, { FC } from "react";
 import { IExperienceForm } from "../ExperienceForm";
 import dynamic from "next/dynamic";
+import { useAppSelector } from "@/redux/hooks/hooks";
 const RichTextEditor = dynamic(
   () => import("@/components/commons/RichTextEditor"),
   {
     ssr: false,
-  },
+  }
 );
 
 const Description: FC<IExperienceForm> = ({ form, index }) => {
+
+
   return (
     <FormField
       name={`experience.${index}.description`}
@@ -25,7 +28,7 @@ const Description: FC<IExperienceForm> = ({ form, index }) => {
           <FormLabel>Description</FormLabel>
           <FormControl>
             <RichTextEditor
-              value={field.value || ""}
+              value={ field.value || ""}
               onChange={(content) => {
                 field.onChange(content);
               }}

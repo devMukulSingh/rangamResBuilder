@@ -8,10 +8,9 @@ interface CompetenceDescriptionProps {
 
 const CompetenceDescription: FC<CompetenceDescriptionProps> = ({ index }) => {
   const aiSuggestedCompDesc = useAppSelector(
-    (state) => state.persistedReducer.aiSuggestedCompDesc
+    (state) => state.persistedReducer.aiSuggestedCompDesc,
   );
   const loading = useAppSelector((state) => state.commonSlice.compDescLoading);
-  console.log(aiSuggestedCompDesc);
 
   if (loading) return <CompDescriptionSkeleton />;
 

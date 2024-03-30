@@ -23,7 +23,7 @@ const Competences: FC<IExperienceForm> = ({ form, index }) => {
       control={form.control}
       render={({ field }) => (
         <div className="grid lg:grid-cols-6 md:grid-cols-3 grid-cols-2 gap-5">
-          {aiSuggestedComp?.map((competence: string, i: number) => (
+          {field.value?.map((competence, i) => (
             <FormItem key={i}>
               <FormControl>
                 <Competence
@@ -31,6 +31,7 @@ const Competences: FC<IExperienceForm> = ({ form, index }) => {
                   index={index}
                   onChange={field.onChange}
                   competence={competence}
+                  competenceIndex={i}
                 />
               </FormControl>
             </FormItem>
