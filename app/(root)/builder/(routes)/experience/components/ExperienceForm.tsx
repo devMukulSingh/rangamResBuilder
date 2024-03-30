@@ -69,10 +69,12 @@ const ExperienceForm = () => {
           checkboxWorkingStatus: false,
           checkboxVolunteering: false,
           checkboxInternship: false,
-          competences: [{
-            name:"",
-            isSelected:false
-          }],
+          competences: [
+            {
+              name: "",
+              isSelected: false,
+            },
+          ],
           description: "",
         },
       ],
@@ -102,13 +104,8 @@ const ExperienceForm = () => {
 
   const handleAddMore = () => {
     const currIndex = controlledFields.length - 1;
-    const {
-      companyName,
-      startDate,
-      jobTitle,
-      endDate,
-      checkboxWorkingStatus,
-    } = form.getValues().experience[currIndex];
+    const { companyName, startDate, jobTitle, endDate, checkboxWorkingStatus } =
+      form.getValues().experience[currIndex];
     if (
       companyName === "" ||
       startDate === "" ||
@@ -127,10 +124,10 @@ const ExperienceForm = () => {
         checkboxInternship: false,
         competences: [
           {
-          name:"",
-          isSelected:false,
-        }
-      ],
+            name: "",
+            isSelected: false,
+          },
+        ],
         id: Math.floor(Math.random() * 100).toString(),
         description: "",
       });

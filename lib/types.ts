@@ -23,8 +23,8 @@ export interface Iexperience {
   checkboxInternship: boolean;
   description: string;
   competences: {
-    isSelected:boolean,
-    name:string
+    isSelected: boolean;
+    name: string;
   }[];
   address?: string;
   employer?: string;

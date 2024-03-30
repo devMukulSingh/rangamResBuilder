@@ -53,9 +53,9 @@ const initialState: IinitialState = {
       description: "",
       competences: [
         {
-          name:"",
-          isSelected:false
-        }
+          name: "",
+          isSelected: false,
+        },
       ],
       address: "",
       employer: "",

@@ -10,6 +10,11 @@ const CompetenceSkeleton = () => {
       <Skeleton className="h-[3.5rem] w-full bg-white" />
       <Skeleton className="h-[3.5rem] w-full bg-white" />
       <Skeleton className="h-[3.5rem] w-full bg-white" />
+      <Skeleton className="h-[3.5rem] w-full bg-white" />
+      <Skeleton className="h-[3.5rem] w-full bg-white" />
+      <Skeleton className="h-[3.5rem] w-full bg-white" />
+      <Skeleton className="h-[3.5rem] w-full bg-white" />
+      <Skeleton className="h-[3.5rem] w-full bg-white" />
     </div>
   );
 };

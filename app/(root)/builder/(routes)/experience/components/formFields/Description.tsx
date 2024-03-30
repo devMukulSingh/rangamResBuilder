@@ -13,12 +13,10 @@ const RichTextEditor = dynamic(
   () => import("@/components/commons/RichTextEditor"),
   {
     ssr: false,
-  }
+  },
 );
 
 const Description: FC<IExperienceForm> = ({ form, index }) => {
-
-
   return (
     <FormField
       name={`experience.${index}.description`}
@@ -28,7 +26,7 @@ const Description: FC<IExperienceForm> = ({ form, index }) => {
           <FormLabel>Description</FormLabel>
           <FormControl>
             <RichTextEditor
-              value={ field.value || ""}
+              value={field.value || ""}
               onChange={(content) => {
                 field.onChange(content);
               }}

@@ -38,12 +38,7 @@ const JobTitle: FC<IExperienceForm> = ({ form, index }) => {
             jobTitle,
           },
         });
-        const parsedCompetences = data.map( (item:string) => ({
-          name:item,
-          isSelected:false
-        })
-        )
-        form.setValue(`experience.${index}.competences`,parsedCompetences);
+        form.setValue(`experience.${index}.competences`, data);
       }
     } catch (e) {
       console.log(`Error in getCompetences ${e}`);
