@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import LinkComp from "@/components/ui/LinkComp";
 import dynamic from "next/dynamic";
+import Achievements from "./Achievements";
 const About = dynamic(() => import("./About"), { ssr: false });
 const Experience = dynamic(() => import("./Experience"), { ssr: false });
 const Project = dynamic(() => import("./Project"), { ssr: false });
@@ -45,8 +46,9 @@ const Template1 = () => {
           <About />
           <Experience />
           <Education />
-          {/* <Project /> */}
           <Skills />
+          <Project />
+          <Achievements/>
         </div>
       </div>
     </div>

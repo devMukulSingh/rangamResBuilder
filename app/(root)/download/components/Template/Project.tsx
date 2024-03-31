@@ -5,12 +5,12 @@ import React from "react";
 
 const Project = () => {
   const projects = useAppSelector((state) => state.persistedReducer.projects);
-
+  if (!projects || projects?.length === 0) return null;
   return (
     <section className="space-y-1">
-      <div className="flex items-center gap-5">
-        <hr className="h-2 bg-blue-400 w-14" />
-        <h1 className=" font-bold">PROJECT</h1>
+       <div className="flex items-center gap-5">
+        <hr className="h-2 border-none bg-blue-400 w-14" />
+        <h1 className=" font-bold">Projects</h1>
       </div>
       {projects?.map((item, index) => (
         <div key={index} className="flex flex-col gap-2">

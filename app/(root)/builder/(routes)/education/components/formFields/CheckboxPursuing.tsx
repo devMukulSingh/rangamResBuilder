@@ -5,6 +5,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
 import { Checkbox } from "@/components/ui/checkbox";
 
@@ -23,6 +24,7 @@ const CheckboxPursuing: FC<IeducationForm> = ({ form, index }) => {
             />
           </FormControl>
           <FormLabel>Pursuing</FormLabel>
+          <FormMessage/>
         </FormItem>
       )}
     />

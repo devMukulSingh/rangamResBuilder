@@ -5,16 +5,11 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
-import React, { FC, useCallback, useEffect, useState } from "react";
+import { useAppDispatch } from "@/redux/hooks/hooks";
+import React, { FC, useCallback } from "react";
 import { IExperienceForm } from "../ExperienceForm";
 import { Input } from "@/components/ui/input";
 import axios from "axios";
-import {
-  resetCompetences,
-  setAiSuggestedComp,
-  setExperience,
-} from "@/redux/slice/userSlice";
 import debounce from "debounce";
 import { setCompLoading } from "@/redux/slice/commonSlice";
 

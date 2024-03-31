@@ -10,6 +10,7 @@ import {
 import MonthPicker from "@/components/commons/MonthPicker";
 
 const StartDate: FC<IeducationForm> = ({ form, index }) => {
+
   return (
     <FormField
       name={`education.${index}.startDate`}
@@ -18,8 +19,9 @@ const StartDate: FC<IeducationForm> = ({ form, index }) => {
         <FormItem>
           <FormLabel>Start Date</FormLabel>
           <FormControl>
-            <MonthPicker field={field} />
+            <MonthPicker disableFuture={true} field={field} />
           </FormControl>
+          <FormMessage/>
         </FormItem>
       )}
     />

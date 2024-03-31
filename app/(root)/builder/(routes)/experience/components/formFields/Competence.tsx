@@ -11,8 +11,9 @@ interface competenceProps {
   competence: {
     name: string;
     isSelected: boolean;
+    id: number;
+    description: string;
   };
-  onChange: (competences: string[]) => void;
   index: number;
   form: UseFormReturn<
     {
@@ -26,15 +27,16 @@ interface competenceProps {
 
 const Competence: React.FC<competenceProps> = ({
   competence,
-  onChange,
   index,
   form,
   competenceIndex,
 }) => {
+  // console.log(competence);
+
   const dispatch = useAppDispatch();
   const competences = form.getValues().experience[index].competences;
   const profession = useAppSelector(
-    (state) => state.persistedReducer.personalInfo.profession,
+    (state) => state.persistedReducer.personalInfo.profession
   );
 
   const { isLoading, data, isError, error, refetch } = useQuery({
@@ -50,10 +52,17 @@ const Competence: React.FC<competenceProps> = ({
       });
       dispatch(setCompDescLoading(isLoading));
       const previousDescription = form.getValues(
-        `experience.${index}.description`,
+        `experience.${index}.description`
       );
       const descriptionString = previousDescription.concat(data);
       form.setValue(`experience.${index}.description`, descriptionString);
+
+      // form.setValue(`experience.${index}.competences.${competenceIndex}`, {
+      //   description: data,
+      //   isSelected: competence.isSelected,
+      //   name: competence.name,
+      //   id: competence.id,
+      // });
       return data;
     },
   });
@@ -63,19 +72,24 @@ const Competence: React.FC<competenceProps> = ({
   const handleSelect = () => {
     if (competence.isSelected) {
       form.setValue(
+        `experience.${index}.competences.${competenceIndex}.description`,
+        ""
+      );
+      form.setValue(
         `experience.${index}.competences.${competenceIndex}.isSelected`,
-        false,
+        false
       );
     } else {
       form.setValue(
         `experience.${index}.competences.${competenceIndex}.isSelected`,
-        true,
+        true
       );
       refetch();
     }
   };
 
-  if (Object.keys(competence).length === 0) return null;
+  if (Object.keys(competence).length === 0 || competence.name === "")
+    return null;
 
   return (
     <>

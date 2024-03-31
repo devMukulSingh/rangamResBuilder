@@ -6,6 +6,12 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { ReactNode, useState } from "react";
 import { IconType } from "react-icons/lib";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 interface SidebarOptionProps {
   option: {
@@ -18,13 +24,15 @@ interface SidebarOptionProps {
 
 const SidebarOption: React.FC<SidebarOptionProps> = ({ option, sidebar }) => {
   const dispatch = useAppDispatch();
-  const { templateId } = useParams();
   const formComp = useAppSelector((state) => state.commonSlice.formComp);
 
   return (
-    <li
-      onClick={() => dispatch(setFormComp(option.title))}
-      className={`
+    <TooltipProvider delayDuration={100}>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <li
+            onClick={() => dispatch(setFormComp(option.title))}
+            className={`
         ${option.title === formComp ? "bg-red-100" : ""}
         flex 
         gap-3 
@@ -33,10 +41,19 @@ const SidebarOption: React.FC<SidebarOptionProps> = ({ option, sidebar }) => {
         cursor-pointer
         whitespace-nowrap
         `}
-    >
-      <option.icon className="text-xl" />
-      {sidebar && option.title}
-    </li>
+          >
+            <option.icon className="text-xl" />
+            {sidebar && option.title}
+          </li>
+        </TooltipTrigger>
+        {
+          !sidebar &&
+          <TooltipContent >
+          <p>{option.title}</p>
+        </TooltipContent>
+        }
+      </Tooltip>
+    </TooltipProvider>
   );
 };
 

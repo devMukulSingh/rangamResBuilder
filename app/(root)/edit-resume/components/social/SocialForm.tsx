@@ -19,7 +19,15 @@ import { motion } from "framer-motion";
 
 const SocialForm = () => {
   const dispatch = useAppDispatch();
-  const form = useForm();
+  const socialLinks = useAppSelector(state => state.persistedReducer.contact);
+  const form = useForm({
+    defaultValues: socialLinks || {
+      github:'',
+      linkedIn:'',
+      portfolio:'',
+      twitter:''
+    },
+  });
   const { templateId } = useParams();
   const router = useRouter();
   const progress = useAppSelector((state) => state.persistedReducer.progress);
@@ -46,7 +54,7 @@ const SocialForm = () => {
           <form onSubmit={form.handleSubmit(onSubmit)} onChange={handleChange}>
             <div className="flex flex-col gap-5">
               <FormField
-                name="linkedinLink"
+                name="linkedIn"
                 control={form.control}
                 render={({ field }) => (
                   <FormItem>
@@ -63,7 +71,7 @@ const SocialForm = () => {
                 )}
               />
               <FormField
-                name="twitterLink"
+                name="twitter"
                 control={form.control}
                 render={({ field }) => (
                   <FormItem>
@@ -80,7 +88,7 @@ const SocialForm = () => {
                 )}
               />
               <FormField
-                name="githubLink"
+                name="github"
                 control={form.control}
                 render={({ field }) => (
                   <FormItem>
@@ -97,7 +105,7 @@ const SocialForm = () => {
                 )}
               />
               <FormField
-                name="portforlioLink"
+                name="portfolio"
                 control={form.control}
                 render={({ field }) => (
                   <FormItem>

@@ -1,10 +1,11 @@
 "use client";
 
 import { useAppSelector } from "@/redux/hooks/hooks";
+import { CheckCircle } from "lucide-react";
 
 const Skills = () => {
   const skills = useAppSelector(
-    (state) => state.persistedReducer.technicalSkills,
+    (state) => state.persistedReducer.technicalSkills
   );
 
   return (
@@ -13,12 +14,16 @@ const Skills = () => {
         <hr className="h-2 border-none bg-blue-400 w-14" />
         <h1 className=" font-bold">SKILLS</h1>
       </div>
-      <ul className="list-disc pl-8">
-        <li className="whitespace-normal">
-          <span className="font-semibold">Tech:</span>{" "}
-          {skills.map((item) => item).join(", ")},
-        </li>
-      </ul>
+      <div className="grid grid-cols-4 gap-5">
+        {skills?.map((skill, index) => {
+          return (
+            <div className="flex gap-4 items-center" key={index}>
+              <CheckCircle className="shrink-0" />
+              {skill}
+            </div>
+          );
+        })}
+      </div>
     </section>
   );
 };

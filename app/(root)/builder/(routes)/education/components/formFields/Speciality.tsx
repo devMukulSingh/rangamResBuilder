@@ -24,6 +24,7 @@ const Speciality: FC<IeducationForm> = ({ form, index }) => {
               placeholder="Computer science"
             />
           </FormControl>
+          <FormMessage />
         </FormItem>
       )}
     />

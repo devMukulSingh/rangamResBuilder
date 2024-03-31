@@ -5,15 +5,9 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
-
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Input } from "@/components/ui/input";
 
 const Degree: FC<IeducationForm> = ({ form, index }) => {
   return (
@@ -23,24 +17,15 @@ const Degree: FC<IeducationForm> = ({ form, index }) => {
       control={form.control}
       render={({ field }) => (
         <FormItem>
-          <FormLabel>Degree/Program</FormLabel>
-          <Select
-            onValueChange={field.onChange}
-            defaultValue="Bachelor's degree"
-          >
-            <FormControl>
-              <SelectTrigger className="bg-white h-14 rounded-sm">
-                <SelectValue placeholder="Bachelor in Technology" />
-              </SelectTrigger>
-            </FormControl>
-            <SelectContent>
-              <SelectItem value="Bachelor's degree">
-                Bachelor's degree
-              </SelectItem>
-              <SelectItem value="Master's degree">Master's degree</SelectItem>
-              <SelectItem value="Doctorate degree">Doctorate degree</SelectItem>
-            </SelectContent>
-          </Select>
+          <FormLabel>Degree Name</FormLabel>
+          <FormControl>
+            <Input
+              className="bg-white h-14 rounded-sm"
+              placeholder="Bachelor in Technology"
+              {...field}
+            />
+          </FormControl>
+          <FormMessage />
         </FormItem>
       )}
     />

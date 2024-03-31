@@ -6,14 +6,12 @@ import { setExperience } from "@/redux/slice/userSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
 import { useEffect, useState } from "react";
 import { PlusCircle, Trash } from "lucide-react";
-import { setProgress } from "@/redux/slice/userSlice";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import toast from "react-hot-toast";
-import dynamic from "next/dynamic";
 import { setFormComp } from "@/redux/slice/commonSlice";
 import { motion } from "framer-motion";
 import CompanyName from "@/app/(root)/builder/(routes)/experience/components/formFields/CompanyName";
@@ -28,7 +26,6 @@ import Employer from "./formFields/Employer";
 import Address from "./formFields/Address";
 
 const ExperienceForm = () => {
-  const progress = useAppSelector((state) => state.persistedReducer.progress);
   const [expanded, setExpanded] = useState<string | false>("");
   const dispatch = useAppDispatch();
   const experience = useAppSelector(
@@ -40,12 +37,19 @@ const ExperienceForm = () => {
       experience: experience || [
         {
           companyName: "",
-          startDate: "",
-          endDate: "",
+          startDate: null,
+          endDate: null,
           jobTitle: "",
           checkboxInternship: false,
           checkboxVolunteering: false,
-          competences: [],
+          competences: [
+            {
+              id: 0,
+              name: "",
+              isSelected: false,
+              description: "",
+            },
+          ],
           description: "",
           id: Math.floor(Math.random() * 100).toString(),
           checkboxWorkingStatus: false,
@@ -73,9 +77,7 @@ const ExperienceForm = () => {
 
   const onSubmit = () => {
     dispatch(setFormComp("Skills"));
-    if (progress <= 22) {
-      dispatch(setProgress());
-    }
+  
   };
   const handleChange = () => {
     const experience = form.getValues().experience;
@@ -102,11 +104,18 @@ const ExperienceForm = () => {
   const handleAddMore = () => {
     fieldArray.append({
       companyName: "",
-      startDate: "",
-      endDate: "",
+      startDate: null,
+      endDate: null,
       checkboxInternship: false,
       checkboxVolunteering: false,
-      competences: [],
+      competences: [
+        {
+          id: 0,
+          name: "",
+          isSelected: false,
+          description: "",
+        },
+      ],
       jobTitle: "",
       description: "",
       id: Math.floor(Math.random() * 100).toString(),

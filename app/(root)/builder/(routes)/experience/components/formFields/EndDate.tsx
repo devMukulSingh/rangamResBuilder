@@ -10,6 +10,7 @@ import { IExperienceForm } from "../ExperienceForm";
 import MonthPicker from "@/components/commons/MonthPicker";
 
 const EndDate: FC<IExperienceForm> = ({ form, index, controlledFields }) => {
+  const minDate = form.getValues().experience[index].startDate;
   return (
     <FormField
       name={`experience.${index}.endDate`}
@@ -20,7 +21,12 @@ const EndDate: FC<IExperienceForm> = ({ form, index, controlledFields }) => {
         >
           <FormLabel>End Date</FormLabel>
           <FormControl>
-            <MonthPicker field={field} />
+            <MonthPicker  minDate={minDate}
+              disabled={
+                !form.getValues().experience[index].startDate
+                  ? true
+                  : false
+              } field={field} />
           </FormControl>
           <FormMessage />
         </FormItem>

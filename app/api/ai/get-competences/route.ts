@@ -19,9 +19,11 @@ export async function GET(req: NextRequest, res: NextResponse) {
       competences
         ?.replace(/\d+(\.\s*|\.)?/g, "")
         .split("\n")
-        .filter((item: string) => item !== "").map((item: string) => ({
+        .filter((item: string) => item !== "")
+        .map((item: string) => ({
           name: item,
           isSelected: false,
+          id:Math.floor(Math.random()*100000)
         })) || [];
 
     // const parsedCompetences = [

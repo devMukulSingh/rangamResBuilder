@@ -13,7 +13,7 @@ const RichTextEditor = dynamic(
   () => import("@/components/commons/RichTextEditor"),
   {
     ssr: false,
-  },
+  }
 );
 
 const Description: FC<IExperienceForm> = ({ form, index }) => {

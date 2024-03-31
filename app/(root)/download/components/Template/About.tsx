@@ -6,7 +6,7 @@ import { FaLinkedin, FaLocationPin } from "react-icons/fa6";
 
 const About = () => {
   const personalInfo = useAppSelector(
-    (state) => state.persistedReducer.personalInfo,
+    (state) => state.persistedReducer.personalInfo
   );
   const contact = useAppSelector((state) => state.persistedReducer.contact);
 
@@ -23,13 +23,17 @@ const About = () => {
         <div>
           <div className="flex items-center gap-1">
             <Mail size={20} />
-            {personalInfo?.email || "john@gmail.com"}
+            {personalInfo?.email || ""}
           </div>
 
-          {/* <div className='flex items-center gap-2'>
-                        <FaLinkedin size={20} />
-                        {contact?.linkedIn || 'https://linkedin.com'}
-                    </div> */}
+          <div className={`flex items-center gap-2`}>
+            {contact?.linkedIn !== "" && contact?.linkedIn && (
+              <>
+                <FaLinkedin size={20} />
+                {contact?.linkedIn}
+              </>
+            )}
+          </div>
         </div>
 
         <div className="flex flex-col">
@@ -37,10 +41,14 @@ const About = () => {
             <Phone size={20} />
             {personalInfo?.mobile || "9808088888"}
           </div>
-          {/* <div className='flex items-center gap-2'>
-                        <FaLocationPin size={20} />
-                        {personalInfo?.address || 'pune'}
-                    </div> */}
+          <div className="flex items-center gap-2">
+            {personalInfo?.address !== "" && personalInfo?.address && (
+              <>
+                <FaLocationPin size={20} />
+                {personalInfo?.address}
+              </>
+            )}
+          </div>
         </div>
       </div>
     </main>

@@ -15,16 +15,18 @@ export interface IpersonalInfo {
 export interface Iexperience {
   companyName: string;
   jobTitle: string;
-  startDate: string;
-  endDate: string;
+  startDate: Date | null;
+  endDate: Date | null;
   id: string;
   checkboxWorkingStatus: boolean;
   checkboxVolunteering: boolean;
   checkboxInternship: boolean;
   description: string;
   competences: {
+    description:string,
     isSelected: boolean;
     name: string;
+    id:number
   }[];
   address?: string;
   employer?: string;
@@ -34,8 +36,8 @@ export interface Ieducation {
   schoolName: string;
   degree: string;
   speciality: string;
-  startDate: string;
-  endDate: string;
+  startDate: Date | null;
+  endDate: Date | null;
   id: string;
   checkboxPursuing: boolean;
   schoolLocation?: string;

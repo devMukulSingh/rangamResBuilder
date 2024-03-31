@@ -18,7 +18,7 @@ const StartDate: FC<IExperienceForm> = ({ form, index }) => {
       render={({ field }) => (
         <FormItem className="w-full">
           <FormLabel>Start Date</FormLabel>
-          <MonthPicker field={field} />
+          <MonthPicker disableFuture={true} field={field} />
           <FormMessage />
         </FormItem>
       )}

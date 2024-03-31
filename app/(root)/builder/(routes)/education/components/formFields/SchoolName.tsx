@@ -5,6 +5,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
@@ -23,6 +24,7 @@ const SchoolName: FC<IeducationForm> = ({ form, index }) => {
               placeholder="School Name"
             />
           </FormControl>
+          <FormMessage />
         </FormItem>
       )}
     />

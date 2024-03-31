@@ -31,7 +31,7 @@ import CompetenceDescription from "./CompetenceDescription";
 export interface IExperienceForm {
   form: UseFormReturn<
     {
-      experience: Iexperience[];
+      experience: Iexperience[]
     },
     any,
     undefined
@@ -62,8 +62,8 @@ const ExperienceForm = () => {
       experience: experience || [
         {
           companyName: "",
-          endDate: "",
-          startDate: "",
+          endDate: null,
+          startDate: null,
           jobTitle: "",
           id: Math.floor(Math.random() * 100).toString(),
           checkboxWorkingStatus: false,
@@ -71,8 +71,10 @@ const ExperienceForm = () => {
           checkboxInternship: false,
           competences: [
             {
+              id: 0,
               name: "",
               isSelected: false,
+              description: "",
             },
           ],
           description: "",
@@ -98,7 +100,8 @@ const ExperienceForm = () => {
 
   const onSubmit = (data: FieldValues) => {
     router.push("/builder/prosummary");
-    console.log(data);
+    console.log(data.experience)
+    // const description = form.getValues().experience.map( item => item.competences);
     dispatch(setExperience(data.experience));
   };
 
@@ -108,17 +111,17 @@ const ExperienceForm = () => {
       form.getValues().experience[currIndex];
     if (
       companyName === "" ||
-      startDate === "" ||
+      !startDate ||
       jobTitle === "" ||
-      (endDate === "" && checkboxWorkingStatus === false)
+      (!endDate && checkboxWorkingStatus === false)
     ) {
       toast.error("Complete previous form first");
     } else {
       fieldArray.append({
         companyName: "",
         jobTitle: "",
-        startDate: "",
-        endDate: "",
+        startDate: null,
+        endDate: null,
         checkboxWorkingStatus: false,
         checkboxVolunteering: false,
         checkboxInternship: false,
@@ -126,6 +129,8 @@ const ExperienceForm = () => {
           {
             name: "",
             isSelected: false,
+            id: 0,
+            description: "",
           },
         ],
         id: Math.floor(Math.random() * 100).toString(),
@@ -275,8 +280,6 @@ const ExperienceForm = () => {
                       </h1>
 
                       <Competences index={index} form={form} />
-
-                      {/* <CompetenceDescription index={index} /> */}
 
                       <Description index={index} form={form} />
                     </div>

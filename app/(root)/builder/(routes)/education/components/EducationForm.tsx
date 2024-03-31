@@ -11,7 +11,6 @@ import {
   useForm,
   UseFormReturn,
 } from "react-hook-form";
-import { motion } from "framer-motion";
 import { Plus, X } from "lucide-react";
 import toast from "react-hot-toast";
 import SchoolName from "./formFields/SchoolName";
@@ -22,6 +21,8 @@ import Degree from "./formFields/Degree";
 import CheckboxPursuing from "./formFields/CheckboxPursuing";
 import LinkComp from "@/components/ui/LinkComp";
 import { useRouter } from "next/navigation";
+import * as z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export interface IeducationForm {
   form: UseFormReturn<
@@ -39,6 +40,7 @@ const EducationForm = () => {
   const dispatch = useAppDispatch();
   const education = useAppSelector((state) => state.persistedReducer.education);
   const router = useRouter();
+  console.log(education);
 
   const form = useForm({
     defaultValues: {
@@ -47,8 +49,8 @@ const EducationForm = () => {
           schoolName: "",
           degree: "",
           speciality: "",
-          startDate: "",
-          endDate: "",
+          startDate: null,
+          endDate: null,
           id: Math.floor(Math.random() * 100).toString(),
           checkboxPursuing: false,
         },
@@ -84,9 +86,9 @@ const EducationForm = () => {
     if (
       schoolName === "" ||
       degree === "" ||
-      startDate === "" ||
+      startDate === null ||
       speciality === "" ||
-      (endDate === "" && checkboxPursuing === false)
+      (endDate === null && checkboxPursuing === false)
     ) {
       toast.error("Complete previous form first");
     } else {
@@ -94,8 +96,8 @@ const EducationForm = () => {
         schoolName: "",
         degree: "",
         speciality: "",
-        startDate: "",
-        endDate: "",
+        startDate: null,
+        endDate: null,
         checkboxPursuing: false,
         id: Math.floor(Math.random() * 100).toString(),
       };
@@ -109,7 +111,6 @@ const EducationForm = () => {
     }
   };
   const onSubmit = (data: FieldValues) => {
-    console.log(data.education);
     router.push("/download");
     dispatch(setEducation(data.education));
   };
