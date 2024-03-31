@@ -10,6 +10,7 @@ export const ChatGPT = async (prompt: string) => {
     const completion = await openai.chat.completions.create({
       messages: [{ role: "user", content: prompt }],
       model: "gpt-3.5-turbo",
+      
     });
     return completion.choices[0].message.content;
   } catch (e) {

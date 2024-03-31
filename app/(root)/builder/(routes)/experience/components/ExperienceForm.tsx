@@ -99,7 +99,7 @@ const ExperienceForm = () => {
     }) || [];
 
   const onSubmit = (data: FieldValues) => {
-    router.push("/builder/prosummary");
+    // router.push("/builder/prosummary");
     console.log(data.experience);
     // const description = form.getValues().experience.map( item => item.competences);
     dispatch(setExperience(data.experience));

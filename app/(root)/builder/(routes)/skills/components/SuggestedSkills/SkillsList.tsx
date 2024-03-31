@@ -8,11 +8,11 @@ import { setAiSuggestedSkills } from "@/redux/slice/userSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
 import useSWR, { useSWRConfig } from "swr";
 
-type Ifetcher = [url: string, profession: string];
+export type Ifetcher = [url: string, profession: string];
 
 const SkillsList = () => {
   const profession = useAppSelector(
-    (state) => state.persistedReducer.personalInfo.profession
+    (state) => state.persistedReducer.personalInfo.profession,
   );
   const dispatch = useAppDispatch();
   const fetcher = ([url, profession]: Ifetcher) =>
@@ -27,7 +27,7 @@ const SkillsList = () => {
       },
       revalidateIfStale: false,
       revalidateOnFocus: false,
-    }
+    },
   );
 
   // const { isLoading, data, error, isError } = useQuery({

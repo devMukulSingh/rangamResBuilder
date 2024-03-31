@@ -1,9 +1,22 @@
 import React from "react";
 import SummaryPoint from "./SummaryPoint";
 import { getSummary } from "@/actions/get-summary";
+import { cookies } from "next/headers";
 
 const SummaryPoints = async () => {
-  const summaries = await getSummary();
+  // const profession = cookies().get("profession")?.value;
+  // const {
+  //   data: summaries,
+  //   error,
+  //   isLoading,
+  // } = useSWR([profession], getSummary);
+  // console.log(summaries, isLoading, error);
+  // if (isLoading) return "loading...";
+  const profession = cookies().get("profession")?.value ;
+  const goal = cookies().get("goal")?.value;
+
+  const summaries = await getSummary({profession, goal});
+
   const parsedSummaries =
     summaries
       ?.replace(/\d+(\.\s*|\.)?/g, "")

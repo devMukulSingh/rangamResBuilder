@@ -1,9 +1,8 @@
 import { ChatGPT } from "@/lib/ChatGPT";
 import { cookies } from "next/headers";
+import { cache } from "react";
 
-export const getSummary = async () => {
-  const profession = cookies().get("profession")?.value;
-  const goal = cookies().get("goal")?.value;
+export const getSummary = cache(async ({ profession, goal }: { profession: string | undefined, goal: string | undefined }) => {
   if (goal === "Student") {
     const prompt = `Suggest 4 short bio for ${profession} for resume, he is a student`;
     const summaries = await ChatGPT(prompt);
@@ -25,4 +24,4 @@ export const getSummary = async () => {
     return summaries;
   }
   return "";
-};
+});
