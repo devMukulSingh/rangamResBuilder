@@ -25,10 +25,10 @@ export interface IinitialState {
   aiSuggesedSkills: string[];
   goal: string;
   aiSuggestedCompDesc: string[];
-  description : {
-    value:string,
-    index:number,
-  }[]
+  description: {
+    value: string;
+    index: number;
+  }[];
 }
 
 const initialState: IinitialState = {
@@ -57,8 +57,8 @@ const initialState: IinitialState = {
       description: "",
       competences: [
         {
-          id:0,
-          description:"",
+          id: 0,
+          description: "",
           name: "",
           isSelected: false,
         },
@@ -91,12 +91,12 @@ const initialState: IinitialState = {
   aiSuggesedSkills: [],
   goal: "",
   aiSuggestedCompDesc: [],
-  description:[
+  description: [
     {
-    index:0,
-    value:''
-  }
-]
+      index: 0,
+      value: "",
+    },
+  ],
 };
 
 export const userSlice = createSlice({
@@ -167,9 +167,9 @@ export const userSlice = createSlice({
     resetCompetences: (state) => {
       state.aiSuggestedComp = initialState.aiSuggestedComp;
     },
-    setDescription: (state,action ) => {
+    setDescription: (state, action) => {
       state.description = action.payload;
-    }
+    },
   },
 });
 
@@ -193,5 +193,5 @@ export const {
   setGoal,
   resetCompetences,
   setAiSuggestedCompDesc,
-  setDescription
+  setDescription,
 } = userSlice.actions;

@@ -48,7 +48,7 @@ const Template1 = () => {
           <Education />
           <Skills />
           <Project />
-          <Achievements/>
+          <Achievements />
         </div>
       </div>
     </div>

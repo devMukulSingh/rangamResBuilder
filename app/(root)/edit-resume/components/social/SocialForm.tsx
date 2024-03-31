@@ -19,13 +19,13 @@ import { motion } from "framer-motion";
 
 const SocialForm = () => {
   const dispatch = useAppDispatch();
-  const socialLinks = useAppSelector(state => state.persistedReducer.contact);
+  const socialLinks = useAppSelector((state) => state.persistedReducer.contact);
   const form = useForm({
     defaultValues: socialLinks || {
-      github:'',
-      linkedIn:'',
-      portfolio:'',
-      twitter:''
+      github: "",
+      linkedIn: "",
+      portfolio: "",
+      twitter: "",
     },
   });
   const { templateId } = useParams();

@@ -29,9 +29,7 @@ const EndDate: FC<IeducationForm> = ({ form, index }) => {
               field={field}
               minDate={minDate}
               disabled={
-                !form.getValues().education[index].startDate
-                  ? true
-                  : false
+                !form.getValues().education[index].startDate ? true : false
               }
             />
           </FormControl>

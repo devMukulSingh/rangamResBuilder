@@ -24,7 +24,7 @@ const CheckboxPursuing: FC<IeducationForm> = ({ form, index }) => {
             />
           </FormControl>
           <FormLabel>Pursuing</FormLabel>
-          <FormMessage/>
+          <FormMessage />
         </FormItem>
       )}
     />

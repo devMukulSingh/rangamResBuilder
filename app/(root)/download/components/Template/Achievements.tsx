@@ -4,7 +4,7 @@ import React from "react";
 
 const Achievements = () => {
   const achievements = useAppSelector(
-    (state) => state.persistedReducer.achievements
+    (state) => state.persistedReducer.achievements,
   );
   if (!achievements || achievements.length === 0) return null;
   return (

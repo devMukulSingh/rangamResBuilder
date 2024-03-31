@@ -33,21 +33,21 @@ const Competences: FC<IExperienceForm> = ({ form, index }) => {
     }
   };
   const isLoading = useAppSelector(
-    (state) => state.commonSlice.competenceLoading
+    (state) => state.commonSlice.competenceLoading,
   );
-      // const handleChange = useCallback((content, field) => {
-      //   const currentComp = form.getValues().experience[index].competences;
-      //   const last = currentComp.pop();
-      //   console.log(last);
+  // const handleChange = useCallback((content, field) => {
+  //   const currentComp = form.getValues().experience[index].competences;
+  //   const last = currentComp.pop();
+  //   console.log(last);
 
-      //   field.onChange([
-      //     ...field.value,
-      //     {
-      //       description: content,
-      //       ...last,
-      //     },
-      //   ]);
-      // },[]);
+  //   field.onChange([
+  //     ...field.value,
+  //     {
+  //       description: content,
+  //       ...last,
+  //     },
+  //   ]);
+  // },[]);
 
   if (isLoading) return <CompetenceSkeleton />;
 
@@ -93,8 +93,6 @@ const Competences: FC<IExperienceForm> = ({ form, index }) => {
               Load More key responsibility
             </h1>
           </div>
-              
-
         </>
       )}
     />
@@ -102,13 +100,13 @@ const Competences: FC<IExperienceForm> = ({ form, index }) => {
 };
 
 export default Competences;
-            // <RichTextEditor
-            //   value={
-            //     field.value
-            //       .map((item) => item?.description?.concat("<br/></li>"))
-            //       .join("") || ""
-            //   }
-            //   onChange= { (content) => {dispatch(setDescription({
-            //     value:content,
-            //     index
-            //   }))}}/>
+// <RichTextEditor
+//   value={
+//     field.value
+//       .map((item) => item?.description?.concat("<br/></li>"))
+//       .join("") || ""
+//   }
+//   onChange= { (content) => {dispatch(setDescription({
+//     value:content,
+//     index
+//   }))}}/>

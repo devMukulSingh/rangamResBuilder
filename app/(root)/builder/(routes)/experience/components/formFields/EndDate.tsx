@@ -21,12 +21,13 @@ const EndDate: FC<IExperienceForm> = ({ form, index, controlledFields }) => {
         >
           <FormLabel>End Date</FormLabel>
           <FormControl>
-            <MonthPicker  minDate={minDate}
+            <MonthPicker
+              minDate={minDate}
               disabled={
-                !form.getValues().experience[index].startDate
-                  ? true
-                  : false
-              } field={field} />
+                !form.getValues().experience[index].startDate ? true : false
+              }
+              field={field}
+            />
           </FormControl>
           <FormMessage />
         </FormItem>

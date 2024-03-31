@@ -5,18 +5,24 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import SkillsSkeleton from "./SkillsSkeleton";
 import { setAiSuggestedSkills } from "@/redux/slice/userSlice";
-import { useAppDispatch } from "@/redux/hooks/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
 
 const SkillsList = () => {
+  const profession = useAppSelector(
+    (state) => state.persistedReducer.personalInfo.profession
+  );
   const dispatch = useAppDispatch();
   const { isLoading, data, error, isError } = useQuery({
-    queryKey: ["aiSuggestedSkills"],
+    queryKey: ["aiSuggestedSkills", profession],
     queryFn: async () => {
-      const { data } = await axios.get(`/api/ai/get-skills`);
+      const { data } = await axios.get(`/api/ai/get-skills`, {
+        params: {profession},
+      });
       dispatch(setAiSuggestedSkills(data));
       return data;
     },
-    staleTime: 5 * 1000,
+    refetchOnMount: false,
+    staleTime:Infinity,
     refetchOnWindowFocus: false,
   });
   if (isLoading) {

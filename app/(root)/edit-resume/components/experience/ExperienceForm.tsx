@@ -77,7 +77,6 @@ const ExperienceForm = () => {
 
   const onSubmit = () => {
     dispatch(setFormComp("Skills"));
-  
   };
   const handleChange = () => {
     const experience = form.getValues().experience;

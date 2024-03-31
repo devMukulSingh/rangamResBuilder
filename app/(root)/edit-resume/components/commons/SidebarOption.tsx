@@ -46,12 +46,11 @@ const SidebarOption: React.FC<SidebarOptionProps> = ({ option, sidebar }) => {
             {sidebar && option.title}
           </li>
         </TooltipTrigger>
-        {
-          !sidebar &&
-          <TooltipContent >
-          <p>{option.title}</p>
-        </TooltipContent>
-        }
+        {!sidebar && (
+          <TooltipContent>
+            <p>{option.title}</p>
+          </TooltipContent>
+        )}
       </Tooltip>
     </TooltipProvider>
   );

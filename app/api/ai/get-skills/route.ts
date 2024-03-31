@@ -4,15 +4,15 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest, res: NextResponse) {
   try {
-    const profession = cookies().get("profession")?.value;
-
+    // const profession = cookies().get("profession")?.value;
+    const profession = req.nextUrl.searchParams.get('profession');
     if (!profession)
       return NextResponse.json(
         { error: "profession is required" },
         { status: 400 },
       );
 
-    const skillPrompt = `My profession is ${profession}, give me a list of 13 technology names, or skills relevant to this profession in max 3 words`;
+    const skillPrompt = `My profession is ${profession}, give me a list of 13 technology names, or skills relevant to this profession in maximum 3 words, and exclude slash`;
     const skills = await ChatGPT(skillPrompt);
     const parsedSkills =
       skills

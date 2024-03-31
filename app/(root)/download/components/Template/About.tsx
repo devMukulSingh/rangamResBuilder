@@ -6,7 +6,7 @@ import { FaLinkedin, FaLocationPin } from "react-icons/fa6";
 
 const About = () => {
   const personalInfo = useAppSelector(
-    (state) => state.persistedReducer.personalInfo
+    (state) => state.persistedReducer.personalInfo,
   );
   const contact = useAppSelector((state) => state.persistedReducer.contact);
 

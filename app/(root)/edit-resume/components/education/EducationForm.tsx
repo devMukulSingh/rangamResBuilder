@@ -155,7 +155,7 @@ const EducationForm = () => {
           <form onSubmit={form.handleSubmit(onSubmit)} onChange={handleChange}>
             <div className="flex flex-col gap-10 w-full">
               {(!education ? controlledFields : education)?.map(
-                (item: Ieducation, index: number) => {
+                (item, index) => {
                   return (
                     <>
                       <Collapsible

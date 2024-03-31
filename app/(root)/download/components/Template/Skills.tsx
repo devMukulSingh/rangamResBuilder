@@ -5,7 +5,7 @@ import { CheckCircle } from "lucide-react";
 
 const Skills = () => {
   const skills = useAppSelector(
-    (state) => state.persistedReducer.technicalSkills
+    (state) => state.persistedReducer.technicalSkills,
   );
 
   return (

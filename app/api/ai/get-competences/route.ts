@@ -1,5 +1,4 @@
 import { ChatGPT } from "@/lib/ChatGPT";
-import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest, res: NextResponse) {
@@ -23,7 +22,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
         .map((item: string) => ({
           name: item,
           isSelected: false,
-          id:Math.floor(Math.random()*100000)
+          id: Math.floor(Math.random() * 100000),
         })) || [];
 
     // const parsedCompetences = [
