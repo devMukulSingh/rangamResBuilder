@@ -1,10 +1,11 @@
 import OpenAI from "openai";
+import { cache } from "react";
 
 const openai = new OpenAI({
   apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
 });
 
-export async function ChatGPT(prompt: string) {
+export const ChatGPT = cache(async(prompt: string) => {
   try {
     const completion = await openai.chat.completions.create({
       messages: [{ role: "user", content: prompt }],
@@ -14,4 +15,4 @@ export async function ChatGPT(prompt: string) {
   } catch (e) {
     console.log(`Error in CHATGPT api ${e}`);
   }
-}
+});

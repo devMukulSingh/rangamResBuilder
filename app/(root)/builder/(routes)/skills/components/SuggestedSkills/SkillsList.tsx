@@ -9,7 +9,10 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
 
 const SkillsList = () => {
   const profession = useAppSelector(
-    (state) => state.persistedReducer.personalInfo.profession,
+    (state) => state.persistedReducer.personalInfo.profession
+  );
+  const skills = useAppSelector(
+    (state) => state.persistedReducer.technicalSkills
   );
   const dispatch = useAppDispatch();
   const { isLoading, data, error, isError } = useQuery({
@@ -25,7 +28,7 @@ const SkillsList = () => {
     staleTime: Infinity,
     refetchOnWindowFocus: false,
   });
-  if (isLoading) {
+  if (isLoading && data) {
     return <SkillsSkeleton />;
   }
   if (isError) {
