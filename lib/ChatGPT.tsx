@@ -5,7 +5,7 @@ const openai = new OpenAI({
   apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
 });
 
-export const ChatGPT = cache(async(prompt: string) => {
+export const ChatGPT = cache(async (prompt: string) => {
   try {
     const completion = await openai.chat.completions.create({
       messages: [{ role: "user", content: prompt }],
