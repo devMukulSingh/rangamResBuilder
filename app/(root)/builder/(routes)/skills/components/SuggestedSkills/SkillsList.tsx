@@ -9,20 +9,20 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
 
 const SkillsList = () => {
   const profession = useAppSelector(
-    (state) => state.persistedReducer.personalInfo.profession
+    (state) => state.persistedReducer.personalInfo.profession,
   );
   const dispatch = useAppDispatch();
   const { isLoading, data, error, isError } = useQuery({
     queryKey: ["aiSuggestedSkills", profession],
     queryFn: async () => {
       const { data } = await axios.get(`/api/ai/get-skills`, {
-        params: {profession},
+        params: { profession },
       });
       dispatch(setAiSuggestedSkills(data));
       return data;
     },
     refetchOnMount: false,
-    staleTime:Infinity,
+    staleTime: Infinity,
     refetchOnWindowFocus: false,
   });
   if (isLoading) {

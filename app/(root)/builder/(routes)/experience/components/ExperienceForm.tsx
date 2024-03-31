@@ -31,7 +31,7 @@ import CompetenceDescription from "./CompetenceDescription";
 export interface IExperienceForm {
   form: UseFormReturn<
     {
-      experience: Iexperience[]
+      experience: Iexperience[];
     },
     any,
     undefined
@@ -100,7 +100,7 @@ const ExperienceForm = () => {
 
   const onSubmit = (data: FieldValues) => {
     router.push("/builder/prosummary");
-    console.log(data.experience)
+    console.log(data.experience);
     // const description = form.getValues().experience.map( item => item.competences);
     dispatch(setExperience(data.experience));
   };
