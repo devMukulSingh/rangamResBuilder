@@ -1,37 +1,49 @@
 "use client";
 import Skill from "./Skill";
 import CustomSkill from "./CustomSkill";
-import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import SkillsSkeleton from "./SkillsSkeleton";
 import { setAiSuggestedSkills } from "@/redux/slice/userSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
+import useSWR, { useSWRConfig } from "swr";
+
+type Ifetcher = [url: string, profession: string];
 
 const SkillsList = () => {
-
   const profession = useAppSelector(
-    (state) => state.persistedReducer.personalInfo.profession,
+    (state) => state.persistedReducer.personalInfo.profession
   );
   const dispatch = useAppDispatch();
-  const { isLoading, data, error, isError } = useQuery({
-    queryKey: ["aiSuggestedSkills", profession],
-    queryFn: async () => {
-      const { data } = await axios.get(`/api/ai/get-skills`, {
-        params: { profession },
-      });
-      dispatch(setAiSuggestedSkills(data));
-      return data;
-    },
+  const fetcher = ([url, profession]: Ifetcher) =>
+    axios.get(url, { params: { profession } }).then((res) => res.data);
 
-    refetchOnMount: false,
-    staleTime: Infinity,
-    refetchOnWindowFocus: false,
-  });
-  if (isLoading || !data) {
-    return <SkillsSkeleton />;
-  }
-  if (isError) {
+  const { data, error, isLoading } = useSWR(
+    ["/api/ai/get-skills", profession],
+    fetcher,
+    {
+      onSuccess: () => {
+        dispatch(setAiSuggestedSkills(data));
+      },
+    }
+  );
+
+  // const { isLoading, data, error, isError } = useQuery({
+  //   queryKey: ["aiSuggestedSkills", profession],
+  //   queryFn: async () => {
+  //     const { data } = await axios.get(`/api/ai/get-skills`, {
+  //       params: { profession },
+  //     });
+  //     return data;
+  //   },
+  //   refetchOnMount: false,
+  //   staleTime: Infinity,
+  //   refetchOnWindowFocus: false,
+  // });
+  if (error) {
     console.log(`Error in GETSkills ${error}`);
+  }
+  if (isLoading) {
+    return <SkillsSkeleton />;
   }
 
   return (
