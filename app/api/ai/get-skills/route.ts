@@ -1,7 +1,6 @@
 import { ChatGPT } from "@/lib/ChatGPT";
 import { NextRequest, NextResponse } from "next/server";
 
-
 export async function GET(req: NextRequest, res: NextResponse) {
   try {
     // const profession = cookies().get("profession")?.value;

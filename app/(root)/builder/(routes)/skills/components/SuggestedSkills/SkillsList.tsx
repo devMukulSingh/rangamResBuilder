@@ -1,4 +1,5 @@
 "use client";
+
 import Skill from "./Skill";
 import CustomSkill from "./CustomSkill";
 import axios from "axios";
@@ -24,6 +25,8 @@ const SkillsList = () => {
       onSuccess: () => {
         dispatch(setAiSuggestedSkills(data));
       },
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
     }
   );
 
