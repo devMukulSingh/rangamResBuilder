@@ -2,6 +2,7 @@ import React from "react";
 import SummaryPoint from "./SummaryPoint";
 import { getSummary } from "@/actions/get-summary";
 import { cookies } from "next/headers";
+import BioSkeleton from "./BioSkeleton";
 
 const SummaryPoints = async () => {
   // const profession = cookies().get("profession")?.value;
@@ -23,9 +24,13 @@ const SummaryPoints = async () => {
       .split("\n")
       .filter((item: string) => item !== "") || [];
   return (
+    <>
+    {
+      parsedSummaries.length === 0 && <BioSkeleton/>
+    }
     <ol
       className="
-            list-none 
+      list-none 
             text-sm 
             text-neutral-500 
             space-y-5 
@@ -34,8 +39,9 @@ const SummaryPoints = async () => {
     >
       {parsedSummaries.map((bio: string, index: number) => (
         <SummaryPoint bio={bio} key={index} />
-      ))}
+        ))}
     </ol>
+        </>
   );
 };
 

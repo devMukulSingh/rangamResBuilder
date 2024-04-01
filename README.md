@@ -1,10 +1,28 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+Rangam Resbuilder is a powerful AI integrated Resume builder that allows you to create a professional resume, with the power of AI.
 
-First, run the development server:
+The AI will suggest you the best suitable Skills, Professional summary, and Descriptions for Professional Experience
 
-```bash
+It will provide you not only the best suggestions, but suggestions, that are based on your goal( eg: Fresher,Experienced professional, etc)
+
+**Official site: https://rangam-res-builder.vercel.app**
+
+
+## DEVELOPMENT
+
+**Step1**
+Clone the repository by entering command in your code editor -
+git clone https://github.com/devMukulSingh/rangamResBuilder.git
+
+**Step2**
+Install the dependencies by entering **npm install**
+
+**Step3**
+Create a .env file in your root directory, and provide the environment variables, for ChatGPT api key and Database key,
+as ilustrated in the .env.example file
+
+**Step4**
+Run the development server:
 npm run dev
 # or
 yarn dev
@@ -12,25 +30,6 @@ yarn dev
 pnpm dev
 # or
 bun dev
-```
 
+**Step5**
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.

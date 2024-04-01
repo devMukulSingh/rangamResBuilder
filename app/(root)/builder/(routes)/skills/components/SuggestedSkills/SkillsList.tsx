@@ -59,6 +59,9 @@ const SkillsList = () => {
       hover:custom-scrollbar 
       relative"
     >
+      {
+        !data ? <SkillsSkeleton/> :
+      
       <div
         className="grid 
       2xl:grid-cols-4
@@ -80,6 +83,7 @@ const SkillsList = () => {
 
         <CustomSkill />
       </div>
+      }
     </div>
   );
 };

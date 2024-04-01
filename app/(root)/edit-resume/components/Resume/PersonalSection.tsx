@@ -37,9 +37,9 @@ const PersonalSection: React.FC<PersonalSection> = ({}) => {
       <div className="space-y-2">
         <h1 className="text-xl font-semibold">Address</h1>
         <h1 className="text-neutral-500">
-          {personalInfo?.address}
-          {personalInfo.city ? `, ${personalInfo.city}` : ""}
-          {personalInfo.state ? `, ${personalInfo.state}` : ""}
+          {/* {personalInfo?.address} */}
+          {personalInfo.city ? `${personalInfo.city}` : ""}
+          {/* {personalInfo.state ? `, ${personalInfo.state}` : ""} */}
         </h1>
       </div>
 

@@ -33,7 +33,7 @@ const Competences: FC<IExperienceForm> = ({ form, index }) => {
     }
   };
   const isLoading = useAppSelector(
-    (state) => state.commonSlice.competenceLoading
+    (state) => state.commonSlice.competenceLoading,
   );
   // const handleChange = useCallback((content, field) => {
   //   const currentComp = form.getValues().experience[index].competences;

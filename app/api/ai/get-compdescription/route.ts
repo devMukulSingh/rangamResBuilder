@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(req: NextRequest, res: NextResponse) {
   try {
     const competence = req.nextUrl.searchParams.get("competence");
-    const profession = cookies().get('profession');
+    const profession = cookies().get("profession");
 
     if (!competence)
       return NextResponse.json(
