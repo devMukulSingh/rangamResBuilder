@@ -1,10 +1,10 @@
 import { ChatGPT } from "@/lib/ChatGPT";
+import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest, res: NextResponse) {
   try {
-    // const profession = cookies().get("profession")?.value;
-    const profession = req.nextUrl.searchParams.get("profession");
+    const profession = cookies().get('profession');
     if (!profession)
       return NextResponse.json(
         { error: "profession is required" },

@@ -33,7 +33,7 @@ const Competences: FC<IExperienceForm> = ({ form, index }) => {
     }
   };
   const isLoading = useAppSelector(
-    (state) => state.commonSlice.competenceLoading,
+    (state) => state.commonSlice.competenceLoading
   );
   // const handleChange = useCallback((content, field) => {
   //   const currentComp = form.getValues().experience[index].competences;
@@ -57,6 +57,7 @@ const Competences: FC<IExperienceForm> = ({ form, index }) => {
       control={form.control}
       render={({ field }) => (
         <>
+          {field.value.length <= 1 && <CompetenceSkeleton />}
           <div className="grid lg:grid-cols-6 md:grid-cols-3 grid-cols-2 gap-5">
             {field.value?.map((competence, i) => (
               <FormItem key={i}>
@@ -75,6 +76,7 @@ const Competences: FC<IExperienceForm> = ({ form, index }) => {
           <div
             onClick={handleLoadMore}
             className={`
+            w-fit
             flex
             items-center
             gap-2

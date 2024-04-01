@@ -274,9 +274,11 @@ const ExperienceForm = () => {
                       </div>
 
                       <h1 className="text-xl sm:text-2xl text-black my-5">
-                        Great! To highlight your experience and describe it
+                        {form.getValues().experience[index].jobTitle === ""
+                          ? `Enter the Job title to generate key responsibilities`
+                          : `Great! To highlight your experience and describe it
                         properly, please choose the key responsibilities at this
-                        workplace.
+                        workplace.`}
                       </h1>
 
                       <Competences index={index} form={form} />
