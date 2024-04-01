@@ -12,10 +12,10 @@ const SummaryPoints = async () => {
   // } = useSWR([profession], getSummary);
   // console.log(summaries, isLoading, error);
   // if (isLoading) return "loading...";
-  const profession = cookies().get("profession")?.value ;
+  const profession = cookies().get("profession")?.value;
   const goal = cookies().get("goal")?.value;
 
-  const summaries = await getSummary({profession, goal});
+  const summaries = await getSummary({ profession, goal });
 
   const parsedSummaries =
     summaries
