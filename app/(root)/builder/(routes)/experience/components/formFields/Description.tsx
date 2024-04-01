@@ -7,14 +7,7 @@ import {
 } from "@/components/ui/form";
 import React, { FC } from "react";
 import { IExperienceForm } from "../ExperienceForm";
-import dynamic from "next/dynamic";
-import { useAppSelector } from "@/redux/hooks/hooks";
-const RichTextEditor = dynamic(
-  () => import("@/components/commons/RichTextEditor"),
-  {
-    ssr: false,
-  },
-);
+import { Editor } from "@tinymce/tinymce-react";
 
 const Description: FC<IExperienceForm> = ({ form, index }) => {
   return (
@@ -25,10 +18,19 @@ const Description: FC<IExperienceForm> = ({ form, index }) => {
         <FormItem>
           <FormLabel>Description</FormLabel>
           <FormControl>
-            <RichTextEditor
+            <Editor
+              onEditorChange={(a, editor) =>
+                field.onChange(editor.getContent())
+              }
               value={field.value || ""}
-              onChange={(content) => {
-                field.onChange(content);
+              apiKey={process.env.NEXT_PUBLIC_TINY_MCE_API_KEY}
+              init={{
+                menubar: false,
+                height: 200,
+                plugins:['lists'],
+                toolbar:
+                  "undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | numlist bullist | removeformat",
+                tinycomments_mode: "embedded",
               }}
             />
           </FormControl>

@@ -1,4 +1,3 @@
-
 Rangam Resbuilder is a powerful AI integrated Resume builder that allows you to create a professional resume, with the power of AI.
 
 The AI will suggest you the best suitable Skills, Professional summary, and Descriptions for Professional Experience
@@ -6,7 +5,6 @@ The AI will suggest you the best suitable Skills, Professional summary, and Desc
 It will provide you not only the best suggestions, but suggestions, that are based on your goal( eg: Fresher,Experienced professional, etc)
 
 **Official site: https://rangam-res-builder.vercel.app**
-
 
 ## DEVELOPMENT
 
@@ -24,11 +22,17 @@ as ilustrated in the .env.example file
 **Step4**
 Run the development server:
 npm run dev
+
 # or
+
 yarn dev
+
 # or
+
 pnpm dev
+
 # or
+
 bun dev
 
 **Step5**

@@ -29,7 +29,6 @@ const Template1 = () => {
         id="template1"
         className="
                 md:w-2/3
-                whitespace-nowrap 
                 text-sm 
                 print:m-0
                 min-w-[45rem]

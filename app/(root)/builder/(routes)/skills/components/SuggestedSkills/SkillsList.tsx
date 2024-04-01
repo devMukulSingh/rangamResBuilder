@@ -59,11 +59,11 @@ const SkillsList = () => {
       hover:custom-scrollbar 
       relative"
     >
-      {
-        !data ? <SkillsSkeleton/> :
-      
-      <div
-        className="grid 
+      {!data ? (
+        <SkillsSkeleton />
+      ) : (
+        <div
+          className="grid 
       2xl:grid-cols-4
       lg:grid-cols-3 
       sm:grid-cols-2 
@@ -74,16 +74,16 @@ const SkillsList = () => {
       py-2 
       pr-3
       "
-      >
-        {data?.map((skill: string, index: number) => (
-          <>
-            <Skill skill={skill} key={index} />
-          </>
-        ))}
+        >
+          {data?.map((skill: string, index: number) => (
+            <>
+              <Skill skill={skill} key={index} />
+            </>
+          ))}
 
-        <CustomSkill />
-      </div>
-      }
+          <CustomSkill />
+        </div>
+      )}
     </div>
   );
 };

@@ -25,23 +25,21 @@ const SummaryPoints = async () => {
       .filter((item: string) => item !== "") || [];
   return (
     <>
-    {
-      parsedSummaries.length === 0 && <BioSkeleton/>
-    }
-    <ol
-      className="
+      {parsedSummaries.length === 0 && <BioSkeleton />}
+      <ol
+        className="
       list-none 
             text-sm 
             text-neutral-500 
             space-y-5 
             mt-2
             "
-    >
-      {parsedSummaries.map((bio: string, index: number) => (
-        <SummaryPoint bio={bio} key={index} />
+      >
+        {parsedSummaries.map((bio: string, index: number) => (
+          <SummaryPoint bio={bio} key={index} />
         ))}
-    </ol>
-        </>
+      </ol>
+    </>
   );
 };
 

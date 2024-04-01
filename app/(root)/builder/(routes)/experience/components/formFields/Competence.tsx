@@ -23,6 +23,7 @@ interface competenceProps {
     undefined
   >;
   competenceIndex: number;
+  onChange: () => void;
 }
 
 const Competence: React.FC<competenceProps> = ({
@@ -30,13 +31,13 @@ const Competence: React.FC<competenceProps> = ({
   index,
   form,
   competenceIndex,
+  onChange,
 }) => {
   // console.log(competence);
 
   const dispatch = useAppDispatch();
-  const competences = form.getValues().experience[index].competences;
   const profession = useAppSelector(
-    (state) => state.persistedReducer.personalInfo.profession,
+    (state) => state.persistedReducer.personalInfo.profession
   );
 
   const { isLoading, data, isError, error, refetch } = useQuery({
@@ -52,17 +53,16 @@ const Competence: React.FC<competenceProps> = ({
       });
       dispatch(setCompDescLoading(isLoading));
       const previousDescription = form.getValues(
-        `experience.${index}.description`,
+        `experience.${index}.description`
       );
       const descriptionString = previousDescription.concat(data);
       form.setValue(`experience.${index}.description`, descriptionString);
-
-      // form.setValue(`experience.${index}.competences.${competenceIndex}`, {
-      //   description: data,
-      //   isSelected: competence.isSelected,
-      //   name: competence.name,
-      //   id: competence.id,
-      // });
+      form.setValue(`experience.${index}.competences.${competenceIndex}`, {
+        description: data,
+        isSelected: competence.isSelected,
+        name: competence.name,
+        id: competence.id,
+      });
       return data;
     },
   });
@@ -70,27 +70,29 @@ const Competence: React.FC<competenceProps> = ({
     console.log(`Error in getCompetence Description ${error}`);
   }
   const handleSelect = () => {
+    console.log(competence);
+
     if (competence.isSelected) {
-      form.setValue(
-        `experience.${index}.competences.${competenceIndex}.description`,
-        "",
-      );
+      const descriptionToRemove = competence.description;
+      const filteredString = form
+        .getValues()
+        .experience[index].description.replace(descriptionToRemove, "");
+      console.log(filteredString);
+
+      form.setValue(`experience.${index}.description`, filteredString);
       form.setValue(
         `experience.${index}.competences.${competenceIndex}.isSelected`,
-        false,
+        false
       );
     } else {
       form.setValue(
         `experience.${index}.competences.${competenceIndex}.isSelected`,
-        true,
+        true
       );
       refetch();
     }
   };
-
-  if (Object.keys(competence).length === 0 || competence.name === "")
-    return null;
-
+  if (competence?.name === "") return null;
   return (
     <>
       <div

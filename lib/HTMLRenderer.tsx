@@ -1,5 +1,6 @@
 import parseHtmlStringToHtml, { domToReact } from "html-react-parser";
 import { useMemo } from "react";
+import { cn } from "./utils";
 
 export const HTMLRenderer = ({
   htmlString = "",
@@ -16,11 +17,11 @@ export const HTMLRenderer = ({
 
           if (Array.isArray(dToReact)) {
             return (
-              <ol className="list-decimal pl-5">
+              <ol className="list-decimal pl-5 break-all whitespace-normal">
                 {dToReact.map((item, index) => {
                   if (!item.props.children) return null;
                   return (
-                    <li key={index} className={className}>
+                    <li key={index} className={`break-words whitespace-wrap`}>
                       {item.props.children}
                     </li>
                   );

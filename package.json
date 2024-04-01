@@ -32,6 +32,7 @@
     "@radix-ui/react-tooltip": "^1.0.7",
     "@reduxjs/toolkit": "^2.2.1",
     "@tanstack/react-query": "^5.28.8",
+    "@tinymce/tinymce-react": "^5.0.0",
     "@tiptap/extension-bullet-list": "^2.2.4",
     "@tiptap/extension-color": "^2.2.4",
     "@tiptap/extension-list-item": "^2.2.4",
@@ -72,6 +73,7 @@
     "swr": "^2.2.5",
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
+    "tinymce": "^7.0.0",
     "validator": "^13.11.0",
     "zod": "^3.22.4"
   },

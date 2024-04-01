@@ -1,5 +1,5 @@
 import { FormControl, FormField, FormItem } from "@/components/ui/form";
-import React, { FC, useCallback } from "react";
+import React, { FC, useCallback, useState } from "react";
 import { IExperienceForm } from "../ExperienceForm";
 import { Plus } from "lucide-react";
 import Competence from "./Competence";
@@ -9,10 +9,21 @@ import { setCompLoading } from "@/redux/slice/commonSlice";
 import axios from "axios";
 import RichTextEditor from "@/components/commons/RichTextEditor";
 import { setDescription } from "@/redux/slice/userSlice";
+import { Editor } from "@tinymce/tinymce-react";
+import { Iexperience } from "@/lib/types";
+import { ControllerRenderProps } from "react-hook-form";
+
+type Tfield = ControllerRenderProps<
+  {
+    experience: Iexperience[];
+  },
+  `experience.${number}.competences`
+>;
 
 const Competences: FC<IExperienceForm> = ({ form, index }) => {
   const dispatch = useAppDispatch();
   const jobTitle = form.getValues().experience[index].jobTitle;
+
   const handleLoadMore = async () => {
     try {
       dispatch(setCompLoading(true));
@@ -33,21 +44,9 @@ const Competences: FC<IExperienceForm> = ({ form, index }) => {
     }
   };
   const isLoading = useAppSelector(
-    (state) => state.commonSlice.competenceLoading,
+    (state) => state.commonSlice.competenceLoading
   );
-  // const handleChange = useCallback((content, field) => {
-  //   const currentComp = form.getValues().experience[index].competences;
-  //   const last = currentComp.pop();
-  //   console.log(last);
 
-  //   field.onChange([
-  //     ...field.value,
-  //     {
-  //       description: content,
-  //       ...last,
-  //     },
-  //   ]);
-  // },[]);
 
   if (isLoading) return <CompetenceSkeleton />;
 
@@ -63,9 +62,9 @@ const Competences: FC<IExperienceForm> = ({ form, index }) => {
               <FormItem key={i}>
                 <FormControl>
                   <Competence
+                    onChange={field.onChange}
                     form={form}
                     index={index}
-                    // onChange={field.onChange}
                     competence={competence}
                     competenceIndex={i}
                   />
@@ -82,7 +81,7 @@ const Competences: FC<IExperienceForm> = ({ form, index }) => {
             gap-2
             col-span-2
             cursor-pointer
-             ${form.getValues().experience[index].competences[0].name === "" ? "hidden" : ""}
+             ${form.getValues().experience[index].competences[0]?.name === "" ? "hidden" : ""}
             ${form.getValues().experience[index].competences.length === 14 ? "hidden" : ""}
             `}
           >
@@ -95,6 +94,7 @@ const Competences: FC<IExperienceForm> = ({ form, index }) => {
               Load More key responsibility
             </h1>
           </div>
+         
         </>
       )}
     />
@@ -102,13 +102,3 @@ const Competences: FC<IExperienceForm> = ({ form, index }) => {
 };
 
 export default Competences;
-// <RichTextEditor
-//   value={
-//     field.value
-//       .map((item) => item?.description?.concat("<br/></li>"))
-//       .join("") || ""
-//   }
-//   onChange= { (content) => {dispatch(setDescription({
-//     value:content,
-//     index
-//   }))}}/>

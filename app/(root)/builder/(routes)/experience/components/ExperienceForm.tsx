@@ -102,6 +102,9 @@ const ExperienceForm = () => {
     router.push("/builder/prosummary");
     console.log(data.experience);
     // const description = form.getValues().experience.map( item => item.competences);
+    controlledFields.map( (field,index) => (
+      form.setValue(`experience.${index}.description`,"")
+    ));
     dispatch(setExperience(data.experience));
   };
 
