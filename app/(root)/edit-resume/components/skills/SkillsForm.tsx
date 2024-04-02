@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 const SkillsForm = () => {
   const dispatch = useAppDispatch();
   const aiSuggesedSkills = useAppSelector(
-    (state) => state.persistedReducer.aiSuggesedSkills
+    (state) => state.persistedReducer.aiSuggesedSkills,
   );
 
   return (

@@ -24,7 +24,7 @@ const CustomSkill = () => {
       .max(20, {
         message: "Max 20 characters allowed",
       })
-      .regex(/^[ -.a-z0-9]+$/gi, {
+      .regex(/^[-.a-z0-9 ]*$/gi, {
         message: "Special characters are not allowed",
       })
       .optional(),
@@ -35,20 +35,18 @@ const CustomSkill = () => {
     resolver: zodResolver(schema),
   });
   const skillFromState = useAppSelector(
-    (state) => state.persistedReducer.technicalSkills,
+    (state) => state.persistedReducer.technicalSkills
   );
 
   const onSubmit = (data: formSchema, e?: React.BaseSyntheticEvent) => {
     e?.preventDefault();
-    console.log(data);
-
-    const customSkill = form.getValues().customSkill;
+    const { customSkill } = data;
 
     if (customSkill && customSkill.trim() !== "") {
       const combinedSkills = [...skillFromState, customSkill];
       dispatch(setTechnicalSkills(combinedSkills));
+      form.setValue("customSkill", "");
     }
-    form.setValue("customSkill", "");
   };
   const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
@@ -59,7 +57,7 @@ const CustomSkill = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(
-          (data: formSchema, e?: React.BaseSyntheticEvent) => onSubmit(data, e),
+          (data: formSchema, e?: React.BaseSyntheticEvent) => onSubmit(data, e)
         )}
         className="cols-span-1 sm:col-span-2"
       >
@@ -73,7 +71,6 @@ const CustomSkill = () => {
                   <FormControl>
                     <Input
                       className="shadow-md rounded-sm bg-white h-full py-2 w-full"
-                      // onKeyDown={(e) => e.key === "Enter" && e.preventDefault()}
                       onKeyUp={(e) => handleKeyUp(e)}
                       {...field}
                       placeholder="You didn't find? Enter your skill"

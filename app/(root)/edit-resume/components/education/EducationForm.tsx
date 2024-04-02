@@ -35,10 +35,10 @@ const EducationForm = () => {
   const [expanded, setExpanded] = useState<string | false>("");
   const dispatch = useAppDispatch();
   const education = useAppSelector((state) => state.persistedReducer.education);
-  const formSchema = z
-    .object({
-      education: z.object({
-        id:z.string(),
+  const formSchema = z.object({
+    education: z
+      .object({
+        id: z.string(),
         schoolName: z.string({
           required_error: "School name is required",
           invalid_type_error: "Invalid string",
@@ -61,8 +61,9 @@ const EducationForm = () => {
           })
           .optional(),
         checkboxPursuing: z.boolean().optional(),
-      }).array()
-    })
+      })
+      .array(),
+  });
 
   const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
@@ -113,7 +114,6 @@ const EducationForm = () => {
         id: item.id,
         speciality: item.speciality,
         checkboxPursuing: item.checkboxPursuing,
-
       };
     });
 
@@ -367,7 +367,7 @@ const EducationForm = () => {
                       </Collapsible>
                     </>
                   );
-                }
+                },
               )}
 
               <div className="flex gap-5">
