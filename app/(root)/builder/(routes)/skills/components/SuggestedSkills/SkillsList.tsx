@@ -23,9 +23,10 @@ const SkillsList = () => {
     fetcher,
     {
       onSuccess: () => {
-        
         dispatch(setAiSuggestedSkills(data));
       },
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
     }
   );
 

@@ -20,7 +20,7 @@ const Description: FC<IExperienceForm> = ({ form, index }) => {
           <FormLabel>Description</FormLabel>
           <FormControl>
             <RichTextEditor
-              onChange={(content) => field.onChange(content) }
+              onChange={(content) => field.onChange(content)}
               value={field.value}
             />
           </FormControl>

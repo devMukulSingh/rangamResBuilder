@@ -92,10 +92,12 @@ const PersonalForm = () => {
   });
 
   type formSchema = z.infer<typeof schema>;
-  const personalInfo = useAppSelector( state => state.persistedReducer.personalInfo);
+  const personalInfo = useAppSelector(
+    (state) => state.persistedReducer.personalInfo,
+  );
   const form = useForm<formSchema>({
     resolver: zodResolver(schema),
-    defaultValues: personalInfo
+    defaultValues: personalInfo,
   });
 
   const onSubmit = async (data: formSchema) => {

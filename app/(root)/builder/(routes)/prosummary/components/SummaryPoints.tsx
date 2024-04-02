@@ -5,7 +5,6 @@ import { cookies } from "next/headers";
 import BioSkeleton from "./BioSkeleton";
 
 const SummaryPoints = async () => {
-
   const profession = cookies().get("profession")?.value;
   const goal = cookies().get("goal")?.value;
 
