@@ -8,7 +8,7 @@ const RichTextEditor = dynamic(
   () => import("@/components/commons/RichTextEditor"),
   {
     ssr: false,
-  },
+  }
 );
 
 interface PersonalSection {}
@@ -16,11 +16,11 @@ interface PersonalSection {}
 const PersonalSection: React.FC<PersonalSection> = ({}) => {
   const dispatch = useAppDispatch();
   const personalInfo = useAppSelector(
-    (state) => state.persistedReducer.personalInfo,
+    (state) => state.persistedReducer.personalInfo
   );
   const formComp = useAppSelector((state) => state.commonSlice.formComp);
   const selectedBio = useAppSelector(
-    (state) => state.persistedReducer?.personalInfo?.bio,
+    (state) => state.persistedReducer?.personalInfo?.bio
   );
 
   return (
@@ -29,6 +29,7 @@ const PersonalSection: React.FC<PersonalSection> = ({}) => {
       <div className="space-y-2">
         <h1 className="text-2xl font-semibold">{personalInfo?.fullName}</h1>
         <h1>
+          {personalInfo.countryCode}&nbsp;
           {personalInfo?.mobile}{" "}
           {`${personalInfo?.email ? `|| ${personalInfo.email}` : ""}`}
         </h1>

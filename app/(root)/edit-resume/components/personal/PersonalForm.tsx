@@ -1,5 +1,5 @@
 "use client";
-import { setFormComp } from "@/redux/slice/commonSlice";
+import { setFormComp, setValidatedOptions } from "@/redux/slice/commonSlice";
 import { motion } from "framer-motion";
 import Name from "@/app/(root)/builder/(routes)/personal/components/formFields/Name";
 import Email from "@/app/(root)/builder/(routes)/personal/components/formFields/Email";
@@ -56,13 +56,14 @@ const PersonalForm = () => {
 
   type formSchema = z.infer<typeof schema>;
   const personalInfo = useAppSelector(
-    (state) => state.persistedReducer.personalInfo,
+    (state) => state.persistedReducer.personalInfo
   );
-
+    console.log(personalInfo);
+    
   const form = useForm<formSchema>({
     resolver: zodResolver(schema),
     defaultValues: personalInfo || {
-      countryCode: "+1(USD)",
+      countryCode: "+1 (USD)",
       email: "",
       fullName: "",
       mobile: "",
@@ -75,9 +76,19 @@ const PersonalForm = () => {
   });
 
   const onSubmit = () => {
+    const isValidated = form.formState.isValid;
     dispatch(setFormComp("Experience"));
+    dispatch(
+      setValidatedOptions({
+        name: "Personal Information",
+        isValidated: true,
+        index: 0,
+      })
+    );
   };
   const handleChange = () => {
+    console.log(form.getValues());
+    
     dispatch(setPersonalInfo(form.getValues()));
   };
 
@@ -100,7 +111,7 @@ const PersonalForm = () => {
               <Address form={form} />
 
               <div className="flex gap-5 w-full">
-                <CountryCode form={form} />
+                <CountryCode form={form} handleChange={handleChange} />
                 <Mobile form={form} />
               </div>
 

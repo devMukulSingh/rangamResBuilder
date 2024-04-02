@@ -2,9 +2,6 @@
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
 import { setFormComp } from "@/redux/slice/commonSlice";
 import { LucideIcon } from "lucide-react";
-import Link from "next/link";
-import { useParams } from "next/navigation";
-import { ReactNode, useState } from "react";
 import { IconType } from "react-icons/lib";
 import {
   Tooltip,
@@ -12,6 +9,8 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { useState } from "react";
+import toast from "react-hot-toast";
 
 interface SidebarOptionProps {
   option: {
@@ -20,22 +19,44 @@ interface SidebarOptionProps {
     isActive: boolean;
   };
   sidebar: boolean;
+  index: number;
 }
 
-const SidebarOption: React.FC<SidebarOptionProps> = ({ option, sidebar }) => {
+const SidebarOption: React.FC<SidebarOptionProps> = ({
+  option,
+  sidebar,
+  index,
+}) => {
   const dispatch = useAppDispatch();
   const formComp = useAppSelector((state) => state.commonSlice.formComp);
+  const sidebarOptions = useAppSelector(
+    (state) => state.commonSlice.sidebarOptions
+  );
+
+  const justBefore = sidebarOptions[index > 0 ? index - 1 : 0];
   const handleNavigate = () => {
+    const beforeComp = sidebarOptions.filter((item) => item.index < index);
+
+    for (let comp of beforeComp) {
+      if (!comp.isValidated) {
+        toast.error("Form data is required");
+        return null;
+      }
+    }
     dispatch(setFormComp(option.title));
   };
+
   return (
     <TooltipProvider delayDuration={100}>
       <Tooltip>
         <TooltipTrigger asChild>
           <li
+            aria-disabled={!justBefore.isValidated}
             onClick={() => handleNavigate()}
             className={`
         ${option.title === formComp ? "bg-red-100" : ""}
+
+        disabled:opacity-30
         flex 
         gap-3 
         hover:bg-red-100 

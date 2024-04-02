@@ -21,6 +21,7 @@ const CountryCode = dynamic(() => import("./formFields/CountryCode"), {
 import validator from "validator";
 
 export interface IForm {
+  handleChange?:() => void;
   form: UseFormReturn<
     {
       fullName: string;

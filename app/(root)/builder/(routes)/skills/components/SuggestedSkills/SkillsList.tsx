@@ -6,13 +6,13 @@ import axios from "axios";
 import SkillsSkeleton from "./SkillsSkeleton";
 import { setAiSuggestedSkills } from "@/redux/slice/userSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
-import useSWR, { useSWRConfig } from "swr";
+import useSWR from "swr";
 
 export type Ifetcher = [url: string, profession: string];
 
 const SkillsList = () => {
   const profession = useAppSelector(
-    (state) => state.persistedReducer.personalInfo.profession,
+    (state) => state.persistedReducer.personalInfo.profession
   );
   const dispatch = useAppDispatch();
   const fetcher = ([url, profession]: Ifetcher) =>
@@ -22,30 +22,12 @@ const SkillsList = () => {
     ["/api/ai/get-skills", profession],
     fetcher,
     {
-      onSuccess: () => {
-        console.log(data);
-
-        // dispatch(setAiSuggestedSkills(data));
-      },
       revalidateIfStale: false,
       revalidateOnFocus: false,
-    },
+    }
   );
   dispatch(setAiSuggestedSkills(data));
-  // console.log("hello");
 
-  // const { isLoading, data, error, isError } = useQuery({
-  //   queryKey: ["aiSuggestedSkills", profession],
-  //   queryFn: async () => {
-  //     const { data } = await axios.get(`/api/ai/get-skills`, {
-  //       params: { profession },
-  //     });
-  //     return data;
-  //   },
-  //   refetchOnMount: false,
-  //   staleTime: Infinity,
-  //   refetchOnWindowFocus: false,
-  // });
   if (error) {
     console.log(`Error in GETSkills ${error}`);
   }
@@ -63,7 +45,7 @@ const SkillsList = () => {
       hover:custom-scrollbar 
       relative"
     >
-      {!data ? (
+      { (!data || data.length < 2 )? (
         <SkillsSkeleton />
       ) : (
         <div
@@ -93,3 +75,17 @@ const SkillsList = () => {
 };
 
 export default SkillsList;
+// console.log("hello");
+
+// const { isLoading, data, error, isError } = useQuery({
+//   queryKey: ["aiSuggestedSkills", profession],
+//   queryFn: async () => {
+//     const { data } = await axios.get(`/api/ai/get-skills`, {
+//       params: { profession },
+//     });
+//     return data;
+//   },
+//   refetchOnMount: false,
+//   staleTime: Infinity,
+//   refetchOnWindowFocus: false,
+// });

@@ -92,18 +92,20 @@ const Sidebar = () => {
                 `}
         />
         <ul className="">
-          {sidebarOptions.map((option) => (
+          {sidebarOptions.map((option, index) => (
             <SidebarOption
               option={option}
-              key={option.title}
+              key={index}
+              index={index}
               sidebar={sidebar}
             />
           ))}
           {showOptions &&
-            extraOptions.map((option) => (
+            extraOptions.map((option, index) => (
               <SidebarOption
+                index={index+4}
                 option={option}
-                key={option.title}
+                key={index}
                 sidebar={sidebar}
               />
             ))}

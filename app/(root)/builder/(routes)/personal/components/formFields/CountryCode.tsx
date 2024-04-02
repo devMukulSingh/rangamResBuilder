@@ -27,7 +27,7 @@ import { countryCodes } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
 import { IForm } from "../PersonalForm";
 
-const CountryCode: FC<IForm> = ({ form }) => {
+const CountryCode: FC<IForm> = ({ form,handleChange }) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -74,6 +74,7 @@ const CountryCode: FC<IForm> = ({ form }) => {
                         onSelect={() => {
                           form.setValue("countryCode", code.mobileCode);
                           setOpen(false);
+                          handleChange && handleChange();
                         }}
                       >
                         {code.mobileCode} ({code.name})
