@@ -11,7 +11,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
         { status: 400 },
       );
 
-    const skillPrompt = `My profession is ${profession}, give me a list of 13 technology names, or skills relevant to this profession in maximum 3 words, and exclude slash`;
+    const skillPrompt = `My profession is ${profession}, give me a list of 13 skills used in this profession to add in resume without description give only skills,dont give examples in bracket`;
 
     const skills = await ChatGPT(skillPrompt);
     const parsedSkills =
