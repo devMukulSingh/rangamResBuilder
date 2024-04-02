@@ -31,7 +31,7 @@ const SidebarOption: React.FC<SidebarOptionProps> = ({ option, sidebar }) => {
       <Tooltip>
         <TooltipTrigger asChild>
           <li
-            onClick={() => dispatch(setFormComp(option.title))}
+            // onClick={() => dispatch(setFormComp(option.title))}
             className={`
         ${option.title === formComp ? "bg-red-100" : ""}
         flex 

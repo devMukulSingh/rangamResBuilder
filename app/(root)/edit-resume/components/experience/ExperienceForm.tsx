@@ -29,7 +29,7 @@ const ExperienceForm = () => {
   const [expanded, setExpanded] = useState<string | false>("");
   const dispatch = useAppDispatch();
   const experience = useAppSelector(
-    (state) => state.persistedReducer.experience,
+    (state) => state.persistedReducer.experience
   );
 
   const form = useForm({
@@ -230,7 +230,7 @@ const ExperienceForm = () => {
                       </CollapsibleContent>
                     </Collapsible>
                   );
-                },
+                }
               )}
 
               <Button
@@ -243,9 +243,9 @@ const ExperienceForm = () => {
                 Add More
               </Button>
 
-              {/* <Button type="submit" className="w-full py-6 mt-5">
+              <Button type="submit" className="w-1/3 self-center mt-5">
                 Next
-              </Button> */}
+              </Button>
             </div>
           </form>
         </Form>

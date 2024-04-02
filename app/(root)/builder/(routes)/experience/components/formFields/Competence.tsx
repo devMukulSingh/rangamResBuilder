@@ -37,7 +37,7 @@ const Competence: React.FC<competenceProps> = ({
 
   const dispatch = useAppDispatch();
   const profession = useAppSelector(
-    (state) => state.persistedReducer.personalInfo.profession,
+    (state) => state.persistedReducer.personalInfo.profession
   );
 
   const { isLoading, data, isError, error, refetch } = useQuery({
@@ -53,8 +53,8 @@ const Competence: React.FC<competenceProps> = ({
       });
       dispatch(setCompDescLoading(isLoading));
       const previousDescription = form.getValues(
-        `experience.${index}.description`,
-      );
+        `experience.${index}.description`
+      ).replace("<br>","");
       const descriptionString = previousDescription.concat(data);
       form.setValue(`experience.${index}.description`, descriptionString);
       form.setValue(`experience.${index}.competences.${competenceIndex}`, {
@@ -76,18 +76,20 @@ const Competence: React.FC<competenceProps> = ({
       const descriptionToRemove = competence.description;
       const filteredString = form
         .getValues()
-        .experience[index].description.replace(descriptionToRemove, "");
+        .experience[
+          index
+        ].description.replace(`${descriptionToRemove}`, "").replace("<br>","");
       console.log(filteredString);
 
       form.setValue(`experience.${index}.description`, filteredString);
       form.setValue(
         `experience.${index}.competences.${competenceIndex}.isSelected`,
-        false,
+        false
       );
     } else {
       form.setValue(
         `experience.${index}.competences.${competenceIndex}.isSelected`,
-        true,
+        true
       );
       refetch();
     }

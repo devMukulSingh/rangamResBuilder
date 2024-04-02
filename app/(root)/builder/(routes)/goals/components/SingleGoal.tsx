@@ -34,19 +34,20 @@ const SingleGoal: React.FC<SingleGoalProps> = ({
         gap-5 
         px-5
         py-5
-        sm:w-auto
-        w-[20rem] 
+        lg:w-[90%]
+        md:w-full
+        w-[15rem] 
       bg-red-100
       rounded-lg
-        h-[18rem]
+        h-[16rem]
         ${selected === goal.title ? "bg-red-300 transition scale-90" : ""}
         `}
     >
       <figure
         className="
         relative
-        w-[15rem]
-        h-[15rem]
+        w-[10rem]
+        h-[10rem]
         "
       >
         <Image

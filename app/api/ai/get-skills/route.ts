@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(req: NextRequest, res: NextResponse) {
   try {
     const profession = cookies().get("profession")?.value;
-    if (!profession || profession === '')
+    if (!profession || profession === "")
       return NextResponse.json(
         { error: "profession is required" },
         { status: 400 },

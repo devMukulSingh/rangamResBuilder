@@ -12,7 +12,7 @@ export type Ifetcher = [url: string, profession: string];
 
 const SkillsList = () => {
   const profession = useAppSelector(
-    (state) => state.persistedReducer.personalInfo.profession
+    (state) => state.persistedReducer.personalInfo.profession,
   );
   const dispatch = useAppDispatch();
   const fetcher = ([url, profession]: Ifetcher) =>
@@ -27,7 +27,7 @@ const SkillsList = () => {
       },
       revalidateIfStale: false,
       revalidateOnFocus: false,
-    }
+    },
   );
 
   // const { isLoading, data, error, isError } = useQuery({

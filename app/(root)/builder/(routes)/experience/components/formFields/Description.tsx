@@ -7,7 +7,6 @@ import {
 } from "@/components/ui/form";
 import React, { FC } from "react";
 import { IExperienceForm } from "../ExperienceForm";
-import { Editor } from "@tinymce/tinymce-react";
 import RichTextEditor from "@/components/commons/RichTextEditor";
 
 const Description: FC<IExperienceForm> = ({ form, index }) => {

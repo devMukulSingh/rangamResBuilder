@@ -36,8 +36,8 @@ export interface Ieducation {
   schoolName: string;
   degree: string;
   speciality: string;
-  startDate: Date | null;
-  endDate: Date | null;
+  startDate: undefined | string;
+  endDate: undefined | string;
   id: string;
   checkboxPursuing: boolean;
   schoolLocation?: string;

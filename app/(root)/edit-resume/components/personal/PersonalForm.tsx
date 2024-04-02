@@ -17,9 +17,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { setPersonalInfo } from "@/redux/slice/userSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
 
 const PersonalForm = () => {
-  const [open, setOpen] = useState(false);
   const dispatch = useAppDispatch();
 
   const schema = z.object({
@@ -56,7 +56,7 @@ const PersonalForm = () => {
 
   type formSchema = z.infer<typeof schema>;
   const personalInfo = useAppSelector(
-    (state) => state.persistedReducer.personalInfo,
+    (state) => state.persistedReducer.personalInfo
   );
 
   const form = useForm<formSchema>({
@@ -91,22 +91,16 @@ const PersonalForm = () => {
         <Form {...form}>
           <form onChange={handleChange} onSubmit={form.handleSubmit(onSubmit)}>
             <div className="flex flex-col gap-5">
-              {/* Name */}
               <Name form={form} />
 
-              {/* email */}
               <Email form={form} />
 
-              {/* profession */}
               <Profession form={form} />
 
-              {/* address */}
               <Address form={form} />
 
               <div className="flex gap-5 w-full">
-                {/* countryCode */}
                 <CountryCode form={form} />
-                {/* mobile no */}
                 <Mobile form={form} />
               </div>
 
@@ -119,9 +113,9 @@ const PersonalForm = () => {
                 <DOB form={form} />
               </div>
 
-              {/* <Button type="submit" className="w-full">
+              <Button type="submit" className="self-center w-1/3 mt-10">
                 Next
-              </Button> */}
+              </Button>
             </div>
           </form>
         </Form>

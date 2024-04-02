@@ -45,6 +45,7 @@ const ExperienceForm = () => {
   const dispatch = useAppDispatch();
   const experience =
     useAppSelector((state) => state.persistedReducer.experience) || [];
+console.log(experience);
 
   // const schema = z.object({
   //   CompanyName: z.string().min(3),
@@ -101,10 +102,6 @@ const ExperienceForm = () => {
   const onSubmit = (data: FieldValues) => {
     router.push("/builder/prosummary");
     console.log(data.experience);
-    // const description = form.getValues().experience.map( item => item.competences);
-    controlledFields.map((field, index) =>
-      form.setValue(`experience.${index}.description`, ""),
-    );
     dispatch(setExperience(data.experience));
   };
 

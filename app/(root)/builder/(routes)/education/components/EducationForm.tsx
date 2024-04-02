@@ -40,7 +40,6 @@ const EducationForm = () => {
   const dispatch = useAppDispatch();
   const education = useAppSelector((state) => state.persistedReducer.education);
   const router = useRouter();
-  console.log(education);
 
   const form = useForm({
     defaultValues: {
@@ -49,8 +48,8 @@ const EducationForm = () => {
           schoolName: "",
           degree: "",
           speciality: "",
-          startDate: null,
-          endDate: null,
+          startDate: undefined,
+          endDate: undefined,
           id: Math.floor(Math.random() * 100).toString(),
           checkboxPursuing: false,
         },
@@ -86,9 +85,9 @@ const EducationForm = () => {
     if (
       schoolName === "" ||
       degree === "" ||
-      startDate === null ||
+      startDate === undefined ||
       speciality === "" ||
-      (endDate === null && checkboxPursuing === false)
+      (endDate === undefined && checkboxPursuing === false)
     ) {
       toast.error("Complete previous form first");
     } else {
@@ -96,8 +95,8 @@ const EducationForm = () => {
         schoolName: "",
         degree: "",
         speciality: "",
-        startDate: null,
-        endDate: null,
+        startDate: undefined,
+        endDate: undefined,
         checkboxPursuing: false,
         id: Math.floor(Math.random() * 100).toString(),
       };

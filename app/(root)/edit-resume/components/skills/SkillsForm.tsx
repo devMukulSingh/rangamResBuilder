@@ -1,12 +1,15 @@
 "use client";
 import Skill from "./Skill";
-import { useAppSelector } from "@/redux/hooks/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
 import { motion } from "framer-motion";
 import CustomSkill from "./CustomSkill";
+import { setFormComp } from "@/redux/slice/commonSlice";
+import { Button } from "@/components/ui/button";
 
 const SkillsForm = () => {
+  const dispatch = useAppDispatch();
   const aiSuggesedSkills = useAppSelector(
-    (state) => state.persistedReducer.aiSuggesedSkills,
+    (state) => state.persistedReducer.aiSuggesedSkills
   );
 
   return (
@@ -26,6 +29,12 @@ const SkillsForm = () => {
         </section>
 
         <CustomSkill />
+        <Button
+          onClick={() => dispatch(setFormComp("Education"))}
+          className="w-1/3 self-center mt-5"
+        >
+          Next
+        </Button>
       </div>
     </motion.div>
   );

@@ -21,29 +21,60 @@ import {
 } from "@/components/ui/collapsible";
 import { useParams, useRouter } from "next/navigation";
 import { setProgress } from "@/redux/slice/userSlice";
-import { Trash } from "lucide-react";
+import { PlusCircle, Trash } from "lucide-react";
 import toast from "react-hot-toast";
 import { setFormComp } from "@/redux/slice/commonSlice";
 import { motion } from "framer-motion";
 import { Checkbox } from "@/components/ui/checkbox";
 import MonthPicker from "@/components/commons/MonthPicker";
 import LinkComp from "@/components/ui/LinkComp";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
 
 const EducationForm = () => {
   const [expanded, setExpanded] = useState<string | false>("");
   const dispatch = useAppDispatch();
-  const progress = useAppSelector((state) => state.persistedReducer.progress);
   const education = useAppSelector((state) => state.persistedReducer.education);
+  const formSchema = z
+    .object({
+      education: z.object({
+        id:z.string(),
+        schoolName: z.string({
+          required_error: "School name is required",
+          invalid_type_error: "Invalid string",
+        }),
+        degree: z.string({
+          required_error: "Degree is required",
+          invalid_type_error: "Invalid string",
+        }),
+        speciality: z.string({
+          required_error: "Speciality is required",
+          invalid_type_error: "Invalid string",
+        }),
+        startDate: z.string({
+          required_error: "Start date is required",
+          invalid_type_error: "Invalid date",
+        }),
+        endDate: z
+          .string({
+            invalid_type_error: "Invalid date",
+          })
+          .optional(),
+        checkboxPursuing: z.boolean().optional(),
+      }).array()
+    })
 
-  const form = useForm({
+  const router = useRouter();
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
     defaultValues: {
       education: education || [
         {
           schoolName: "",
           degree: "",
           speciality: "",
-          startDate: "",
-          endDate: "",
+          startDate: undefined,
+          endDate: undefined,
           checkboxPursuing: false,
           id: Math.floor(Math.random() * 100).toString(),
           // schoolLocation: '',
@@ -67,10 +98,8 @@ const EducationForm = () => {
   });
 
   const onSubmit = () => {
-    dispatch(setFormComp("Social Links"));
-    if (progress <= 46) {
-      dispatch(setProgress());
-    }
+    router.push("/download");
+    // dispatch(setFormComp("Social Links"));
   };
   const handleChange = () => {
     const education = form.getValues().education;
@@ -85,8 +114,6 @@ const EducationForm = () => {
         speciality: item.speciality,
         checkboxPursuing: item.checkboxPursuing,
 
-        // schoolLocation: item.schoolLocation,
-        // percentage: item.percentage
       };
     });
 
@@ -284,7 +311,6 @@ const EducationForm = () => {
 
                           {/* startDate */}
                           <FormField
-                            defaultValue="2018-05"
                             name={`education.${index}.startDate`}
                             control={form.control}
                             render={({ field }) => (
@@ -300,7 +326,6 @@ const EducationForm = () => {
 
                           {/* endDate */}
                           <FormField
-                            defaultValue="2018-05"
                             name={`education.${index}.endDate`}
                             control={form.control}
                             render={({ field }) => (
@@ -342,16 +367,22 @@ const EducationForm = () => {
                       </Collapsible>
                     </>
                   );
-                },
+                }
               )}
 
               <div className="flex gap-5">
-                <Button type="button" onClick={handleAddMore} className="w-40">
+                <Button
+                  type="button"
+                  onClick={handleAddMore}
+                  className="w-40 flex gap-2"
+                  variant="ghost"
+                >
+                  <PlusCircle />
                   Add More
                 </Button>
-                <LinkComp href={"/download"} className="">
+                <Button className="w-40" type="submit">
                   Submit
-                </LinkComp>
+                </Button>
               </div>
             </div>
           </form>
