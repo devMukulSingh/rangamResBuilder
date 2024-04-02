@@ -8,10 +8,10 @@ export interface IinitialState {
   competenceLoading: boolean;
   compDescLoading: boolean;
   sidebarOptions: {
-    name: string,
-    isValidated: boolean,
-    index: number
-  }[]
+    name: string;
+    isValidated: boolean;
+    index: number;
+  }[];
 }
 
 const initialState: IinitialState = {
@@ -25,44 +25,44 @@ const initialState: IinitialState = {
     {
       index: 0,
       name: "Personal Information",
-      isValidated: false
+      isValidated: false,
     },
     {
       index: 1,
       name: "Experience",
-      isValidated: true
+      isValidated: true,
     },
     {
       index: 2,
       name: "Skills",
-      isValidated: true
+      isValidated: true,
     },
     {
       index: 3,
       name: "Education",
-      isValidated: false
+      isValidated: false,
     },
     {
       index: 4,
       name: "Social Links",
-      isValidated: true
+      isValidated: true,
     },
     {
       index: 5,
       name: "Projects",
-      isValidated: true
+      isValidated: true,
     },
     {
       index: 6,
       name: "Achievments",
-      isValidated: true
+      isValidated: true,
     },
     {
       index: 7,
       name: "Language",
-      isValidated: true
+      isValidated: true,
     },
-  ]
+  ],
 };
 
 const commonSlice = createSlice({
@@ -91,12 +91,11 @@ const commonSlice = createSlice({
       state.compDescLoading = action.payload;
     },
     setValidatedOptions: (state, action) => {
-      const filtered = state.sidebarOptions.filter(item => item.name !== action.payload.name);
-      state.sidebarOptions = [
-        ...filtered,
-        action.payload,
-      ]
-    }
+      const filtered = state.sidebarOptions.filter(
+        (item) => item.name !== action.payload.name,
+      );
+      state.sidebarOptions = [...filtered, action.payload];
+    },
   },
 });
 
@@ -110,5 +109,5 @@ export const {
   setSkillsLoading,
   setCompLoading,
   setCompDescLoading,
-  setValidatedOptions
+  setValidatedOptions,
 } = commonSlice.actions;

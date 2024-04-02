@@ -56,10 +56,10 @@ const PersonalForm = () => {
 
   type formSchema = z.infer<typeof schema>;
   const personalInfo = useAppSelector(
-    (state) => state.persistedReducer.personalInfo
+    (state) => state.persistedReducer.personalInfo,
   );
-    console.log(personalInfo);
-    
+  console.log(personalInfo);
+
   const form = useForm<formSchema>({
     resolver: zodResolver(schema),
     defaultValues: personalInfo || {
@@ -83,12 +83,12 @@ const PersonalForm = () => {
         name: "Personal Information",
         isValidated: true,
         index: 0,
-      })
+      }),
     );
   };
   const handleChange = () => {
     console.log(form.getValues());
-    
+
     dispatch(setPersonalInfo(form.getValues()));
   };
 

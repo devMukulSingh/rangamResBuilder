@@ -103,7 +103,7 @@ const Sidebar = () => {
           {showOptions &&
             extraOptions.map((option, index) => (
               <SidebarOption
-                index={index+4}
+                index={index + 4}
                 option={option}
                 key={index}
                 sidebar={sidebar}

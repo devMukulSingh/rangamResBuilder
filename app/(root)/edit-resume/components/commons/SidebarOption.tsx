@@ -30,7 +30,7 @@ const SidebarOption: React.FC<SidebarOptionProps> = ({
   const dispatch = useAppDispatch();
   const formComp = useAppSelector((state) => state.commonSlice.formComp);
   const sidebarOptions = useAppSelector(
-    (state) => state.commonSlice.sidebarOptions
+    (state) => state.commonSlice.sidebarOptions,
   );
 
   const justBefore = sidebarOptions[index > 0 ? index - 1 : 0];

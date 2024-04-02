@@ -27,12 +27,12 @@ import { countryCodes } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
 import { IForm } from "../PersonalForm";
 
-const CountryCode: FC<IForm> = ({ form,handleChange }) => {
+const CountryCode: FC<IForm> = ({ form, handleChange }) => {
   const [open, setOpen] = useState(false);
 
   return (
     <FormField
-      defaultValue="+1 (US)"
+      defaultValue="+1"
       name="countryCode"
       control={form.control}
       render={({ field }) => (

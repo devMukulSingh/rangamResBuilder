@@ -8,14 +8,14 @@ interface ExperienceSectionProps {}
 
 const ExperienceSection: React.FC<ExperienceSectionProps> = ({}) => {
   const experience = useAppSelector(
-    (state) => state.persistedReducer.experience,
+    (state) => state.persistedReducer.experience
   );
 
   return (
     <div className="space-y-4 bg-white p-5 ">
       <h1 className=" text-xl font-semibold">Work Experience</h1>
       {experience?.map((item, index) => (
-        <div className="flex flex-col gap-5 break-all" key={index}>
+        <div className="flex flex-col gap-5 " key={index}>
           <div>
             <h1 className="font-bold">
               {item.jobTitle || ""}

@@ -12,7 +12,7 @@ export type Ifetcher = [url: string, profession: string];
 
 const SkillsList = () => {
   const profession = useAppSelector(
-    (state) => state.persistedReducer.personalInfo.profession
+    (state) => state.persistedReducer.personalInfo.profession,
   );
   const dispatch = useAppDispatch();
   const fetcher = ([url, profession]: Ifetcher) =>
@@ -24,7 +24,7 @@ const SkillsList = () => {
     {
       revalidateIfStale: false,
       revalidateOnFocus: false,
-    }
+    },
   );
   dispatch(setAiSuggestedSkills(data));
 
@@ -45,7 +45,7 @@ const SkillsList = () => {
       hover:custom-scrollbar 
       relative"
     >
-      { (!data || data.length < 2 )? (
+      {!data || data.length < 2 ? (
         <SkillsSkeleton />
       ) : (
         <div

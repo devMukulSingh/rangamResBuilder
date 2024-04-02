@@ -17,11 +17,11 @@ export const HTMLRenderer = ({
 
           if (Array.isArray(dToReact)) {
             return (
-              <ol className="list-decimal pl-5 break-all whitespace-normal">
+              <ol className="list-decimal pl-5">
                 {dToReact.map((item, index) => {
                   if (!item.props.children) return null;
                   return (
-                    <li key={index} className={`break-words whitespace-wrap`}>
+                    <li key={index} className={``}>
                       {item.props.children}
                     </li>
                   );
@@ -41,5 +41,5 @@ export const HTMLRenderer = ({
       },
     });
   }, [htmlString]);
-  return <div className="whitespace-normal">{parsedElement}</div>;
+  return <div className="">{parsedElement}</div>;
 };
