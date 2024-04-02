@@ -12,7 +12,7 @@ export type Ifetcher = [url: string, profession: string];
 
 const SkillsList = () => {
   const profession = useAppSelector(
-    (state) => state.persistedReducer.personalInfo.profession
+    (state) => state.persistedReducer.personalInfo.profession,
   );
   const dispatch = useAppDispatch();
   const fetcher = ([url, profession]: Ifetcher) =>
@@ -22,7 +22,6 @@ const SkillsList = () => {
     ["/api/ai/get-skills", profession],
     fetcher,
     {
-
       onSuccess: () => {
         console.log(data);
 
@@ -30,7 +29,7 @@ const SkillsList = () => {
       },
       revalidateIfStale: false,
       revalidateOnFocus: false,
-    }
+    },
   );
   dispatch(setAiSuggestedSkills(data));
   // console.log("hello");
