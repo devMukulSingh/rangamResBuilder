@@ -45,7 +45,6 @@ const ExperienceForm = () => {
   const dispatch = useAppDispatch();
   const experience =
     useAppSelector((state) => state.persistedReducer.experience) || [];
-  console.log(experience);
 
   // const schema = z.object({
   //   CompanyName: z.string().min(3),

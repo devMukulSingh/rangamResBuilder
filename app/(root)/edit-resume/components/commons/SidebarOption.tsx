@@ -25,13 +25,15 @@ interface SidebarOptionProps {
 const SidebarOption: React.FC<SidebarOptionProps> = ({ option, sidebar }) => {
   const dispatch = useAppDispatch();
   const formComp = useAppSelector((state) => state.commonSlice.formComp);
-
+  const handleNavigate = () => {
+    dispatch(setFormComp(option.title));
+  };
   return (
     <TooltipProvider delayDuration={100}>
       <Tooltip>
         <TooltipTrigger asChild>
           <li
-            // onClick={() => dispatch(setFormComp(option.title))}
+            onClick={() => handleNavigate()}
             className={`
         ${option.title === formComp ? "bg-red-100" : ""}
         flex 
