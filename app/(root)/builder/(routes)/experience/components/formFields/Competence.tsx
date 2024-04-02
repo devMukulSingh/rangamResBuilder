@@ -37,7 +37,7 @@ const Competence: React.FC<competenceProps> = ({
 
   const dispatch = useAppDispatch();
   const profession = useAppSelector(
-    (state) => state.persistedReducer.personalInfo.profession
+    (state) => state.persistedReducer.personalInfo.profession,
   );
 
   const { isLoading, data, isError, error, refetch } = useQuery({
@@ -53,7 +53,7 @@ const Competence: React.FC<competenceProps> = ({
       });
       dispatch(setCompDescLoading(isLoading));
       const previousDescription = form.getValues(
-        `experience.${index}.description`
+        `experience.${index}.description`,
       );
       const descriptionString = previousDescription.concat(data);
       form.setValue(`experience.${index}.description`, descriptionString);
@@ -82,12 +82,12 @@ const Competence: React.FC<competenceProps> = ({
       form.setValue(`experience.${index}.description`, filteredString);
       form.setValue(
         `experience.${index}.competences.${competenceIndex}.isSelected`,
-        false
+        false,
       );
     } else {
       form.setValue(
         `experience.${index}.competences.${competenceIndex}.isSelected`,
-        true
+        true,
       );
       refetch();
     }

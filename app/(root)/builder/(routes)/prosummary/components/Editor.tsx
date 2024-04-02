@@ -1,16 +1,15 @@
 "use client";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
 import { setSelectedBio } from "@/redux/slice/userSlice";
-import MCEEditor from "@/components/commons/MCEEditor";
+import RichTextEditor from "@/components/commons/RichTextEditor";
 
 const Editor = () => {
   const dispatch = useAppDispatch();
   const selectedBio = useAppSelector(
-    (state) => state.persistedReducer.personalInfo.bio
+    (state) => state.persistedReducer.personalInfo.bio,
   );
   return (
-    <MCEEditor
-      height={500}
+    <RichTextEditor
       value={selectedBio}
       onChange={(content) => dispatch(setSelectedBio(content))}
     />

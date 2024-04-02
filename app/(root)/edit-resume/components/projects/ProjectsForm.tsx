@@ -25,7 +25,7 @@ const RichTextEditor = dynamic(
   () => import("@/components/commons/RichTextEditor"),
   {
     ssr: false,
-  }
+  },
 );
 import { motion } from "framer-motion";
 import MCEEditor from "@/components/commons/MCEEditor";
@@ -222,8 +222,7 @@ const ProjectsForm = () => {
                           <FormItem>
                             <FormLabel>Description</FormLabel>
                             <FormControl>
-                              <MCEEditor
-                                height={200}
+                              <RichTextEditor
                                 value={field.value || ""}
                                 onChange={(content) => {
                                   field.onChange(content);

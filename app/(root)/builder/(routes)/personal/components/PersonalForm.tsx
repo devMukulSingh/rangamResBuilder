@@ -5,7 +5,7 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { resetForm, setPersonalInfo } from "@/redux/slice/userSlice";
-import { useAppDispatch } from "@/redux/hooks/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { motion } from "framer-motion";
@@ -92,9 +92,10 @@ const PersonalForm = () => {
   });
 
   type formSchema = z.infer<typeof schema>;
-
+  const personalInfo = useAppSelector( state => state.persistedReducer.personalInfo);
   const form = useForm<formSchema>({
     resolver: zodResolver(schema),
+    defaultValues: personalInfo
   });
 
   const onSubmit = async (data: formSchema) => {

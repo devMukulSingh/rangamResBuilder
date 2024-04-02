@@ -12,7 +12,9 @@ export async function GET(req: NextRequest, res: NextResponse) {
       );
 
     const skillPrompt = `My profession is ${profession}, give me a list of 13 technology names, or skills relevant to this profession in maximum 3 words, and exclude slash`;
+
     const skills = await ChatGPT(skillPrompt);
+    console.log(skills);
     const parsedSkills =
       skills
         ?.replace(/\d+(\.\s*|\.)?/g, "")

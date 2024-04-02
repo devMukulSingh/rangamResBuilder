@@ -5,14 +5,7 @@ import { cookies } from "next/headers";
 import BioSkeleton from "./BioSkeleton";
 
 const SummaryPoints = async () => {
-  // const profession = cookies().get("profession")?.value;
-  // const {
-  //   data: summaries,
-  //   error,
-  //   isLoading,
-  // } = useSWR([profession], getSummary);
-  // console.log(summaries, isLoading, error);
-  // if (isLoading) return "loading...";
+
   const profession = cookies().get("profession")?.value;
   const goal = cookies().get("goal")?.value;
 

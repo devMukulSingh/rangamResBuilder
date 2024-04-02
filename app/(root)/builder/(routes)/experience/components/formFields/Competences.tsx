@@ -44,9 +44,8 @@ const Competences: FC<IExperienceForm> = ({ form, index }) => {
     }
   };
   const isLoading = useAppSelector(
-    (state) => state.commonSlice.competenceLoading
+    (state) => state.commonSlice.competenceLoading,
   );
-
 
   if (isLoading) return <CompetenceSkeleton />;
 
@@ -94,7 +93,6 @@ const Competences: FC<IExperienceForm> = ({ form, index }) => {
               Load More key responsibility
             </h1>
           </div>
-         
         </>
       )}
     />

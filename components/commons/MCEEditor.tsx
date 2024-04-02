@@ -1,10 +1,10 @@
-import React, { FC } from 'react'
+import React, { FC } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 
 interface MCEEditorProps {
   value: string;
   onChange: (value: string) => void;
-  height? : number
+  height?: number;
 }
 
 const MCEEditor: FC<MCEEditorProps> = ({ value, onChange, height }) => {
@@ -25,4 +25,4 @@ const MCEEditor: FC<MCEEditorProps> = ({ value, onChange, height }) => {
   );
 };
 
-export default MCEEditor
+export default MCEEditor;
