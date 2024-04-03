@@ -48,15 +48,29 @@ const EducationForm = () => {
           required_error: "Speciality is required",
           invalid_type_error: "Invalid string",
         }),
-        startDate: z.any({
-          required_error: "Start date is required",
-          invalid_type_error: "Invalid date",
-        }),
-        endDate: z
+        startDate: z
           .any({
-            invalid_type_error: "Invalid date",
+            required_error: "Start date is required",
           })
-          .optional(),
+          .refine(
+            (data) => {
+              if (data) return true;
+            },
+            {
+              message: "Start date is required",
+            }
+          ),
+        endDate: z
+          .any()
+          .optional()
+          .refine(
+            (data) => {
+              if (data) return true;
+            },
+            {
+              message: "End date is required",
+            }
+          ),
         checkboxPursuing: z.boolean(),
       })
       .refine(
@@ -69,7 +83,13 @@ const EducationForm = () => {
           if (endDate && typeof endDate === "string") {
             endDate = parseISO(endDate);
           }
-          if (data.endDate && startDate < endDate) return true;
+          if (
+            data.checkboxPursuing ||
+            startDate < endDate ||
+            !startDate ||
+            !endDate
+          )
+            return true;
         },
         {
           message: `End date must be greater than start date`,

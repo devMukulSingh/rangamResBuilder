@@ -62,11 +62,10 @@ const Competence: React.FC<competenceProps> = ({
       ).replace("<br>", "");
 
       //description to be added in bullet points feature
-      let descriptionString="";
-      if(previousDescription === ""){
+      let descriptionString = "";
+      if (previousDescription === "") {
         descriptionString = `<ul><li>${data}</li></ul>`;
-      }
-      else {
+      } else {
         const withoutUlTag = previousDescription.replace("</ul>", "");
         descriptionString = `${withoutUlTag}<li>${data}</li>`;
       }
@@ -85,7 +84,6 @@ const Competence: React.FC<competenceProps> = ({
     console.log(`Error in getCompetence Description ${error}`);
   }
   const handleSelect = () => {
-
     if (competence.isSelected) {
       const descriptionToRemove = competence.description;
       const filteredString = form

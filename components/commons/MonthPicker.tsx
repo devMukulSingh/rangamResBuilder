@@ -18,6 +18,7 @@ const MonthPicker: FC<any> = ({
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <DemoContainer components={["DatePicker"]}>
         <DatePicker
+        defaultValue={""}
           value={!field.value ? "" : value}
           minDate={minDate}
           disabled={disabled}
