@@ -11,20 +11,23 @@ const MonthPicker: FC<any> = ({
   disableFuture,
   disabled,
   minDate,
+  handleChange,
 }) => {
   const value = new Date(field.value);
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <DemoContainer components={["DatePicker"]}>
         <DatePicker
-          defaultValue={""}
           value={!field.value ? "" : value}
           minDate={minDate}
           disabled={disabled}
           disableFuture={disableFuture}
           className={clsx(`bg-white pt-0 pb-0 w-auto `, className)}
           views={["month", "year"]}
-          onChange={(newValue) => field.onChange(newValue)}
+          onChange={(newValue) => {
+            field.onChange(newValue);
+            console.log(newValue, typeof newValue);
+          }}
         />
       </DemoContainer>
     </LocalizationProvider>

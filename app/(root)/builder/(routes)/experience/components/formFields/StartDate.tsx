@@ -11,7 +11,10 @@ import { Input } from "@/components/ui/input";
 import MonthPicker from "@/components/commons/MonthPicker";
 
 const StartDate: FC<IExperienceForm> = ({ form, index }) => {
-    const { control, formState : {isSubmitting}} = form;
+  const {
+    control,
+    formState: { isSubmitting },
+  } = form;
 
   return (
     <FormField

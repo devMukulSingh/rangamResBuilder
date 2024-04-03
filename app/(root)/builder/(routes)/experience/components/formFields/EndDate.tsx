@@ -30,7 +30,9 @@ const EndDate: FC<IExperienceForm> = ({ form, index, controlledFields }) => {
             <MonthPicker
               minDate={minDate}
               disabled={
-                (isSubmitting || !getValues().experience[index].startDate) ? true : false
+                isSubmitting || !getValues().experience[index].startDate
+                  ? true
+                  : false
               }
               field={field}
             />

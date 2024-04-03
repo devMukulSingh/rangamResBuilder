@@ -10,7 +10,10 @@ import { IExperienceForm } from "../ExperienceForm";
 import { Input } from "@/components/ui/input";
 
 const CompanyName: FC<IExperienceForm> = ({ form, index }) => {
-  const { control, formState : {isSubmitting}} = form;
+  const {
+    control,
+    formState: { isSubmitting },
+  } = form;
   return (
     <FormField
       name={`experience.${index}.companyName`}

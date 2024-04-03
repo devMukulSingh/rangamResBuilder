@@ -3,7 +3,6 @@ import { HTMLRenderer } from "@/lib/HTMLRenderer";
 import { useAppSelector } from "@/redux/hooks/hooks";
 import { Mail, Phone } from "lucide-react";
 import { FaLinkedin, FaLocationPin } from "react-icons/fa6";
-import { MdLocationCity } from "react-icons/md";
 import { IoLocationOutline } from "react-icons/io5";
 const About = () => {
   const personalInfo = useAppSelector(
@@ -27,10 +26,10 @@ const About = () => {
             {personalInfo?.email || ""}
           </div>
           <div className="flex items-center gap-1">
-            {personalInfo?.address !== "" && personalInfo?.address && (
+            {personalInfo?.city !== "" && personalInfo?.city && (
               <>
                 <IoLocationOutline size={25} />
-                {personalInfo?.address}
+                {personalInfo?.city}
               </>
             )}
           </div>

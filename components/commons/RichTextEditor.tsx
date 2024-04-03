@@ -20,7 +20,7 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({ value, onChange }) => {
     ],
   };
 
-  return <ReactQuill value={value} onChange={onChange} modules={modules} />;
+  return <ReactQuill  value={value} onChange={onChange} modules={modules} />;
 };
 
 export default RichTextEditor;

@@ -101,7 +101,10 @@ const PersonalForm = () => {
     resolver: zodResolver(schema),
     defaultValues: personalInfo,
   });
-  const { handleSubmit,formState:{isSubmitting}, } = form;
+  const {
+    handleSubmit,
+    formState: { isSubmitting },
+  } = form;
 
   const onSubmit = async (data: formSchema) => {
     router.push(`/builder/goals?profession=${data.profession}`);
@@ -119,15 +122,9 @@ const PersonalForm = () => {
       <Form {...form}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="px-10 py-10 bg-[#E0F3FF] flex flex-col gap-3 h-full w-full lg:w-[85%]  rounded-lg ">
-            <Name 
-              form={form} 
-              
-              />
+            <Name form={form} />
 
-            <Email 
-              form={form}
-              
-              />
+            <Email form={form} />
 
             <Profession form={form} />
 
@@ -142,7 +139,7 @@ const PersonalForm = () => {
               className="mt-auto w-full py-3 flex gap-2"
             >
               Next
-              {isSubmitting && <Loader />}
+              {isSubmitting && <Loader className="animate-spin"/>}
             </Button>
           </div>
         </form>

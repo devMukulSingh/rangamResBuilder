@@ -1,8 +1,11 @@
 import Circle from "@/components/commons/Circle";
 import LinkComp from "@/components/ui/LinkComp";
 import MainSummary from "./components/MainSummary";
+import { Button } from "@/components/ui/button";
+import Buttons from "./components/Buttons";
 
 const ProSummaryPage = async () => {
+
   return (
     <div
       className="
@@ -41,17 +44,8 @@ const ProSummaryPage = async () => {
 
       <MainSummary />
 
-      <div className="mt-auto flex justify-between">
-        <LinkComp
-          className="w-40  bg-gray-400 text-[#000] hover:bg-gray-300"
-          href={"/builder/experience"}
-        >
-          Back
-        </LinkComp>
-        <LinkComp className="w-40" href={"/builder/education"}>
-          Next
-        </LinkComp>
-      </div>
+      <Buttons/>
+      
     </div>
   );
 };

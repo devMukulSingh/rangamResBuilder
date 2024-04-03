@@ -18,8 +18,11 @@ const CheckboxVolunteering: FC<IExperienceForm> = ({
   index,
   controlledFields,
 }) => {
-    const { control, formState : {isSubmitting}} = form;
-  
+  const {
+    control,
+    formState: { isSubmitting },
+  } = form;
+
   return (
     <FormField
       name={`experience.${index}.checkboxVolunteering`}
@@ -29,7 +32,9 @@ const CheckboxVolunteering: FC<IExperienceForm> = ({
           <FormControl>
             <Checkbox
               disabled={
-               (isSubmitting || controlledFields?.[index].checkboxInternship )? true : false
+                isSubmitting || controlledFields?.[index].checkboxInternship
+                  ? true
+                  : false
               }
               className="size-6 bg-white"
               checked={field.value}

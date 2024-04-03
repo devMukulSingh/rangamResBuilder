@@ -4,13 +4,15 @@ import { setSelectedBio } from "@/redux/slice/userSlice";
 import RichTextEditor from "@/components/commons/RichTextEditor";
 
 const Editor = () => {
+
   const dispatch = useAppDispatch();
   const selectedBio = useAppSelector(
-    (state) => state.persistedReducer.personalInfo.bio,
+    (state) => state.persistedReducer.personalInfo.bio
   );
   return (
     <RichTextEditor
       value={selectedBio}
+
       onChange={(content) => dispatch(setSelectedBio(content))}
     />
   );

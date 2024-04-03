@@ -33,8 +33,12 @@ const Competence: React.FC<competenceProps> = ({
   competenceIndex,
   onChange,
 }) => {
-
-  const { control,setValue,getValues, formState:{ isSubmitting }} = form;
+  const {
+    control,
+    setValue,
+    getValues,
+    formState: { isSubmitting },
+  } = form;
   const dispatch = useAppDispatch();
   const profession = useAppSelector(
     (state) => state.persistedReducer.personalInfo.profession,
@@ -52,9 +56,9 @@ const Competence: React.FC<competenceProps> = ({
         },
       });
       dispatch(setCompDescLoading(isLoading));
-      const previousDescription = 
-        getValues(`experience.${index}.description`)
-        .replace("<br>", "");
+      const previousDescription = getValues(
+        `experience.${index}.description`,
+      ).replace("<br>", "");
       const descriptionString = previousDescription.concat(data);
       setValue(`experience.${index}.description`, descriptionString);
       setValue(`experience.${index}.competences.${competenceIndex}`, {
@@ -100,7 +104,7 @@ const Competence: React.FC<competenceProps> = ({
         aria-disabled={isSubmitting}
         onClick={handleSelect}
         className={`py-5
-        ${isSubmitting ? 'pointer-events-none opacity-30' : '' }
+        ${isSubmitting ? "pointer-events-none opacity-30" : ""}
                         transition
                         px-3
                         h-16

@@ -10,7 +10,7 @@ import {
 import { Input } from "@/components/ui/input";
 
 const Degree: FC<IeducationForm> = ({ form, index }) => {
-    const {
+  const {
     control,
     formState: { isSubmitting },
   } = form;

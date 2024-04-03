@@ -13,9 +13,14 @@ import axios from "axios";
 import debounce from "debounce";
 import { setCompLoading } from "@/redux/slice/commonSlice";
 
-const JobTitle: FC<IExperienceForm> = ({form, index }) => {
+const JobTitle: FC<IExperienceForm> = ({ form, index }) => {
   const dispatch = useAppDispatch();
-  const { control, setValue, getValues, formState : {isSubmitting}} = form;
+  const {
+    control,
+    setValue,
+    getValues,
+    formState: { isSubmitting },
+  } = form;
   const onChange = () => {
     const jobTitle = getValues().experience[index].jobTitle;
     debouncedRequest(jobTitle);

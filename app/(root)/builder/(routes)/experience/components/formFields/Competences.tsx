@@ -21,12 +21,11 @@ type Tfield = ControllerRenderProps<
 >;
 
 const Competences: FC<IExperienceForm> = ({ form, index }) => {
-  
-    const {
+  const {
     control,
     formState: { isSubmitting },
     getValues,
-    setValue
+    setValue,
   } = form;
   const dispatch = useAppDispatch();
   const jobTitle = getValues().experience[index].jobTitle;

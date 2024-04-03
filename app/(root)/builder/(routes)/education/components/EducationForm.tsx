@@ -25,9 +25,18 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 export interface IeducationForm {
+  handleChange?: () => void;
   form: UseFormReturn<
     {
-      education: Ieducation[];
+      education: {
+        startDate?:any;
+        id: string;
+        schoolName: string;
+        degree: string;
+        speciality: string;
+        checkboxPursuing: boolean;
+        endDate?: any | undefined;
+      }[];
     },
     any,
     undefined
@@ -40,16 +49,61 @@ const EducationForm = () => {
   const dispatch = useAppDispatch();
   const education = useAppSelector((state) => state.persistedReducer.education);
   const router = useRouter();
+  const schema = z.object({
+    education: z
+      .object({
+        id: z.string(),
+        schoolName: z
+          .string({
+            required_error: "School name is required",
+            invalid_type_error: "Invalid string",
+          })
+          .trim()
+          .min(1, {
+            message: "School name is required",
+          }),
+        degree: z
+          .string({
+            required_error: "Degree is required",
+            invalid_type_error: "Invalid string",
+          })
+          .trim()
+          .min(1, {
+            message: "Degree is required",
+          }),
+        speciality: z
+          .string({
+            required_error: "Speciality is required",
+            invalid_type_error: "Invalid string",
+          })
+          .trim()
+          .min(1, {
+            message: "Specialiy is required",
+          }),
+        startDate: z.any({
+          required_error: "Start date is required",
+        }),
+        endDate: z.unknown().optional(),
+        checkboxPursuing: z.boolean(),
+      })
+      
+      .array()
+      .min(1, {
+        message: "1 is required",
+      }),
+  });
+  type formSchema = z.infer<typeof schema>;
 
-  const form = useForm({
+  const form = useForm<formSchema>({
+    resolver: zodResolver(schema),
     defaultValues: {
       education: education || [
         {
           schoolName: "",
           degree: "",
           speciality: "",
-          startDate: undefined,
-          endDate: undefined,
+          startDate: "",
+          endDate: "",
           id: Math.floor(Math.random() * 100).toString(),
           checkboxPursuing: false,
         },
@@ -92,9 +146,9 @@ const EducationForm = () => {
     if (
       schoolName === "" ||
       degree === "" ||
-      startDate === undefined ||
+      startDate === "" ||
       speciality === "" ||
-      (endDate === undefined && checkboxPursuing === false)
+      (endDate === "" && checkboxPursuing === false)
     ) {
       toast.error("Complete previous form first");
     } else {
@@ -102,8 +156,8 @@ const EducationForm = () => {
         schoolName: "",
         degree: "",
         speciality: "",
-        startDate: undefined,
-        endDate: undefined,
+        startDate: "",
+        endDate: "",
         checkboxPursuing: false,
         id: Math.floor(Math.random() * 100).toString(),
       };
@@ -145,8 +199,6 @@ const EducationForm = () => {
       }
     }
   }, [controlledFields.length]);
-  console.log(isSubmitting, "isSubmitting");
-  console.log(isValidating, "isValidating");
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   return (
@@ -206,7 +258,7 @@ const EducationForm = () => {
             {(controlledFields.length === 0
               ? education
               : controlledFields
-            )?.map((item: Ieducation, index: number) => {
+            )?.map((item,index) => {
               return (
                 <>
                   {item.id === selected && (

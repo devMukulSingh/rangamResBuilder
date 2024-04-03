@@ -10,7 +10,10 @@ import React, { FC } from "react";
 import { IForm } from "../PersonalForm";
 
 const Email: FC<IForm> = ({ form }) => {
-  const { control, formState:{isSubmitting} } = form;
+  const {
+    control,
+    formState: { isSubmitting },
+  } = form;
 
   return (
     <FormField

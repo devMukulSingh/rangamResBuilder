@@ -9,8 +9,11 @@ import { Input } from "@/components/ui/input";
 import React, { FC } from "react";
 import { IForm } from "../PersonalForm";
 
-const Name: FC<IForm> = ({ form}) => {
-  const { control, formState:{isSubmitting} } = form;
+const Name: FC<IForm> = ({ form }) => {
+  const {
+    control,
+    formState: { isSubmitting },
+  } = form;
   return (
     <FormField
       name="fullName"

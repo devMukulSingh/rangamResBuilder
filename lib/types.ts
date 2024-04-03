@@ -31,16 +31,15 @@ export interface Iexperience {
   address?: string;
   employer?: string;
 }
-
 export interface Ieducation {
   schoolName: string;
   degree: string;
   speciality: string;
-  startDate: undefined | string;
-  endDate: undefined | string;
+  startDate: any ;
+  endDate?: any | undefined ;
   id: string;
   checkboxPursuing: boolean;
-  schoolLocation?: string;
+  schoolLocation?: string | undefined;
 }
 export interface Icontact {
   linkedIn: string;

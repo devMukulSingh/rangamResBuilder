@@ -10,10 +10,10 @@ import {
 import { Input } from "@/components/ui/input";
 
 const Speciality: FC<IeducationForm> = ({ form, index }) => {
-    const {
-      control,
-      formState: { isSubmitting },
-    } = form;
+  const {
+    control,
+    formState: { isSubmitting },
+  } = form;
 
   return (
     <FormField

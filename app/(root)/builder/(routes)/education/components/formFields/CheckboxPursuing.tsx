@@ -10,10 +10,10 @@ import {
 import { Checkbox } from "@/components/ui/checkbox";
 
 const CheckboxPursuing: FC<IeducationForm> = ({ form, index }) => {
-    const {
-      control,
-      formState: { isSubmitting },
-    } = form;
+  const {
+    control,
+    formState: { isSubmitting },
+  } = form;
 
   return (
     <FormField

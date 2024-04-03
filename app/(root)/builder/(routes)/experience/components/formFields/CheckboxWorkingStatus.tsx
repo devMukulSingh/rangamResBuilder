@@ -10,9 +10,13 @@ import { IExperienceForm } from "../ExperienceForm";
 import { Checkbox } from "@/components/ui/checkbox";
 
 const CheckboxWorkingStatus: FC<IExperienceForm> = ({ form, index }) => {
-  const { control, getValues, formState: {isSubmitting} } = form;
+  const {
+    control,
+    getValues,
+    formState: { isSubmitting },
+  } = form;
   const minDate = getValues().experience[index].startDate;
-  
+
   return (
     <FormField
       name={`experience.${index}.checkboxWorkingStatus`}
