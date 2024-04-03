@@ -77,7 +77,7 @@ const ExperienceForm = () => {
           {
             message: `End date must be greater than start date`,
             path: ["endDate"],
-          }
+          },
         ),
     })
     .array();

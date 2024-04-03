@@ -10,7 +10,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
         { status: 400 },
       );
 
-    const prompt = `Generate 7 key competences or responsibilities whose profession is ${jobTitle},in max 3 words`;
+    const prompt = `Generate 7 key competences or responsibilities whose profession is ${jobTitle},in maximum 3 words`;
 
     const competences = await ChatGPT(prompt);
 

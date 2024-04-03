@@ -20,11 +20,11 @@ const CheckboxPursuing: FC<IeducationForm> = ({ form, index }) => {
       name={`education.${index}.checkboxPursuing`}
       control={control}
       render={({ field }) => (
-        <FormItem className="flex self-end mx-auto gap-2">
+        <FormItem className="flex self-end ml-auto gap-2">
           <FormControl>
             <Checkbox
               disabled={isSubmitting}
-              className="size-6 bg-white border-none"
+              className="size-6 bg-white"
               checked={field.value}
               onCheckedChange={field.onChange}
             />

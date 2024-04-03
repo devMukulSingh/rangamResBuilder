@@ -26,6 +26,7 @@ import Speciality from "@/app/(root)/builder/(routes)/education/components/formF
 import StartDate from "@/app/(root)/builder/(routes)/education/components/formFields/StartDate";
 import EndDate from "@/app/(root)/builder/(routes)/education/components/formFields/EndDate";
 import CheckboxPursuing from "@/app/(root)/builder/(routes)/education/components/formFields/CheckboxPursuing";
+import { parseISO } from "date-fns";
 
 const EducationForm = () => {
   const [expanded, setExpanded] = useState<string | false>("");
@@ -58,6 +59,23 @@ const EducationForm = () => {
           .optional(),
         checkboxPursuing: z.boolean(),
       })
+      .refine(
+        (data) => {
+          let startDate = data.startDate;
+          let endDate = data?.endDate;
+          if (typeof startDate === "string") {
+            startDate = parseISO(startDate);
+          }
+          if (endDate && typeof endDate === "string") {
+            endDate = parseISO(endDate);
+          }
+          if (data.endDate && startDate < endDate) return true;
+        },
+        {
+          message: `End date must be greater than start date`,
+          path: ["endDate"],
+        }
+      )
       .array(),
   });
 

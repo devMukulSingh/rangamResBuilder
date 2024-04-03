@@ -89,6 +89,8 @@ const EducationForm = () => {
       })
       .refine(
         (data) => {
+          console.log(data);
+
           let startDate = data.startDate;
           let endDate = data?.endDate;
           if (typeof startDate === "string") {
@@ -97,12 +99,13 @@ const EducationForm = () => {
           if (endDate && typeof endDate === "string") {
             endDate = parseISO(endDate);
           }
-          if (data.endDate && startDate < endDate) return true;
+          if (data.checkboxPursuing && data.endDate && startDate < endDate)
+            return true;
         },
         {
           message: `End date must be greater than start date`,
           path: ["endDate"],
-        },
+        }
       )
       .array()
       .min(1, {

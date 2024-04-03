@@ -56,10 +56,21 @@ const Competence: React.FC<competenceProps> = ({
         },
       });
       dispatch(setCompDescLoading(isLoading));
-      const previousDescription = getValues(
+
+      let previousDescription = getValues(
         `experience.${index}.description`,
       ).replace("<br>", "");
-      const descriptionString = previousDescription.concat(data);
+
+      //description to be added in bullet points feature
+      let descriptionString="";
+      if(previousDescription === ""){
+        descriptionString = `<ul><li>${data}</li></ul>`;
+      }
+      else {
+        const withoutUlTag = previousDescription.replace("</ul>", "");
+        descriptionString = `${withoutUlTag}<li>${data}</li>`;
+      }
+      //
       setValue(`experience.${index}.description`, descriptionString);
       setValue(`experience.${index}.competences.${competenceIndex}`, {
         description: data,
@@ -74,7 +85,6 @@ const Competence: React.FC<competenceProps> = ({
     console.log(`Error in getCompetence Description ${error}`);
   }
   const handleSelect = () => {
-    console.log(competence);
 
     if (competence.isSelected) {
       const descriptionToRemove = competence.description;
@@ -82,7 +92,6 @@ const Competence: React.FC<competenceProps> = ({
         .getValues()
         .experience[index].description.replace(`${descriptionToRemove}`, "")
         .replace("<br>", "");
-      console.log(filteredString);
 
       setValue(`experience.${index}.description`, filteredString);
       setValue(
