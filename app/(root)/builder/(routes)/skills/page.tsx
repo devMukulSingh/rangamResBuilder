@@ -42,7 +42,7 @@ const SkillsPage = async () => {
 
         <Skills />
 
-        <Buttons/>
+        <Buttons />
       </div>
     </>
   );

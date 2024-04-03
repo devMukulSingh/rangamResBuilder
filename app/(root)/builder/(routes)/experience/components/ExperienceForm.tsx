@@ -52,10 +52,11 @@ const ExperienceForm = () => {
         .object({
           CompanyName: z.string().optional(),
           jobTitle: z.string().optional(),
-
-          startDate: z.any({
-            required_error: "Start date is required",
-          }),
+          startDate: z
+            .any({
+              required_error: "Start date is required",
+            })
+            .optional(),
           endDate: z.any().optional(),
           checkboxWorkingStatus: z.string().optional(),
           checkboxVolunteering: z.string().optional(),
@@ -81,7 +82,7 @@ const ExperienceForm = () => {
     })
     .array();
   const form = useForm({
-    resolver: zodResolver(schema),
+    // resolver: zodResolver(schema),
     defaultValues: {
       experience: experience || [
         {

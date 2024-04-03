@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 const Buttons = () => {
   const router = useRouter();
   const selectedSkills = useAppSelector(
-    (state) => state.persistedReducer.technicalSkills
+    (state) => state.persistedReducer.technicalSkills,
   );
   const handleNavigation = () => {
     if (selectedSkills.length < 6) {
