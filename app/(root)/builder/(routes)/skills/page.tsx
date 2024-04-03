@@ -1,6 +1,7 @@
 import Circle from "@/components/commons/Circle";
 import LinkComp from "@/components/ui/LinkComp";
 import Skills from "./components/Skills";
+import Buttons from "./components/Buttons";
 
 const SkillsPage = async () => {
   return (
@@ -41,17 +42,7 @@ const SkillsPage = async () => {
 
         <Skills />
 
-        <div className="mt-auto flex justify-between">
-          <LinkComp
-            className="w-40  bg-gray-400 text-[#000] hover:bg-gray-300"
-            href={"/builder/goals"}
-          >
-            Back
-          </LinkComp>
-          <LinkComp className="w-40" href={"/builder/experience"}>
-            Next
-          </LinkComp>
-        </div>
+        <Buttons/>
       </div>
     </>
   );

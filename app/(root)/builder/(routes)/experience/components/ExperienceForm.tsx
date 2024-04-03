@@ -27,7 +27,8 @@ import LinkComp from "@/components/ui/LinkComp";
 import { useRouter } from "next/navigation";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import CompetenceDescription from "./CompetenceDescription";
+import { parseISO } from "date-fns";
+
 export interface IExperienceForm {
   form: UseFormReturn<
     {
@@ -45,14 +46,48 @@ const ExperienceForm = () => {
   const dispatch = useAppDispatch();
   const experience =
     useAppSelector((state) => state.persistedReducer.experience) || [];
+  const schema = z
+    .object({
+      experience: z
+        .object({
+          CompanyName: z.string().optional(),
+          jobTitle: z.string().optional(),
 
+          startDate: z.any({
+            required_error: "Start date is required",
+          }),
+          endDate: z.any().optional(),
+          checkboxWorkingStatus: z.string().optional(),
+          checkboxVolunteering: z.string().optional(),
+          checkboxInternship: z.string().optional(),
+        })
+        .refine(
+          (data) => {
+            let startDate = data.startDate;
+            let endDate = data?.endDate;
+            if (typeof startDate === "string") {
+              startDate = parseISO(startDate);
+            }
+            if (endDate && typeof endDate === "string") {
+              endDate = parseISO(endDate);
+            }
+            if (data.endDate && startDate < endDate) return true;
+          },
+          {
+            message: `End date must be greater than start date`,
+            path: ["endDate"],
+          }
+        ),
+    })
+    .array();
   const form = useForm({
+    resolver: zodResolver(schema),
     defaultValues: {
       experience: experience || [
         {
           companyName: "",
-          endDate: null,
-          startDate: null,
+          endDate: "",
+          startDate: "",
           jobTitle: "",
           id: Math.floor(Math.random() * 100).toString(),
           checkboxWorkingStatus: false,
@@ -117,8 +152,8 @@ const ExperienceForm = () => {
       fieldArray.append({
         companyName: "",
         jobTitle: "",
-        startDate: null,
-        endDate: null,
+        startDate: "",
+        endDate: "",
         checkboxWorkingStatus: false,
         checkboxVolunteering: false,
         checkboxInternship: false,

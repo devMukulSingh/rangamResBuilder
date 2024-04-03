@@ -48,8 +48,8 @@ const initialState: IinitialState = {
     {
       companyName: "",
       jobTitle: "",
-      startDate: null,
-      endDate: null,
+      startDate: "",
+      endDate: "",
       id: "",
       checkboxWorkingStatus: false,
       checkboxVolunteering: false,

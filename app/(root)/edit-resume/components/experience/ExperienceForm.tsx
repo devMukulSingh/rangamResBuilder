@@ -37,8 +37,8 @@ const ExperienceForm = () => {
       experience: experience || [
         {
           companyName: "",
-          startDate: null,
-          endDate: null,
+          startDate: "",
+          endDate: "",
           jobTitle: "",
           checkboxInternship: false,
           checkboxVolunteering: false,
@@ -103,8 +103,8 @@ const ExperienceForm = () => {
   const handleAddMore = () => {
     fieldArray.append({
       companyName: "",
-      startDate: null,
-      endDate: null,
+      startDate: "",
+      endDate: "",
       checkboxInternship: false,
       checkboxVolunteering: false,
       competences: [

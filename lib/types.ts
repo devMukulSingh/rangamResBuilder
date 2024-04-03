@@ -15,8 +15,8 @@ export interface IpersonalInfo {
 export interface Iexperience {
   companyName: string;
   jobTitle: string;
-  startDate: Date | null;
-  endDate: Date | null;
+  startDate: Date | string;
+  endDate: Date | string;
   id: string;
   checkboxWorkingStatus: boolean;
   checkboxVolunteering: boolean;

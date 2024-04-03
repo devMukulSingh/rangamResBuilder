@@ -26,7 +26,6 @@ const MonthPicker: FC<any> = ({
           views={["month", "year"]}
           onChange={(newValue) => {
             field.onChange(newValue);
-            console.log(newValue, typeof newValue);
           }}
         />
       </DemoContainer>
