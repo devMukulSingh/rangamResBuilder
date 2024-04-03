@@ -9,16 +9,18 @@ import { Input } from "@/components/ui/input";
 import React, { FC } from "react";
 import { IForm } from "../PersonalForm";
 
-const Name: FC<IForm> = ({ form }) => {
+const Name: FC<IForm> = ({ form}) => {
+  const { control, formState:{isSubmitting} } = form;
   return (
     <FormField
       name="fullName"
-      control={form.control}
+      control={control}
       render={({ field }) => (
         <FormItem className="">
           <FormLabel>Full Name</FormLabel>
           <FormControl>
             <Input
+              disabled={isSubmitting}
               className="bg-white "
               {...field}
               placeholder="Enter your full name"

@@ -10,15 +10,21 @@ import React, { FC } from "react";
 import { IForm } from "../PersonalForm";
 
 const Mobile: FC<IForm> = ({ form }) => {
+  const {
+    control,
+    formState: { isSubmitting },
+  } = form;
+
   return (
     <FormField
       name="mobile"
-      control={form.control}
+      control={control}
       render={({ field }) => (
         <FormItem className="w-1/2">
           <FormLabel>Mobile</FormLabel>
           <FormControl>
             <Input
+              disabled={isSubmitting}
               className="bg-white"
               {...field}
               placeholder="Mobile number"

@@ -5,11 +5,11 @@ export interface IpersonalInfo {
   countryCode: string;
   mobile: string;
   bio: string;
-  state?: string;
-  address?: string;
-  dob?: string;
-  birthPlace?: string;
-  city?: string;
+  state?: string | undefined;
+  address?: string | undefined;
+  dob?: string | undefined;
+  birthPlace?: string | undefined;
+  city?: string | undefined;
 }
 
 export interface Iexperience {

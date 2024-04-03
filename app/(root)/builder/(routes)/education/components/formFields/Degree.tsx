@@ -10,6 +10,11 @@ import {
 import { Input } from "@/components/ui/input";
 
 const Degree: FC<IeducationForm> = ({ form, index }) => {
+    const {
+    control,
+    formState: { isSubmitting },
+  } = form;
+
   return (
     <FormField
       defaultValue="Bachelor's degree"
@@ -20,8 +25,9 @@ const Degree: FC<IeducationForm> = ({ form, index }) => {
           <FormLabel>Degree Name</FormLabel>
           <FormControl>
             <Input
+              disabled={isSubmitting}
               className="bg-white h-14 rounded-sm"
-              placeholder="Bachelor in Technology"
+              placeholder="Degree Name"
               {...field}
             />
           </FormControl>

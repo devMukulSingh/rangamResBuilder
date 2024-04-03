@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import { setAiSuggestedComp, setExperience } from "@/redux/slice/userSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
 import { FC, useEffect, useState } from "react";
-import { Plus, X } from "lucide-react";
+import { Loader, Plus, X } from "lucide-react";
 import toast from "react-hot-toast";
 import { Iexperience } from "@/lib/types";
 import Competences from "./formFields/Competences";
@@ -46,17 +46,6 @@ const ExperienceForm = () => {
   const experience =
     useAppSelector((state) => state.persistedReducer.experience) || [];
 
-  // const schema = z.object({
-  //   CompanyName: z.string().min(3),
-  //   jobTitle: z.string().min(3),
-  //   endDate: z.string(),
-  //   startDate: z.string().min(3),
-  //   checkboxWorkingStatus: z.boolean(),
-  //   checkboxVolunteering: z.boolean(),
-  //   checkboxInternship: z.boolean(),
-  //   competences: z.string().array().min(1),
-  //   description: z.string().min(10),
-  // });
   const form = useForm({
     defaultValues: {
       experience: experience || [
@@ -83,12 +72,21 @@ const ExperienceForm = () => {
     },
   });
 
+  const {
+    handleSubmit,
+    formState: { isSubmitting },
+    control,
+    watch,
+    setValue,
+    getValues,
+  } = form;
+
   const fieldArray = useFieldArray({
     name: "experience",
-    control: form.control,
+    control,
   });
 
-  const watchFieldsArray = form.watch("experience");
+  const watchFieldsArray = watch("experience");
 
   const controlledFields =
     fieldArray.fields.map((field, index) => {
@@ -107,7 +105,7 @@ const ExperienceForm = () => {
   const handleAddMore = () => {
     const currIndex = controlledFields.length - 1;
     const { companyName, startDate, jobTitle, endDate, checkboxWorkingStatus } =
-      form.getValues().experience[currIndex];
+      getValues().experience[currIndex];
     if (
       companyName === "" ||
       !startDate ||
@@ -175,7 +173,7 @@ const ExperienceForm = () => {
     // >
     <>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col ">
             <div className="flex">
               {controlledFields.map((item, index) => (
@@ -273,7 +271,7 @@ const ExperienceForm = () => {
                       </div>
 
                       <h1 className="text-xl sm:text-2xl text-black my-5">
-                        {form.getValues().experience[index].jobTitle === ""
+                        {getValues().experience[index].jobTitle === ""
                           ? `Enter the Job title to generate key responsibilities`
                           : `Great! To highlight your experience and describe it
                         properly, please choose the key responsibilities at this
@@ -290,13 +288,19 @@ const ExperienceForm = () => {
             })}
             <div className="mt-5 flex justify-between h-10">
               <LinkComp
+                disabled={isSubmitting}
                 className="w-40 bg-gray-400 text-[#000] hover:bg-gray-300"
                 href={`/builder/skills`}
               >
                 Back
               </LinkComp>
-              <Button type="submit" className="w-40">
+              <Button
+                disabled={isSubmitting}
+                type="submit"
+                className="w-40 flex gap-2"
+              >
                 Next
+                {isSubmitting && <Loader className="animate-spin" />}
               </Button>
             </div>
           </div>

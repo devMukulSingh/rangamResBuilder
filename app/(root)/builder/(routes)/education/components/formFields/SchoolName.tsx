@@ -10,15 +10,21 @@ import {
 import { Input } from "@/components/ui/input";
 
 const SchoolName: FC<IeducationForm> = ({ form, index }) => {
+  const {
+    control,
+    formState: { isSubmitting },
+  } = form;
+
   return (
     <FormField
       name={`education.${index}.schoolName`}
-      control={form.control}
+      control={control}
       render={({ field }) => (
         <FormItem>
           <FormLabel>School Name</FormLabel>
           <FormControl>
             <Input
+              disabled={isSubmitting}
               className="bg-white h-14 rounded-sm"
               {...field}
               placeholder="School Name"

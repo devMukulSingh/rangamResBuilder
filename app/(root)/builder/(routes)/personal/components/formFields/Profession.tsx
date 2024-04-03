@@ -10,15 +10,21 @@ import React, { FC } from "react";
 import { IForm } from "../PersonalForm";
 
 const Profession: FC<IForm> = ({ form }) => {
+  const {
+    control,
+    formState: { isSubmitting },
+  } = form;
+
   return (
     <FormField
       name="profession"
-      control={form.control}
+      control={control}
       render={({ field }) => (
         <FormItem className="">
           <FormLabel>Desired job title</FormLabel>
           <FormControl>
             <Input
+              disabled={isSubmitting}
               className="bg-white "
               {...field}
               placeholder="Specify your desired job title"

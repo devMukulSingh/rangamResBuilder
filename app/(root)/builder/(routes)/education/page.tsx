@@ -37,6 +37,8 @@ w-full
       </header>
 
       <EducationForm />
+
+      
     </div>
   );
 };

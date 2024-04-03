@@ -27,14 +27,19 @@ import { countryCodes } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
 import { IForm } from "../PersonalForm";
 
-const CountryCode: FC<IForm> = ({ form, handleChange }) => {
+const CountryCode: FC<IForm> = ({ form ,handleChange }) => {
   const [open, setOpen] = useState(false);
+  const {
+    control,
+    setValue,
+    formState: { isSubmitting },
+  } = form;
 
   return (
     <FormField
       defaultValue="+1"
       name="countryCode"
-      control={form.control}
+      control={control}
       render={({ field }) => (
         <FormItem className="w-1/2">
           <FormLabel>Country Code</FormLabel>
@@ -42,16 +47,17 @@ const CountryCode: FC<IForm> = ({ form, handleChange }) => {
             <PopoverTrigger asChild>
               <FormControl>
                 <Button
+                  disabled={isSubmitting}
                   variant="outline"
                   role="combobox"
                   className={cn(
                     "w-full bg-white justify-between",
-                    !field.value && "text-muted-foreground",
+                    !field.value && "text-muted-foreground"
                   )}
                 >
                   {
                     countryCodes.find(
-                      (countryCode) => countryCode.mobileCode === field.value,
+                      (countryCode) => countryCode.mobileCode === field.value
                     )?.mobileCode
                   }
                 </Button>
@@ -72,7 +78,7 @@ const CountryCode: FC<IForm> = ({ form, handleChange }) => {
                         key={code.name}
                         value={code.name}
                         onSelect={() => {
-                          form.setValue("countryCode", code.mobileCode);
+                          setValue && setValue("countryCode", code.mobileCode);
                           setOpen(false);
                           handleChange && handleChange();
                         }}
@@ -83,7 +89,7 @@ const CountryCode: FC<IForm> = ({ form, handleChange }) => {
                             "ml-auto h-4 w-4",
                             code.mobileCode === field.value
                               ? "opacity-100"
-                              : "opacity-0",
+                              : "opacity-0"
                           )}
                         />
                       </CommandItem>

@@ -10,6 +10,11 @@ import {
 import MonthPicker from "@/components/commons/MonthPicker";
 
 const EndDate: FC<IeducationForm> = ({ form, index }) => {
+    const {
+      control,
+      formState: { isSubmitting },
+    } = form;
+
   const minDate = form.getValues().education[index].startDate;
   return (
     <FormField
@@ -29,7 +34,7 @@ const EndDate: FC<IeducationForm> = ({ form, index }) => {
               field={field}
               minDate={minDate}
               disabled={
-                !form.getValues().education[index].startDate ? true : false
+                (isSubmitting || !form.getValues().education[index].startDate) ? true : false
               }
             />
           </FormControl>

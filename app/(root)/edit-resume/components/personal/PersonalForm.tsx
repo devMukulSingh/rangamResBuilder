@@ -87,8 +87,6 @@ const PersonalForm = () => {
     );
   };
   const handleChange = () => {
-    console.log(form.getValues());
-
     dispatch(setPersonalInfo(form.getValues()));
   };
 

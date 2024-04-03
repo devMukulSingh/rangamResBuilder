@@ -21,8 +21,15 @@ type Tfield = ControllerRenderProps<
 >;
 
 const Competences: FC<IExperienceForm> = ({ form, index }) => {
+  
+    const {
+    control,
+    formState: { isSubmitting },
+    getValues,
+    setValue
+  } = form;
   const dispatch = useAppDispatch();
-  const jobTitle = form.getValues().experience[index].jobTitle;
+  const jobTitle = getValues().experience[index].jobTitle;
 
   const handleLoadMore = async () => {
     try {
@@ -32,8 +39,8 @@ const Competences: FC<IExperienceForm> = ({ form, index }) => {
           jobTitle,
         },
       });
-      const prevCompetences = form.getValues(`experience.${index}.competences`);
-      form.setValue(`experience.${index}.competences`, [
+      const prevCompetences = getValues(`experience.${index}.competences`);
+      setValue(`experience.${index}.competences`, [
         ...prevCompetences,
         ...data,
       ]);
@@ -52,7 +59,7 @@ const Competences: FC<IExperienceForm> = ({ form, index }) => {
   return (
     <FormField
       name={`experience.${index}.competences`}
-      control={form.control}
+      control={control}
       render={({ field }) => (
         <>
           {field.value.length <= 1 && <CompetenceSkeleton />}
@@ -80,8 +87,8 @@ const Competences: FC<IExperienceForm> = ({ form, index }) => {
             gap-2
             col-span-2
             cursor-pointer
-             ${form.getValues().experience[index].competences[0]?.name === "" ? "hidden" : ""}
-            ${form.getValues().experience[index].competences.length === 14 ? "hidden" : ""}
+             ${getValues().experience[index].competences[0]?.name === "" ? "hidden" : ""}
+            ${getValues().experience[index].competences.length === 14 ? "hidden" : ""}
             `}
           >
             <Plus color="#004878" />

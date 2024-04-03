@@ -11,7 +11,7 @@ import {
   useForm,
   UseFormReturn,
 } from "react-hook-form";
-import { Plus, X } from "lucide-react";
+import { Loader, Plus, X } from "lucide-react";
 import toast from "react-hot-toast";
 import SchoolName from "./formFields/SchoolName";
 import Speciality from "./formFields/Speciality";
@@ -57,11 +57,19 @@ const EducationForm = () => {
     },
   });
 
+  const {
+    control,
+    formState: { isSubmitting, isValidating },
+    watch,
+    handleSubmit,
+    getValues,
+  } = form;
+
   const fieldArray = useFieldArray({
     name: "education",
-    control: form.control,
+    control: control,
   });
-  const watchFieldsArray = form.watch("education");
+  const watchFieldsArray = watch("education");
 
   const controlledFields = fieldArray.fields.map((field, index) => {
     return {
@@ -79,8 +87,7 @@ const EducationForm = () => {
       startDate,
       checkboxPursuing,
       endDate,
-    } = form.getValues().education[currIndex];
-    console.log(schoolName, speciality, degree, startDate);
+    } = getValues().education[currIndex];
 
     if (
       schoolName === "" ||
@@ -110,6 +117,8 @@ const EducationForm = () => {
     }
   };
   const onSubmit = (data: FieldValues) => {
+    console.log(data);
+
     router.push("/download");
     dispatch(setEducation(data.education));
   };
@@ -136,6 +145,8 @@ const EducationForm = () => {
       }
     }
   }, [controlledFields.length]);
+  console.log(isSubmitting, "isSubmitting");
+  console.log(isValidating, "isValidating");
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   return (
@@ -146,7 +157,7 @@ const EducationForm = () => {
     // >
     <div>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col gap-5">
             <div className="flex">
               {controlledFields.map((item, index) => (
@@ -222,13 +233,19 @@ const EducationForm = () => {
 
             <div className="mt-auto flex justify-between">
               <LinkComp
+                disabled={isSubmitting}
                 className="w-40 bg-gray-400 text-[#000] hover:bg-gray-300"
                 href={"/builder/prosummary"}
               >
                 Back
               </LinkComp>
-              <Button type="submit" className="w-40">
+              <Button
+                type="submit"
+                className="flex gap-2 w-40"
+                disabled={isSubmitting}
+              >
                 Next
+                {isSubmitting && <Loader className="animate-spin" />}
               </Button>
             </div>
           </div>

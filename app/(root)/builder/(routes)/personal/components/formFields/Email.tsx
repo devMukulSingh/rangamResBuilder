@@ -10,15 +10,18 @@ import React, { FC } from "react";
 import { IForm } from "../PersonalForm";
 
 const Email: FC<IForm> = ({ form }) => {
+  const { control, formState:{isSubmitting} } = form;
+
   return (
     <FormField
       name="email"
-      control={form.control}
+      control={control}
       render={({ field }) => (
         <FormItem className="">
           <FormLabel>Email Address</FormLabel>
           <FormControl>
             <Input
+              disabled={isSubmitting}
               className="bg-white"
               {...field}
               placeholder="Enter your email address"

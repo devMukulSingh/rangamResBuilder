@@ -199,7 +199,6 @@ const EducationForm = () => {
                               className="w-full hover:bg-red-300"
                             >
                               {education?.[index]?.schoolName || "University"}
-                              {/* {education?.[expanded + 1]?.schoolName || 'Delhi University'} */}
                             </Button>
                           </CollapsibleTrigger>
                           <Trash
@@ -262,7 +261,7 @@ const EducationForm = () => {
                                 <FormLabel>Degree/Program</FormLabel>
                                 <FormControl>
                                   <Input
-                                    placeholder="B.Sc in Computer Science"
+                                    placeholder="Degree name"
                                     className="bg-white"
                                     {...field}
                                   />
@@ -367,7 +366,7 @@ const EducationForm = () => {
                       </Collapsible>
                     </>
                   );
-                },
+                }
               )}
 
               <div className="flex gap-5">

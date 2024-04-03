@@ -10,6 +10,11 @@ import {
 import { Input } from "@/components/ui/input";
 
 const Speciality: FC<IeducationForm> = ({ form, index }) => {
+    const {
+      control,
+      formState: { isSubmitting },
+    } = form;
+
   return (
     <FormField
       name={`education.${index}.speciality`}
@@ -19,6 +24,7 @@ const Speciality: FC<IeducationForm> = ({ form, index }) => {
           <FormLabel>Specialisation</FormLabel>
           <FormControl>
             <Input
+              disabled={isSubmitting}
               className="bg-white h-14 rounded-sm"
               {...field}
               placeholder="Computer science"

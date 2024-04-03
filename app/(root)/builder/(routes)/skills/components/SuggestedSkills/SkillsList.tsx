@@ -75,17 +75,4 @@ const SkillsList = () => {
 };
 
 export default SkillsList;
-// console.log("hello");
 
-// const { isLoading, data, error, isError } = useQuery({
-//   queryKey: ["aiSuggestedSkills", profession],
-//   queryFn: async () => {
-//     const { data } = await axios.get(`/api/ai/get-skills`, {
-//       params: { profession },
-//     });
-//     return data;
-//   },
-//   refetchOnMount: false,
-//   staleTime: Infinity,
-//   refetchOnWindowFocus: false,
-// });

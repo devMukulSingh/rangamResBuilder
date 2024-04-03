@@ -18,6 +18,7 @@ const CheckboxInternship: FC<IExperienceForm> = ({
   index,
   controlledFields,
 }) => {
+    const { control, formState : {isSubmitting}} = form;
   return (
     <FormField
       name={`experience.${index}.checkboxInternship`}
@@ -27,7 +28,9 @@ const CheckboxInternship: FC<IExperienceForm> = ({
           <FormControl>
             <Checkbox
               disabled={
-                controlledFields?.[index].checkboxVolunteering ? true : false
+               ( isSubmitting || controlledFields?.[index].checkboxVolunteering)
+                  ? true
+                  : false
               }
               className="size-6 bg-white border"
               checked={field.value}

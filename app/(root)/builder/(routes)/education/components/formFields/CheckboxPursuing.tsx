@@ -10,14 +10,20 @@ import {
 import { Checkbox } from "@/components/ui/checkbox";
 
 const CheckboxPursuing: FC<IeducationForm> = ({ form, index }) => {
+    const {
+      control,
+      formState: { isSubmitting },
+    } = form;
+
   return (
     <FormField
       name={`education.${index}.checkboxPursuing`}
-      control={form.control}
+      control={control}
       render={({ field }) => (
         <FormItem className="flex self-end mx-auto gap-2">
           <FormControl>
             <Checkbox
+              disabled={isSubmitting}
               className="size-6 bg-white border-none"
               checked={field.value}
               onCheckedChange={field.onChange}

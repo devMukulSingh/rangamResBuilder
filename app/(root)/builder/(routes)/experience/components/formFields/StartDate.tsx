@@ -11,14 +11,20 @@ import { Input } from "@/components/ui/input";
 import MonthPicker from "@/components/commons/MonthPicker";
 
 const StartDate: FC<IExperienceForm> = ({ form, index }) => {
+    const { control, formState : {isSubmitting}} = form;
+
   return (
     <FormField
       name={`experience.${index}.startDate`}
-      control={form.control}
+      control={control}
       render={({ field }) => (
         <FormItem className="w-full">
           <FormLabel>Start Date</FormLabel>
-          <MonthPicker disableFuture={true} field={field} />
+          <MonthPicker
+            disabled={isSubmitting}
+            disableFuture={true}
+            field={field}
+          />
           <FormMessage />
         </FormItem>
       )}

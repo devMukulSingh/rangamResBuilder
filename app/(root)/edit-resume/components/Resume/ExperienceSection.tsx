@@ -8,7 +8,7 @@ interface ExperienceSectionProps {}
 
 const ExperienceSection: React.FC<ExperienceSectionProps> = ({}) => {
   const experience = useAppSelector(
-    (state) => state.persistedReducer.experience
+    (state) => state.persistedReducer.experience,
   );
 
   return (

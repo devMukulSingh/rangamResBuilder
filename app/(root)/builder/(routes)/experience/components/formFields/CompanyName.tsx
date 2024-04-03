@@ -10,15 +10,17 @@ import { IExperienceForm } from "../ExperienceForm";
 import { Input } from "@/components/ui/input";
 
 const CompanyName: FC<IExperienceForm> = ({ form, index }) => {
+  const { control, formState : {isSubmitting}} = form;
   return (
     <FormField
       name={`experience.${index}.companyName`}
-      control={form.control}
+      control={control}
       render={({ field }) => (
         <FormItem>
           <FormLabel>Company</FormLabel>
           <FormControl>
             <Input
+              disabled={isSubmitting}
               className="h-14 rounded-sm  bg-white"
               {...field}
               placeholder="Company name"

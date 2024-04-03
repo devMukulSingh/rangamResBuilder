@@ -33,8 +33,8 @@ const Competence: React.FC<competenceProps> = ({
   competenceIndex,
   onChange,
 }) => {
-  // console.log(competence);
 
+  const { control,setValue,getValues, formState:{ isSubmitting }} = form;
   const dispatch = useAppDispatch();
   const profession = useAppSelector(
     (state) => state.persistedReducer.personalInfo.profession,
@@ -52,12 +52,12 @@ const Competence: React.FC<competenceProps> = ({
         },
       });
       dispatch(setCompDescLoading(isLoading));
-      const previousDescription = form
-        .getValues(`experience.${index}.description`)
+      const previousDescription = 
+        getValues(`experience.${index}.description`)
         .replace("<br>", "");
       const descriptionString = previousDescription.concat(data);
-      form.setValue(`experience.${index}.description`, descriptionString);
-      form.setValue(`experience.${index}.competences.${competenceIndex}`, {
+      setValue(`experience.${index}.description`, descriptionString);
+      setValue(`experience.${index}.competences.${competenceIndex}`, {
         description: data,
         isSelected: competence.isSelected,
         name: competence.name,
@@ -80,13 +80,13 @@ const Competence: React.FC<competenceProps> = ({
         .replace("<br>", "");
       console.log(filteredString);
 
-      form.setValue(`experience.${index}.description`, filteredString);
-      form.setValue(
+      setValue(`experience.${index}.description`, filteredString);
+      setValue(
         `experience.${index}.competences.${competenceIndex}.isSelected`,
         false,
       );
     } else {
-      form.setValue(
+      setValue(
         `experience.${index}.competences.${competenceIndex}.isSelected`,
         true,
       );
@@ -97,8 +97,10 @@ const Competence: React.FC<competenceProps> = ({
   return (
     <>
       <div
+        aria-disabled={isSubmitting}
         onClick={handleSelect}
         className={`py-5
+        ${isSubmitting ? 'pointer-events-none opacity-30' : '' }
                         transition
                         px-3
                         h-16
