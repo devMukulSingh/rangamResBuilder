@@ -139,7 +139,7 @@ const PersonalForm = () => {
               className="mt-auto w-full py-3 flex gap-2"
             >
               Next
-              {isSubmitting && <Loader className="animate-spin"/>}
+              {isSubmitting && <Loader className="animate-spin" />}
             </Button>
           </div>
         </form>

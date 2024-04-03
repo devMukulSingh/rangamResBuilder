@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 const Buttons = () => {
   const router = useRouter();
   const selectedBio = useAppSelector(
-    (state) => state.persistedReducer.personalInfo.bio
+    (state) => state.persistedReducer.personalInfo.bio,
   );
   const parsed = selectedBio.replace(/(<([^>]+)>)/gi, "");
   const handleNavigation = () => {

@@ -23,13 +23,14 @@ import LinkComp from "@/components/ui/LinkComp";
 import { useRouter } from "next/navigation";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { parseISO } from "date-fns";
 
 export interface IeducationForm {
   handleChange?: () => void;
   form: UseFormReturn<
     {
       education: {
-        startDate?:any;
+        startDate?: any;
         id: string;
         schoolName: string;
         degree: string;
@@ -83,10 +84,27 @@ const EducationForm = () => {
         startDate: z.any({
           required_error: "Start date is required",
         }),
-        endDate: z.unknown().optional(),
+        endDate: z.any().optional(),
         checkboxPursuing: z.boolean(),
       })
-      
+      .refine(
+        (data) => {
+          let startDate = data.startDate;
+          let endDate = data?.endDate;
+          if (typeof startDate === "string") {
+            startDate = parseISO(startDate);
+          }
+          if (endDate && typeof endDate === "string") {
+            endDate = parseISO(endDate);
+          }
+          console.log(data.startDate, endDate);
+          if (data.endDate && startDate < endDate) return true;
+        },
+        {
+          message: `End date must be greater than start date`,
+          path: ["endDate"],
+        }
+      )
       .array()
       .min(1, {
         message: "1 is required",
@@ -258,7 +276,7 @@ const EducationForm = () => {
             {(controlledFields.length === 0
               ? education
               : controlledFields
-            )?.map((item,index) => {
+            )?.map((item, index) => {
               return (
                 <>
                   {item.id === selected && (

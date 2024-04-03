@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import Buttons from "./components/Buttons";
 
 const ProSummaryPage = async () => {
-
   return (
     <div
       className="
@@ -44,8 +43,7 @@ const ProSummaryPage = async () => {
 
       <MainSummary />
 
-      <Buttons/>
-      
+      <Buttons />
     </div>
   );
 };
