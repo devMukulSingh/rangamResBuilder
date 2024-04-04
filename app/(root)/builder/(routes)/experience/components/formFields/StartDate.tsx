@@ -7,10 +7,9 @@ import {
 } from "@/components/ui/form";
 import React, { FC, useState } from "react";
 import { IExperienceForm } from "../ExperienceForm";
-import { Input } from "@/components/ui/input";
 import MonthPicker from "@/components/commons/MonthPicker";
 
-const StartDate: FC<IExperienceForm> = ({ form, index }) => {
+const StartDate: FC<IExperienceForm> = ({ form, index,handleChange }) => {
   const {
     control,
     formState: { isSubmitting },
@@ -24,6 +23,7 @@ const StartDate: FC<IExperienceForm> = ({ form, index }) => {
         <FormItem className="w-full">
           <FormLabel>Start Date</FormLabel>
           <MonthPicker
+            handleChange={handleChange}
             disabled={isSubmitting}
             disableFuture={true}
             field={field}

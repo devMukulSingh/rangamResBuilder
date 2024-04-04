@@ -1,19 +1,16 @@
 "use client";
 import { Form } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { FieldValues, useFieldArray, useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
 import { setEducation } from "@/redux/slice/userSlice";
 import { useEffect, useState } from "react";
-import { Ieducation } from "@/lib/types";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import { useParams, useRouter } from "next/navigation";
-import { setProgress } from "@/redux/slice/userSlice";
 import { PlusCircle, Trash } from "lucide-react";
 import toast from "react-hot-toast";
 import { setFormComp, setValidatedOptions } from "@/redux/slice/commonSlice";
@@ -25,8 +22,8 @@ import Degree from "@/app/(root)/builder/(routes)/education/components/formField
 import Speciality from "@/app/(root)/builder/(routes)/education/components/formFields/Speciality";
 import StartDate from "@/app/(root)/builder/(routes)/education/components/formFields/StartDate";
 import EndDate from "@/app/(root)/builder/(routes)/education/components/formFields/EndDate";
-import CheckboxPursuing from "@/app/(root)/builder/(routes)/education/components/formFields/CheckboxPursuing";
 import { parseISO } from "date-fns";
+import CheckboxPursuing from "./components/CheckboxPursuing";
 
 const EducationForm = () => {
   const [expanded, setExpanded] = useState<string | false>("");
@@ -152,6 +149,7 @@ const EducationForm = () => {
   };
   const handleChange = () => {
     const education = form.getValues().education;
+    
     const parsedEducation = education.map((item) => {
       return {
         schoolName: item.schoolName,
@@ -170,7 +168,7 @@ const EducationForm = () => {
     if (controlledFields.length > 2) {
       toast.error(`Maximum 3 education allowed`);
       return;
-    } 
+    }
     const currIndex = controlledFields.length - 1;
     const {
       schoolName,
@@ -187,10 +185,9 @@ const EducationForm = () => {
       startDate.trim() === "" ||
       speciality.trim() === "" ||
       (endDate.trim() === "" && checkboxPursuing === false)
-    ){
-      toast.error(`Complete previous form first`)
-    }
-    else {
+    ) {
+      toast.error(`Complete previous form first`);
+    } else {
       const emptyField = {
         schoolName: "",
         degree: "",
@@ -290,19 +287,25 @@ const EducationForm = () => {
 
                           <Speciality form={form} index={index} />
 
-                          <StartDate
+                          <div className="flex gap-2">
+                            <StartDate
+                              form={form}
+                              index={index}
+                              handleChange={handleChange}
+                            />
+
+                            <EndDate
+                              form={form}
+                              index={index}
+                              handleChange={handleChange}
+                            />
+                          </div>
+
+                          <CheckboxPursuing
                             form={form}
                             index={index}
                             handleChange={handleChange}
                           />
-
-                          <EndDate
-                            form={form}
-                            index={index}
-                            handleChange={handleChange}
-                          />
-
-                          <CheckboxPursuing form={form} index={index} />
                         </CollapsibleContent>
                       </Collapsible>
                     </>

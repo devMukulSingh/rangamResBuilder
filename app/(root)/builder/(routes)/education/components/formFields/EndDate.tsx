@@ -9,9 +9,8 @@ import {
 } from "@/components/ui/form";
 import MonthPicker from "@/components/commons/MonthPicker";
 
-const EndDate: FC<IeducationForm> = ({ form, index }) => {
+const EndDate: FC<IeducationForm> = ({ form, index,handleChange }) => {
   const {
-    control,
     formState: { isSubmitting },
   } = form;
 
@@ -31,6 +30,7 @@ const EndDate: FC<IeducationForm> = ({ form, index }) => {
           <FormLabel>End Date</FormLabel>
           <FormControl>
             <MonthPicker
+              handleChange={handleChange}
               field={field}
               minDate={minDate}
               disabled={

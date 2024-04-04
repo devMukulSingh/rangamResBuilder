@@ -24,7 +24,7 @@ const RichTextEditor = dynamic(
   () => import("@/components/commons/RichTextEditor"),
   {
     ssr: false,
-  }
+  },
 );
 import { motion } from "framer-motion";
 
@@ -85,23 +85,19 @@ const ProjectsForm = () => {
       toast.error("Max 4 pojects allowed");
       return;
     }
-     const currIndex = controlledFields.length - 1;
-     const {
-        projectName,
-     } = form.getValues().projects[currIndex];
-     if (
-       projectName.trim() === "" 
-     ) {
-       toast.error("Complete previous form first");
-     } else {
-       const emptyField = {
-         projectName: "",
-         projectUrl: "",
-         description: "",
-         id: Math.floor(Math.random() * 100).toString(),
-       };
-       fieldArray.append(emptyField);
-     }
+    const currIndex = controlledFields.length - 1;
+    const { projectName } = form.getValues().projects[currIndex];
+    if (projectName.trim() === "") {
+      toast.error("Complete previous form first");
+    } else {
+      const emptyField = {
+        projectName: "",
+        projectUrl: "",
+        description: "",
+        id: Math.floor(Math.random() * 100).toString(),
+      };
+      fieldArray.append(emptyField);
+    }
   };
   const handleCollapsible = (id: string, isExpanded: boolean) => {
     if (isExpanded) {

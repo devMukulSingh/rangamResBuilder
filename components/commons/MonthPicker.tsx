@@ -14,6 +14,7 @@ const MonthPicker: FC<any> = ({
   handleChange,
 }) => {
   const value = new Date(field.value);
+
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <DemoContainer components={["DatePicker"]}>
@@ -27,6 +28,7 @@ const MonthPicker: FC<any> = ({
           views={["month", "year"]}
           onChange={(newValue) => {
             field.onChange(newValue);
+            handleChange();
           }}
         />
       </DemoContainer>

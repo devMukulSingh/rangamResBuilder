@@ -24,6 +24,7 @@ const SkillsList = () => {
     {
       revalidateIfStale: false,
       revalidateOnFocus: false,
+      revalidateOnReconnect:false,
     },
   );
   dispatch(setAiSuggestedSkills(data));

@@ -21,14 +21,6 @@ const EducationSection: React.FC<EducationSectionProps> = ({}) => {
                   ? ` in ${educationInfo.speciality}`
                   : ""
               }`}
-              {/* {` 
-                            ${
-                              educationInfo.percentage
-                                ? ` - ${educationInfo.percentage} CGPA`
-                                : ``
-                            } 
-                        
-                        `} */}
             </h1>
             <h1>
               {`${
@@ -36,7 +28,7 @@ const EducationSection: React.FC<EducationSectionProps> = ({}) => {
                   ? format(educationInfo.startDate, "MMM yyyy")
                   : ""
               } `}
-              {`${!educationInfo.endDate && educationInfo.startDate ? " - present" : `${educationInfo.endDate ? `- ${format(educationInfo?.endDate, "MMM yyyy")}` : ""}  `} `}
+              {`${educationInfo.checkboxPursuing && educationInfo.startDate ? " - present" : `${educationInfo.endDate ? `- ${format(educationInfo?.endDate, "MMM yyyy")}` : ""}  `} `}
             </h1>
           </div>
         </div>

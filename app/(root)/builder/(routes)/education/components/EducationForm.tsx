@@ -178,7 +178,7 @@ const EducationForm = () => {
     if (controlledFields.length > 2) {
       toast.error(`Maximum 3 education allowed`);
       return;
-    } 
+    }
     const currIndex = controlledFields.length - 1;
     const {
       schoolName,

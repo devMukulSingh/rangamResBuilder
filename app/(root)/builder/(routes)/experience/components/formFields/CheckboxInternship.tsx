@@ -31,7 +31,8 @@ const CheckboxInternship: FC<IExperienceForm> = ({
           <FormControl>
             <Checkbox
               disabled={
-                (isSubmitting || form?.getValues().experience[index].checkboxVolunteering)
+                isSubmitting ||
+                form?.getValues().experience[index].checkboxVolunteering
                   ? true
                   : false
               }

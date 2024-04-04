@@ -29,7 +29,7 @@ const ExperienceForm = () => {
   const [expanded, setExpanded] = useState<string | false>("");
   const dispatch = useAppDispatch();
   const experience = useAppSelector(
-    (state) => state.persistedReducer.experience
+    (state) => state.persistedReducer.experience,
   );
 
   const form = useForm({
@@ -80,8 +80,6 @@ const ExperienceForm = () => {
   };
   const handleChange = () => {
     const experience = form.getValues().experience;
-    console.log(experience);
-
     const parsedExperience = experience.map((item) => {
       return {
         companyName: item.companyName,
@@ -235,19 +233,31 @@ const ExperienceForm = () => {
                         <Address form={form} index={index} />
 
                         <div className="flex gap-5 w-full">
-                          <StartDate form={form} index={index} />
-                          <EndDate form={form} index={index} />
+                          <StartDate
+                            form={form}
+                            index={index}
+                            handleChange={handleChange}
+                          />
+                          <EndDate
+                            form={form}
+                            index={index}
+                            handleChange={handleChange}
+                          />
                         </div>
 
                         <div className="self-start">
-                          <CheckboxWorkingStatus index={index} form={form} />
+                          <CheckboxWorkingStatus
+                            index={index}
+                            form={form}
+                            handleChange={handleChange}
+                          />
                         </div>
 
                         <Description form={form} index={index} />
                       </CollapsibleContent>
                     </Collapsible>
                   );
-                }
+                },
               )}
 
               <Button

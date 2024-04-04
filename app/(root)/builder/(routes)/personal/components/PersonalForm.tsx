@@ -50,6 +50,7 @@ const PersonalForm = () => {
       .string({
         required_error: "Full name is required",
       })
+      .trim()
       .min(3, {
         message: "Name must be minimum 3 characters",
       })
@@ -60,6 +61,7 @@ const PersonalForm = () => {
       .string({
         required_error: "Email is required",
       })
+      .trim()
       .email({
         message: "Please enter valid email",
       }),
@@ -67,6 +69,7 @@ const PersonalForm = () => {
       .string({
         required_error: "Profession is required",
       })
+      .trim()
       .min(3, {
         message: "Profession must be minimum 5 characters",
       })
@@ -77,6 +80,7 @@ const PersonalForm = () => {
       .string({
         required_error: "Country code is required",
       })
+      .trim()
       .min(2, {
         message: "CountryCode must be minimum 2 numbers",
       }),
@@ -85,6 +89,7 @@ const PersonalForm = () => {
         required_error: "Mobile no is required",
         invalid_type_error: "must be a number",
       })
+      .trim()
       .refine(validator.isMobilePhone),
     state: z.string().optional(),
     city: z.string().optional(),

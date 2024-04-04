@@ -9,7 +9,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { useState } from "react";
 import toast from "react-hot-toast";
 
 interface SidebarOptionProps {
@@ -30,10 +29,9 @@ const SidebarOption: React.FC<SidebarOptionProps> = ({
   const dispatch = useAppDispatch();
   const formComp = useAppSelector((state) => state.commonSlice.formComp);
   const sidebarOptions = useAppSelector(
-    (state) => state.commonSlice.sidebarOptions,
+    (state) => state.commonSlice.sidebarOptions
   );
 
-  const justBefore = sidebarOptions[index > 0 ? index - 1 : 0];
   const handleNavigate = () => {
     const beforeComp = sidebarOptions.filter((item) => item.index < index);
 
@@ -51,12 +49,10 @@ const SidebarOption: React.FC<SidebarOptionProps> = ({
       <Tooltip>
         <TooltipTrigger asChild>
           <li
-            aria-disabled={!justBefore.isValidated}
             onClick={() => handleNavigate()}
             className={`
         ${option.title === formComp ? "bg-red-100" : ""}
 
-        disabled:opacity-30
         flex 
         gap-3 
         hover:bg-red-100 

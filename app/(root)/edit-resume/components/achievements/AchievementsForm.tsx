@@ -24,7 +24,7 @@ const AchievementsForm = () => {
   const dispatch = useAppDispatch();
   const progress = useAppSelector((state) => state.persistedReducer.progress);
   const achievements = useAppSelector(
-    (state) => state.persistedReducer.achievements
+    (state) => state.persistedReducer.achievements,
   );
 
   const form = useForm({

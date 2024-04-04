@@ -9,7 +9,7 @@ import React, { FC } from "react";
 import { IExperienceForm } from "../ExperienceForm";
 import MonthPicker from "@/components/commons/MonthPicker";
 
-const EndDate: FC<IExperienceForm> = ({ form, index, controlledFields }) => {
+const EndDate: FC<IExperienceForm> = ({ form, index, handleChange }) => {
   const {
     control,
     formState: { isSubmitting },
@@ -28,6 +28,7 @@ const EndDate: FC<IExperienceForm> = ({ form, index, controlledFields }) => {
           <FormLabel>End Date</FormLabel>
           <FormControl>
             <MonthPicker
+              handleChange={handleChange}
               minDate={minDate}
               disabled={
                 isSubmitting || !getValues().experience[index].startDate

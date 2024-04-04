@@ -3,47 +3,45 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
-import React, { FC } from "react";
-import { IExperienceForm } from "../ExperienceForm";
-
 import { Checkbox } from "@/components/ui/checkbox";
+import { IeducationForm } from "@/app/(root)/builder/(routes)/education/components/EducationForm";
+import { FC } from "react";
 
-const CheckboxWorkingStatus: FC<IExperienceForm> = ({
+const CheckboxPursuing: FC<IeducationForm> = ({
   form,
   index,
-  handleChange
+  handleChange,
 }) => {
   const {
     control,
-    getValues,
     formState: { isSubmitting },
   } = form;
-  const minDate = getValues().experience[index].startDate;
 
   return (
     <FormField
-      name={`experience.${index}.checkboxWorkingStatus`}
+      name={`education.${index}.checkboxPursuing`}
       control={control}
       render={({ field }) => (
-        <FormItem className="flex mt-auto  gap-4 ">
+        <FormItem className="flex gap-2">
           <FormControl>
             <Checkbox
               disabled={isSubmitting}
-              className="size-6 bg-white border"
+              className="size-6 bg-white"
               checked={field.value}
               onCheckedChange={(value) => {
-                field.onChange(value)
+                field.onChange(value);
                 handleChange&&handleChange();
-              }
-              }
+              }}
             />
           </FormControl>
-          <FormLabel>Currently working here</FormLabel>
+          <FormLabel>Pursuing</FormLabel>
+          <FormMessage />
         </FormItem>
       )}
     />
   );
 };
 
-export default CheckboxWorkingStatus;
+export default CheckboxPursuing;

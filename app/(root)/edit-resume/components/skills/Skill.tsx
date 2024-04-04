@@ -32,7 +32,8 @@ const Skill: React.FC<SkillProps> = ({ skill }) => {
     <>
       <div
         onClick={handleSelect}
-        className={`p-5
+        className={`py-5
+        px-3
         transition
         flex
         items-center
@@ -46,7 +47,7 @@ const Skill: React.FC<SkillProps> = ({ skill }) => {
                             } 
                             `}
       >
-        <h1>{skill}</h1>
+        <h1 className="text-sm">{skill}</h1>
       </div>
     </>
   );
