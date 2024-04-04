@@ -29,7 +29,7 @@ const SkillsForm = () => {
           </div>
         </section>
 
-        <CustomSkill  />
+        <CustomSkill />
         <Button
           onClick={() => dispatch(setFormComp("Education"))}
           className="w-1/3 self-center mt-5"

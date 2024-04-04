@@ -39,7 +39,7 @@ export interface IExperienceForm {
   >;
   index: number;
   controlledFields?: Iexperience[];
-  handleChange? : () => void
+  handleChange?: () => void;
 }
 const ExperienceForm = () => {
   const router = useRouter();

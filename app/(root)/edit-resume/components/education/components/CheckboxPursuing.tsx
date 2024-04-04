@@ -32,7 +32,7 @@ const CheckboxPursuing: FC<IeducationForm> = ({
               checked={field.value}
               onCheckedChange={(value) => {
                 field.onChange(value);
-                handleChange&&handleChange();
+                handleChange && handleChange();
               }}
             />
           </FormControl>

@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/form";
 import MonthPicker from "@/components/commons/MonthPicker";
 
-const EndDate: FC<IeducationForm> = ({ form, index,handleChange }) => {
+const EndDate: FC<IeducationForm> = ({ form, index, handleChange }) => {
   const {
     formState: { isSubmitting },
   } = form;

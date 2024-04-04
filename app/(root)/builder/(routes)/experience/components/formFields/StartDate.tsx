@@ -9,7 +9,7 @@ import React, { FC, useState } from "react";
 import { IExperienceForm } from "../ExperienceForm";
 import MonthPicker from "@/components/commons/MonthPicker";
 
-const StartDate: FC<IExperienceForm> = ({ form, index,handleChange }) => {
+const StartDate: FC<IExperienceForm> = ({ form, index, handleChange }) => {
   const {
     control,
     formState: { isSubmitting },

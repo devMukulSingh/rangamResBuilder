@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 interface SingleGoalProps {
   goal: {
@@ -23,9 +24,14 @@ const SingleGoal: React.FC<SingleGoalProps> = ({
     }
   };
   return (
-    <div
-      onClick={handleGoalSelect}
-      className={`
+    <motion.div
+      initial={{ opacity: 0, scale: 0.5 }}
+      animate={{ opacity: [0, 1], scale: 1 }}
+      transition={{ duration: 0.5, ease: "easeInOut" }}
+    >
+      <div
+        onClick={handleGoalSelect}
+        className={`
         transition
         flex
         items-center
@@ -42,33 +48,28 @@ const SingleGoal: React.FC<SingleGoalProps> = ({
         h-[16rem]
         ${selected === goal.title ? "bg-red-300 transition scale-90" : ""}
         `}
-    >
-      <figure
-        className="
+      >
+        <figure
+          className="
         relative
         w-[10rem]
         h-[10rem]
         "
-      >
-        <Image
-          alt="goalImg"
-          fill
-          className="object-contain"
-          src={goal.img}
-          loading="lazy"
-        />
-      </figure>
-      <h1
-        className="mt-auto
+        >
+          <Image alt="goalImg" fill className="object-contain" src={goal.img} />
+        </figure>
+        <h1
+          className="mt-auto
                 text-xl
                 text-neutral-600 
                 font-semibold
                 text-center
                 "
-      >
-        {goal.title}
-      </h1>
-    </div>
+        >
+          {goal.title}
+        </h1>
+      </div>
+    </motion.div>
   );
 };
 

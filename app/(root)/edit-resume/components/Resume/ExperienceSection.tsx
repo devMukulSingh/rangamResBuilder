@@ -17,9 +17,7 @@ const ExperienceSection: React.FC<ExperienceSectionProps> = ({}) => {
       {experience?.map((item, index) => (
         <div className="flex flex-col gap-5 " key={index}>
           <div>
-            <h1 className="font-bold">
-              {item.jobTitle || ""}
-            </h1>
+            <h1 className="font-bold">{item.jobTitle || ""}</h1>
             <h1>
               {`${item.startDate ? format(item?.startDate, "MMM yyyy") : ""} `}
               {`${item.checkboxWorkingStatus && item.startDate ? " - present" : `${item.endDate ? `- ${format(item?.endDate, "MMM yyyy")}` : ""}  `} `}

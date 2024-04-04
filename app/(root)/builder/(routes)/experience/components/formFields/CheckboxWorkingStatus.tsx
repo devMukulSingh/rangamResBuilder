@@ -12,7 +12,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 const CheckboxWorkingStatus: FC<IExperienceForm> = ({
   form,
   index,
-  handleChange
+  handleChange,
 }) => {
   const {
     control,
@@ -33,10 +33,9 @@ const CheckboxWorkingStatus: FC<IExperienceForm> = ({
               className="size-6 bg-white border"
               checked={field.value}
               onCheckedChange={(value) => {
-                field.onChange(value)
-                handleChange&&handleChange();
-              }
-              }
+                field.onChange(value);
+                handleChange && handleChange();
+              }}
             />
           </FormControl>
           <FormLabel>Currently working here</FormLabel>
