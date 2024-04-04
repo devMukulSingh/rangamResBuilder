@@ -7,8 +7,7 @@ import ProjectSection from "./ProjectSection";
 import AchievementSection from "./AchievementSection";
 import ExperienceSection from "./ExperienceSection";
 import PersonalSection from "./PersonalSection";
-import { usePathname } from "next/navigation";
-import SuggestedBio from "./SuggestedBio";
+
 const LanguageSection = dynamic(() => import("./LanguageSection"), {
   ssr: false,
 });
@@ -20,9 +19,9 @@ const Resume = () => {
 
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: [0, 1], scale: [0.9, 1] }}
-      transition={{ duration: 0.4 }}
+      initial={{ opacity: 0, x: 150 }}
+      animate={{ opacity: [0, 1], x: 1 }}
+      transition={{ duration: 0.5 }}
     >
       <div
         className={`max-h-[calc(100vh-6rem)] overflow-auto no-scrollbar ${sidebar ? "w-[calc(100vw-47rem)]" : "w-[calc(100vw-37rem)]"} pb-20  max-w-[55rem] shrink-0`}

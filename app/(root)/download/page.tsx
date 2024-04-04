@@ -2,7 +2,7 @@ import React from "react";
 import DownloadSection from "./components/DownloadSection";
 import Template1 from "./components/Template/Template1";
 
-const DownloadPage = ({ params }: { params: { templateId: string } }) => {
+const DownloadPage = () => {
   return (
     <main
       className="md:flex-row 

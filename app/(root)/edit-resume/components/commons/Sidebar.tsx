@@ -20,7 +20,7 @@ const Sidebar = () => {
   const sidebar = useAppSelector((state) => state.commonSlice.sidebar);
   const pathName = usePathname();
   const showOptions = useAppSelector(
-    (state) => state.commonSlice.showSidebarOptions,
+    (state) => state.commonSlice.showSidebarOptions
   );
   const halfOptions = [
     {
@@ -74,51 +74,51 @@ const Sidebar = () => {
     }
   }, []);
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: [0, 1], scale: [0.9, 1] }}
-      transition={{ duration: 0.4 }}
+    // <motion.div
+    //   initial={{ opacity: 0 }}
+    //   animate={{ opacity: [0, 1], scale: [0.9, 1] }}
+    //   transition={{ duration: 0.4 }}
+    // >
+    <div
+      className={`flex flex-col h-[calc(100vh-6.5rem)] bg-white py-3 fixed transition-all ${
+        sidebar ? "w-[18rem] lg:w-[20rem]" : "w-[7rem]"
+      }  `}
     >
-      <div
-        className={`flex flex-col h-[calc(100vh-6.5rem)] bg-white py-3 fixed transition-all ${
-          sidebar ? "w-[18rem] lg:w-[20rem]" : "w-[7rem]"
-        }  `}
-      >
-        <MdOutlineSort
-          onClick={() => dispatch(toggleSidebar())}
-          className={`
+      <MdOutlineSort
+        onClick={() => dispatch(toggleSidebar())}
+        className={`
                 size-8
                 cursor-pointer
                 ${sidebar ? "ml-auto mr-5" : " mr-0 ml-0 mb-5 self-center"}
                 `}
-        />
-        <ul className="">
-          {sidebarOptions.map((option, index) => (
+      />
+      <ul className="">
+        {sidebarOptions.map((option, index) => (
+          <SidebarOption
+            option={option}
+            key={index}
+            index={index}
+            sidebar={sidebar}
+          />
+        ))}
+        {showOptions &&
+          extraOptions.map((option, index) => (
             <SidebarOption
+              index={index + 4}
               option={option}
               key={index}
-              index={index}
               sidebar={sidebar}
             />
           ))}
-          {showOptions &&
-            extraOptions.map((option, index) => (
-              <SidebarOption
-                index={index + 4}
-                option={option}
-                key={index}
-                sidebar={sidebar}
-              />
-            ))}
-        </ul>
-        <Button
-          className={`mx-10 self-center mt-5 w-4/5`}
-          onClick={() => dispatch(setShowSidebarOptions())}
-        >
-          {showOptions ? "Hide" : "Show More"}
-        </Button>
-      </div>
-    </motion.div>
+      </ul>
+      <Button
+        className={`mx-10 self-center mt-5 w-4/5`}
+        onClick={() => dispatch(setShowSidebarOptions())}
+      >
+        {showOptions ? "Hide" : "Show More"}
+      </Button>
+    </div>
+    // </motion.div>
   );
 };
 

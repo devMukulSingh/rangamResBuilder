@@ -56,7 +56,7 @@ const PersonalForm = () => {
 
   type formSchema = z.infer<typeof schema>;
   const personalInfo = useAppSelector(
-    (state) => state.persistedReducer.personalInfo,
+    (state) => state.persistedReducer.personalInfo
   );
 
   const form = useForm<formSchema>({
@@ -82,7 +82,7 @@ const PersonalForm = () => {
         name: "Personal Information",
         isValidated: true,
         index: 0,
-      }),
+      })
     );
   };
   const handleChange = () => {
@@ -90,45 +90,45 @@ const PersonalForm = () => {
   };
 
   return (
-    // <motion.div
-    //   animate={{ x: 1, opacity: [0, 1] }}
-    //   initial={{ x: -150, opacity: 0 }}
-    //   transition={{ duration: 0.3 }}
-    // >
-    <div className="px-5 pt-10 pb-20">
-      <Form {...form}>
-        <form onChange={handleChange} onSubmit={form.handleSubmit(onSubmit)}>
-          <div className="flex flex-col gap-5">
-            <Name form={form} />
+    <motion.div
+      animate={{ x: 1, opacity: [0, 1] }}
+      initial={{ x: -150, opacity: 0 }}
+      transition={{ duration: 0.3 }}
+    >
+      <div className="px-5 pt-10 pb-20">
+        <Form {...form}>
+          <form onChange={handleChange} onSubmit={form.handleSubmit(onSubmit)}>
+            <div className="flex flex-col gap-5">
+              <Name form={form} />
 
-            <Email form={form} />
+              <Email form={form} />
 
-            <Profession form={form} />
+              <Profession form={form} />
 
-            <Address form={form} />
+              <Address form={form} />
 
-            <div className="flex gap-5 w-full">
-              <CountryCode form={form} handleChange={handleChange} />
-              <Mobile form={form} />
+              <div className="flex gap-5 w-full">
+                <CountryCode form={form} handleChange={handleChange} />
+                <Mobile form={form} />
+              </div>
+
+              <div className="flex gap-5 w-full">
+                <City form={form} />
+                <State form={form} />
+              </div>
+
+              <div className="flex gap-5 w-full">
+                <DOB form={form} />
+              </div>
+
+              <Button type="submit" className="self-center w-1/3 mt-10">
+                Next
+              </Button>
             </div>
-
-            <div className="flex gap-5 w-full">
-              <City form={form} />
-              <State form={form} />
-            </div>
-
-            <div className="flex gap-5 w-full">
-              <DOB form={form} />
-            </div>
-
-            <Button type="submit" className="self-center w-1/3 mt-10">
-              Next
-            </Button>
-          </div>
-        </form>
-      </Form>
-    </div>
-    // </motion.div>
+          </form>
+        </Form>
+      </div>
+    </motion.div>
   );
 };
 
