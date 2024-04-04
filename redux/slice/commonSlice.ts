@@ -12,6 +12,7 @@ export interface IinitialState {
     isValidated: boolean;
     index: number;
   }[];
+  showSidebarOptions:boolean
 }
 
 const initialState: IinitialState = {
@@ -63,6 +64,7 @@ const initialState: IinitialState = {
       isValidated: true,
     },
   ],
+  showSidebarOptions:false,
 };
 
 const commonSlice = createSlice({
@@ -96,6 +98,9 @@ const commonSlice = createSlice({
       );
       state.sidebarOptions = [...filtered, action.payload];
     },
+    setShowSidebarOptions : (state) => {
+      state.showSidebarOptions = !state.showSidebarOptions;
+    }
   },
 });
 
@@ -110,4 +115,5 @@ export const {
   setCompLoading,
   setCompDescLoading,
   setValidatedOptions,
+  setShowSidebarOptions
 } = commonSlice.actions;

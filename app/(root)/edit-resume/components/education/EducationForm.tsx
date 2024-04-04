@@ -16,7 +16,7 @@ import { useParams, useRouter } from "next/navigation";
 import { setProgress } from "@/redux/slice/userSlice";
 import { PlusCircle, Trash } from "lucide-react";
 import toast from "react-hot-toast";
-import { setFormComp } from "@/redux/slice/commonSlice";
+import { setFormComp, setValidatedOptions } from "@/redux/slice/commonSlice";
 import { motion } from "framer-motion";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -30,6 +30,9 @@ import { parseISO } from "date-fns";
 
 const EducationForm = () => {
   const [expanded, setExpanded] = useState<string | false>("");
+  const showSidebarOptions = useAppSelector(
+    (state) => state.commonSlice.showSidebarOptions
+  );
   const dispatch = useAppDispatch();
   const education = useAppSelector((state) => state.persistedReducer.education);
   const formSchema = z.object({
@@ -133,7 +136,17 @@ const EducationForm = () => {
   });
 
   const onSubmit = () => {
-    router.push("/download");
+    dispatch(
+      setValidatedOptions({
+        name: "Education",
+        isValidated: true,
+        index: 0,
+      }))
+    if (!showSidebarOptions) {
+      router.push("/download");
+    } else {
+      dispatch(setFormComp("Social Links"));
+    }
     // dispatch(setFormComp("Social Links"));
   };
   const handleChange = () => {
@@ -274,7 +287,7 @@ const EducationForm = () => {
                       </Collapsible>
                     </>
                   );
-                },
+                }
               )}
 
               <div className="flex gap-5">

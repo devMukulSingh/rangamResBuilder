@@ -81,17 +81,29 @@ const EducationForm = () => {
           .min(1, {
             message: "Specialiy is required",
           }),
-        startDate: z.any({
-          required_error: "Start date is required",
-        }).refine( data => {
-          if(data) return true;
-        },{
-          message:'Start date is required'
-        }),
-        endDate: z.any().optional().refine( data => {
-          if(data) return true;
-        },{
-      message:'End date is required'} ),
+        startDate: z
+          .any({
+            required_error: "Start date is required",
+          })
+          .refine(
+            (data) => {
+              if (data) return true;
+            },
+            {
+              message: "Start date is required",
+            },
+          ),
+        endDate: z
+          .any()
+          .optional()
+          .refine(
+            (data) => {
+              if (data) return true;
+            },
+            {
+              message: "End date is required",
+            },
+          ),
         checkboxPursuing: z.boolean(),
       })
       .refine(
@@ -104,12 +116,18 @@ const EducationForm = () => {
           if (endDate && typeof endDate === "string") {
             endDate = parseISO(endDate);
           }
-          if (data.checkboxPursuing || startDate < endDate || !startDate || !endDate) return true;
+          if (
+            data.checkboxPursuing ||
+            startDate < endDate ||
+            !startDate ||
+            !endDate
+          )
+            return true;
         },
         {
           message: `End date must be greater than start date`,
           path: ["endDate"],
-        }
+        },
       )
       .array()
       .min(1, {

@@ -8,7 +8,7 @@ import { FaDiagramProject, FaUserPen } from "react-icons/fa6";
 import { GiSkills } from "react-icons/gi";
 import { usePathname } from "next/navigation";
 import { resetForm } from "@/redux/slice/userSlice";
-import { toggleSidebar } from "@/redux/slice/commonSlice";
+import { setShowSidebarOptions, toggleSidebar } from "@/redux/slice/commonSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
@@ -18,7 +18,9 @@ const Sidebar = () => {
   const dispatch = useAppDispatch();
   const sidebar = useAppSelector((state) => state.commonSlice.sidebar);
   const pathName = usePathname();
-  const [showOptions, setShowOptions] = useState(false);
+  const showOptions = useAppSelector(
+    (state) => state.commonSlice.showSidebarOptions
+  );
   const halfOptions = [
     {
       icon: User,
@@ -110,7 +112,7 @@ const Sidebar = () => {
         </ul>
         <Button
           className={`mx-10 self-center mt-5 w-4/5`}
-          onClick={() => setShowOptions((prev) => !prev)}
+          onClick={() => dispatch(setShowSidebarOptions()) }
         >
           {showOptions ? "Hide" : "Show More"}
         </Button>
