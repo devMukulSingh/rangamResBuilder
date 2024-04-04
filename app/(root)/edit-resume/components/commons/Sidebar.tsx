@@ -1,14 +1,15 @@
 "use client";
 import { MdOutlineSort } from "react-icons/md";
 import SidebarOption from "./SidebarOption";
-import Progressbar from "./Progressbar";
 import { Contact, GraduationCap, Languages, User } from "lucide-react";
 import { BiCertification } from "react-icons/bi";
 import { FaDiagramProject, FaUserPen } from "react-icons/fa6";
 import { GiSkills } from "react-icons/gi";
 import { usePathname } from "next/navigation";
-import { resetForm } from "@/redux/slice/userSlice";
-import { setShowSidebarOptions, toggleSidebar } from "@/redux/slice/commonSlice";
+import {
+  setShowSidebarOptions,
+  toggleSidebar,
+} from "@/redux/slice/commonSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
@@ -19,7 +20,7 @@ const Sidebar = () => {
   const sidebar = useAppSelector((state) => state.commonSlice.sidebar);
   const pathName = usePathname();
   const showOptions = useAppSelector(
-    (state) => state.commonSlice.showSidebarOptions
+    (state) => state.commonSlice.showSidebarOptions,
   );
   const halfOptions = [
     {
@@ -112,7 +113,7 @@ const Sidebar = () => {
         </ul>
         <Button
           className={`mx-10 self-center mt-5 w-4/5`}
-          onClick={() => dispatch(setShowSidebarOptions()) }
+          onClick={() => dispatch(setShowSidebarOptions())}
         >
           {showOptions ? "Hide" : "Show More"}
         </Button>

@@ -141,7 +141,8 @@ const EducationForm = () => {
         name: "Education",
         isValidated: true,
         index: 0,
-      }))
+      })
+    );
     if (!showSidebarOptions) {
       router.push("/download");
     } else {
@@ -151,8 +152,6 @@ const EducationForm = () => {
   };
   const handleChange = () => {
     const education = form.getValues().education;
-    console.log(education);
-
     const parsedEducation = education.map((item) => {
       return {
         schoolName: item.schoolName,
@@ -168,18 +167,41 @@ const EducationForm = () => {
     dispatch(setEducation(parsedEducation));
   };
   const handleAddMore = () => {
-    const emptyField = {
-      schoolName: "",
-      degree: "",
-      speciality: "",
-      startDate: "",
-      endDate: "",
-      id: Math.floor(Math.random() * 100).toString(),
-      checkboxPursuing: false,
-      // schoolLocation: '',
-      // percentage: 0,
-    };
-    fieldArray.append(emptyField);
+    if (controlledFields.length > 2) {
+      toast.error(`Maximum 3 education allowed`);
+      return;
+    } 
+    const currIndex = controlledFields.length - 1;
+    const {
+      schoolName,
+      speciality,
+      degree,
+      startDate,
+      checkboxPursuing,
+      endDate,
+    } = form.getValues().education[currIndex];
+
+    if (
+      schoolName.trim() === "" ||
+      degree.trim() === "" ||
+      startDate.trim() === "" ||
+      speciality.trim() === "" ||
+      (endDate.trim() === "" && checkboxPursuing === false)
+    ){
+      toast.error(`Complete previous form first`)
+    }
+    else {
+      const emptyField = {
+        schoolName: "",
+        degree: "",
+        speciality: "",
+        startDate: "",
+        endDate: "",
+        id: Math.floor(Math.random() * 100).toString(),
+        checkboxPursuing: false,
+      };
+      fieldArray.append(emptyField);
+    }
   };
 
   const handleCollapsible = (id: string, isExpanded: boolean) => {
@@ -208,8 +230,6 @@ const EducationForm = () => {
     }
     //handling delete collapsible
     else if (education && education.length > controlledFields.length) {
-      console.log("else", controlledFields);
-
       if (controlledFields.length > 0) {
         dispatch(setEducation(controlledFields));
       } else {
@@ -301,7 +321,7 @@ const EducationForm = () => {
                   Add More
                 </Button>
                 <Button className="w-40" type="submit">
-                  Submit
+                  {showSidebarOptions ? "Next" : "Submit"}
                 </Button>
               </div>
             </div>

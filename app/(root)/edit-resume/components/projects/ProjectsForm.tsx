@@ -8,13 +8,12 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { FieldValues, useFieldArray, useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
 import { setProjects } from "@/redux/slice/userSlice";
 import { PlusCircle, Trash } from "lucide-react";
 import { setProgress } from "@/redux/slice/userSlice";
-import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Collapsible, CollapsibleTrigger } from "@/components/ui/collapsible";
@@ -25,10 +24,9 @@ const RichTextEditor = dynamic(
   () => import("@/components/commons/RichTextEditor"),
   {
     ssr: false,
-  },
+  }
 );
 import { motion } from "framer-motion";
-import MCEEditor from "@/components/commons/MCEEditor";
 
 const ProjectsForm = () => {
   const [expanded, setExpanded] = useState<string | false>("");
@@ -64,9 +62,9 @@ const ProjectsForm = () => {
 
   const onSubmit = () => {
     dispatch(setFormComp("Achievements"));
-    if (progress <= 70) {
-      dispatch(setProgress());
-    }
+    // if (progress <= 70) {
+    //   dispatch(setProgress());
+    // }
   };
 
   const handleChange = () => {
@@ -83,17 +81,27 @@ const ProjectsForm = () => {
   };
 
   const handleAddMore = () => {
-    if (controlledFields.length < 4) {
-      const emptyField = {
-        projectName: "",
-        projectUrl: "",
-        description: "",
-        id: Math.floor(Math.random() * 100).toString(),
-      };
-      fieldArray.append(emptyField);
-    } else {
+    if (controlledFields.length > 3) {
       toast.error("Max 4 pojects allowed");
+      return;
     }
+     const currIndex = controlledFields.length - 1;
+     const {
+        projectName,
+     } = form.getValues().projects[currIndex];
+     if (
+       projectName.trim() === "" 
+     ) {
+       toast.error("Complete previous form first");
+     } else {
+       const emptyField = {
+         projectName: "",
+         projectUrl: "",
+         description: "",
+         id: Math.floor(Math.random() * 100).toString(),
+       };
+       fieldArray.append(emptyField);
+     }
   };
   const handleCollapsible = (id: string, isExpanded: boolean) => {
     if (isExpanded) {

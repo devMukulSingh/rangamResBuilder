@@ -24,6 +24,7 @@ const Email: FC<IForm> = ({ form }) => {
           <FormLabel>Email Address</FormLabel>
           <FormControl>
             <Input
+              type="email"
               disabled={isSubmitting}
               className="bg-white"
               {...field}

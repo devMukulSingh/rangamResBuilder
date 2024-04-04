@@ -139,13 +139,17 @@ const ExperienceForm = () => {
   };
 
   const handleAddMore = () => {
+     if (controlledFields.length > 3) {
+       toast.error(`Maximum 4 experiences allowed`);
+       return;
+     }
     const currIndex = controlledFields.length - 1;
     const { companyName, startDate, jobTitle, endDate, checkboxWorkingStatus } =
       getValues().experience[currIndex];
     if (
-      companyName === "" ||
+      companyName.trim() === "" ||
       !startDate ||
-      jobTitle === "" ||
+      jobTitle.trim() === "" ||
       (!endDate && checkboxWorkingStatus === false)
     ) {
       toast.error("Complete previous form first");

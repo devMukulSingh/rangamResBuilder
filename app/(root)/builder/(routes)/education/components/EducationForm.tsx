@@ -175,6 +175,10 @@ const EducationForm = () => {
   });
 
   const handleAddMore = () => {
+    if (controlledFields.length > 2) {
+      toast.error(`Maximum 3 education allowed`);
+      return;
+    } 
     const currIndex = controlledFields.length - 1;
     const {
       schoolName,
@@ -186,11 +190,11 @@ const EducationForm = () => {
     } = getValues().education[currIndex];
 
     if (
-      schoolName === "" ||
-      degree === "" ||
-      startDate === "" ||
-      speciality === "" ||
-      (endDate === "" && checkboxPursuing === false)
+      schoolName.trim() === "" ||
+      degree.trim() === "" ||
+      startDate.trim() === "" ||
+      speciality.trim() === "" ||
+      (endDate.trim() === "" && checkboxPursuing === false)
     ) {
       toast.error("Complete previous form first");
     } else {

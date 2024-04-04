@@ -29,7 +29,7 @@ const ExperienceForm = () => {
   const [expanded, setExpanded] = useState<string | false>("");
   const dispatch = useAppDispatch();
   const experience = useAppSelector(
-    (state) => state.persistedReducer.experience,
+    (state) => state.persistedReducer.experience
   );
 
   const form = useForm({
@@ -80,6 +80,7 @@ const ExperienceForm = () => {
   };
   const handleChange = () => {
     const experience = form.getValues().experience;
+    console.log(experience);
 
     const parsedExperience = experience.map((item) => {
       return {
@@ -101,27 +102,43 @@ const ExperienceForm = () => {
   };
 
   const handleAddMore = () => {
-    fieldArray.append({
-      companyName: "",
-      startDate: "",
-      endDate: "",
-      checkboxInternship: false,
-      checkboxVolunteering: false,
-      competences: [
-        {
-          id: 0,
-          name: "",
-          isSelected: false,
-          description: "",
-        },
-      ],
-      jobTitle: "",
-      description: "",
-      id: Math.floor(Math.random() * 100).toString(),
-      checkboxWorkingStatus: false,
-      address: "",
-      employer: "",
-    });
+    if (controlledFields.length > 3) {
+      toast.error(`Maximum 4 experiences allowed`);
+      return;
+    }
+    const currIndex = controlledFields.length - 1;
+    const { companyName, startDate, jobTitle, endDate, checkboxWorkingStatus } =
+      form.getValues().experience[currIndex];
+    if (
+      companyName.trim() === "" ||
+      !startDate ||
+      jobTitle.trim() === "" ||
+      (!endDate && checkboxWorkingStatus === false)
+    ) {
+      toast.error("Complete previous form first");
+    } else {
+      fieldArray.append({
+        companyName: "",
+        startDate: "",
+        endDate: "",
+        checkboxInternship: false,
+        checkboxVolunteering: false,
+        competences: [
+          {
+            id: 0,
+            name: "",
+            isSelected: false,
+            description: "",
+          },
+        ],
+        jobTitle: "",
+        description: "",
+        id: Math.floor(Math.random() * 100).toString(),
+        checkboxWorkingStatus: false,
+        address: "",
+        employer: "",
+      });
+    }
   };
   const handleCollapsible = (id: string, isExpanded: boolean) => {
     if (isExpanded) {
@@ -230,7 +247,7 @@ const ExperienceForm = () => {
                       </CollapsibleContent>
                     </Collapsible>
                   );
-                },
+                }
               )}
 
               <Button

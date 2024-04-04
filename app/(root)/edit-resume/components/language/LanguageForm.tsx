@@ -6,7 +6,7 @@ import {
   FormItem,
   FormLabel,
 } from "@/components/ui/form";
-import { FieldValues, useFieldArray, useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import {
   Select,
@@ -18,13 +18,12 @@ import {
 import { languagesData, strengths } from "@/lib/constants";
 import { PlusCircle } from "lucide-react";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
-import { useEffect, useRef, useState } from "react";
 import { setLanguages } from "@/redux/slice/userSlice";
 import { useParams, useRouter } from "next/navigation";
 import { motion } from "framer-motion";
+import toast from "react-hot-toast";
 
 const LanguageForm = () => {
-  const { templateId } = useParams();
   const dispatch = useAppDispatch();
   const router = useRouter();
   const languages = useAppSelector((state) => state.persistedReducer.languages);
@@ -69,7 +68,11 @@ const LanguageForm = () => {
   });
 
   const handleAddMore = () => {
-    fieldArray.append({ language: "", strength: "" });
+    if (controlledFields.length > 3) {
+      toast.error(`Maximum 4 Languages required`);
+    } else {
+      fieldArray.append({ language: "English", strength: "" });
+    }
   };
 
   return (

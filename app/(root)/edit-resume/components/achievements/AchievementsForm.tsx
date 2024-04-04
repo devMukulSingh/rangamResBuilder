@@ -18,12 +18,13 @@ import { useParams, useRouter } from "next/navigation";
 import { setProgress } from "@/redux/slice/userSlice";
 import { setFormComp } from "@/redux/slice/commonSlice";
 import { motion } from "framer-motion";
+import toast from "react-hot-toast";
 
 const AchievementsForm = () => {
   const dispatch = useAppDispatch();
   const progress = useAppSelector((state) => state.persistedReducer.progress);
   const achievements = useAppSelector(
-    (state) => state.persistedReducer.achievements,
+    (state) => state.persistedReducer.achievements
   );
 
   const form = useForm({
@@ -65,7 +66,11 @@ const AchievementsForm = () => {
   };
 
   const handleAddMore = () => {
-    fieldArray.append({ value: "" });
+    if (controlledFields.length > 3) {
+      toast.error(`Maximum 4 Achievements allowed`);
+    } else {
+      fieldArray.append({ value: "" });
+    }
   };
 
   return (

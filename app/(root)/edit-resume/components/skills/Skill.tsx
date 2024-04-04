@@ -34,6 +34,8 @@ const Skill: React.FC<SkillProps> = ({ skill }) => {
         onClick={handleSelect}
         className={`p-5
         transition
+        flex
+        items-center
                           rounded-md
                            cursor-pointer
                             ${
