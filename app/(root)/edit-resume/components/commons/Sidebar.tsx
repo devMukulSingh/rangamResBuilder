@@ -20,7 +20,7 @@ const Sidebar = () => {
   const sidebar = useAppSelector((state) => state.commonSlice.sidebar);
   const pathName = usePathname();
   const showOptions = useAppSelector(
-    (state) => state.commonSlice.showSidebarOptions
+    (state) => state.commonSlice.showSidebarOptions,
   );
   const halfOptions = [
     {
