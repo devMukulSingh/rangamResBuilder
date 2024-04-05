@@ -31,10 +31,13 @@ const PersonalForm = () => {
       .max(30, {
         message: "Name should be max 30 characters",
       }),
-    email: z.string().email({
-      message: "Please enter valid email",
-    }).refine((data) => data.endsWith("com"),{
-        message: "Please enter valid email"
+    email: z
+      .string()
+      .email({
+        message: "Please enter valid email",
+      })
+      .refine((data) => data.endsWith("com"), {
+        message: "Please enter valid email",
       }),
     profession: z
       .string()

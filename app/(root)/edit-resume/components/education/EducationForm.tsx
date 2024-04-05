@@ -62,15 +62,7 @@ const EducationForm = () => {
           ),
         endDate: z
           .any()
-          .optional()
-          .refine(
-            (data) => {
-              if (data) return true;
-            },
-            {
-              message: "End date is required",
-            },
-          ),
+          .optional(),
         checkboxPursuing: z.boolean(),
       })
       .refine(

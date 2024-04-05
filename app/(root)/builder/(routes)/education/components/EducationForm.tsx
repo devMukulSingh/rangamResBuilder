@@ -91,19 +91,9 @@ const EducationForm = () => {
             },
             {
               message: "Start date is required",
-            },
+            }
           ),
-        endDate: z
-          .any()
-          .optional()
-          .refine(
-            (data) => {
-              if (data) return true;
-            },
-            {
-              message: "End date is required",
-            },
-          ),
+        endDate: z.any().optional(),
         checkboxPursuing: z.boolean(),
       })
       .refine(
@@ -127,7 +117,7 @@ const EducationForm = () => {
         {
           message: `End date must be greater than start date`,
           path: ["endDate"],
-        },
+        }
       )
       .array()
       .min(1, {
