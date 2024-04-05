@@ -18,7 +18,8 @@ const Education = () => {
           <h1 className="font-bold">{item?.schoolName}</h1>
           <div className="flex justify-between">
             <h1>
-              Bachelor In Technology in {item?.speciality}
+              {item.degree}
+              {`${item?.speciality ? ` in ${item.speciality}` : ""}`}
               {/* {` ${item.degree ? `${item?.degree} in ${item.speciality}` : ''} `} */}
             </h1>
             <h1>
