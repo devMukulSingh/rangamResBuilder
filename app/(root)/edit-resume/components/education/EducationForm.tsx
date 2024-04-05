@@ -28,7 +28,7 @@ import CheckboxPursuing from "./components/CheckboxPursuing";
 const EducationForm = () => {
   const [expanded, setExpanded] = useState<string | false>("");
   const showSidebarOptions = useAppSelector(
-    (state) => state.commonSlice.showSidebarOptions
+    (state) => state.commonSlice.showSidebarOptions,
   );
   const dispatch = useAppDispatch();
   const education = useAppSelector((state) => state.persistedReducer.education);
@@ -58,7 +58,7 @@ const EducationForm = () => {
             },
             {
               message: "Start date is required",
-            }
+            },
           ),
         endDate: z.any().optional(),
         checkboxPursuing: z.boolean(),
@@ -84,7 +84,7 @@ const EducationForm = () => {
         {
           message: `End date must be greater than start date`,
           path: ["endDate"],
-        }
+        },
       )
       .array(),
   });
@@ -128,7 +128,7 @@ const EducationForm = () => {
         name: "Education",
         isValidated: true,
         index: 0,
-      })
+      }),
     );
     if (!showSidebarOptions) {
       router.push("/download");
@@ -300,7 +300,7 @@ const EducationForm = () => {
                       </Collapsible>
                     </>
                   );
-                }
+                },
               )}
 
               <div className="flex gap-5">
