@@ -24,7 +24,7 @@ const MonthPicker: FC<any> = ({
           minDate={minDate}
           disabled={disabled}
           disableFuture={disableFuture}
-          className={clsx(`bg-white pt-0 pb-0 w-auto `, className)}
+          className={clsx(`bg-white pt-0 pb-0`, className)}
           views={["month", "year"]}
           onChange={(newValue) => {
             field.onChange(newValue);
