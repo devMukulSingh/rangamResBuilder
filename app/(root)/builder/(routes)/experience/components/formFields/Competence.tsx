@@ -43,8 +43,8 @@ const Competence: React.FC<competenceProps> = ({
   const profession = useAppSelector(
     (state) => state.persistedReducer.personalInfo.profession,
   );
-  
-  const { data, isError, error, refetch,isFetching } = useQuery({
+
+  const { data, isError, error, refetch, isFetching } = useQuery({
     queryKey: ["compDescription"],
     enabled: false,
     refetchOnWindowFocus: false,
@@ -77,12 +77,10 @@ const Competence: React.FC<competenceProps> = ({
       });
       return data;
     },
-    
   });
   if (isError) {
     console.log(`Error in getCompetence Description ${error}`);
   }
-
 
   const handleSelect = () => {
     if (competence.isSelected) {
@@ -112,7 +110,7 @@ const Competence: React.FC<competenceProps> = ({
         aria-disabled={isSubmitting}
         onClick={handleSelect}
         className={`py-5
-        ${(isSubmitting || isFetching) ? "pointer-events-none opacity-55" : ""}                
+        ${isSubmitting || isFetching ? "pointer-events-none opacity-55" : ""}                
         transition
                         px-3
                         h-16

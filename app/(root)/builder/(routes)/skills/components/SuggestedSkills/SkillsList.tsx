@@ -22,12 +22,17 @@ const SkillsList = () => {
     ["/api/ai/get-skills", profession],
     fetcher,
     {
+      onSuccess(data, key, config) {
+        dispatch(setAiSuggestedSkills(data));
+      },
+      
       revalidateIfStale: false,
       revalidateOnFocus: false,
       revalidateOnReconnect: false,
+      refreshWhenOffline:false,
     },
   );
-  dispatch(setAiSuggestedSkills(data));
+
 
   if (error) {
     console.log(`Error in GETSkills ${error}`);

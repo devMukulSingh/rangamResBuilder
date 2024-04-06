@@ -1,8 +1,6 @@
 import { ChatGPT } from "@/lib/ChatGPT";
-import { cookies } from "next/headers";
-import { cache } from "react";
 
-export const getSummary = cache(
+export const getSummary = 
   async ({
     profession,
     goal,
@@ -31,5 +29,5 @@ export const getSummary = cache(
       return summaries;
     }
     return "";
-  },
-);
+  }
+

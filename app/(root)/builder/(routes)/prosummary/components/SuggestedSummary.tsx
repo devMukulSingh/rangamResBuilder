@@ -8,8 +8,6 @@ const SummaryPoints = dynamic(() => import("./SummaryPoints"), {
 const SuggestedSummary = async () => {
   return (
     <div className="flex flex-col gap-3 p-5 ">
-      {/* <h1 className="font-semibold">Select Career Field</h1>
-      <SelectComp /> */}
       <SummaryPoints />
     </div>
   );

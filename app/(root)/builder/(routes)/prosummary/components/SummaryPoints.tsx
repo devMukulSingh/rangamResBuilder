@@ -1,36 +1,57 @@
+"use client";
 import React from "react";
 import SummaryPoint from "./SummaryPoint";
-import { getSummary } from "@/actions/get-summary";
-import { cookies } from "next/headers";
 import BioSkeleton from "./BioSkeleton";
+import useSWR from "swr";
+import axios from "axios";
+import { useAppSelector } from "@/redux/hooks/hooks";
 
-const SummaryPoints = async () => {
-  const profession = cookies().get("profession")?.value;
-  const goal = cookies().get("goal")?.value;
+type Ifetcher = [url: string, profession: string, goal: string];
 
-  const summaries = await getSummary({ profession, goal });
+const SummaryPoints = () => {
+  const fetcher = ([url, profession, goal]: Ifetcher) =>
+    axios.get(url, { params: { profession, goal } }).then((res) => res.data);
 
-  const parsedSummaries =
-    summaries
-      ?.replace(/\d+(\.\s*|\.)?/g, "")
-      .split("\n")
-      .filter((item: string) => item !== "") || [];
+  const profession = useAppSelector(
+    (state) => state.persistedReducer.personalInfo.profession
+  );
+  const goal = useAppSelector((state) => state.persistedReducer.goal);
+
+  const { data, isLoading, error } = useSWR(
+    [`/api/ai/get-summary`, profession, goal],
+    fetcher,
+    {
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+      refreshWhenOffline:false,
+    }
+  );
+
+  if (error) {
+    console.log(`Error in get Summary ${error.message}`);
+    return;
+  }
+
   return (
     <>
-      {parsedSummaries.length === 0 && <BioSkeleton />}
-      <ol
-        className="
+      {(isLoading || !data) ? (
+        <BioSkeleton />
+      ) : (
+        <ol
+          className="
       list-none 
             text-sm 
             text-neutral-500 
             space-y-5 
             mt-2
             "
-      >
-        {parsedSummaries.map((bio: string, index: number) => (
-          <SummaryPoint bio={bio} key={index} />
-        ))}
-      </ol>
+        >
+          {data?.map((bio: string, index: number) => (
+            <SummaryPoint bio={bio} key={index} />
+          ))}
+        </ol>
+      )}
     </>
   );
 };
