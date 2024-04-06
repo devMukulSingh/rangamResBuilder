@@ -1,5 +1,5 @@
 import { FormControl, FormField, FormItem } from "@/components/ui/form";
-import React, { FC, useCallback, useState } from "react";
+import React, { FC } from "react";
 import { IExperienceForm } from "../ExperienceForm";
 import { Plus } from "lucide-react";
 import Competence from "./Competence";
@@ -7,9 +7,6 @@ import CompetenceSkeleton from "../CompetenceSkeleton";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
 import { setCompLoading } from "@/redux/slice/commonSlice";
 import axios from "axios";
-import RichTextEditor from "@/components/commons/RichTextEditor";
-import { setDescription } from "@/redux/slice/userSlice";
-import { Editor } from "@tinymce/tinymce-react";
 import { Iexperience } from "@/lib/types";
 import { ControllerRenderProps } from "react-hook-form";
 

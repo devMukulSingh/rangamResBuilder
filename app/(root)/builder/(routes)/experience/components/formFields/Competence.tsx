@@ -39,12 +39,12 @@ const Competence: React.FC<competenceProps> = ({
     getValues,
     formState: { isSubmitting },
   } = form;
-  const dispatch = useAppDispatch();
+
   const profession = useAppSelector(
     (state) => state.persistedReducer.personalInfo.profession,
   );
-
-  const { isLoading, data, isError, error, refetch } = useQuery({
+  
+  const { data, isError, error, refetch,isFetching } = useQuery({
     queryKey: ["compDescription"],
     enabled: false,
     refetchOnWindowFocus: false,
@@ -55,13 +55,11 @@ const Competence: React.FC<competenceProps> = ({
           profession,
         },
       });
-      dispatch(setCompDescLoading(isLoading));
-
       let previousDescription = getValues(
         `experience.${index}.description`,
       ).replace("<br>", "");
 
-      //description to be added in bullet points feature
+      //description to be added in bullet points, feature
       let descriptionString = "";
       if (previousDescription === "") {
         descriptionString = `<ul><li>${data}</li></ul>`;
@@ -69,7 +67,7 @@ const Competence: React.FC<competenceProps> = ({
         const withoutUlTag = previousDescription.replace("</ul>", "");
         descriptionString = `${withoutUlTag}<li>${data}</li>`;
       }
-      //
+      //setting value of the description field
       setValue(`experience.${index}.description`, descriptionString);
       setValue(`experience.${index}.competences.${competenceIndex}`, {
         description: data,
@@ -79,10 +77,13 @@ const Competence: React.FC<competenceProps> = ({
       });
       return data;
     },
+    
   });
   if (isError) {
     console.log(`Error in getCompetence Description ${error}`);
   }
+
+
   const handleSelect = () => {
     if (competence.isSelected) {
       const descriptionToRemove = competence.description;
@@ -111,8 +112,8 @@ const Competence: React.FC<competenceProps> = ({
         aria-disabled={isSubmitting}
         onClick={handleSelect}
         className={`py-5
-        ${isSubmitting ? "pointer-events-none opacity-30" : ""}
-                        transition
+        ${(isSubmitting || isFetching) ? "pointer-events-none opacity-55" : ""}                
+        transition
                         px-3
                         h-16
                         w-full
