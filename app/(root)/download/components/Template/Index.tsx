@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import LinkComp from "@/components/ui/LinkComp";
 import dynamic from "next/dynamic";
 import Achievements from "./Achievements";
@@ -8,7 +7,7 @@ const Project = dynamic(() => import("./Project"), { ssr: false });
 const Education = dynamic(() => import("./Education"), { ssr: false });
 const Skills = dynamic(() => import("./Skills"), { ssr: false });
 
-const Template1 = () => {
+const Index = () => {
   return (
     <div className="flex flex-col gap-2">
       <LinkComp
@@ -54,4 +53,4 @@ const Template1 = () => {
   );
 };
 
-export default Template1;
+export default Index;

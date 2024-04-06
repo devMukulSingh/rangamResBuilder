@@ -1,9 +1,17 @@
 "use client";
-//@ts-ignore
 import { Button } from "@/components/ui/button";
+import { PDFDownloadLink, usePDF } from "@react-pdf/renderer";
 import { Download } from "lucide-react";
+import PdfComponent from "./PdfDownload/PdfComponent";
+import { useAppSelector } from "@/redux/hooks/hooks";
 
 const DownloadButtons = () => {
+          const resumeData = useAppSelector((state) => state.persistedReducer);
+
+ const [instance, update] = usePDF({
+   document: <PdfComponent resumeData={resumeData} />,
+ });
+
   const handlePdfDownload = () => {
     // document.addEventListener('p')
     globalThis.print();
@@ -15,6 +23,16 @@ const DownloadButtons = () => {
         Download
         <Download />
       </Button>
+      {/* <PDFDownloadLink
+        document={<PdfComponent resumeData={resumeData} />}
+        fileName="somename.pdf"
+      >
+        <Button className="w-[18rem] gap-2 flex">
+          Download
+          <Download />
+        </Button>
+      </PDFDownloadLink> */}
+
     </div>
   );
 };

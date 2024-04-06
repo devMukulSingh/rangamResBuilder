@@ -1,6 +1,6 @@
 import React from "react";
 import DownloadSection from "./components/DownloadSection";
-import Template1 from "./components/Template/Template1";
+import Resume from "./components/Template/Index";
 
 const DownloadPage = () => {
   return (
@@ -17,7 +17,7 @@ const DownloadPage = () => {
     justify-between "
     >
       <DownloadSection />
-      <Template1 />
+      <Resume />
     </main>
   );
 };

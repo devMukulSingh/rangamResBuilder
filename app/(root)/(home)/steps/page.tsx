@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 const StepsPage = () => {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 80 }}
+      initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: [0, 1], y: 0 }}
       transition={{ duration: 0.5 }}
       className="flex  lg:px-20 sm:px-10 px-5 py-10 "

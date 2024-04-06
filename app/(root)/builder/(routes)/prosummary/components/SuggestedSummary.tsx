@@ -1,6 +1,4 @@
-
 import SummaryPoints from "./SummaryPoints";
-
 
 const SuggestedSummary = async () => {
   return (

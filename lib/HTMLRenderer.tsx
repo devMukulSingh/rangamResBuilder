@@ -1,11 +1,14 @@
-import parseHtmlStringToHtml, { domToReact } from "html-react-parser";
+import parseHtmlStringToHtml, { domToReact, Text } from "html-react-parser";
 import { useMemo } from "react";
 import { cn } from "./utils";
+import { View } from "@react-pdf/renderer";
 
 export const HTMLRenderer = ({
   htmlString = "",
   className,
+  type
 }: {
+  type?:string
   htmlString: string;
   className?: string;
 }) => {
@@ -14,7 +17,6 @@ export const HTMLRenderer = ({
       transform: (reactNode: any, domNode: any) => {
         if (reactNode && reactNode.type === "ol") {
           const dToReact: any = domToReact(domNode.children);
-
           if (Array.isArray(dToReact)) {
             return (
               <ol className="list-decimal pl-5">
@@ -41,5 +43,6 @@ export const HTMLRenderer = ({
       },
     });
   }, [htmlString]);
-  return <div className="">{parsedElement}</div>;
+  return <div>{parsedElement}</div>;
+
 };

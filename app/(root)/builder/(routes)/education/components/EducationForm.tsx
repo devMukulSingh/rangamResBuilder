@@ -207,8 +207,6 @@ const EducationForm = () => {
     }
   };
   const onSubmit = (data: FieldValues) => {
-    console.log(data);
-
     router.push("/download");
     dispatch(setEducation(data.education));
   };

@@ -7,7 +7,7 @@ const Landing = () => {
   return (
     <>
       <motion.div
-        initial={{ opacity: 0, y: 80 }}
+        initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: [0, 1], y: 0 }}
         transition={{ duration: 0.6 }}
         className="w-full px-5 sm:px-10 lg:px-20 flex flex-col justify-center gap-5 sm:gap-20 py-10 md:flex-row"

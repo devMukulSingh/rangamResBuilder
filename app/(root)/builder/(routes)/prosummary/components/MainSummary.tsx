@@ -3,7 +3,6 @@ import Editor from "./Editor";
 import BioSkeleton from "./BioSkeleton";
 import SuggestedSummary from "./SuggestedSummary";
 
-
 const MainSummary = ({}) => {
   return (
     <div
