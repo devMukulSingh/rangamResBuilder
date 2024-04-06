@@ -25,14 +25,13 @@ const SkillsList = () => {
       onSuccess(data, key, config) {
         dispatch(setAiSuggestedSkills(data));
       },
-      
+
       revalidateIfStale: false,
       revalidateOnFocus: false,
       revalidateOnReconnect: false,
-      refreshWhenOffline:false,
+      refreshWhenOffline: false,
     },
   );
-
 
   if (error) {
     console.log(`Error in GETSkills ${error}`);

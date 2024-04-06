@@ -1,7 +1,5 @@
 import Circle from "@/components/commons/Circle";
-import LinkComp from "@/components/ui/LinkComp";
 import MainSummary from "./components/MainSummary";
-import { Button } from "@/components/ui/button";
 import Buttons from "./components/Buttons";
 
 const ProSummaryPage = async () => {

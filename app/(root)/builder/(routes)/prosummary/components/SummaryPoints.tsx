@@ -13,7 +13,7 @@ const SummaryPoints = () => {
     axios.get(url, { params: { profession, goal } }).then((res) => res.data);
 
   const profession = useAppSelector(
-    (state) => state.persistedReducer.personalInfo.profession
+    (state) => state.persistedReducer.personalInfo.profession,
   );
   const goal = useAppSelector((state) => state.persistedReducer.goal);
 
@@ -24,8 +24,8 @@ const SummaryPoints = () => {
       revalidateIfStale: false,
       revalidateOnFocus: false,
       revalidateOnReconnect: false,
-      refreshWhenOffline:false,
-    }
+      refreshWhenOffline: false,
+    },
   );
 
   if (error) {
@@ -35,7 +35,7 @@ const SummaryPoints = () => {
 
   return (
     <>
-      {(isLoading || !data) ? (
+      {isLoading || !data ? (
         <BioSkeleton />
       ) : (
         <ol

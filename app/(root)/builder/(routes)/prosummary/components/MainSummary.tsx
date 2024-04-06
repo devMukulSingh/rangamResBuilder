@@ -1,9 +1,8 @@
 import dynamic from "next/dynamic";
 import Editor from "./Editor";
 import BioSkeleton from "./BioSkeleton";
-const SuggestedSummary = dynamic(() => import("./SuggestedSummary"), {
-  loading: () => <BioSkeleton />,
-});
+import SuggestedSummary from "./SuggestedSummary";
+
 
 const MainSummary = ({}) => {
   return (
