@@ -11,13 +11,13 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export interface IinitialState {
   personalInfo: IpersonalInfo;
-  experience: Iexperience[] | null;
+  experience: Iexperience[] | [];
   technicalSkills: string[];
-  education: Ieducation[] | null;
+  education: Ieducation[] | [];
   contact: Icontact | null;
-  achievements: Iachievements[] | null;
-  languages: Ilanguages[] | null;
-  projects: Iprojects[] | null;
+  achievements: Iachievements[] | [];
+  languages: Ilanguages[] | [];
+  projects: Iprojects[] | [];
   progress: number;
   sidebar: boolean;
   aiSuggestedBio: string[];
@@ -81,9 +81,9 @@ const initialState: IinitialState = {
     },
   ],
   contact: null,
-  achievements: null,
-  languages: null,
-  projects: null,
+  achievements: [],
+  languages: [],
+  projects: [],
   progress: 10,
   sidebar: true,
   aiSuggestedBio: [],

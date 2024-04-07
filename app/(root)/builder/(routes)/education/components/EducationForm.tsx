@@ -2,9 +2,8 @@
 import { Form } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
-import { setEducation } from "@/redux/slice/userSlice";
+import { IinitialState, setEducation } from "@/redux/slice/userSlice";
 import { useEffect, useState } from "react";
-import { Ieducation } from "@/lib/types";
 import {
   FieldValues,
   useFieldArray,
@@ -24,7 +23,9 @@ import { useRouter } from "next/navigation";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { parseISO } from "date-fns";
-
+import useSWR from "swr";
+import axios from "axios";
+import useSWRMutation from "swr/mutation";
 export interface IeducationForm {
   handleChange?: () => void;
   form: UseFormReturn<
@@ -44,11 +45,22 @@ export interface IeducationForm {
   >;
   index: number;
 }
+type Ifetcher=[
+  url:string,
+  data : IinitialState
+]
+const fetcher = ([url, resumeData]: Ifetcher) =>
+  axios.post(url, resumeData).then((res) => res.data);
 
 const EducationForm = () => {
+  const resumeData = useAppSelector(state => state.persistedReducer);
+  const { trigger,isMutating,error } = useSWRMutation(
+    [`/api/user/set-resumedata`, resumeData],
+    fetcher
+  );
   const [selected, setSelected] = useState<string>("");
-  const dispatch = useAppDispatch();
   const education = useAppSelector((state) => state.persistedReducer.education);
+  const dispatch = useAppDispatch();
   const router = useRouter();
   const schema = z.object({
     education: z
@@ -206,8 +218,9 @@ const EducationForm = () => {
       fieldArray.remove(index);
     }
   };
-  const onSubmit = (data: FieldValues) => {
-    router.push("/download");
+  const onSubmit = async(data: FieldValues) => {
+    await trigger();
+    // router.push("/download");
     dispatch(setEducation(data.education));
   };
   useEffect(() => {
@@ -233,7 +246,9 @@ const EducationForm = () => {
       }
     }
   }, [controlledFields.length]);
-
+  if(error){
+    console.log(`Error in post user data ${error}`);
+  }
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   return (
     // <motion.div
@@ -259,7 +274,7 @@ const EducationForm = () => {
                                         }
                                         rounded-none
                                         border-r-2
-                                        flex 
+                                        flex        
                                         h-12
                                         w-48
                                         items-center 
@@ -328,10 +343,10 @@ const EducationForm = () => {
               <Button
                 type="submit"
                 className="flex gap-2 w-40"
-                disabled={isSubmitting}
+                disabled={isSubmitting || isMutating}
               >
-                Next
-                {isSubmitting && <Loader className="animate-spin" />}
+                Submit
+                {(isSubmitting || isMutating) && <Loader className="animate-spin" />}
               </Button>
             </div>
           </div>

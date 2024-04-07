@@ -10,27 +10,29 @@ datasource db {
 }
 
 model User{
-  id              Int               @id@default(autoincrement())
+  id              String            @id@default(uuid())
   goal            String
   personalInfo    PersonalInfo?     @relation("userToPersonalInfo")
   skills          Skills[]          @relation("userToSkills")
   experiences     Experience[]      @relation("userToExperience")
   educations      Education[]       @relation("userToEducation")
-  contacts        Contact?          @relation("userToContact")
-  achievements    Achievement?      @relation("userToAchievement")
   projects        Project[]         @relation("userToProject")
   languages       Language[]        @relation("userToLanguage")
+  contacts        Contact?          @relation("userToContact")
+  achievements    Achievement?      @relation("userToAchievement")
+          
 }
 
 model PersonalInfo{
-  id                    Int               @id@default(autoincrement())
-  userId                Int               @unique
-  user                  User              @relation("userToPersonalInfo",fields: [userId],references: [id])
-  name                  String
+  id                    String            @id@default(uuid())
+  userId                String            @unique
+  user                  User              @relation("userToPersonalInfo",fields: [userId],references: [id],onDelete:Cascade)
+  fullName              String
   email                 String
-  jobTitle              String
+  bio                   String            @db.VarChar(400)    
+  profession            String
   countryCode           String
-  mobile                Int
+  mobile                String
   state                 String? 
   address               String? 
   dob                   String? 
@@ -39,37 +41,39 @@ model PersonalInfo{
 }
 
 model Skills{
-  id                      Int                       @id@default(autoincrement())
+  id                      Int                    @id@default(autoincrement())
   skillName               String                    
-  userId                  Int                        @unique
-  user                    User                      @relation("userToSkills",fields: [userId],references: [id])
+  userId                  String                       
+  user                    User                      @relation("userToSkills",fields: [userId],references: [id],onDelete:Cascade)
 }
 
 model Experience{
-  id                              Int                       @id@default(autoincrement())
-  userId                          Int                    
-  user                            User                      @relation("userToExperience",references: [id],fields: [userId])
-  companyName                     String?
-  jobTitle                        String?
-  startDate                       String?
-  endDate                         String?
-  checkboxWorkingStatus           Boolean?
-  checkboxVolunteering            Boolean?
-  checkboxInternship              Boolean?
-  description                     String?
-  competences                     Competence[]              @relation("experienceToCompetence")
-  address                         String?
-  employer                        String?
+  id                              String                    @id@default(uuid())
+  userId                          String                    
+  user                            User                      @relation("userToExperience",references: [id],fields: [userId],onDelete:Cascade)
+  companyName                     String
+  jobTitle                        String
+  startDate                       String
+  endDate                         String
+  checkboxWorkingStatus           Boolean
+  checkboxVolunteering            Boolean
+  checkboxInternship              Boolean
+  description                     String                    @db.VarChar(400)    
+  // competences                  Competence[]              @relation("experienceToCompetence")
+  competences                     Json          
+  address                         String
+  employer                        String
 }
 
-model Competence{
-  id                              Int                       @id@default(autoincrement())
-  name                            String?
-  experienceId                    Int
-  experience                      Experience                @relation("experienceToCompetence",fields: [experienceId],references: [id])
-}
+// model Competence{
+//   id                              String                       @id@default(uuid())
+//   name                            String
+//   description                     String                    @db.VarChar(300)    
+//   experienceId                    String                   
+//   experience                      Experience                @relation("experienceToCompetence",fields: [experienceId],references: [id],onDelete:Cascade)
+// }
 model Education{
-  id                              Int                       @id@default(autoincrement())
+  id                              String                       @id@default(uuid())
   schoolName                      String
   degree                          String
   speciality                      String
@@ -77,14 +81,14 @@ model Education{
   endDate                         String?
   checkboxPursuing                Boolean?
   schoolLocation                  String?
-  userId                          Int                    
-  user                            User                      @relation("userToEducation",references: [id],fields: [userId])
+  userId                          String                    
+  user                            User                      @relation("userToEducation",references: [id],fields: [userId],onDelete:Cascade)
 }
 
 model Contact{
-  id                              Int                       @id@default(autoincrement())
-  userId                          Int                       @unique
-  user                            User                      @relation("userToContact",references: [id],fields: [userId])
+  id                              String                       @id@default(uuid())
+  userId                          String                       @unique
+  user                            User                      @relation("userToContact",references: [id],fields: [userId],onDelete:Cascade)
   linkedIn                        String?
   github                          String?
   twitter                         String?
@@ -92,25 +96,25 @@ model Contact{
 }
 
 model Achievement{
-  id                              Int                       @id@default(autoincrement())
-  userId                          Int                       @unique
-  user                            User                      @relation("userToAchievement",references: [id],fields: [userId])
+  id                              String                       @id@default(uuid())
+  userId                          String                       @unique
+  user                            User                      @relation("userToAchievement",references: [id],fields: [userId],onDelete:Cascade)
   name                            String?
 }
 
 model Project{
-  id                              Int                       @id@default(autoincrement())
-  userId                          Int                       @unique
-  user                            User                      @relation("userToProject",references: [id],fields: [userId])
-  projectName                     String?
-  projectUrl                      String?
-  description                     String?
+  id                              String                       @id@default(uuid())
+  userId                          String                      
+  user                            User                      @relation("userToProject",references: [id],fields: [userId],onDelete:Cascade)
+  projectName                     String
+  projectUrl                      String
+  description                     String                    @db.VarChar(400)    
 }
 
 model Language{
-  id                              Int                       @id@default(autoincrement())
-  userId                          Int                       @unique
-  user                            User                      @relation("userToLanguage",references: [id],fields: [userId])
-  name                            String?
-  strength                        String?
+  id                              String                       @id@default(uuid())
+  userId                          String                       
+  user                            User                      @relation("userToLanguage",references: [id],fields: [userId],onDelete:Cascade)
+  name                            String
+  strength                        String
 }
