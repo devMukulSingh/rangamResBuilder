@@ -9,7 +9,9 @@ const About = () => {
     (state) => state.persistedReducer.personalInfo,
   );
   const contact = useAppSelector((state) => state.persistedReducer.contact);
-
+  const resume = useAppSelector( state => state.persistedReducer);
+  console.log(resume);
+  
   return (
     <main className="flex flex-col gap-5">
       <div className="flex flex-col gap-3">

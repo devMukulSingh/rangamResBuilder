@@ -58,7 +58,7 @@ const PdfComponent: FC<PdfComponentProps> = ({ resumeData }) => {
             backgroundColor: "#60A5FA",
           }}
         />
-        <About personalInfo={personalInfo} contact={contact}/>
+        <About personalInfo={personalInfo} contact={contact} />
       </Page>
     </Document>
   );

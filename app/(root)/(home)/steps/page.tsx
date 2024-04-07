@@ -42,6 +42,7 @@ const StepsPage = () => {
           className="object-contain"
           alt="resumeImg"
           src={"/3Steps.png"}
+          priority
         />
       </figure>
     </motion.div>

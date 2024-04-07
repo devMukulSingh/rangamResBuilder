@@ -46,6 +46,7 @@ const Landing = () => {
             className="object-contain"
             src={"/CV.png"}
             alt="landingImg"
+            priority
           />
         </figure>
       </motion.div>

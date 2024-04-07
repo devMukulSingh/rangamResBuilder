@@ -1,8 +1,4 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+ 
 
 generator client {
   provider = "prisma-client-js"
@@ -15,9 +11,15 @@ datasource db {
 
 model User{
   id              Int               @id@default(autoincrement())
-  personalInfo    PersonalInfo?      @relation("userToPersonalInfo")
-  skills          Skills[]           @relation("userToSkills")
-  // experience              
+  goal            String
+  personalInfo    PersonalInfo?     @relation("userToPersonalInfo")
+  skills          Skills[]          @relation("userToSkills")
+  experiences     Experience[]      @relation("userToExperience")
+  educations      Education[]       @relation("userToEducation")
+  contacts        Contact?          @relation("userToContact")
+  achievements    Achievement?      @relation("userToAchievement")
+  projects        Project[]         @relation("userToProject")
+  languages       Language[]        @relation("userToLanguage")
 }
 
 model PersonalInfo{
@@ -29,6 +31,11 @@ model PersonalInfo{
   jobTitle              String
   countryCode           String
   mobile                Int
+  state                 String? 
+  address               String? 
+  dob                   String? 
+  birthPlace            String? 
+  city                  String? 
 }
 
 model Skills{
@@ -36,4 +43,74 @@ model Skills{
   skillName               String                    
   userId                  Int                        @unique
   user                    User                      @relation("userToSkills",fields: [userId],references: [id])
+}
+
+model Experience{
+  id                              Int                       @id@default(autoincrement())
+  userId                          Int                    
+  user                            User                      @relation("userToExperience",references: [id],fields: [userId])
+  companyName                     String?
+  jobTitle                        String?
+  startDate                       String?
+  endDate                         String?
+  checkboxWorkingStatus           Boolean?
+  checkboxVolunteering            Boolean?
+  checkboxInternship              Boolean?
+  description                     String?
+  competences                     Competence[]              @relation("experienceToCompetence")
+  address                         String?
+  employer                        String?
+}
+
+model Competence{
+  id                              Int                       @id@default(autoincrement())
+  name                            String?
+  experienceId                    Int
+  experience                      Experience                @relation("experienceToCompetence",fields: [experienceId],references: [id])
+}
+model Education{
+  id                              Int                       @id@default(autoincrement())
+  schoolName                      String
+  degree                          String
+  speciality                      String
+  startDate                       String
+  endDate                         String?
+  checkboxPursuing                Boolean?
+  schoolLocation                  String?
+  userId                          Int                    
+  user                            User                      @relation("userToEducation",references: [id],fields: [userId])
+}
+
+model Contact{
+  id                              Int                       @id@default(autoincrement())
+  userId                          Int                       @unique
+  user                            User                      @relation("userToContact",references: [id],fields: [userId])
+  linkedIn                        String?
+  github                          String?
+  twitter                         String?
+  portfolio                       String?
+}
+
+model Achievement{
+  id                              Int                       @id@default(autoincrement())
+  userId                          Int                       @unique
+  user                            User                      @relation("userToAchievement",references: [id],fields: [userId])
+  name                            String?
+}
+
+model Project{
+  id                              Int                       @id@default(autoincrement())
+  userId                          Int                       @unique
+  user                            User                      @relation("userToProject",references: [id],fields: [userId])
+  projectName                     String?
+  projectUrl                      String?
+  description                     String?
+}
+
+model Language{
+  id                              Int                       @id@default(autoincrement())
+  userId                          Int                       @unique
+  user                            User                      @relation("userToLanguage",references: [id],fields: [userId])
+  name                            String?
+  strength                        String?
 }

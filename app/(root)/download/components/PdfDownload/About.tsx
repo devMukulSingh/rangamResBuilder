@@ -1,21 +1,15 @@
-import React from 'react'
-import {
-  Text,
-  View,
-} from "@react-pdf/renderer";
+import React from "react";
+import { Text, View } from "@react-pdf/renderer";
 import { FC } from "react";
 import SVGIcon from "./SVGIcon";
-import { Icontact, IpersonalInfo } from '@/lib/types';
+import { Icontact, IpersonalInfo } from "@/lib/types";
 
-interface AboutProps{
-  personalInfo:IpersonalInfo,
-  contact:Icontact | null
+interface AboutProps {
+  personalInfo: IpersonalInfo;
+  contact: Icontact | null;
 }
 
-const About:FC<AboutProps> = ({
-  personalInfo,
-  contact
-}) => {
+const About: FC<AboutProps> = ({ personalInfo, contact }) => {
   return (
     <>
       <View
@@ -36,9 +30,7 @@ const About:FC<AboutProps> = ({
         >
           {personalInfo?.fullName}
         </Text>
-          <Text>
-            {personalInfo.bio}
-          </Text>
+        <Text>{personalInfo.bio}</Text>
 
         {/* Links */}
         <View
@@ -104,6 +96,6 @@ const About:FC<AboutProps> = ({
       </View>
     </>
   );
-}
+};
 
-export default About
+export default About;

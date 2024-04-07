@@ -6,9 +6,9 @@ import { View } from "@react-pdf/renderer";
 export const HTMLRenderer = ({
   htmlString = "",
   className,
-  type
+  type,
 }: {
-  type?:string
+  type?: string;
   htmlString: string;
   className?: string;
 }) => {
@@ -44,5 +44,4 @@ export const HTMLRenderer = ({
     });
   }, [htmlString]);
   return <div>{parsedElement}</div>;
-
 };

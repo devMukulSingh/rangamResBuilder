@@ -6,11 +6,11 @@ import PdfComponent from "./PdfDownload/PdfComponent";
 import { useAppSelector } from "@/redux/hooks/hooks";
 
 const DownloadButtons = () => {
-          const resumeData = useAppSelector((state) => state.persistedReducer);
+  const resumeData = useAppSelector((state) => state.persistedReducer);
 
- const [instance, update] = usePDF({
-   document: <PdfComponent resumeData={resumeData} />,
- });
+  const [instance, update] = usePDF({
+    document: <PdfComponent resumeData={resumeData} />,
+  });
 
   const handlePdfDownload = () => {
     // document.addEventListener('p')
@@ -32,7 +32,6 @@ const DownloadButtons = () => {
           <Download />
         </Button>
       </PDFDownloadLink> */}
-
     </div>
   );
 };
