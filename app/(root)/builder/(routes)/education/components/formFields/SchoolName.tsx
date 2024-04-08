@@ -21,13 +21,13 @@ const SchoolName: FC<IeducationForm> = ({ form, index }) => {
       control={control}
       render={({ field }) => (
         <FormItem>
-          <FormLabel>School Name</FormLabel>
+          <FormLabel>University/School Name</FormLabel>
           <FormControl>
             <Input
               disabled={isSubmitting}
               className="bg-white h-14 rounded-sm"
               {...field}
-              placeholder="School Name"
+              placeholder="University/School Name"
             />
           </FormControl>
           <FormMessage />

@@ -138,7 +138,7 @@ const EducationForm = () => {
   const form = useForm<formSchema>({
     resolver: zodResolver(schema),
     defaultValues: {
-      education: education || [
+      education: education.length !==0 ? education : [
         {
           schoolName: "",
           degree: "",
@@ -217,7 +217,7 @@ const EducationForm = () => {
   };
   const onSubmit = async (data: FieldValues) => {
     await trigger();
-    // router.push("/download");
+    router.push("/download");
     dispatch(setEducation(data.education));
   };
   useEffect(() => {

@@ -34,7 +34,7 @@ const EducationForm = () => {
   const resumeData = useAppSelector((state) => state.persistedReducer);
   const { trigger, isMutating, error } = useSWRMutation(
     [`/api/user/set-resumedata`, resumeData],
-    fetcher
+    fetcher,
   );
   const [expanded, setExpanded] = useState<string | false>("");
   const showSidebarOptions = useAppSelector(
@@ -49,14 +49,20 @@ const EducationForm = () => {
         schoolName: z.string({
           required_error: "School name is required",
           invalid_type_error: "Invalid string",
+        }).trim().min(1,{
+          message:'University/School name is required'
         }),
         degree: z.string({
           required_error: "Degree is required",
           invalid_type_error: "Invalid string",
+        }).trim().min(1,{
+          message:'Degree is required'
         }),
         speciality: z.string({
           required_error: "Speciality is required",
           invalid_type_error: "Invalid string",
+        }).trim().min(1,{
+          message:'Speciality is required'
         }),
         startDate: z
           .any({
@@ -103,7 +109,7 @@ const EducationForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      education: education || [
+      education: education.length!==0 ? education : [
         {
           schoolName: "",
           degree: "",
@@ -132,8 +138,8 @@ const EducationForm = () => {
     };
   });
 
-  const onSubmit = async() => {
-    if(!showSidebarOptions) await trigger();
+  const onSubmit = async () => {
+    if (!showSidebarOptions) await trigger();
     dispatch(
       setValidatedOptions({
         name: "Education",
@@ -211,8 +217,11 @@ const EducationForm = () => {
   };
 
   const handleDelete = (index: number) => {
-    if (controlledFields.length > 0) {
+    if (controlledFields.length > 1) {
       fieldArray.remove(index);
+    }
+    else{
+       toast.error("Profile should have at least one education field");
     }
   };
   useEffect(() => {
@@ -235,8 +244,8 @@ const EducationForm = () => {
       }
     }
   }, [controlledFields.length]);
-  if(error) console.log(`Error in POST resumeData req ${error}`);
-  
+  if (error) console.log(`Error in POST resumeData req ${error}`);
+
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   return (
     <motion.div
@@ -244,11 +253,11 @@ const EducationForm = () => {
       initial={{ x: -150, opacity: 0 }}
       transition={{ duration: 0.2 }}
     >
-      <div className="pt-10 pb-20 w-full">
+      <div className="pt-10 pb-20 w-full px-5">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} onChange={handleChange}>
             <div className="flex flex-col gap-10 w-full">
-              {(education.length===0 ? controlledFields : education)?.map(
+              {controlledFields?.map(
                 (item, index) => {
                   return (
                     <>
@@ -312,7 +321,7 @@ const EducationForm = () => {
                       </Collapsible>
                     </>
                   );
-                }
+                },
               )}
 
               <div className="flex gap-5">
@@ -325,11 +334,13 @@ const EducationForm = () => {
                   <PlusCircle />
                   Add More
                 </Button>
-                <Button className="w-40 flex gap-2" type="submit" disabled={isMutating}>
+                <Button
+                  className="w-40 flex gap-2"
+                  type="submit"
+                  disabled={isMutating}
+                >
                   {showSidebarOptions ? "Next" : "Submit"}
-                  {
-                    isMutating && <Loader className="animate-spine"/>
-                  }
+                  {isMutating && <Loader className="animate-spine" />}
                 </Button>
               </div>
             </div>

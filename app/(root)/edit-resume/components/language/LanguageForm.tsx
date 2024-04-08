@@ -30,11 +30,14 @@ const LanguageForm = () => {
 
   const form = useForm({
     defaultValues: {
-      languageInfo: languages.length===0 ? [
-        { language: "English", strength: "" },
-        { language: "English", strength: "" },
-        { language: "English", strength: "" },
-      ] : languages
+      languageInfo:
+        languages.length === 0
+          ? [
+              { language: "English", strength: "" },
+              { language: "English", strength: "" },
+              { language: "English", strength: "" },
+            ]
+          : languages,
     },
   });
 

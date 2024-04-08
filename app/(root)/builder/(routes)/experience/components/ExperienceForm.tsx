@@ -85,7 +85,7 @@ const ExperienceForm = () => {
   const form = useForm({
     // resolver: zodResolver(schema),
     defaultValues: {
-      experience: experience || [
+      experience: experience.length!==0 ? experience : [
         {
           companyName: "",
           endDate: "",

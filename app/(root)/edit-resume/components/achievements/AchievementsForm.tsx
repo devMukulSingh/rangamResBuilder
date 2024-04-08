@@ -29,11 +29,10 @@ const AchievementsForm = () => {
 
   const form = useForm({
     defaultValues: {
-      achievements: achievements.length !==0 ? achievements :  [
-        { value: "" },
-        { value: "" },
-        { value: "" },
-      ],
+      achievements:
+        achievements.length !== 0
+          ? achievements
+          : [{ value: "" }, { value: "" }, { value: "" }],
     },
   });
   const fieldArray = useFieldArray({

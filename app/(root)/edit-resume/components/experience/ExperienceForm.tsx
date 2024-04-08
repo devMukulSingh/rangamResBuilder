@@ -34,7 +34,7 @@ const ExperienceForm = () => {
 
   const form = useForm({
     defaultValues: {
-      experience: experience || [
+      experience: experience.length !==0 ? experience : [
         {
           companyName: "",
           startDate: "",
@@ -146,8 +146,12 @@ const ExperienceForm = () => {
     }
   };
   const handleDelete = (index: number) => {
-    if (controlledFields.length > 0) {
+    if (controlledFields.length > 1) {
       fieldArray.remove(index);
+    }
+    else{
+        toast.error("Profile should have at least one experience field");
+
     }
   };
 
@@ -182,7 +186,7 @@ const ExperienceForm = () => {
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} onChange={handleChange}>
             <div className="flex flex-col gap-5 ">
-              {(!experience ? controlledFields : experience)?.map(
+              { controlledFields?.map(
                 (item, index) => {
                   return (
                     <Collapsible
@@ -199,7 +203,7 @@ const ExperienceForm = () => {
                             variant="ghost"
                             className="w-full hover:bg-red-300 text-neutral-100"
                           >
-                            {experience?.[index].companyName || "Company"}
+                            {experience?.[index]?.companyName || "Company"}
                           </Button>
                         </CollapsibleTrigger>
                         <Trash
