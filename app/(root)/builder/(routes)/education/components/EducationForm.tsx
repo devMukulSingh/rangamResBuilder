@@ -45,18 +45,15 @@ export interface IeducationForm {
   >;
   index: number;
 }
-type Ifetcher=[
-  url:string,
-  data : IinitialState
-]
-const fetcher = ([url, resumeData]: Ifetcher) =>
+export type Ifetcher = [url: string, data: IinitialState];
+export const fetcher = ([url, resumeData]: Ifetcher) =>
   axios.post(url, resumeData).then((res) => res.data);
 
 const EducationForm = () => {
-  const resumeData = useAppSelector(state => state.persistedReducer);
-  const { trigger,isMutating,error } = useSWRMutation(
+  const resumeData = useAppSelector((state) => state.persistedReducer);
+  const { trigger, isMutating, error } = useSWRMutation(
     [`/api/user/set-resumedata`, resumeData],
-    fetcher
+    fetcher,
   );
   const [selected, setSelected] = useState<string>("");
   const education = useAppSelector((state) => state.persistedReducer.education);
@@ -218,7 +215,7 @@ const EducationForm = () => {
       fieldArray.remove(index);
     }
   };
-  const onSubmit = async(data: FieldValues) => {
+  const onSubmit = async (data: FieldValues) => {
     await trigger();
     // router.push("/download");
     dispatch(setEducation(data.education));
@@ -246,7 +243,7 @@ const EducationForm = () => {
       }
     }
   }, [controlledFields.length]);
-  if(error){
+  if (error) {
     console.log(`Error in post user data ${error}`);
   }
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -346,7 +343,9 @@ const EducationForm = () => {
                 disabled={isSubmitting || isMutating}
               >
                 Submit
-                {(isSubmitting || isMutating) && <Loader className="animate-spin" />}
+                {(isSubmitting || isMutating) && (
+                  <Loader className="animate-spin" />
+                )}
               </Button>
             </div>
           </div>

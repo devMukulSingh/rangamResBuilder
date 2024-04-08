@@ -30,11 +30,11 @@ const LanguageForm = () => {
 
   const form = useForm({
     defaultValues: {
-      languageInfo: languages || [
+      languageInfo: languages.length===0 ? [
         { language: "English", strength: "" },
         { language: "English", strength: "" },
         { language: "English", strength: "" },
-      ],
+      ] : languages
     },
   });
 
@@ -85,7 +85,7 @@ const LanguageForm = () => {
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} onChange={handleChange}>
             <div className="flex flex-col gap-5 ">
-              {controlledFields.map((item, index) => {
+              {controlledFields?.map((item, index) => {
                 return (
                   <div className="flex gap-2 " key={item.id}>
                     <FormField

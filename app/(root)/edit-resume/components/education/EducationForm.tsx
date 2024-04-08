@@ -11,7 +11,7 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import { useParams, useRouter } from "next/navigation";
-import { PlusCircle, Trash } from "lucide-react";
+import { Loader, PlusCircle, Trash } from "lucide-react";
 import toast from "react-hot-toast";
 import { setFormComp, setValidatedOptions } from "@/redux/slice/commonSlice";
 import { motion } from "framer-motion";
@@ -24,8 +24,18 @@ import StartDate from "@/app/(root)/builder/(routes)/education/components/formFi
 import EndDate from "@/app/(root)/builder/(routes)/education/components/formFields/EndDate";
 import { parseISO } from "date-fns";
 import CheckboxPursuing from "./components/CheckboxPursuing";
+import useSWRMutation from "swr/mutation";
+import axios from "axios";
+import { Ifetcher } from "@/app/(root)/builder/(routes)/education/components/EducationForm";
 
+const fetcher = ([url, resumeData]: Ifetcher) =>
+  axios.put(url, resumeData).then((res) => res.data);
 const EducationForm = () => {
+  const resumeData = useAppSelector((state) => state.persistedReducer);
+  const { trigger, isMutating, error } = useSWRMutation(
+    [`/api/user/set-resumedata`, resumeData],
+    fetcher
+  );
   const [expanded, setExpanded] = useState<string | false>("");
   const showSidebarOptions = useAppSelector(
     (state) => state.commonSlice.showSidebarOptions,
@@ -122,7 +132,8 @@ const EducationForm = () => {
     };
   });
 
-  const onSubmit = () => {
+  const onSubmit = async() => {
+    if(!showSidebarOptions) await trigger();
     dispatch(
       setValidatedOptions({
         name: "Education",
@@ -172,9 +183,9 @@ const EducationForm = () => {
     if (
       schoolName.trim() === "" ||
       degree.trim() === "" ||
-      startDate.trim() === "" ||
+      startDate === "" ||
       speciality.trim() === "" ||
-      (endDate.trim() === "" && checkboxPursuing === false)
+      (endDate === "" && checkboxPursuing === false)
     ) {
       toast.error(`Complete previous form first`);
     } else {
@@ -224,7 +235,8 @@ const EducationForm = () => {
       }
     }
   }, [controlledFields.length]);
-
+  if(error) console.log(`Error in POST resumeData req ${error}`);
+  
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   return (
     <motion.div
@@ -236,7 +248,7 @@ const EducationForm = () => {
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} onChange={handleChange}>
             <div className="flex flex-col gap-10 w-full">
-              {(!education ? controlledFields : education)?.map(
+              {(education.length===0 ? controlledFields : education)?.map(
                 (item, index) => {
                   return (
                     <>
@@ -300,7 +312,7 @@ const EducationForm = () => {
                       </Collapsible>
                     </>
                   );
-                },
+                }
               )}
 
               <div className="flex gap-5">
@@ -313,8 +325,11 @@ const EducationForm = () => {
                   <PlusCircle />
                   Add More
                 </Button>
-                <Button className="w-40" type="submit">
+                <Button className="w-40 flex gap-2" type="submit" disabled={isMutating}>
                   {showSidebarOptions ? "Next" : "Submit"}
+                  {
+                    isMutating && <Loader className="animate-spine"/>
+                  }
                 </Button>
               </div>
             </div>

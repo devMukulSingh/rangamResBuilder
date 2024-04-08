@@ -31,7 +31,6 @@ import { motion } from "framer-motion";
 const ProjectsForm = () => {
   const [expanded, setExpanded] = useState<string | false>("");
   const dispatch = useAppDispatch();
-  const progress = useAppSelector((state) => state.persistedReducer.progress);
   const projects = useAppSelector((state) => state.persistedReducer.projects);
 
   const form = useForm({
@@ -125,7 +124,6 @@ const ProjectsForm = () => {
     }
     //handling delete collapsible
     else if (projects && projects.length > controlledFields.length) {
-      console.log("else", controlledFields);
 
       if (controlledFields.length > 0) {
         dispatch(setProjects(controlledFields));
@@ -145,7 +143,7 @@ const ProjectsForm = () => {
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} onChange={handleChange}>
             <div className="flex flex-col gap-5">
-              {projects?.map((item, index) => {
+              { (projects.length===0? controlledFields : projects).map((item, index) => {
                 return (
                   <Collapsible
                     key={index}

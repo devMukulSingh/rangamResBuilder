@@ -2,18 +2,9 @@ import { prisma } from "@/lib/prisma";
 import { IinitialState } from "@/redux/slice/userSlice";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(req: NextRequest, res: NextResponse) {
+export async function PUT(req: NextRequest, res: NextResponse) {
     try {
         const resumeData:IinitialState = await req.json();
-        if (!resumeData || Object.keys(resumeData).length === 0)
-            return NextResponse.json(
-                {
-                    error: `Resume data is required`,
-                },
-                {
-                    status: 400,
-                },
-            );
         const {
             education,
             experience,
@@ -33,10 +24,27 @@ export async function POST(req: NextRequest, res: NextResponse) {
             },
             technicalSkills,
         } = resumeData;
+        if (!resumeData || Object.keys(resumeData).length === 0)
+            return NextResponse.json(
+                {
+                    error: `Resume data is required`,
+                },
+                {
+                    status: 400,
+                },
+            );
+            const userByEmail = await prisma.user.findUnique({
+                where:{
+                    email,
+                }
+            });
+            
+            if(!userByEmail) return NextResponse.json({
+                error:"Unauthorised, user doesn't exists",
+            }, { status: 401 });
 
-        const user = await prisma.user.create({
+        const user = await prisma.user.update({
             data: {
-                email,
                 goal,
                 personalInfo: {
                     create: {
@@ -124,12 +132,11 @@ export async function POST(req: NextRequest, res: NextResponse) {
                 personalInfo: true,
                 skills: true,
             },
-        });
-        // for( )
+            where:{
+                id:userByEmail.id
+            }
+        })
             
-        
-    
-    
         return NextResponse.json(user, {
             status: 201,
         });

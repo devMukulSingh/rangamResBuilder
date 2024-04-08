@@ -11,6 +11,7 @@ datasource db {
 
 model User{
   id              String            @id@default(uuid())
+  email           String            @unique
   goal            String
   personalInfo    PersonalInfo?     @relation("userToPersonalInfo")
   skills          Skills[]          @relation("userToSkills")
@@ -28,7 +29,7 @@ model PersonalInfo{
   userId                String            @unique
   user                  User              @relation("userToPersonalInfo",fields: [userId],references: [id],onDelete:Cascade)
   fullName              String
-  email                 String
+  email                 String            @unique
   bio                   String            @db.VarChar(400)    
   profession            String
   countryCode           String
@@ -59,19 +60,19 @@ model Experience{
   checkboxVolunteering            Boolean
   checkboxInternship              Boolean
   description                     String                    @db.VarChar(400)    
-  // competences                  Competence[]              @relation("experienceToCompetence")
-  competences                     Json          
+  competences                  Competence[]              @relation("experienceToCompetence")
+  // competences                     Json          
   address                         String
   employer                        String
 }
 
-// model Competence{
-//   id                              String                       @id@default(uuid())
-//   name                            String
-//   description                     String                    @db.VarChar(300)    
-//   experienceId                    String                   
-//   experience                      Experience                @relation("experienceToCompetence",fields: [experienceId],references: [id],onDelete:Cascade)
-// }
+model Competence{
+  id                              String                       @id@default(uuid())
+  name                            String
+  description                     String                    @db.VarChar(300)    
+  experienceId                    String                   
+  experience                      Experience                @relation("experienceToCompetence",fields: [experienceId],references: [id],onDelete:Cascade)
+}
 model Education{
   id                              String                       @id@default(uuid())
   schoolName                      String

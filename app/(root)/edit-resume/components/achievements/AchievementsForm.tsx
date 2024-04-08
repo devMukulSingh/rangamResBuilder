@@ -29,7 +29,7 @@ const AchievementsForm = () => {
 
   const form = useForm({
     defaultValues: {
-      achievements: achievements || [
+      achievements: achievements.length !==0 ? achievements :  [
         { value: "" },
         { value: "" },
         { value: "" },
