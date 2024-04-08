@@ -71,11 +71,10 @@ export async function PUT(req: NextRequest, res: NextResponse) {
         },
         skills: {
           createMany: {
-            data:technicalSkills.map( item => ({
-              skillName:item
-            }))
+            data: technicalSkills.map((item) => ({
+              skillName: item,
+            })),
           },
-          
         },
         experiences: {
           createMany: {
@@ -90,25 +89,12 @@ export async function PUT(req: NextRequest, res: NextResponse) {
               description: item.description,
               address: item.address || "",
               employer: item.employer || "",
-              // competences: {
-              //     createMany: {
-              //         data: experience.map(item => item.competences.filter(item => item.isSelected == true).map(item => ({
-              //             name: item.name,
-              //             description: item.description
-              //         }))).flat()
-              //     }
-              // }
-              competences:
-                experience
-                  .map((item) =>
-                    item.competences
-                      .filter((item) => item.isSelected == true)
-                      .map((item) => ({
-                        name: item.name,
-                        description: item.description,
-                      })),
-                  )
-                  .flat(),
+              competences: item.competences
+                    .filter((item) => item.isSelected == true)
+                    .map((item) => ({
+                      name: item.name,
+                      description: item.description,
+                    })).flat(),
             })),
           },
         },
@@ -123,54 +109,51 @@ export async function PUT(req: NextRequest, res: NextResponse) {
               checkboxPursuing: item.checkboxPursuing,
               schoolLocation: item.schoolLocation,
             })),
-            // where: {
-            //   userId: userByEmail.id
-            // }
+
           },
         },
         achievements: {
-          createMany:{
-            data:achievements.map( item => ({
-              name:item.value
+          createMany: {
+            data: achievements.map((item) => ({
+              name: item.value,
             })),
-            // skipDuplicates:true
           },
         },
         contacts: {
-          upsert:{
-            create:{
-              github:contact?.github,
-              linkedIn:contact?.linkedIn,
-              portfolio:contact?.portfolio,
-              twitter:contact?.twitter
-            },
-            update:{
+          upsert: {
+            create: {
               github: contact?.github,
               linkedIn: contact?.linkedIn,
               portfolio: contact?.portfolio,
-              twitter: contact?.twitter
+              twitter: contact?.twitter,
             },
-            where:{
-              userId:userByEmail.id
-            }
-          }
+            update: {
+              github: contact?.github,
+              linkedIn: contact?.linkedIn,
+              portfolio: contact?.portfolio,
+              twitter: contact?.twitter,
+            },
+            where: {
+              userId: userByEmail.id,
+            },
+          },
         },
         languages: {
-          createMany:{
-            data:languages.map( item => ({
-              name:item.language,
-              strength:item.strength
-            }))
-          }
+          createMany: {
+            data: languages.map((item) => ({
+              name: item.language,
+              strength: item.strength,
+            })),
+          },
         },
         projects: {
-          createMany:{
-            data:projects.map( item => ({
-              projectName:item.projectName,
-              description:item.description,
-              projectUrl:item.projectUrl
-            }))
-          }
+          createMany: {
+            data: projects.map((item) => ({
+              projectName: item.projectName,
+              description: item.description,
+              projectUrl: item.projectUrl,
+            })),
+          },
         },
       },
 
@@ -179,10 +162,10 @@ export async function PUT(req: NextRequest, res: NextResponse) {
         experiences: true,
         personalInfo: true,
         skills: true,
-        achievements:true,
-        languages:true,
-        contacts:true,
-        projects:true        
+        achievements: true,
+        languages: true,
+        contacts: true,
+        projects: true,
       },
       where: {
         id: userByEmail.id,

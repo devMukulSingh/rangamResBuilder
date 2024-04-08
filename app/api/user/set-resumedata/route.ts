@@ -82,17 +82,16 @@ export async function POST(req: NextRequest, res: NextResponse) {
               //         }))).flat()
               //     }
               // }
-              competences:
-                experience
-                  .map((item) =>
-                    item.competences
-                      .filter((item) => item.isSelected == true)
-                      .map((item) => ({
-                        name: item.name,
-                        description: item.description,
-                      })),
-                  )
-                  .flat(),
+              competences: experience
+                .map((item) =>
+                  item.competences
+                    .filter((item) => item.isSelected == true)
+                    .map((item) => ({
+                      name: item.name,
+                      description: item.description,
+                    })),
+                )
+                .flat(),
             })),
           },
         },

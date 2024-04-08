@@ -25,15 +25,15 @@ import toast from "react-hot-toast";
 import useSWRMutation from "swr/mutation";
 import { Ifetcher } from "@/app/(root)/builder/(routes)/education/components/EducationForm";
 import axios from "axios";
- 
+
 const fetcher = ([url, resumeData]: Ifetcher) =>
-axios.put(url, resumeData).then((res) => res.data);
+  axios.put(url, resumeData).then((res) => res.data);
 const LanguageForm = () => {
-    const resumeData = useAppSelector((state) => state.persistedReducer);
-    const { trigger, isMutating, error } = useSWRMutation(
-      [`/api/user/update-resumedata`, resumeData],
-      fetcher
-    );
+  const resumeData = useAppSelector((state) => state.persistedReducer);
+  const { trigger, isMutating, error } = useSWRMutation(
+    [`/api/user/update-resumedata`, resumeData],
+    fetcher,
+  );
   const dispatch = useAppDispatch();
   const router = useRouter();
   const languages = useAppSelector((state) => state.persistedReducer.languages);
@@ -58,7 +58,7 @@ const LanguageForm = () => {
 
   const watchFieldsArray = form.watch("languageInfo");
 
-  const onSubmit = async() => {
+  const onSubmit = async () => {
     await trigger();
     router.push(`/download`);
   };
@@ -88,7 +88,7 @@ const LanguageForm = () => {
       fieldArray.append({ language: "English", strength: "" });
     }
   };
-  if(error){
+  if (error) {
     console.log(`Error in PUT req resumedata ${error}`);
   }
   return (
@@ -175,7 +175,7 @@ const LanguageForm = () => {
                 className="w-[15rem] py-6 self-center mt-20"
               >
                 Submit
-                {isMutating && <Loader className="animate-spin"/>}
+                {isMutating && <Loader className="animate-spin" />}
               </Button>
             </div>
           </form>

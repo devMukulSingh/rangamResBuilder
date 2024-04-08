@@ -20,7 +20,7 @@ model User{
   languages       Language[]        @relation("userToLanguage")
   contacts        Contact?          @relation("userToContact")
   achievements    Achievement[]      @relation("userToAchievement")
-          
+
 }
 
 model PersonalInfo{
@@ -41,7 +41,7 @@ model PersonalInfo{
 }
 
 model Skills{
-  id                      Int                    @id@default(autoincrement())
+  id                      String                    @id@default(uuid())
   skillName               String                    
   userId                  String                       
   user                    User                      @relation("userToSkills",fields: [userId],references: [id],onDelete:Cascade)
@@ -96,7 +96,7 @@ model Contact{
 }
 
 model Achievement{
-  id                              Int                       @id@default(autoincrement())
+  id                              String                       @id@default(uuid())
   userId                          String                       
   user                            User                      @relation("userToAchievement",references: [id],fields: [userId],onDelete:Cascade)
   name                            String?
