@@ -34,30 +34,33 @@ const ExperienceForm = () => {
 
   const form = useForm({
     defaultValues: {
-      experience: experience.length !==0 ? experience : [
-        {
-          companyName: "",
-          startDate: "",
-          endDate: "",
-          jobTitle: "",
-          checkboxInternship: false,
-          checkboxVolunteering: false,
-          competences: [
-            {
-              id: 0,
-              name: "",
-              isSelected: false,
-              description: "",
-            },
-          ],
-          description: "",
-          id: Math.floor(Math.random() * 100).toString(),
-          checkboxWorkingStatus: false,
-          role: "",
-          address: "",
-          employer: "",
-        },
-      ],
+      experience:
+        experience.length !== 0
+          ? experience
+          : [
+              {
+                companyName: "",
+                startDate: "",
+                endDate: "",
+                jobTitle: "",
+                checkboxInternship: false,
+                checkboxVolunteering: false,
+                competences: [
+                  {
+                    id: 0,
+                    name: "",
+                    isSelected: false,
+                    description: "",
+                  },
+                ],
+                description: "",
+                id: Math.floor(Math.random() * 100).toString(),
+                checkboxWorkingStatus: false,
+                role: "",
+                address: "",
+                employer: "",
+              },
+            ],
     },
   });
 
@@ -148,10 +151,8 @@ const ExperienceForm = () => {
   const handleDelete = (index: number) => {
     if (controlledFields.length > 1) {
       fieldArray.remove(index);
-    }
-    else{
-        toast.error("Profile should have at least one experience field");
-
+    } else {
+      toast.error("Profile should have at least one experience field");
     }
   };
 
@@ -186,34 +187,33 @@ const ExperienceForm = () => {
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} onChange={handleChange}>
             <div className="flex flex-col gap-5 ">
-              { controlledFields?.map(
-                (item, index) => {
-                  return (
-                    <Collapsible
-                      key={index}
-                      onOpenChange={() =>
-                        handleCollapsible(item.id, item.id === expanded)
-                      }
-                      className={`space-y-2`}
-                      open={item.id === expanded}
-                    >
-                      <div className="flex hover:bg-red-300 items-center bg-red-400 px-5">
-                        <CollapsibleTrigger asChild>
-                          <Button
-                            variant="ghost"
-                            className="w-full hover:bg-red-300 text-neutral-100"
-                          >
-                            {experience?.[index]?.companyName || "Company"}
-                          </Button>
-                        </CollapsibleTrigger>
-                        <Trash
-                          className="ml-auto cursor-pointer text-neutral-200"
-                          onClick={() => handleDelete(index)}
-                        />
-                      </div>
+              {controlledFields?.map((item, index) => {
+                return (
+                  <Collapsible
+                    key={index}
+                    onOpenChange={() =>
+                      handleCollapsible(item.id, item.id === expanded)
+                    }
+                    className={`space-y-2`}
+                    open={item.id === expanded}
+                  >
+                    <div className="flex hover:bg-red-300 items-center bg-red-400 px-5">
+                      <CollapsibleTrigger asChild>
+                        <Button
+                          variant="ghost"
+                          className="w-full hover:bg-red-300 text-neutral-100"
+                        >
+                          {experience?.[index]?.companyName || "Company"}
+                        </Button>
+                      </CollapsibleTrigger>
+                      <Trash
+                        className="ml-auto cursor-pointer text-neutral-200"
+                        onClick={() => handleDelete(index)}
+                      />
+                    </div>
 
-                      <CollapsibleContent
-                        className={`flex
+                    <CollapsibleContent
+                      className={`flex
                                                  flex-col
                                                   gap-5
                                                    border 
@@ -221,48 +221,47 @@ const ExperienceForm = () => {
                                                    transition-transform 
                                                    data-[state=open]:animate-accordion-down 
                                                    `}
-                        key={item.id}
-                      >
-                        <CompanyName index={index} form={form} />
+                      key={item.id}
+                    >
+                      <CompanyName index={index} form={form} />
 
-                        <JobTitle index={index} form={form} />
+                      <JobTitle index={index} form={form} />
 
-                        <div className="flex gap-5">
-                          <CheckboxInternship index={index} form={form} />
-                          <CheckboxVolunteering index={index} form={form} />
-                        </div>
+                      <div className="flex gap-5">
+                        <CheckboxInternship index={index} form={form} />
+                        <CheckboxVolunteering index={index} form={form} />
+                      </div>
 
-                        <Employer form={form} index={index} />
+                      <Employer form={form} index={index} />
 
-                        <Address form={form} index={index} />
+                      <Address form={form} index={index} />
 
-                        <div className="flex gap-5 w-full">
-                          <StartDate
-                            form={form}
-                            index={index}
-                            handleChange={handleChange}
-                          />
-                          <EndDate
-                            form={form}
-                            index={index}
-                            handleChange={handleChange}
-                          />
-                        </div>
+                      <div className="flex gap-5 w-full">
+                        <StartDate
+                          form={form}
+                          index={index}
+                          handleChange={handleChange}
+                        />
+                        <EndDate
+                          form={form}
+                          index={index}
+                          handleChange={handleChange}
+                        />
+                      </div>
 
-                        <div className="self-start">
-                          <CheckboxWorkingStatus
-                            index={index}
-                            form={form}
-                            handleChange={handleChange}
-                          />
-                        </div>
+                      <div className="self-start">
+                        <CheckboxWorkingStatus
+                          index={index}
+                          form={form}
+                          handleChange={handleChange}
+                        />
+                      </div>
 
-                        <Description form={form} index={index} />
-                      </CollapsibleContent>
-                    </Collapsible>
-                  );
-                },
-              )}
+                      <Description form={form} index={index} />
+                    </CollapsibleContent>
+                  </Collapsible>
+                );
+              })}
 
               <Button
                 onClick={handleAddMore}

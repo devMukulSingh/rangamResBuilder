@@ -16,14 +16,24 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { languagesData, strengths } from "@/lib/constants";
-import { PlusCircle } from "lucide-react";
+import { Loader, PlusCircle } from "lucide-react";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
 import { setLanguages } from "@/redux/slice/userSlice";
 import { useParams, useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import toast from "react-hot-toast";
-
+import useSWRMutation from "swr/mutation";
+import { Ifetcher } from "@/app/(root)/builder/(routes)/education/components/EducationForm";
+import axios from "axios";
+ 
+const fetcher = ([url, resumeData]: Ifetcher) =>
+axios.put(url, resumeData).then((res) => res.data);
 const LanguageForm = () => {
+    const resumeData = useAppSelector((state) => state.persistedReducer);
+    const { trigger, isMutating, error } = useSWRMutation(
+      [`/api/user/update-resumedata`, resumeData],
+      fetcher
+    );
   const dispatch = useAppDispatch();
   const router = useRouter();
   const languages = useAppSelector((state) => state.persistedReducer.languages);
@@ -48,7 +58,8 @@ const LanguageForm = () => {
 
   const watchFieldsArray = form.watch("languageInfo");
 
-  const onSubmit = () => {
+  const onSubmit = async() => {
+    await trigger();
     router.push(`/download`);
   };
 
@@ -77,7 +88,9 @@ const LanguageForm = () => {
       fieldArray.append({ language: "English", strength: "" });
     }
   };
-
+  if(error){
+    console.log(`Error in PUT req resumedata ${error}`);
+  }
   return (
     <motion.div
       animate={{ x: 1, opacity: [0, 1] }}
@@ -157,10 +170,12 @@ const LanguageForm = () => {
                 Add more language
               </Button>
               <Button
+                disabled={isMutating}
                 type="submit"
                 className="w-[15rem] py-6 self-center mt-20"
               >
                 Submit
+                {isMutating && <Loader className="animate-spin"/>}
               </Button>
             </div>
           </form>

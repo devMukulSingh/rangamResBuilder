@@ -35,14 +35,17 @@ const ProjectsForm = () => {
 
   const form = useForm({
     defaultValues: {
-      projects: projects.length !== 0 ? projects : [
-        {
-          projectName: "",
-          projectUrl: "",
-          description: "",
-          id: Math.floor(Math.random() * 100).toString(),
-        },
-      ],
+      projects:
+        projects.length !== 0
+          ? projects
+          : [
+              {
+                projectName: "",
+                projectUrl: "",
+                description: "",
+                id: Math.floor(Math.random() * 100).toString(),
+              },
+            ],
     },
   });
 
@@ -61,7 +64,6 @@ const ProjectsForm = () => {
 
   const onSubmit = () => {
     dispatch(setFormComp("Achievements"));
- 
   };
 
   const handleChange = () => {
@@ -142,35 +144,34 @@ const ProjectsForm = () => {
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} onChange={handleChange}>
             <div className="flex flex-col gap-5">
-              {controlledFields?.map(
-                (item, index) => {
-                  return (
-                    <Collapsible
-                      key={index}
-                      onOpenChange={() =>
-                        handleCollapsible(item.id, item.id === expanded)
-                      }
-                      className="space-y-2 transition"
-                      open={item.id === expanded}
-                    >
-                      <div className="flex transition text-neutral-100 hover:bg-red-300 items-center bg-red-400 px-5">
-                        <CollapsibleTrigger asChild>
-                          <Button
-                            variant="ghost"
-                            className="w-full text-neutral-100 hover:bg-red-300"
-                          >
-                            {projects?.[index]?.projectName || "Project"}
-                          </Button>
-                        </CollapsibleTrigger>
-                        <Trash
-                          className="ml-auto cursor-pointer text-neutral-200"
-                          onClick={() => handleDelete(index)}
-                        />
-                      </div>
+              {controlledFields?.map((item, index) => {
+                return (
+                  <Collapsible
+                    key={index}
+                    onOpenChange={() =>
+                      handleCollapsible(item.id, item.id === expanded)
+                    }
+                    className="space-y-2 transition"
+                    open={item.id === expanded}
+                  >
+                    <div className="flex transition text-neutral-100 hover:bg-red-300 items-center bg-red-400 px-5">
+                      <CollapsibleTrigger asChild>
+                        <Button
+                          variant="ghost"
+                          className="w-full text-neutral-100 hover:bg-red-300"
+                        >
+                          {projects?.[index]?.projectName || "Project"}
+                        </Button>
+                      </CollapsibleTrigger>
+                      <Trash
+                        className="ml-auto cursor-pointer text-neutral-200"
+                        onClick={() => handleDelete(index)}
+                      />
+                    </div>
 
-                      <CollapsibleContent
-                        key={item.id}
-                        className={`flex
+                    <CollapsibleContent
+                      key={item.id}
+                      className={`flex
                                                  flex-col
                                                   gap-5
                                                    border 
@@ -178,69 +179,68 @@ const ProjectsForm = () => {
                                                    transition-transform 
                                                    data-[state=open]:animate-accordion-down 
                                                    `}
-                      >
-                        {/* ProjectName */}
-                        <FormField
-                          name={`projects.${index}.projectName`}
-                          control={form.control}
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Name of Project</FormLabel>
-                              <FormControl>
-                                <Input
-                                  className="py-8 bg-white"
-                                  {...field}
-                                  placeholder="Google Lance"
-                                />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
+                    >
+                      {/* ProjectName */}
+                      <FormField
+                        name={`projects.${index}.projectName`}
+                        control={form.control}
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Name of Project</FormLabel>
+                            <FormControl>
+                              <Input
+                                className="py-8 bg-white"
+                                {...field}
+                                placeholder="Google Lance"
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
 
-                        {/* ProjectUrl */}
-                        <FormField
-                          name={`projects.${index}.projectUrl`}
-                          control={form.control}
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Project Url</FormLabel>
-                              <FormControl>
-                                <Input
-                                  className="py-8 bg-white"
-                                  {...field}
-                                  placeholder="www.google.com"
-                                />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                        {/* ProjectDescription */}
-                        <FormField
-                          name={`projects.${index}.description`}
-                          control={form.control}
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Description</FormLabel>
-                              <FormControl>
-                                <RichTextEditor
-                                  value={field.value || ""}
-                                  onChange={(content) => {
-                                    field.onChange(content);
-                                    handleChange();
-                                  }}
-                                />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                      </CollapsibleContent>
-                    </Collapsible>
-                  );
-                },
-              )}
+                      {/* ProjectUrl */}
+                      <FormField
+                        name={`projects.${index}.projectUrl`}
+                        control={form.control}
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Project Url</FormLabel>
+                            <FormControl>
+                              <Input
+                                className="py-8 bg-white"
+                                {...field}
+                                placeholder="www.google.com"
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      {/* ProjectDescription */}
+                      <FormField
+                        name={`projects.${index}.description`}
+                        control={form.control}
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Description</FormLabel>
+                            <FormControl>
+                              <RichTextEditor
+                                value={field.value || ""}
+                                onChange={(content) => {
+                                  field.onChange(content);
+                                  handleChange();
+                                }}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </CollapsibleContent>
+                  </Collapsible>
+                );
+              })}
 
               <Button
                 onClick={handleAddMore}

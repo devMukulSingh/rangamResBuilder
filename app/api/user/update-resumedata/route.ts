@@ -6,6 +6,10 @@ export async function PUT(req: NextRequest, res: NextResponse) {
   try {
     const resumeData: IinitialState = await req.json();
     const {
+      achievements,
+      contact,
+      languages,
+      projects,
       education,
       experience,
       goal,
@@ -51,7 +55,7 @@ export async function PUT(req: NextRequest, res: NextResponse) {
       data: {
         goal,
         personalInfo: {
-          create: {
+          update: {
             bio,
             countryCode,
             email,
@@ -67,11 +71,11 @@ export async function PUT(req: NextRequest, res: NextResponse) {
         },
         skills: {
           createMany: {
-            data: technicalSkills.map((item) => ({
-              skillName: item,
-            })),
-            skipDuplicates: true,
+            data:technicalSkills.map( item => ({
+              skillName:item
+            }))
           },
+          
         },
         experiences: {
           createMany: {
@@ -94,17 +98,17 @@ export async function PUT(req: NextRequest, res: NextResponse) {
               //         }))).flat()
               //     }
               // }
-              // competences:
-              //   experience
-              //     .map((item) =>
-              //       item.competences
-              //         .filter((item) => item.isSelected == true)
-              //         .map((item) => ({
-              //           name: item.name,
-              //           description: item.description,
-              //         })),
-              //     )
-              //     .flat(),
+              competences:
+                experience
+                  .map((item) =>
+                    item.competences
+                      .filter((item) => item.isSelected == true)
+                      .map((item) => ({
+                        name: item.name,
+                        description: item.description,
+                      })),
+                  )
+                  .flat(),
             })),
           },
         },
@@ -119,12 +123,55 @@ export async function PUT(req: NextRequest, res: NextResponse) {
               checkboxPursuing: item.checkboxPursuing,
               schoolLocation: item.schoolLocation,
             })),
+            // where: {
+            //   userId: userByEmail.id
+            // }
           },
         },
-        achievements: {},
-        contacts: {},
-        languages: {},
-        projects: {},
+        achievements: {
+          createMany:{
+            data:achievements.map( item => ({
+              name:item.value
+            })),
+            // skipDuplicates:true
+          },
+        },
+        contacts: {
+          upsert:{
+            create:{
+              github:contact?.github,
+              linkedIn:contact?.linkedIn,
+              portfolio:contact?.portfolio,
+              twitter:contact?.twitter
+            },
+            update:{
+              github: contact?.github,
+              linkedIn: contact?.linkedIn,
+              portfolio: contact?.portfolio,
+              twitter: contact?.twitter
+            },
+            where:{
+              userId:userByEmail.id
+            }
+          }
+        },
+        languages: {
+          createMany:{
+            data:languages.map( item => ({
+              name:item.language,
+              strength:item.strength
+            }))
+          }
+        },
+        projects: {
+          createMany:{
+            data:projects.map( item => ({
+              projectName:item.projectName,
+              description:item.description,
+              projectUrl:item.projectUrl
+            }))
+          }
+        },
       },
 
       include: {
@@ -132,6 +179,10 @@ export async function PUT(req: NextRequest, res: NextResponse) {
         experiences: true,
         personalInfo: true,
         skills: true,
+        achievements:true,
+        languages:true,
+        contacts:true,
+        projects:true        
       },
       where: {
         id: userByEmail.id,
@@ -142,9 +193,9 @@ export async function PUT(req: NextRequest, res: NextResponse) {
       status: 201,
     });
   } catch (e) {
-    console.log(`Error in POST resumeData ${e}`);
+    console.log(`Error in PUT resumeData req ${e}`);
     return NextResponse.json({
-      error: `Error in POST resumeData ${e}`,
+      error: `Error in PUT resumeData req ${e}`,
     });
   }
 }

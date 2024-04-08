@@ -33,7 +33,7 @@ const fetcher = ([url, resumeData]: Ifetcher) =>
 const EducationForm = () => {
   const resumeData = useAppSelector((state) => state.persistedReducer);
   const { trigger, isMutating, error } = useSWRMutation(
-    [`/api/user/set-resumedata`, resumeData],
+    [`/api/user/update-resumedata`, resumeData],
     fetcher,
   );
   const [expanded, setExpanded] = useState<string | false>("");
@@ -46,24 +46,33 @@ const EducationForm = () => {
     education: z
       .object({
         id: z.string(),
-        schoolName: z.string({
-          required_error: "School name is required",
-          invalid_type_error: "Invalid string",
-        }).trim().min(1,{
-          message:'University/School name is required'
-        }),
-        degree: z.string({
-          required_error: "Degree is required",
-          invalid_type_error: "Invalid string",
-        }).trim().min(1,{
-          message:'Degree is required'
-        }),
-        speciality: z.string({
-          required_error: "Speciality is required",
-          invalid_type_error: "Invalid string",
-        }).trim().min(1,{
-          message:'Speciality is required'
-        }),
+        schoolName: z
+          .string({
+            required_error: "School name is required",
+            invalid_type_error: "Invalid string",
+          })
+          .trim()
+          .min(1, {
+            message: "University/School name is required",
+          }),
+        degree: z
+          .string({
+            required_error: "Degree is required",
+            invalid_type_error: "Invalid string",
+          })
+          .trim()
+          .min(1, {
+            message: "Degree is required",
+          }),
+        speciality: z
+          .string({
+            required_error: "Speciality is required",
+            invalid_type_error: "Invalid string",
+          })
+          .trim()
+          .min(1, {
+            message: "Speciality is required",
+          }),
         startDate: z
           .any({
             required_error: "Start date is required",
@@ -109,19 +118,22 @@ const EducationForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      education: education.length!==0 ? education : [
-        {
-          schoolName: "",
-          degree: "",
-          speciality: "",
-          startDate: "",
-          endDate: "",
-          checkboxPursuing: false,
-          id: Math.floor(Math.random() * 100).toString(),
-          // schoolLocation: '',
-          // percentage: 0
-        },
-      ],
+      education:
+        education.length !== 0
+          ? education
+          : [
+              {
+                schoolName: "",
+                degree: "",
+                speciality: "",
+                startDate: "",
+                endDate: "",
+                checkboxPursuing: false,
+                id: Math.floor(Math.random() * 100).toString(),
+                // schoolLocation: '',
+                // percentage: 0
+              },
+            ],
     },
   });
 
@@ -219,9 +231,8 @@ const EducationForm = () => {
   const handleDelete = (index: number) => {
     if (controlledFields.length > 1) {
       fieldArray.remove(index);
-    }
-    else{
-       toast.error("Profile should have at least one education field");
+    } else {
+      toast.error("Profile should have at least one education field");
     }
   };
   useEffect(() => {
@@ -257,34 +268,33 @@ const EducationForm = () => {
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} onChange={handleChange}>
             <div className="flex flex-col gap-10 w-full">
-              {controlledFields?.map(
-                (item, index) => {
-                  return (
-                    <>
-                      <Collapsible
-                        onOpenChange={() =>
-                          handleCollapsible(item.id, item.id === expanded)
-                        }
-                        className="space-y-2 transition"
-                        open={item.id === expanded}
-                      >
-                        <div className="flex transition text-neutral-100 hover:bg-red-300 items-center bg-red-400 px-5">
-                          <CollapsibleTrigger asChild>
-                            <Button
-                              variant="ghost"
-                              className="w-full hover:bg-red-300"
-                            >
-                              {education?.[index]?.schoolName || "University"}
-                            </Button>
-                          </CollapsibleTrigger>
-                          <Trash
-                            className="ml-auto cursor-pointer text-neutral-200"
-                            onClick={() => handleDelete(index)}
-                          />
-                        </div>
-                        <CollapsibleContent
-                          key={item.id}
-                          className={`flex
+              {controlledFields?.map((item, index) => {
+                return (
+                  <>
+                    <Collapsible
+                      onOpenChange={() =>
+                        handleCollapsible(item.id, item.id === expanded)
+                      }
+                      className="space-y-2 transition"
+                      open={item.id === expanded}
+                    >
+                      <div className="flex transition text-neutral-100 hover:bg-red-300 items-center bg-red-400 px-5">
+                        <CollapsibleTrigger asChild>
+                          <Button
+                            variant="ghost"
+                            className="w-full hover:bg-red-300"
+                          >
+                            {education?.[index]?.schoolName || "University"}
+                          </Button>
+                        </CollapsibleTrigger>
+                        <Trash
+                          className="ml-auto cursor-pointer text-neutral-200"
+                          onClick={() => handleDelete(index)}
+                        />
+                      </div>
+                      <CollapsibleContent
+                        key={item.id}
+                        className={`flex
                                                      flex-col
                                                       gap-5
                                                        border 
@@ -292,37 +302,36 @@ const EducationForm = () => {
                                                        transition-transform 
                                                        data-[state=open]:animate-accordion-down 
                                                        `}
-                        >
-                          <SchoolName form={form} index={index} />
-                          <Degree form={form} index={index} />
+                      >
+                        <SchoolName form={form} index={index} />
+                        <Degree form={form} index={index} />
 
-                          <Speciality form={form} index={index} />
+                        <Speciality form={form} index={index} />
 
-                          <div className="flex gap-2">
-                            <StartDate
-                              form={form}
-                              index={index}
-                              handleChange={handleChange}
-                            />
-
-                            <EndDate
-                              form={form}
-                              index={index}
-                              handleChange={handleChange}
-                            />
-                          </div>
-
-                          <CheckboxPursuing
+                        <div className="flex gap-2">
+                          <StartDate
                             form={form}
                             index={index}
                             handleChange={handleChange}
                           />
-                        </CollapsibleContent>
-                      </Collapsible>
-                    </>
-                  );
-                },
-              )}
+
+                          <EndDate
+                            form={form}
+                            index={index}
+                            handleChange={handleChange}
+                          />
+                        </div>
+
+                        <CheckboxPursuing
+                          form={form}
+                          index={index}
+                          handleChange={handleChange}
+                        />
+                      </CollapsibleContent>
+                    </Collapsible>
+                  </>
+                );
+              })}
 
               <div className="flex gap-5">
                 <Button

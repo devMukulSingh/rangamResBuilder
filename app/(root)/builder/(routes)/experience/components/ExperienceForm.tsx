@@ -85,27 +85,30 @@ const ExperienceForm = () => {
   const form = useForm({
     // resolver: zodResolver(schema),
     defaultValues: {
-      experience: experience.length!==0 ? experience : [
-        {
-          companyName: "",
-          endDate: "",
-          startDate: "",
-          jobTitle: "",
-          id: Math.floor(Math.random() * 100).toString(),
-          checkboxWorkingStatus: false,
-          checkboxVolunteering: false,
-          checkboxInternship: false,
-          competences: [
-            {
-              id: 0,
-              name: "",
-              isSelected: false,
-              description: "",
-            },
-          ],
-          description: "",
-        },
-      ],
+      experience:
+        experience.length !== 0
+          ? experience
+          : [
+              {
+                companyName: "",
+                endDate: "",
+                startDate: "",
+                jobTitle: "",
+                id: Math.floor(Math.random() * 100).toString(),
+                checkboxWorkingStatus: false,
+                checkboxVolunteering: false,
+                checkboxInternship: false,
+                competences: [
+                  {
+                    id: 0,
+                    name: "",
+                    isSelected: false,
+                    description: "",
+                  },
+                ],
+                description: "",
+              },
+            ],
     },
   });
 

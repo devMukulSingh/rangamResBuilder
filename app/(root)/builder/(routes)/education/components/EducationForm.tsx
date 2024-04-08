@@ -138,17 +138,20 @@ const EducationForm = () => {
   const form = useForm<formSchema>({
     resolver: zodResolver(schema),
     defaultValues: {
-      education: education.length !==0 ? education : [
-        {
-          schoolName: "",
-          degree: "",
-          speciality: "",
-          startDate: "",
-          endDate: "",
-          id: Math.floor(Math.random() * 100).toString(),
-          checkboxPursuing: false,
-        },
-      ],
+      education:
+        education.length !== 0
+          ? education
+          : [
+              {
+                schoolName: "",
+                degree: "",
+                speciality: "",
+                startDate: "",
+                endDate: "",
+                id: Math.floor(Math.random() * 100).toString(),
+                checkboxPursuing: false,
+              },
+            ],
     },
   });
 
@@ -191,9 +194,9 @@ const EducationForm = () => {
     if (
       schoolName.trim() === "" ||
       degree.trim() === "" ||
-      startDate.trim() === "" ||
+      startDate === "" ||
       speciality.trim() === "" ||
-      (endDate.trim() === "" && checkboxPursuing === false)
+      (endDate === "" && checkboxPursuing === false)
     ) {
       toast.error("Complete previous form first");
     } else {
