@@ -151,14 +151,13 @@ const EducationForm = () => {
   });
 
   const onSubmit = async () => {
-    try{
+    try {
       if (!showSidebarOptions) await trigger();
-    }
-    catch(e){
+    } catch (e) {
       console.log(`Error in onSubmit PUT req ${e}`);
     }
-      dispatch(
-        setValidatedOptions({
+    dispatch(
+      setValidatedOptions({
         name: "Education",
         isValidated: true,
         index: 0,
@@ -169,7 +168,7 @@ const EducationForm = () => {
     } else {
       dispatch(setFormComp("Social Links"));
     }
-  }
+  };
 
   const handleChange = () => {
     const education = form.getValues().education;

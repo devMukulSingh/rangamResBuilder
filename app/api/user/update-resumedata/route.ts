@@ -90,11 +90,12 @@ export async function PUT(req: NextRequest, res: NextResponse) {
               address: item.address || "",
               employer: item.employer || "",
               competences: item.competences
-                    .filter((item) => item.isSelected == true)
-                    .map((item) => ({
-                      name: item.name,
-                      description: item.description,
-                    })).flat(),
+                .filter((item) => item.isSelected == true)
+                .map((item) => ({
+                  name: item.name,
+                  description: item.description,
+                }))
+                .flat(),
             })),
           },
         },
@@ -109,7 +110,6 @@ export async function PUT(req: NextRequest, res: NextResponse) {
               checkboxPursuing: item.checkboxPursuing,
               schoolLocation: item.schoolLocation,
             })),
-
           },
         },
         achievements: {
