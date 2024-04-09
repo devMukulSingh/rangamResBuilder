@@ -45,9 +45,9 @@ export interface IeducationForm {
   >;
   index: number;
 }
-export type Ifetcher = [ url: string, resumeData: IinitialState] ;
+export type Ifetcher = [url: string, resumeData: IinitialState];
 
-export const fetcher = ([url,resumeData]:Ifetcher) =>
+export const fetcher = ([url, resumeData]: Ifetcher) =>
   axios.post(url, resumeData).then((res) => res.data);
 
 const EducationForm = () => {
@@ -220,9 +220,18 @@ const EducationForm = () => {
     }
   };
   const onSubmit = async (data: FieldValues) => {
+    
     dispatch(setEducation(data.education));
-    await trigger();
-    router.push("/download");
+    try{
+      await trigger();
+    }
+    catch(e){
+      console.log(`Error in onSubmit POST resumedata req ${e}`);
+      
+    }
+    finally{
+      router.push("/download");
+    }
   };
   useEffect(() => {
     setSelected(controlledFields[0]?.id);
