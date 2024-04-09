@@ -66,7 +66,7 @@ const LanguageForm = () => {
     // } finally {
     //   router.push(`/download`);
     // }
-      router.push(`/download`);
+    router.push(`/download`);
   };
 
   const handleChange = () => {

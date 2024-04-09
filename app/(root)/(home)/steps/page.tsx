@@ -27,9 +27,9 @@ const StepsPage = () => {
           className="self-center md:self-end w-60 h-10"
           href={"/builder/personal"}
         >
-          <Button
-            onClick={ () => dispatch(resetForm())} 
-            className="w-full">Create a RESUME</Button>
+          <Button onClick={() => dispatch(resetForm())} className="w-full">
+            Create a RESUME
+          </Button>
         </Link>
       </div>
 
