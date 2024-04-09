@@ -59,16 +59,14 @@ const LanguageForm = () => {
   const watchFieldsArray = form.watch("languageInfo");
 
   const onSubmit = async () => {
-    try{
-      await trigger();
-    }
-    catch(e){
-      console.log(`Error in onSubmit PUT req ${e}`);
-      
-    }
-    finally{
+    // try {
+    //   await trigger();
+    // } catch (e) {
+    //   console.log(`Error in onSubmit PUT req ${e}`);
+    // } finally {
+    //   router.push(`/download`);
+    // }
       router.push(`/download`);
-    }
   };
 
   const handleChange = () => {

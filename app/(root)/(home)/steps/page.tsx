@@ -4,8 +4,11 @@ import Image from "next/image";
 import Link from "next/link";
 import Steps from "./components/Steps";
 import { motion } from "framer-motion";
+import { resetForm } from "@/redux/slice/userSlice";
+import { useAppDispatch } from "@/redux/hooks/hooks";
 
 const StepsPage = () => {
+  const dispatch = useAppDispatch();
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
@@ -24,7 +27,9 @@ const StepsPage = () => {
           className="self-center md:self-end w-60 h-10"
           href={"/builder/personal"}
         >
-          <Button className="w-full">Create a RESUME</Button>
+          <Button
+            onClick={ () => dispatch(resetForm())} 
+            className="w-full">Create a RESUME</Button>
         </Link>
       </div>
 

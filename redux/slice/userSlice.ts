@@ -37,7 +37,7 @@ const initialState: IinitialState = {
     email: "",
     profession: "",
     address: "",
-    countryCode: "",
+    countryCode: "+1",
     mobile: "",
     state: "",
     dob: "",

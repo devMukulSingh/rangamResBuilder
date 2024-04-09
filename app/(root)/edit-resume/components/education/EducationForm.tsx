@@ -151,11 +151,11 @@ const EducationForm = () => {
   });
 
   const onSubmit = async () => {
-    try {
-      if (!showSidebarOptions) await trigger();
-    } catch (e) {
-      console.log(`Error in onSubmit PUT req ${e}`);
-    }
+    // try {
+    //   if (!showSidebarOptions) await trigger();
+    // } catch (e) {
+    //   console.log(`Error in onSubmit PUT req ${e}`);
+    // }
     dispatch(
       setValidatedOptions({
         name: "Education",
