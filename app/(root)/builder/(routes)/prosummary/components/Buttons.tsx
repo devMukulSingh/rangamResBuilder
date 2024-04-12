@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import LinkComp from "@/components/ui/LinkComp";
 import { useAppSelector } from "@/redux/hooks/hooks";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useEffect } from "react";
 import toast from "react-hot-toast";
 
 const Buttons = () => {
@@ -19,6 +19,9 @@ const Buttons = () => {
       toast.error("Bio is required");
     }
   };
+  useEffect( () => {
+      router.prefetch(`/builder/education`);
+  },[])
   return (
     <>
       <div className="mt-auto flex justify-between">

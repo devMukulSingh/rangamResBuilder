@@ -24,6 +24,7 @@ const StepsPage = () => {
         <Steps />
 
         <Link
+          prefetch={true}
           className="self-center md:self-end w-60 h-10"
           href={"/builder/personal"}
         >

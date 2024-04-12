@@ -20,6 +20,7 @@ const LinkComp: FC<LinkProps> = ({
 }) => {
   return (
     <Link
+      prefetch={true}
       onClick={onClick}
       aria-disabled={disabled}
       className={cn(

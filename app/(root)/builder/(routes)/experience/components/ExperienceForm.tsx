@@ -188,6 +188,7 @@ const ExperienceForm = () => {
   };
 
   useEffect(() => {
+    router.prefetch("/builder/prosummary");
     setSelected(controlledFields[0]?.id);
   }, []);
 

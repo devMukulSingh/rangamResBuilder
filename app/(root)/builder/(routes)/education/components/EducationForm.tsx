@@ -230,6 +230,7 @@ const EducationForm = () => {
     router.push("/download");
   };
   useEffect(() => {
+    router.prefetch('/download')
     setSelected(controlledFields[0]?.id);
   }, []);
 

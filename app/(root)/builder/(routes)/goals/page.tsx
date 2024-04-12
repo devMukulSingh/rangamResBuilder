@@ -43,6 +43,7 @@ const GoalsPage = async ({
       </header>
 
       <Goals />
+      
     </div>
   );
 };

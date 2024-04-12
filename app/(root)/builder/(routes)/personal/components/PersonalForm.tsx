@@ -20,6 +20,7 @@ const CountryCode = dynamic(() => import("./formFields/CountryCode"), {
 });
 import validator from "validator";
 import { Loader } from "lucide-react";
+import { useEffect } from "react";
 
 export interface IForm {
   handleChange?: () => void;
@@ -120,6 +121,9 @@ const PersonalForm = () => {
     dispatch(setPersonalInfo(data));
     await axios.post("/api/set-profession", { profession: data.profession });
   };
+  useEffect( () => {
+    router.prefetch(`/builder/goals`);
+  },[])
   return (
     // <motion.div
     //     initial={{ opacity: 0 }}
