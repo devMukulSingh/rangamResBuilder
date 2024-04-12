@@ -19,9 +19,9 @@ const Buttons = () => {
       toast.error("Bio is required");
     }
   };
-  useEffect( () => {
-      router.prefetch(`/builder/education`);
-  },[])
+  useEffect(() => {
+    router.prefetch(`/builder/education`);
+  }, []);
   return (
     <>
       <div className="mt-auto flex justify-between">

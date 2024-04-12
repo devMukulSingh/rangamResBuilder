@@ -121,9 +121,9 @@ const PersonalForm = () => {
     dispatch(setPersonalInfo(data));
     await axios.post("/api/set-profession", { profession: data.profession });
   };
-  useEffect( () => {
+  useEffect(() => {
     router.prefetch(`/builder/goals`);
-  },[])
+  }, []);
   return (
     // <motion.div
     //     initial={{ opacity: 0 }}
