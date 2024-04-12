@@ -16,56 +16,19 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { setPersonalInfo } from "@/redux/slice/userSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { personalSchema } from "@/lib/formSchemas";
 
 const PersonalForm = () => {
   const dispatch = useAppDispatch();
 
-  const schema = z.object({
-    fullName: z
-      .string()
-      .min(3, {
-        message: "Name should be minimum 3 characters",
-      })
-      .max(30, {
-        message: "Name should be max 30 characters",
-      }),
-    email: z
-      .string()
-      .email({
-        message: "Please enter valid email",
-      })
-      .refine((data) => data.endsWith("com"), {
-        message: "Please enter valid email",
-      }),
-    profession: z
-      .string()
-      .min(3, {
-        message: "Profession should be minimum 5 characters",
-      })
-      .max(30, {
-        message: "Profession should be max 30 characters",
-      }),
-    address: z.string().optional(),
-    countryCode: z.string().min(2, {
-      message: "CountryCode should be minimum 2 numbers",
-    }),
-    mobile: z.string().min(10, {
-      message: "Mobile no should be minimum 10 numbers",
-    }),
-    city: z.string().optional(),
-    state: z.string().optional(),
-    dob: z.any().optional(),
-  });
-
-  type formSchema = z.infer<typeof schema>;
+  type formSchema = z.infer<typeof personalSchema>;
   const personalInfo = useAppSelector(
     (state) => state.persistedReducer.personalInfo,
   );
 
   const form = useForm<formSchema>({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(personalSchema),
     defaultValues: personalInfo || {
       countryCode: "+1 (USD)",
       email: "",

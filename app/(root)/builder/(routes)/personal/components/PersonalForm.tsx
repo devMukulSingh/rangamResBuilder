@@ -8,19 +8,18 @@ import { resetForm, setPersonalInfo } from "@/redux/slice/userSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
 import Name from "./formFields/Name";
 import Email from "./formFields/Email";
 import Profession from "./formFields/Profession";
 import Mobile from "./formFields/Mobile";
 import FieldSkeleton from "./FieldSkeleton";
+import { Loader } from "lucide-react";
+import { useEffect } from "react";
+import { personalSchema } from "@/lib/formSchemas";
 const CountryCode = dynamic(() => import("./formFields/CountryCode"), {
   loading: () => <FieldSkeleton />,
 });
-import validator from "validator";
-import { Loader } from "lucide-react";
-import { useEffect } from "react";
 
 export interface IForm {
   handleChange?: () => void;
@@ -43,71 +42,16 @@ export interface IForm {
 }
 
 const PersonalForm = () => {
+  
   const dispatch = useAppDispatch();
   const router = useRouter();
 
-  const schema = z.object({
-    fullName: z
-      .string({
-        required_error: "Full name is required",
-      })
-      .trim()
-      .min(3, {
-        message: "Name must be minimum 3 characters",
-      })
-      .max(30, {
-        message: "Name must be max 30 characters",
-      }),
-    email: z
-      .string({
-        required_error: "Email is required",
-      })
-      .trim()
-      .email({
-        message: "Please enter valid email",
-      })
-      .refine((data) => data.endsWith("com"), {
-        message: "Please enter valid email",
-      }),
-    profession: z
-      .string({
-        required_error: "Profession is required",
-      })
-      .trim()
-      .min(3, {
-        message: "Profession must be minimum 5 characters",
-      })
-      .max(30, {
-        message: "Profession must be max 30 characters",
-      }),
-    countryCode: z
-      .string({
-        required_error: "Country code is required",
-      })
-      .trim()
-      .min(2, {
-        message: "CountryCode must be minimum 2 numbers",
-      }),
-    mobile: z
-      .string({
-        required_error: "Mobile no is required",
-        invalid_type_error: "must be a number",
-      })
-      .trim()
-      .refine(validator.isMobilePhone),
-    state: z.string().optional(),
-    city: z.string().optional(),
-    address: z.string().optional(),
-    dob: z.string().optional(),
-    birthPlace: z.string().optional(),
-  });
-
-  type formSchema = z.infer<typeof schema>;
+  type formSchema = z.infer<typeof personalSchema>;
   const personalInfo = useAppSelector(
     (state) => state.persistedReducer.personalInfo,
   );
   const form = useForm<formSchema>({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(personalSchema),
     defaultValues: personalInfo,
   });
   const {
@@ -125,11 +69,7 @@ const PersonalForm = () => {
     router.prefetch(`/builder/goals`);
   }, []);
   return (
-    // <motion.div
-    //     initial={{ opacity: 0 }}
-    //     animate={{ opacity: [0, 1], scale: [0.9, 1] }}
-    //     transition={{ duration: 0.4 }}
-    // >
+   
     <div className=" text-neutral-500 lg:w-fit w-full flex justify-center md:justify-end h-[30rem] ">
       <Form {...form}>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -157,7 +97,6 @@ const PersonalForm = () => {
         </form>
       </Form>
     </div>
-    // </motion.div>
   );
 };
 

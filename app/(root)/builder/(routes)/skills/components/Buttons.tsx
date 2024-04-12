@@ -18,9 +18,9 @@ const Buttons = () => {
       router.push(`/builder/experience`);
     }
   };
-  useEffect( () => {
+  useEffect(() => {
     router.prefetch(`/builder/experience`);
-  },[]);
+  }, []);
   return (
     <div>
       <div className="mt-auto flex justify-between">

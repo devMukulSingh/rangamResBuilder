@@ -28,15 +28,10 @@ const SocialForm = () => {
       twitter: "",
     },
   });
-  const { templateId } = useParams();
-  const router = useRouter();
-  const progress = useAppSelector((state) => state.persistedReducer.progress);
 
   const onSubmit = () => {
     dispatch(setFormComp("Projects"));
-    if (progress <= 58) {
-      dispatch(setProgress());
-    }
+ 
   };
 
   const handleChange = () => {

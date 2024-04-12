@@ -27,9 +27,11 @@ import CheckboxPursuing from "./components/CheckboxPursuing";
 import useSWRMutation from "swr/mutation";
 import axios from "axios";
 import { Ifetcher } from "@/app/(root)/builder/(routes)/education/components/EducationForm";
+import { educationSchema } from "@/lib/formSchemas";
 
 const fetcher = ([url, resumeData]: Ifetcher) =>
-  axios.put(url, resumeData).then((res) => res.data);
+axios.put(url, resumeData).then((res) => res.data);
+
 const EducationForm = () => {
   const resumeData = useAppSelector((state) => state.persistedReducer);
   const { trigger, isMutating, error } = useSWRMutation(
@@ -42,81 +44,81 @@ const EducationForm = () => {
   );
   const dispatch = useAppDispatch();
   const education = useAppSelector((state) => state.persistedReducer.education);
-  const formSchema = z.object({
-    education: z
-      .object({
-        id: z.string(),
-        schoolName: z
-          .string({
-            required_error: "School name is required",
-            invalid_type_error: "Invalid string",
-          })
-          .trim()
-          .min(1, {
-            message: "University/School name is required",
-          }),
-        degree: z
-          .string({
-            required_error: "Degree is required",
-            invalid_type_error: "Invalid string",
-          })
-          .trim()
-          .min(1, {
-            message: "Degree is required",
-          }),
-        speciality: z
-          .string({
-            required_error: "Speciality is required",
-            invalid_type_error: "Invalid string",
-          })
-          .trim()
-          .min(1, {
-            message: "Speciality is required",
-          }),
-        startDate: z
-          .any({
-            required_error: "Start date is required",
-          })
-          .refine(
-            (data) => {
-              if (data) return true;
-            },
-            {
-              message: "Start date is required",
-            },
-          ),
-        endDate: z.any().optional(),
-        checkboxPursuing: z.boolean(),
-      })
-      .refine(
-        (data) => {
-          let startDate = data.startDate;
-          let endDate = data?.endDate;
-          if (typeof startDate === "string") {
-            startDate = parseISO(startDate);
-          }
-          if (endDate && typeof endDate === "string") {
-            endDate = parseISO(endDate);
-          }
-          if (
-            data.checkboxPursuing ||
-            startDate < endDate ||
-            !startDate ||
-            !endDate
-          )
-            return true;
-        },
-        {
-          message: `End date must be greater than start date`,
-          path: ["endDate"],
-        },
-      )
-      .array(),
-  });
+  // const formSchema = z.object({
+  //   education: z
+  //     .object({
+  //       id: z.string(),
+  //       schoolName: z
+  //         .string({
+  //           required_error: "School name is required",
+  //           invalid_type_error: "Invalid string",
+  //         })
+  //         .trim()
+  //         .min(1, {
+  //           message: "University/School name is required",
+  //         }),
+  //       degree: z
+  //         .string({
+  //           required_error: "Degree is required",
+  //           invalid_type_error: "Invalid string",
+  //         })
+  //         .trim()
+  //         .min(1, {
+  //           message: "Degree is required",
+  //         }),
+  //       speciality: z
+  //         .string({
+  //           required_error: "Speciality is required",
+  //           invalid_type_error: "Invalid string",
+  //         })
+  //         .trim()
+  //         .min(1, {
+  //           message: "Speciality is required",
+  //         }),
+  //       startDate: z
+  //         .any({
+  //           required_error: "Start date is required",
+  //         })
+  //         .refine(
+  //           (data) => {
+  //             if (data) return true;
+  //           },
+  //           {
+  //             message: "Start date is required",
+  //           },
+  //         ),
+  //       endDate: z.any().optional(),
+  //       checkboxPursuing: z.boolean(),
+  //     })
+  //     .refine(
+  //       (data) => {
+  //         let startDate = data.startDate;
+  //         let endDate = data?.endDate;
+  //         if (typeof startDate === "string") {
+  //           startDate = parseISO(startDate);
+  //         }
+  //         if (endDate && typeof endDate === "string") {
+  //           endDate = parseISO(endDate);
+  //         }
+  //         if (
+  //           data.checkboxPursuing ||
+  //           startDate < endDate ||
+  //           !startDate ||
+  //           !endDate
+  //         )
+  //           return true;
+  //       },
+  //       {
+  //         message: `End date must be greater than start date`,
+  //         path: ["endDate"],
+  //       },
+  //     )
+  //     .array(),
+  // });
 
   const router = useRouter();
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof educationSchema>>({
+    resolver: zodResolver(educationSchema),
     defaultValues: {
       education:
         education.length !== 0

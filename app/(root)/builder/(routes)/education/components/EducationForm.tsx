@@ -26,6 +26,7 @@ import { parseISO } from "date-fns";
 import useSWR from "swr";
 import axios from "axios";
 import useSWRMutation from "swr/mutation";
+import { educationSchema } from "@/lib/formSchemas";
 export interface IeducationForm {
   handleChange?: () => void;
   form: UseFormReturn<
@@ -54,90 +55,16 @@ const EducationForm = () => {
   const resumeData = useAppSelector((state) => state.persistedReducer);
   const { trigger, isMutating, error } = useSWRMutation(
     [`/api/user/set-resumedata`, resumeData],
-    fetcher,
+    fetcher
   );
   const [selected, setSelected] = useState<string>("");
   const education = useAppSelector((state) => state.persistedReducer.education);
   const dispatch = useAppDispatch();
   const router = useRouter();
-  const schema = z.object({
-    education: z
-      .object({
-        id: z.string(),
-        schoolName: z
-          .string({
-            required_error: "School name is required",
-            invalid_type_error: "Invalid string",
-          })
-          .trim()
-          .min(1, {
-            message: "School name is required",
-          }),
-        degree: z
-          .string({
-            required_error: "Degree is required",
-            invalid_type_error: "Invalid string",
-          })
-          .trim()
-          .min(1, {
-            message: "Degree is required",
-          }),
-        speciality: z
-          .string({
-            required_error: "Speciality is required",
-            invalid_type_error: "Invalid string",
-          })
-          .trim()
-          .min(1, {
-            message: "Specialiy is required",
-          }),
-        startDate: z
-          .any({
-            required_error: "Start date is required",
-          })
-          .refine(
-            (data) => {
-              if (data) return true;
-            },
-            {
-              message: "Start date is required",
-            },
-          ),
-        endDate: z.any().optional(),
-        checkboxPursuing: z.boolean(),
-      })
-      .refine(
-        (data) => {
-          let startDate = data.startDate;
-          let endDate = data?.endDate;
-          if (typeof startDate === "string") {
-            startDate = parseISO(startDate);
-          }
-          if (endDate && typeof endDate === "string") {
-            endDate = parseISO(endDate);
-          }
-          if (
-            data.checkboxPursuing ||
-            startDate < endDate ||
-            !startDate ||
-            !endDate
-          )
-            return true;
-        },
-        {
-          message: `End date must be greater than start date`,
-          path: ["endDate"],
-        },
-      )
-      .array()
-      .min(1, {
-        message: "1 is required",
-      }),
-  });
-  type formSchema = z.infer<typeof schema>;
+  type formSchema = z.infer<typeof educationSchema>;
 
   const form = useForm<formSchema>({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(educationSchema),
     defaultValues: {
       education:
         education.length !== 0
@@ -258,11 +185,7 @@ const EducationForm = () => {
   }
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   return (
-    // <motion.div
-    //     animate={{ x: 1, opacity: [0, 1] }}
-    //     initial={{ x: -150, opacity: 0 }}
-    //     transition={{ duration: 0.2 }}
-    // >
+ 
     <div>
       <Form {...form}>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -362,7 +285,7 @@ const EducationForm = () => {
         </form>
       </Form>
     </div>
-    // </motion.div>
+ 
   );
 };
 

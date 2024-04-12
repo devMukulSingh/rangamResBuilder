@@ -47,41 +47,8 @@ const ExperienceForm = () => {
   const dispatch = useAppDispatch();
   const experience =
     useAppSelector((state) => state.persistedReducer.experience) || [];
-  const schema = z
-    .object({
-      experience: z
-        .object({
-          CompanyName: z.string().optional(),
-          jobTitle: z.string().optional(),
-          startDate: z
-            .any({
-              required_error: "Start date is required",
-            })
-            .optional(),
-          endDate: z.any().optional(),
-          checkboxWorkingStatus: z.string().optional(),
-          checkboxVolunteering: z.string().optional(),
-          checkboxInternship: z.string().optional(),
-        })
-        .refine(
-          (data) => {
-            let startDate = data.startDate;
-            let endDate = data?.endDate;
-            if (typeof startDate === "string") {
-              startDate = parseISO(startDate);
-            }
-            if (endDate && typeof endDate === "string") {
-              endDate = parseISO(endDate);
-            }
-            if (data.endDate && startDate < endDate) return true;
-          },
-          {
-            message: `End date must be greater than start date`,
-            path: ["endDate"],
-          },
-        ),
-    })
-    .array();
+
+ 
   const form = useForm({
     // resolver: zodResolver(schema),
     defaultValues: {
@@ -210,12 +177,7 @@ const ExperienceForm = () => {
   }, [controlledFields.length]);
 
   return (
-    // <motion.div
-    //     animate={{ x: 1, opacity: [0, 1] }}
-    //     initial={{ x: -150, opacity: 0 }}
-    //     transition={{ duration: 0.2 }}
-    // >
-    <>
+ 
       <Form {...form}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col ">
@@ -350,8 +312,7 @@ const ExperienceForm = () => {
           </div>
         </form>
       </Form>
-    </>
-    // </motion.div>
+ 
   );
 };
 

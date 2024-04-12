@@ -11,28 +11,19 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
 import { setTechnicalSkills } from "@/redux/slice/userSlice";
-import { FieldValues, useForm } from "react-hook-form";
+import {  useForm } from "react-hook-form";
 import React from "react";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { customSkillSchema } from "@/lib/formSchemas";
 
 const CustomSkill = () => {
   const dispatch = useAppDispatch();
-  const schema = z.object({
-    customSkill: z
-      .string()
-      .max(20, {
-        message: "Max 20 characters allowed",
-      })
-      .regex(/^[-.a-z0-9 ]*$/gi, {
-        message: "Special characters are not allowed",
-      })
-      .optional(),
-  });
-  type formSchema = z.infer<typeof schema>;
+  
+  type formSchema = z.infer<typeof customSkillSchema>;
 
   const form = useForm<formSchema>({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(customSkillSchema),
   });
   const skillFromState = useAppSelector(
     (state) => state.persistedReducer.technicalSkills,
