@@ -37,43 +37,43 @@ export async function POST(req: NextRequest, res: NextResponse) {
     const user = await prisma.user.create({
       data: {
         email,
-        goal : {
-          create:{
-            name:goal
-          }
+        goal: {
+          create: {
+            name: goal,
+          },
         },
         personalInfo: {
           create: {
             bio,
-            countryCode:{
-              create:{
-                code:countryCode
-              }
+            countryCode: {
+              create: {
+                code: countryCode,
+              },
             },
             email,
-            profession:{
-              create:{
-                name:profession
-              }
+            profession: {
+              create: {
+                name: profession,
+              },
             },
             mobile,
             fullName,
             address,
-            birthPlace:{
-              create:{
-                name:birthPlace
-              }
+            birthPlace: {
+              create: {
+                name: birthPlace,
+              },
             },
-            city:{
-              create:{
-                name:city
-              }
+            city: {
+              create: {
+                name: city,
+              },
             },
             dob,
-            state:{
-              create:{
-                name:state
-              }
+            state: {
+              create: {
+                name: state,
+              },
             },
           },
         },

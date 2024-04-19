@@ -53,43 +53,43 @@ export async function PUT(req: NextRequest, res: NextResponse) {
 
     const user = await prisma.user.update({
       data: {
-        goal:{
-          create:{
-            name:goal
-          }
+        goal: {
+          create: {
+            name: goal,
+          },
         },
         personalInfo: {
           update: {
             bio,
-            countryCode:{
-              create:{
-                code:countryCode
-              }
+            countryCode: {
+              create: {
+                code: countryCode,
+              },
             },
             email,
-            profession:{
-              create:{
-                name:countryCode
-              }
+            profession: {
+              create: {
+                name: countryCode,
+              },
             },
             mobile,
             fullName,
             address,
-            birthPlace:{
-              create:{
-                name:birthPlace
-              }
+            birthPlace: {
+              create: {
+                name: birthPlace,
+              },
             },
-            city:{
-              create:{
-                name:city
-              }
+            city: {
+              create: {
+                name: city,
+              },
             },
             dob,
-            state:{
-              create:{
-                name:state
-              }
+            state: {
+              create: {
+                name: state,
+              },
             },
           },
         },

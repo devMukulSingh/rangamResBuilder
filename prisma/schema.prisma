@@ -10,41 +10,44 @@ datasource db {
 
 model User{
   id              String            @id@default(uuid())
+  skillId       String
+  goalId          String
   email           String            @unique
-  goal            Goal?             @relation("userToGoal")
-  personalInfo    PersonalInfo?     @relation("userToPersonalInfo")
-  skills          Skills[]          @relation("userToSkills")
+  goal            Goal             @relation("userToGoal",fields: [goalId],references: [id])
+  skills          Skill[]          
+  personalInfo    PersonalInfo?      @relation("userToPersonalInfo")
   experiences     Experience[]      @relation("userToExperience")
   educations      Education[]       @relation("userToEducation")
   projects        Project[]         @relation("userToProject")
   languages       Language[]        @relation("userToLanguage")
-  contacts        Contact?          @relation("userToContact")
+  contacts        Contact?           @relation("userToContact")
   achievements    Achievement[]      @relation("userToAchievement")
 }
 model Goal{
   id                  String              @id@default(uuid())
   name                String              
-  userId              String              @unique 
-  user                User                @relation("userToGoal",fields: [userId],references: [id])
+  users               User[]             @relation("userToGoal")
 }
 model PersonalInfo{
   id                    String            @id@default(uuid())
+  professionId          String
+  countryCodeId         String
   userId                String            @unique
-  user                  User              @relation("userToPersonalInfo",fields: [userId],references: [id],onDelete:Cascade)
+  user                  User              @relation("userToPersonalInfo",fields: [userId],references: [id])
   fullName              String
   email                 String            @unique
   bio                   String            @db.VarChar(400)    
-  profession            Profession?        @relation("personalInfoToProfession")
-  countryCode           CountryCode?        @relation("personalInfoToCountryCode") 
+  profession            Profession        @relation("personalInfoToProfession",fields: [professionId],references: [id])
+  countryCode           CountryCode       @relation("personalInfoToCountryCode",fields: [countryCodeId],references: [id]) 
   mobile                String
   state                 State?             @relation("personalInfoToState") 
   address               String? 
   dob                   String? 
   birthPlace            BirthPlace?       @relation("personalInfoToBirthPlace") 
-  city                  City?         @relation("personalInfoToCity") 
+  city                  City?             @relation("personalInfoToCity") 
 }
 model BirthPlace{
-   id                    String            @id@default(uuid())
+   id                   String            @id@default(uuid())
   name                  String?
   personalId            String            @unique
   personalInfo          PersonalInfo      @relation("personalInfoToBirthPlace",fields: [personalId],references: [id])
@@ -64,27 +67,24 @@ model State{
 model Profession{
   id                    String            @id@default(uuid())
   name                  String
-  personalId            String            @unique
-  personalInfo          PersonalInfo      @relation("personalInfoToProfession",fields: [personalId],references: [id])
+  personalInfos          PersonalInfo[]      @relation("personalInfoToProfession")
 }
 model CountryCode{
    id                    String            @id@default(uuid())
   code                  String
- personalId            String            @unique
-  personalInfo         PersonalInfo      @relation("personalInfoToCountryCode",fields: [personalId],references: [id])
+  personalInfos         PersonalInfo[]      @relation("personalInfoToCountryCode")
 }
 
-model Skills{
+model Skill{
   id                      String                    @id@default(uuid())
   skillName               String                    
-  userId                  String                       
-  user                    User                      @relation("userToSkills",fields: [userId],references: [id],onDelete:Cascade)
+  users                   User[]                     
 }
 
 model Experience{
   id                              String                    @id@default(uuid())
   userId                          String                    
-  user                            User                      @relation("userToExperience",references: [id],fields: [userId],onDelete:Cascade)
+  user                            User                      @relation("userToExperience",references: [id],fields: [userId])
   companyName                     String?
   jobTitle                        String?
   startDate                       String?
@@ -104,7 +104,7 @@ model Experience{
 //   name                            String
 //   description                     String                    @db.VarChar(300)    
 //   experienceId                    String                   
-//   experience                      Experience                @relation("experienceToCompetence",fields: [experienceId],references: [id],onDelete:Cascade)
+//   experience                      Experience                @relation("experienceToCompetence",fields: [experienceId],references: [id])
 // }
 model Education{
   id                              String                       @id@default(uuid())
@@ -116,13 +116,13 @@ model Education{
   checkboxPursuing                Boolean?
   schoolLocation                  String?
   userId                          String                    
-  user                            User                      @relation("userToEducation",references: [id],fields: [userId],onDelete:Cascade)
+  user                            User                      @relation("userToEducation",references: [id],fields: [userId])
 }
 
 model Contact{
   id                              String                       @id@default(uuid())
   userId                          String                       @unique
-  user                            User                      @relation("userToContact",references: [id],fields: [userId],onDelete:Cascade)
+  user                            User                      @relation("userToContact",references: [id],fields: [userId] )
   linkedIn                        String?
   github                          String?
   twitter                         String?
@@ -132,14 +132,14 @@ model Contact{
 model Achievement{
   id                              String                       @id@default(uuid())
   userId                          String                       
-  user                            User                      @relation("userToAchievement",references: [id],fields: [userId],onDelete:Cascade)
+  user                            User                      @relation("userToAchievement",references: [id],fields: [userId])
   name                            String?
 }
 
 model Project{
   id                              String                    @id@default(uuid())
   userId                          String                      
-  user                            User                      @relation("userToProject",references: [id],fields: [userId],onDelete:Cascade)
+  user                            User                      @relation("userToProject",references: [id],fields: [userId])
   projectName                     String?
   projectUrl                      String?
   description                     String?                   @db.VarChar(400)    
@@ -148,7 +148,7 @@ model Project{
 model Language{
   id                              String                     @id@default(uuid())
   userId                          String                       
-  user                            User                        @relation("userToLanguage",references: [id],fields: [userId],onDelete:Cascade)
+  user                            User                        @relation("userToLanguage",references: [id],fields: [userId])
   name                            String?
   strength                        String?
 }

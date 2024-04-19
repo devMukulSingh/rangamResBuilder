@@ -14,14 +14,13 @@ interface RichTextEditorProps {
 
 const RichTextEditor: React.FC<RichTextEditorProps> = ({ value, onChange }) => {
   const modules = {
-    
     toolbar: [
       ["bold", "italic", "underline", "strike"],
       [{ list: "ordered" }, { list: "bullet" }],
     ],
   };
 
-  return <ReactQuill value={value} onChange={onChange} modules={modules}  />;
+  return <ReactQuill value={value} onChange={onChange} modules={modules} />;
 };
 
 export default RichTextEditor;
