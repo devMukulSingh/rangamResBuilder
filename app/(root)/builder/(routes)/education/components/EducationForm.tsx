@@ -55,7 +55,7 @@ const EducationForm = () => {
   const resumeData = useAppSelector((state) => state.persistedReducer);
   const { trigger, isMutating, error } = useSWRMutation(
     [`/api/user/set-resumedata`, resumeData],
-    fetcher
+    fetcher,
   );
   const [selected, setSelected] = useState<string>("");
   const education = useAppSelector((state) => state.persistedReducer.education);
@@ -185,7 +185,6 @@ const EducationForm = () => {
   }
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   return (
- 
     <div>
       <Form {...form}>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -285,7 +284,6 @@ const EducationForm = () => {
         </form>
       </Form>
     </div>
- 
   );
 };
 

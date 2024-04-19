@@ -42,7 +42,6 @@ export interface IForm {
 }
 
 const PersonalForm = () => {
-  
   const dispatch = useAppDispatch();
   const router = useRouter();
 
@@ -69,7 +68,6 @@ const PersonalForm = () => {
     router.prefetch(`/builder/goals`);
   }, []);
   return (
-   
     <div className=" text-neutral-500 lg:w-fit w-full flex justify-center md:justify-end h-[30rem] ">
       <Form {...form}>
         <form onSubmit={handleSubmit(onSubmit)}>

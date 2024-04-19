@@ -11,7 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
 import { setTechnicalSkills } from "@/redux/slice/userSlice";
-import {  useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import React from "react";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -19,7 +19,7 @@ import { customSkillSchema } from "@/lib/formSchemas";
 
 const CustomSkill = () => {
   const dispatch = useAppDispatch();
-  
+
   type formSchema = z.infer<typeof customSkillSchema>;
 
   const form = useForm<formSchema>({

@@ -48,7 +48,6 @@ const ExperienceForm = () => {
   const experience =
     useAppSelector((state) => state.persistedReducer.experience) || [];
 
- 
   const form = useForm({
     // resolver: zodResolver(schema),
     defaultValues: {
@@ -177,17 +176,16 @@ const ExperienceForm = () => {
   }, [controlledFields.length]);
 
   return (
- 
-      <Form {...form}>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="flex flex-col ">
-            <div className="flex">
-              {controlledFields.map((item, index) => (
-                <Button
-                  type="button"
-                  key={index}
-                  onClick={() => setSelected(item.id)}
-                  className={`
+    <Form {...form}>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="flex flex-col ">
+          <div className="flex">
+            {controlledFields.map((item, index) => (
+              <Button
+                type="button"
+                key={index}
+                onClick={() => setSelected(item.id)}
+                className={`
                                         ${
                                           selected === item.id
                                             ? "text-neutral-500 bg-red-100 hover:bg-red-100"
@@ -200,18 +198,18 @@ const ExperienceForm = () => {
                                         w-48
                                         items-center 
                                         px-5`}
-                >
-                  {item?.companyName || "Company"}
-                  <X
-                    className="cursor-pointer ml-auto hover:bg-neutral-400 rounded-full"
-                    onClick={() => handleDelete(index)}
-                  />
-                </Button>
-              ))}
-              <Button
-                type="button"
-                onClick={() => handleAddMore()}
-                className="flex 
+              >
+                {item?.companyName || "Company"}
+                <X
+                  className="cursor-pointer ml-auto hover:bg-neutral-400 rounded-full"
+                  onClick={() => handleDelete(index)}
+                />
+              </Button>
+            ))}
+            <Button
+              type="button"
+              onClick={() => handleAddMore()}
+              className="flex 
                                         gap-2
                                         h-12
                                         rounded-none
@@ -219,15 +217,13 @@ const ExperienceForm = () => {
                                         hover:bg-red-300 
                                         items-center 
                                         bg-red-400 px-5"
-              >
-                Add More
-                <Plus />
-              </Button>
-            </div>
-            {(controlledFields.length === 0
-              ? experience
-              : controlledFields
-            )?.map((item, index) => {
+            >
+              Add More
+              <Plus />
+            </Button>
+          </div>
+          {(controlledFields.length === 0 ? experience : controlledFields)?.map(
+            (item, index) => {
               return (
                 <>
                   {item.id === selected && (
@@ -291,28 +287,28 @@ const ExperienceForm = () => {
                   )}
                 </>
               );
-            })}
-            <div className="mt-5 flex justify-between h-10">
-              <LinkComp
-                disabled={isSubmitting}
-                className="w-40 bg-gray-400 text-[#000] hover:bg-gray-300"
-                href={`/builder/skills`}
-              >
-                Back
-              </LinkComp>
-              <Button
-                disabled={isSubmitting}
-                type="submit"
-                className="w-40 flex gap-2"
-              >
-                Next
-                {isSubmitting && <Loader className="animate-spin" />}
-              </Button>
-            </div>
+            },
+          )}
+          <div className="mt-5 flex justify-between h-10">
+            <LinkComp
+              disabled={isSubmitting}
+              className="w-40 bg-gray-400 text-[#000] hover:bg-gray-300"
+              href={`/builder/skills`}
+            >
+              Back
+            </LinkComp>
+            <Button
+              disabled={isSubmitting}
+              type="submit"
+              className="w-40 flex gap-2"
+            >
+              Next
+              {isSubmitting && <Loader className="animate-spin" />}
+            </Button>
           </div>
-        </form>
-      </Form>
- 
+        </div>
+      </form>
+    </Form>
   );
 };
 

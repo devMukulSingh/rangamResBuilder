@@ -2,7 +2,6 @@ import * as z from "zod";
 import validator from "validator";
 import { parseISO } from "date-fns";
 
-
 //builder route schemas
 export const personalSchema = z.object({
   fullName: z
@@ -103,7 +102,7 @@ export const experienceSchema = z
         {
           message: `End date must be greater than start date`,
           path: ["endDate"],
-        }
+        },
       ),
   })
   .array();
@@ -149,7 +148,7 @@ export const educationSchema = z.object({
           },
           {
             message: "Start date is required",
-          }
+          },
         ),
       endDate: z.any().optional(),
       checkboxPursuing: z.boolean(),
@@ -175,7 +174,7 @@ export const educationSchema = z.object({
       {
         message: `End date must be greater than start date`,
         path: ["endDate"],
-      }
+      },
     )
     .array()
     .min(1, {

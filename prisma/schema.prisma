@@ -11,7 +11,7 @@ datasource db {
 model User{
   id              String            @id@default(uuid())
   email           String            @unique
-  goal            String
+  goal            Goal?             @relation("userToGoal")
   personalInfo    PersonalInfo?     @relation("userToPersonalInfo")
   skills          Skills[]          @relation("userToSkills")
   experiences     Experience[]      @relation("userToExperience")
@@ -20,9 +20,13 @@ model User{
   languages       Language[]        @relation("userToLanguage")
   contacts        Contact?          @relation("userToContact")
   achievements    Achievement[]      @relation("userToAchievement")
-
 }
-
+model Goal{
+  id                  String              @id@default(uuid())
+  name                String              
+  userId              String              @unique 
+  user                User                @relation("userToGoal",fields: [userId],references: [id])
+}
 model PersonalInfo{
   id                    String            @id@default(uuid())
   userId                String            @unique
@@ -30,14 +34,44 @@ model PersonalInfo{
   fullName              String
   email                 String            @unique
   bio                   String            @db.VarChar(400)    
-  profession            String
-  countryCode           String
+  profession            Profession?        @relation("personalInfoToProfession")
+  countryCode           CountryCode?        @relation("personalInfoToCountryCode") 
   mobile                String
-  state                 String? 
+  state                 State?             @relation("personalInfoToState") 
   address               String? 
   dob                   String? 
-  birthPlace            String? 
-  city                  String? 
+  birthPlace            BirthPlace?       @relation("personalInfoToBirthPlace") 
+  city                  City?         @relation("personalInfoToCity") 
+}
+model BirthPlace{
+   id                    String            @id@default(uuid())
+  name                  String?
+  personalId            String            @unique
+  personalInfo          PersonalInfo      @relation("personalInfoToBirthPlace",fields: [personalId],references: [id])
+}
+model City{
+   id                    String            @id@default(uuid())
+  name                  String?
+  personalId            String            @unique
+  personalInfo          PersonalInfo      @relation("personalInfoToCity",fields: [personalId],references: [id])
+}
+model State{
+   id                    String            @id@default(uuid())
+  name                  String?
+  personalId            String            @unique
+  personalInfo          PersonalInfo      @relation("personalInfoToState",fields: [personalId],references: [id])
+}
+model Profession{
+  id                    String            @id@default(uuid())
+  name                  String
+  personalId            String            @unique
+  personalInfo          PersonalInfo      @relation("personalInfoToProfession",fields: [personalId],references: [id])
+}
+model CountryCode{
+   id                    String            @id@default(uuid())
+  code                  String
+ personalId            String            @unique
+  personalInfo         PersonalInfo      @relation("personalInfoToCountryCode",fields: [personalId],references: [id])
 }
 
 model Skills{

@@ -31,7 +31,6 @@ const SocialForm = () => {
 
   const onSubmit = () => {
     dispatch(setFormComp("Projects"));
- 
   };
 
   const handleChange = () => {

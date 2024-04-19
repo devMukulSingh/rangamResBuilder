@@ -30,7 +30,7 @@ import { Ifetcher } from "@/app/(root)/builder/(routes)/education/components/Edu
 import { educationSchema } from "@/lib/formSchemas";
 
 const fetcher = ([url, resumeData]: Ifetcher) =>
-axios.put(url, resumeData).then((res) => res.data);
+  axios.put(url, resumeData).then((res) => res.data);
 
 const EducationForm = () => {
   const resumeData = useAppSelector((state) => state.persistedReducer);
