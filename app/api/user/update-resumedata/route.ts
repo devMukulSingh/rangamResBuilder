@@ -94,11 +94,11 @@ export async function PUT(req: NextRequest, res: NextResponse) {
           },
         },
         skills: {
-          createMany: {
-            data: technicalSkills.map((item) => ({
+          create: 
+            technicalSkills.map((item) => ({
               skillName: item,
             })),
-          },
+ 
         },
         experiences: {
           createMany: {

@@ -15,7 +15,7 @@ md:px-10
 px-5
 py-10
 w-full
-"
+" 
     >
       <header className="flex flex-col gap-5">
         <div className="flex gap-5">

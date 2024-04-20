@@ -9,6 +9,10 @@ import {
 } from "@/lib/types";
 import { createSlice } from "@reduxjs/toolkit";
 
+export interface IresumeData extends IinitialState{
+  
+}
+
 export interface IinitialState {
   personalInfo: IpersonalInfo;
   experience: Iexperience[] | [];

@@ -10,11 +10,10 @@ datasource db {
 
 model User{
   id              String            @id@default(uuid())
-  skillId       String
+  email           String            @unique 
   goalId          String
-  email           String            @unique
-  goal            Goal             @relation("userToGoal",fields: [goalId],references: [id])
-  skills          Skill[]          
+  goal            Goal              @relation("userToGoal",fields: [goalId],references: [id])
+  skills          Skill[]           @relation("_UserToSkill")
   personalInfo    PersonalInfo?      @relation("userToPersonalInfo")
   experiences     Experience[]      @relation("userToExperience")
   educations      Education[]       @relation("userToEducation")
@@ -77,35 +76,41 @@ model CountryCode{
 
 model Skill{
   id                      String                    @id@default(uuid())
-  skillName               String                    
-  users                   User[]                     
+  skillName               String
+  users                   User[]                    @relation("_UserToSkill")
 }
 
 model Experience{
   id                              String                    @id@default(uuid())
-  userId                          String                    
+  userId                       String                    
   user                            User                      @relation("userToExperience",references: [id],fields: [userId])
-  companyName                     String?
-  jobTitle                        String?
-  startDate                       String?
+  companyName                     String                  
+  jobTitle                        JobTitle?                   @relation("experienceToJobTitle")
+  startDate                       String
   endDate                         String?
   checkboxWorkingStatus           Boolean?
   checkboxVolunteering            Boolean?
   checkboxInternship              Boolean?
   description                     String?                    @db.VarChar(400)    
-  // competences                  Competence[]              @relation("experienceToCompetence")
-  competences                     Json          
+  // competences                     Json          
   address                         String?
   employer                        String?
 }
 
-// model Competence{
-//   id                              String                       @id@default(uuid())
-//   name                            String
-//   description                     String                    @db.VarChar(300)    
-//   experienceId                    String                   
-//   experience                      Experience                @relation("experienceToCompetence",fields: [experienceId],references: [id])
-// }
+model JobTitle{
+    id                              String                    @id@default(uuid())
+    name                            String?  
+    competences                     Competence[]              @relation("jobTitleToCompetence")
+    experienceId                    String                    @unique
+    experience                     Experience              @relation("experienceToJobTitle",fields: [experienceId],references: [id])
+}
+model Competence{
+  id                              String                       @id@default(uuid())
+  name                            String?
+  description                     String?                    @db.VarChar(300)    
+  jobTitleId                      String                   
+  jobTitle                        JobTitle                @relation("jobTitleToCompetence",fields: [jobTitleId],references: [id])
+}
 model Education{
   id                              String                       @id@default(uuid())
   schoolName                      String
