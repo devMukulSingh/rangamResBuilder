@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const config = {
-  distDir: "dist",
+  // distDir: "dist",
   images: {
     remotePatterns: [
       {
