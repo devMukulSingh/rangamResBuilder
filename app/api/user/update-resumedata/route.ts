@@ -59,9 +59,10 @@ export async function PUT(req: NextRequest, res: NextResponse) {
         },
       },
     });
+
     await prisma.experience.createMany({
       data: experience.map((item, index) => ({
-        userId: newUser.id,
+        userId: user.id,
         companyName: item.companyName,
         startDate: item.startDate.toLocaleString(),
         endDate: item.endDate.toLocaleString(),
@@ -74,35 +75,52 @@ export async function PUT(req: NextRequest, res: NextResponse) {
       })),
     });
 
-    const experiences = await prisma.experience.findMany({});
+    const experiences = await prisma.experience.findMany({
+      where: {
+        userId: newUser.id
+      }
+    });
+
 
     await prisma.jobTitle.createMany({
-      data: experiences.map((item) => ({
-        name: item.companyName,
-        experienceId: item.id,
-      })),
-      // where: {
-      //   experienceId: {
-      //     in: [...experiences.map(item => item.id)]
-      //   }
+      data: experience.map((item, index) => ({
+        name: item.jobTitle,
+        experienceId: experiences[index].id
+      }))
 
-      // }
     });
-    const jobTitle = await prisma.jobTitle.findFirst({});
+
+    const jobTitles = await prisma.jobTitle.findMany({
+      where: {
+        experienceId: {
+          in: experiences.map(item => item.id),
+        },
+      },
+      include: {
+        experience: true
+      }
+    });
+
+    const jobTitleToExpId = new Map();
+
+    jobTitles.forEach((item) => jobTitleToExpId.set(item.name, item.experienceId));
+
     const competences = experience
-      .map((item) => item.competences.filter((item) => item.isSelected == true))
+      .map(exp => exp.competences.map(item => ({
+        name: item.name,
+        description: item.description,
+        experienceId: jobTitleToExpId.get(exp.jobTitle)
+      })))
       .flat();
 
+
     await prisma.competence.createMany({
-      data: competences.map((competence) => ({
-        jobTitleId: jobTitle?.id || "",
-        name: competence.name,
-        description: competence.description,
-      })),
-      // where: {
-      //   jobTitleId: jobTitle?.id
-      // }
-    });
+      data: competences.map((item, index) => ({
+        experienceId: item.experienceId,
+        description: item.description,
+        name: item.name
+      }))
+    })
 
     const user = await prisma.user.update({
       data: {
@@ -180,9 +198,7 @@ export async function PUT(req: NextRequest, res: NextResponse) {
               checkboxPursuing: item.checkboxPursuing,
               schoolLocation: item.schoolLocation,
             })),
-            // where: {
-            //   userId: userByEmail.id
-            // }
+ 
           },
         },
         achievements: {
@@ -193,23 +209,14 @@ export async function PUT(req: NextRequest, res: NextResponse) {
           },
         },
         contacts: {
-          // upsert: {
+ 
           create: {
             github: contact?.github,
             linkedIn: contact?.linkedIn,
             portfolio: contact?.portfolio,
             twitter: contact?.twitter,
           },
-          // update: {
-          //   github: contact?.github,
-          //   linkedIn: contact?.linkedIn,
-          //   portfolio: contact?.portfolio,
-          //   twitter: contact?.twitter,
-          // },
-          // where: {
-          //   userId: userByEmail.id,
-          // },
-          // },
+ 
         },
         languages: {
           createMany: {

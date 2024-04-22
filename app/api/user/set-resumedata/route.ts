@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { IinitialState } from "@/redux/slice/userSlice";
+import exp from "constants";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest, res: NextResponse) {
@@ -58,26 +59,53 @@ export async function POST(req: NextRequest, res: NextResponse) {
       })),
     });
 
-    const experiences = await prisma.experience.findMany({});
+    const experiences = await prisma.experience.findMany({
+      where:{
+        userId:user.id
+      }
+    });
+
 
     await prisma.jobTitle.createMany({
-      data: experiences.map((item) => ({
-        name: item.companyName,
-        experienceId: item.id,
-      })),
+      data: experience.map( (item,index) => ({
+        name:item.jobTitle,
+        experienceId:experiences[index].id
+      }))
+
     });
-    const jobTitle = await prisma.jobTitle.findFirst({});
+
+    const jobTitles = await prisma.jobTitle.findMany({
+      where:{
+        experienceId:{
+          in:experiences.map(item => item.id),
+        },
+      },
+      include:{
+        experience:true
+      }
+    });
+
+    const jobTitleToExpId = new Map();
+
+    jobTitles.forEach((item) => jobTitleToExpId.set(item.name,item.experienceId) );
+
     const competences = experience
-      .map((item) => item.competences.filter((item) => item.isSelected == true))
+      .map(exp => exp.competences.map( item => ({
+          name:item.name,
+          description:item.description,
+        experienceId: jobTitleToExpId.get(exp.jobTitle)
+      })))
       .flat();
 
+
     await prisma.competence.createMany({
-      data: competences.map((competence) => ({
-        jobTitleId: jobTitle?.id || "",
-        name: competence.name,
-        description: competence.description,
-      })),
-    });
+      data: competences.map((item,index) => ({
+        experienceId:item.experienceId,
+        description:item.description,
+        name:item.name
+      }))
+    })
+
     const userUpdate = await prisma.user.update({
       data: {
         personalInfo: {
