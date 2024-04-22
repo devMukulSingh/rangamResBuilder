@@ -12,7 +12,7 @@ model User{
   id              String            @id@default(uuid())
   email           String            @unique 
   goalId          String
-  goal            Goal              @relation("userToGoal",fields: [goalId],references: [id])
+  goal            Goal              @relation("userToGoal",fields: [goalId],references: [id],onDelete: Cascade)
   skills          Skill[]           @relation("_UserToSkill")
   personalInfo    PersonalInfo?      @relation("userToPersonalInfo")
   experiences     Experience[]      @relation("userToExperience")
@@ -32,12 +32,12 @@ model PersonalInfo{
   professionId          String
   countryCodeId         String
   userId                String            @unique
-  user                  User              @relation("userToPersonalInfo",fields: [userId],references: [id])
+  user                  User              @relation("userToPersonalInfo",fields: [userId],references: [id],onDelete: Cascade)
   fullName              String
   email                 String            @unique
   bio                   String            @db.VarChar(400)    
-  profession            Profession        @relation("personalInfoToProfession",fields: [professionId],references: [id])
-  countryCode           CountryCode       @relation("personalInfoToCountryCode",fields: [countryCodeId],references: [id]) 
+  profession            Profession        @relation("personalInfoToProfession",fields: [professionId],references: [id],onDelete: Cascade)
+  countryCode           CountryCode       @relation("personalInfoToCountryCode",fields: [countryCodeId],references: [id],onDelete: Cascade) 
   mobile                String
   state                 State?             @relation("personalInfoToState") 
   address               String? 
@@ -49,19 +49,19 @@ model BirthPlace{
    id                   String            @id@default(uuid())
   name                  String?
   personalId            String            @unique
-  personalInfo          PersonalInfo      @relation("personalInfoToBirthPlace",fields: [personalId],references: [id])
+  personalInfo          PersonalInfo      @relation("personalInfoToBirthPlace",fields: [personalId],references: [id],onDelete: Cascade)
 }
 model City{
    id                    String            @id@default(uuid())
   name                  String?
   personalId            String            @unique
-  personalInfo          PersonalInfo      @relation("personalInfoToCity",fields: [personalId],references: [id])
+  personalInfo          PersonalInfo      @relation("personalInfoToCity",fields: [personalId],references: [id],onDelete: Cascade)
 }
 model State{
    id                    String            @id@default(uuid())
   name                  String?
   personalId            String            @unique
-  personalInfo          PersonalInfo      @relation("personalInfoToState",fields: [personalId],references: [id])
+  personalInfo          PersonalInfo      @relation("personalInfoToState",fields: [personalId],references: [id],onDelete: Cascade)
 }
 model Profession{
   id                    String            @id@default(uuid())
@@ -83,7 +83,7 @@ model Skill{
 model Experience{
   id                              String                    @id@default(uuid())
   userId                       String                    
-  user                            User                      @relation("userToExperience",references: [id],fields: [userId])
+  user                            User                      @relation("userToExperience",references: [id],fields: [userId],onDelete: Cascade)
   companyName                     String                  
   jobTitle                        JobTitle?                   @relation("experienceToJobTitle")
   startDate                       String
@@ -92,7 +92,6 @@ model Experience{
   checkboxVolunteering            Boolean?
   checkboxInternship              Boolean?
   description                     String?                    @db.VarChar(400)    
-  // competences                     Json          
   address                         String?
   employer                        String?
 }
@@ -102,14 +101,14 @@ model JobTitle{
     name                            String?  
     competences                     Competence[]              @relation("jobTitleToCompetence")
     experienceId                    String                    @unique
-    experience                     Experience              @relation("experienceToJobTitle",fields: [experienceId],references: [id])
+    experience                     Experience              @relation("experienceToJobTitle",fields: [experienceId],references: [id],onDelete: Cascade)
 }
 model Competence{
   id                              String                       @id@default(uuid())
   name                            String?
   description                     String?                    @db.VarChar(300)    
   jobTitleId                      String                   
-  jobTitle                        JobTitle                @relation("jobTitleToCompetence",fields: [jobTitleId],references: [id])
+  jobTitle                        JobTitle                @relation("jobTitleToCompetence",fields: [jobTitleId],references: [id],onDelete: Cascade)
 }
 model Education{
   id                              String                       @id@default(uuid())
@@ -121,13 +120,13 @@ model Education{
   checkboxPursuing                Boolean?
   schoolLocation                  String?
   userId                          String                    
-  user                            User                      @relation("userToEducation",references: [id],fields: [userId])
+  user                            User                      @relation("userToEducation",references: [id],fields: [userId],onDelete: Cascade)
 }
 
 model Contact{
   id                              String                       @id@default(uuid())
   userId                          String                       @unique
-  user                            User                      @relation("userToContact",references: [id],fields: [userId] )
+  user                            User                      @relation("userToContact",references: [id],fields: [userId] ,onDelete: Cascade)
   linkedIn                        String?
   github                          String?
   twitter                         String?
@@ -137,14 +136,14 @@ model Contact{
 model Achievement{
   id                              String                       @id@default(uuid())
   userId                          String                       
-  user                            User                      @relation("userToAchievement",references: [id],fields: [userId])
+  user                            User                      @relation("userToAchievement",references: [id],fields: [userId],onDelete: Cascade)
   name                            String?
 }
 
 model Project{
   id                              String                    @id@default(uuid())
   userId                          String                      
-  user                            User                      @relation("userToProject",references: [id],fields: [userId])
+  user                            User                      @relation("userToProject",references: [id],fields: [userId],onDelete: Cascade)
   projectName                     String?
   projectUrl                      String?
   description                     String?                   @db.VarChar(400)    
@@ -153,7 +152,7 @@ model Project{
 model Language{
   id                              String                     @id@default(uuid())
   userId                          String                       
-  user                            User                        @relation("userToLanguage",references: [id],fields: [userId])
+  user                            User                        @relation("userToLanguage",references: [id],fields: [userId],onDelete: Cascade)
   name                            String?
   strength                        String?
 }

@@ -34,19 +34,18 @@ export async function POST(req: NextRequest, res: NextResponse) {
       technicalSkills,
     } = resumeData;
     const user = await prisma.user.create({
-      data:{
+      data: {
         email,
-        goal:{
-          create:{
-            name:goal
-          }
+        goal: {
+          create: {
+            name: goal,
+          },
         },
-
-      }
-    })
-      await prisma.experience.createMany({
-       data:experience.map((item, index) => ({
-        userId:user.id,
+      },
+    });
+    await prisma.experience.createMany({
+      data: experience.map((item, index) => ({
+        userId: user.id,
         companyName: item.companyName,
         startDate: item.startDate.toLocaleString(),
         endDate: item.endDate.toLocaleString(),
@@ -57,27 +56,28 @@ export async function POST(req: NextRequest, res: NextResponse) {
         address: item.address || "",
         employer: item.employer || "",
       })),
-    })
+    });
 
     const experiences = await prisma.experience.findMany({});
 
     await prisma.jobTitle.createMany({
-      data: experiences.map(item => ({
-        name:item.companyName,
-        experienceId:item.id,
-      }))
-    })
+      data: experiences.map((item) => ({
+        name: item.companyName,
+        experienceId: item.id,
+      })),
+    });
     const jobTitle = await prisma.jobTitle.findFirst({});
-    const competences = experience.map(item => item.competences.filter(item => item.isSelected==true)).flat();
-    console.log(competences);
-    
+    const competences = experience
+      .map((item) => item.competences.filter((item) => item.isSelected == true))
+      .flat();
+
     await prisma.competence.createMany({
-      data:competences.map( (competence) => ({
+      data: competences.map((competence) => ({
         jobTitleId: jobTitle?.id || "",
         name: competence.name,
-        description: competence.description
-      }))
-    })
+        description: competence.description,
+      })),
+    });
     const userUpdate = await prisma.user.update({
       data: {
         personalInfo: {
@@ -115,14 +115,11 @@ export async function POST(req: NextRequest, res: NextResponse) {
             },
           },
         },
-       skills:{
-        create:
-        technicalSkills.map( item => ({
-          skillName:item,
-        })),
-
-       },
-        
+        skills: {
+          create: technicalSkills.map((item) => ({
+            skillName: item,
+          })),
+        },
         educations: {
           createMany: {
             data: education.map((item) => ({
@@ -141,30 +138,29 @@ export async function POST(req: NextRequest, res: NextResponse) {
         languages: {},
         projects: {},
       },
-      where:{
-        email
+      where: {
+        email,
       },
       include: {
         educations: true,
         experiences: {
-          include:{
-            jobTitle:{
-              include:{
-                competences:true
-              }
-            }
-          }
+          include: {
+            jobTitle: {
+              include: {
+                competences: true,
+              },
+            },
+          },
         },
         personalInfo: true,
         skills: true,
-        achievements:true,
-        contacts:true,
-        goal:true,
-        languages:true,
-        projects:true
+        achievements: true,
+        contacts: true,
+        goal: true,
+        languages: true,
+        projects: true,
       },
-
-    });
+     });
 
     return NextResponse.json(userUpdate, {
       status: 201,

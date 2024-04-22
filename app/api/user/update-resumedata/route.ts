@@ -37,29 +37,77 @@ export async function PUT(req: NextRequest, res: NextResponse) {
           status: 400,
         },
       );
-    const userByEmail = await prisma.user.findUnique({
+    const deletedUser = await prisma.user.delete({
       where: {
-        email,
-      },
-    });
-
-    if (!userByEmail)
+        email
+      }
+    })
+    if (!deletedUser)
       return NextResponse.json(
         {
           error: "Unauthorised, user doesn't exists",
         },
         { status: 401 },
       );
+    const newUser = await prisma.user.create({
+      data:{
+        email,
+        goal:{
+          create:{
+            name:goal
+          }
+        }
+      }
+    })
+    await prisma.experience.createMany({
+      data: experience.map((item, index) => ({
+        userId: newUser.id,
+        companyName: item.companyName,
+        startDate: item.startDate.toLocaleString(),
+        endDate: item.endDate.toLocaleString(),
+        checkboxWorkingStatus: item.checkboxWorkingStatus,
+        checkboxVolunteering: item.checkboxVolunteering,
+        checkboxInternship: item.checkboxInternship,
+        description: item.description,
+        address: item.address || "",
+        employer: item.employer || "",
+      })),
+    });
+
+    const experiences = await prisma.experience.findMany({});
+
+    await prisma.jobTitle.createMany({
+      data: experiences.map((item) => ({
+        name: item.companyName,
+        experienceId: item.id,
+      })),
+      // where: {
+      //   experienceId: {
+      //     in: [...experiences.map(item => item.id)]
+      //   }
+
+      // }
+    });
+    const jobTitle = await prisma.jobTitle.findFirst({});
+    const competences = experience
+      .map((item) => item.competences.filter((item) => item.isSelected == true))
+      .flat();
+
+    await prisma.competence.createMany({
+      data: competences.map((competence) => ({
+        jobTitleId: jobTitle?.id || "",
+        name: competence.name,
+        description: competence.description,
+      })),
+      // where: {
+      //   jobTitleId: jobTitle?.id
+      // }
+    });
 
     const user = await prisma.user.update({
       data: {
-        goal: {
-          create: {
-            name: goal,
-          },
-        },
         personalInfo: {
-          update: {
+          create: {
             bio,
             countryCode: {
               create: {
@@ -94,35 +142,33 @@ export async function PUT(req: NextRequest, res: NextResponse) {
           },
         },
         skills: {
-          create: 
-            technicalSkills.map((item) => ({
-              skillName: item,
-            })),
- 
+          create: technicalSkills.map((item) => ({
+            skillName: item,
+          })),
         },
-        experiences: {
-          createMany: {
-            data: experience.map((item) => ({
-              companyName: item.companyName,
-              jobTitle: item.jobTitle,
-              startDate: item.startDate.toLocaleString(),
-              endDate: item.endDate.toLocaleString(),
-              checkboxWorkingStatus: item.checkboxWorkingStatus,
-              checkboxVolunteering: item.checkboxVolunteering,
-              checkboxInternship: item.checkboxInternship,
-              description: item.description,
-              address: item.address || "",
-              employer: item.employer || "",
-              competences: item.competences
-                .filter((item) => item.isSelected == true)
-                .map((item) => ({
-                  name: item.name,
-                  description: item.description,
-                }))
-                .flat(),
-            })),
-          },
-        },
+  
+        //   createMany: {
+        //     data: experience.map((item) => ({
+        //       companyName: item.companyName,
+        //       jobTitle: item.jobTitle,
+        //       startDate: item.startDate.toLocaleString(),
+        //       endDate: item.endDate.toLocaleString(),
+        //       checkboxWorkingStatus: item.checkboxWorkingStatus,
+        //       checkboxVolunteering: item.checkboxVolunteering,
+        //       checkboxInternship: item.checkboxInternship,
+        //       description: item.description,
+        //       address: item.address || "",
+        //       employer: item.employer || "",
+        //       competences: item.competences
+        //         .filter((item) => item.isSelected == true)
+        //         .map((item) => ({
+        //           name: item.name,
+        //           description: item.description,
+        //         }))
+        //         .flat(),
+        //     })),
+        //   },
+        // },
         educations: {
           createMany: {
             data: education.map((item) => ({
@@ -134,6 +180,9 @@ export async function PUT(req: NextRequest, res: NextResponse) {
               checkboxPursuing: item.checkboxPursuing,
               schoolLocation: item.schoolLocation,
             })),
+            // where: {
+            //   userId: userByEmail.id
+            // }
           },
         },
         achievements: {
@@ -144,23 +193,23 @@ export async function PUT(req: NextRequest, res: NextResponse) {
           },
         },
         contacts: {
-          upsert: {
+          // upsert: {
             create: {
               github: contact?.github,
               linkedIn: contact?.linkedIn,
               portfolio: contact?.portfolio,
               twitter: contact?.twitter,
             },
-            update: {
-              github: contact?.github,
-              linkedIn: contact?.linkedIn,
-              portfolio: contact?.portfolio,
-              twitter: contact?.twitter,
-            },
-            where: {
-              userId: userByEmail.id,
-            },
-          },
+            // update: {
+            //   github: contact?.github,
+            //   linkedIn: contact?.linkedIn,
+            //   portfolio: contact?.portfolio,
+            //   twitter: contact?.twitter,
+            // },
+            // where: {
+            //   userId: userByEmail.id,
+            // },
+          // },
         },
         languages: {
           createMany: {
@@ -183,16 +232,25 @@ export async function PUT(req: NextRequest, res: NextResponse) {
 
       include: {
         educations: true,
-        experiences: true,
+        experiences: {
+          include: {
+            jobTitle: {
+              include: {
+                competences: true,
+              },
+            },
+          },
+        },
         personalInfo: true,
         skills: true,
         achievements: true,
-        languages: true,
         contacts: true,
+        goal: true,
+        languages: true,
         projects: true,
       },
       where: {
-        id: userByEmail.id,
+        id: newUser.id,
       },
     });
 
@@ -201,8 +259,6 @@ export async function PUT(req: NextRequest, res: NextResponse) {
     });
   } catch (e) {
     console.log(`Error in PUT resumeData req ${e}`);
-    return NextResponse.json({
-      error: `Error in PUT resumeData req ${e}`,
-    });
+    return NextResponse.json(e,{status:500});
   }
 }
