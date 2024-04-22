@@ -39,9 +39,9 @@ export async function PUT(req: NextRequest, res: NextResponse) {
       );
     const deletedUser = await prisma.user.delete({
       where: {
-        email
-      }
-    })
+        email,
+      },
+    });
     if (!deletedUser)
       return NextResponse.json(
         {
@@ -50,15 +50,15 @@ export async function PUT(req: NextRequest, res: NextResponse) {
         { status: 401 },
       );
     const newUser = await prisma.user.create({
-      data:{
+      data: {
         email,
-        goal:{
-          create:{
-            name:goal
-          }
-        }
-      }
-    })
+        goal: {
+          create: {
+            name: goal,
+          },
+        },
+      },
+    });
     await prisma.experience.createMany({
       data: experience.map((item, index) => ({
         userId: newUser.id,
@@ -146,7 +146,7 @@ export async function PUT(req: NextRequest, res: NextResponse) {
             skillName: item,
           })),
         },
-  
+
         //   createMany: {
         //     data: experience.map((item) => ({
         //       companyName: item.companyName,
@@ -194,21 +194,21 @@ export async function PUT(req: NextRequest, res: NextResponse) {
         },
         contacts: {
           // upsert: {
-            create: {
-              github: contact?.github,
-              linkedIn: contact?.linkedIn,
-              portfolio: contact?.portfolio,
-              twitter: contact?.twitter,
-            },
-            // update: {
-            //   github: contact?.github,
-            //   linkedIn: contact?.linkedIn,
-            //   portfolio: contact?.portfolio,
-            //   twitter: contact?.twitter,
-            // },
-            // where: {
-            //   userId: userByEmail.id,
-            // },
+          create: {
+            github: contact?.github,
+            linkedIn: contact?.linkedIn,
+            portfolio: contact?.portfolio,
+            twitter: contact?.twitter,
+          },
+          // update: {
+          //   github: contact?.github,
+          //   linkedIn: contact?.linkedIn,
+          //   portfolio: contact?.portfolio,
+          //   twitter: contact?.twitter,
+          // },
+          // where: {
+          //   userId: userByEmail.id,
+          // },
           // },
         },
         languages: {
@@ -259,6 +259,6 @@ export async function PUT(req: NextRequest, res: NextResponse) {
     });
   } catch (e) {
     console.log(`Error in PUT resumeData req ${e}`);
-    return NextResponse.json(e,{status:500});
+    return NextResponse.json(e, { status: 500 });
   }
 }

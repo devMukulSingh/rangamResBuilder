@@ -9,6 +9,7 @@ interface LinkProps {
   children: ReactNode;
   className?: string;
   onClick?: (data: FieldValues) => void;
+  prefetch?:boolean
 }
 
 const LinkComp: FC<LinkProps> = ({
@@ -17,10 +18,11 @@ const LinkComp: FC<LinkProps> = ({
   children,
   className,
   onClick,
+  prefetch
 }) => {
   return (
     <Link
-      prefetch={true}
+      prefetch={prefetch}
       onClick={onClick}
       aria-disabled={disabled}
       className={cn(
@@ -43,7 +45,7 @@ const LinkComp: FC<LinkProps> = ({
                  focus-visible:ring-offset-2 
                  aria-disabled:pointer-events-none 
                  aria-disabled:opacity-50`,
-        className,
+        className
       )}
       href={href}
     >

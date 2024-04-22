@@ -160,7 +160,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
         languages: true,
         projects: true,
       },
-     });
+    });
 
     return NextResponse.json(userUpdate, {
       status: 201,

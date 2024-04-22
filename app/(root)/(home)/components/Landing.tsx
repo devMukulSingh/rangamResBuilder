@@ -25,7 +25,10 @@ const Landing = () => {
             background and generate a professional resume in just 10 minutes.
             Your resume is crucial - make it stand out.
           </h1>
-          <LinkComp className="mt-5" href={"/steps"}>
+          <LinkComp 
+            prefetch={true}
+            className="mt-5" 
+            href={"/steps"}>
             Get Started
           </LinkComp>
         </div>
