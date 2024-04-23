@@ -7,10 +7,10 @@ import {
   FieldValues,
 } from "react-hook-form";
 import { Button } from "@/components/ui/button";
-import {  setExperience } from "@/redux/slice/userSlice";
+import { setExperience } from "@/redux/slice/userSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
-import {  useEffect, useState } from "react";
-import {  Plus, X } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Plus, X } from "lucide-react";
 import toast from "react-hot-toast";
 import { Iexperience } from "@/lib/types";
 import Competences from "./formFields/Competences";
@@ -25,6 +25,7 @@ import StartDate from "./formFields/StartDate";
 import { useRouter } from "next/navigation";
 import Buttons from "./Buttons";
 import { useIsFetching, useQueryClient } from "@tanstack/react-query";
+import useSWR, { useSWRConfig } from "swr";
 
 export interface IExperienceForm {
   form: UseFormReturn<
@@ -39,6 +40,11 @@ export interface IExperienceForm {
   handleChange?: () => void;
 }
 const ExperienceForm = () => {
+    const profession = useAppSelector(
+      (state) => state.persistedReducer.personalInfo.profession
+    );
+
+
   const router = useRouter();
   const [selected, setSelected] = useState<string | false>("");
   const dispatch = useAppDispatch();
@@ -50,7 +56,6 @@ const ExperienceForm = () => {
     useAppSelector((state) => state.persistedReducer.experience) || [];
 
   const form = useForm({
-    // resolver: zodResolver(schema),
     defaultValues: {
       experience:
         experience.length !== 0

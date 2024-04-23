@@ -1,5 +1,5 @@
 import { FormControl, FormField, FormItem } from "@/components/ui/form";
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { IExperienceForm } from "../ExperienceForm";
 import { Plus } from "lucide-react";
 import Competence from "./Competence";
@@ -10,6 +10,7 @@ import { Iexperience } from "@/lib/types";
 import { ControllerRenderProps } from "react-hook-form";
 import { useIsFetching } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
+import useSWR from "swr";
 
 type Tfield = ControllerRenderProps<
   {
@@ -19,40 +20,40 @@ type Tfield = ControllerRenderProps<
 >;
 
 const Competences: FC<IExperienceForm> = ({ form, index }) => {
+  const [isFetching, setIsFetching] = useState(false)
   const {
     control,
-    formState: { isSubmitting },
     getValues,
     setValue,
   } = form;
-  const dispatch = useAppDispatch();
   const jobTitle = getValues().experience[index].jobTitle;
+  const fetcher = (url:string) => axios.get(url, {
+    params: {
+          jobTitle,
+        }}).then((res) => res.data);
+  const { isLoading, error } = useSWR(isFetching ? "/api/ai/get-competences":null,fetcher,{
+    revalidateIfStale:false,
+    revalidateOnReconnect:false,
+    revalidateOnFocus:false,
+    onSuccess(data, key, config) {
+        const prevCompetences = getValues(`experience.${index}.competences`);
+        setValue(`experience.${index}.competences`, [
+          ...prevCompetences,
+          ...data,
+        ]);
+    },
+ 
+  });
   const isFetchingCompetenceDescription = useIsFetching({
     queryKey: ["compDescription"],
   });
-
-  const handleLoadMore = async () => {
-    try {
-      const { data } = await axios.get("/api/ai/get-competences", {
-        params: {
-          jobTitle,
-        },
-      });
-      const prevCompetences = getValues(`experience.${index}.competences`);
-      setValue(`experience.${index}.competences`, [
-        ...prevCompetences,
-        ...data,
-      ]);
-    } catch (e) {
-      console.log(`Error in getCompetences ${e}`);
-    }
-  };
-  const isLoading = useAppSelector(
+  const isCompetencesLoading = useAppSelector(
     (state) => state.commonSlice.competenceLoading,
   );
-
-  if (isLoading) return <CompetenceSkeleton />;
-
+  if (isCompetencesLoading || isLoading) return <CompetenceSkeleton />;
+  if(error){
+    console.log(`error in getCompetences ${error}`);
+  }
   return (
     <FormField
       name={`experience.${index}.competences`}
@@ -76,9 +77,10 @@ const Competences: FC<IExperienceForm> = ({ form, index }) => {
             ))}
           </div>
           <Button
+            type="button"
             variant="ghost"
             disabled={isFetchingCompetenceDescription === 0 ? false : true}
-            onClick={handleLoadMore}
+            onClick={() => setIsFetching(true)}
             className={`
             hover:bg-transparent
             w-fit

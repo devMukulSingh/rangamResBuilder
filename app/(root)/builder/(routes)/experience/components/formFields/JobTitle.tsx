@@ -31,6 +31,7 @@ const JobTitle: FC<IExperienceForm> = ({ form, index }) => {
 
   const getCompetences = debounce(async (jobTitle) => {
     try {
+      dispatch(setCompLoading(true));
       if (jobTitle.length > 5) {
         const { data } = await axios.get("/api/ai/get-competences", {
           params: {
@@ -41,6 +42,9 @@ const JobTitle: FC<IExperienceForm> = ({ form, index }) => {
       }
     } catch (e) {
       console.log(`Error in getCompetences ${e}`);
+    }
+    finally{
+      dispatch(setCompLoading(false));
     }
   }, 2000);
 

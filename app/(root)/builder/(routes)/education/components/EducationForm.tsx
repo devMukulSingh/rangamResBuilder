@@ -263,7 +263,6 @@ const EducationForm = () => {
             })}
 
             <Buttons isMutating={isMutating} isSubmitting={isSubmitting} />
-            
           </div>
         </form>
       </Form>

@@ -42,10 +42,11 @@ const Competence: React.FC<competenceProps> = ({
     (state) => state.persistedReducer.personalInfo.profession,
   );
 
-  const { data, isError, error, refetch, isFetching } = useQuery({
+  const { isError, error, refetch, isFetching } = useQuery({
     queryKey: ["compDescription"],
     enabled: false,
     refetchOnWindowFocus: false,
+    refetchOnReconnect:false,
     queryFn: async () => {
       const { data } = await axios.get(`/api/ai/get-compdescription`, {
         params: {

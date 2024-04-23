@@ -5,6 +5,8 @@ import { Toaster } from "react-hot-toast";
 import Providers from "@/redux/providers/Providers";
 import PersistProvider from "@/redux/providers/PersistProvider";
 import QueryProviders from "@/lib/QueryProviders";
+import { SWRConfig } from "swr";
+import { SWRProvider } from "@/lib/SWRProvider";
 
 const inter = Roboto({ subsets: ["latin"], weight: "400" });
 
@@ -23,7 +25,9 @@ export default function RootLayout({
       <body className={inter.className}>
         <Providers>
           <PersistProvider>
-            <QueryProviders>{children}</QueryProviders>
+            <SWRProvider>
+              <QueryProviders>{children}</QueryProviders>
+            </SWRProvider>
             <Toaster />
           </PersistProvider>
         </Providers>
