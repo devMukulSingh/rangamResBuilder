@@ -1,10 +1,10 @@
-import Loader from '@/components/commons/Loader';
-import { Button } from '@/components/ui/button';
-import LinkComp from '@/components/ui/LinkComp';
-import React, { FC } from 'react'
+import Loader from "@/components/commons/Loader";
+import { Button } from "@/components/ui/button";
+import LinkComp from "@/components/ui/LinkComp";
+import React, { FC } from "react";
 
 interface Buttons {
-  isSubmitting?:boolean
+  isSubmitting?: boolean;
 }
 
 const Buttons: FC<Buttons> = ({ isSubmitting }) => {
@@ -19,10 +19,10 @@ const Buttons: FC<Buttons> = ({ isSubmitting }) => {
       </LinkComp>
       <Button disabled={isSubmitting} type="submit" className="w-40 flex gap-2">
         Next
-        {isSubmitting && <Loader/>}
+        {isSubmitting && <Loader />}
       </Button>
     </div>
   );
 };
 
-export default Buttons
+export default Buttons;

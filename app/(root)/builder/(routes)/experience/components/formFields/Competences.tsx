@@ -31,7 +31,6 @@ const Competences: FC<IExperienceForm> = ({ form, index }) => {
     queryKey: ["compDescription"],
   });
 
-
   const handleLoadMore = async () => {
     try {
       const { data } = await axios.get("/api/ai/get-competences", {
@@ -46,7 +45,7 @@ const Competences: FC<IExperienceForm> = ({ form, index }) => {
       ]);
     } catch (e) {
       console.log(`Error in getCompetences ${e}`);
-    } 
+    }
   };
   const isLoading = useAppSelector(
     (state) => state.commonSlice.competenceLoading,

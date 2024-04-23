@@ -24,7 +24,7 @@ const Buttons = () => {
   }, []);
   return (
     <>
-      <div className="mt-auto flex justify-between">
+      <div className="mt-auto flex justify-between gap-5">
         <LinkComp
           className="w-40  bg-gray-400 text-[#000] hover:bg-gray-300"
           href={"/builder/experience"}

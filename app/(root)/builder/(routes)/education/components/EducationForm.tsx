@@ -190,9 +190,7 @@ const EducationForm = () => {
       <Form {...form}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col gap-5">
-            <div
-              className="flex overflow-auto hidden-scrollbar "
-            >
+            <div className="flex overflow-auto hidden-scrollbar ">
               {controlledFields.map((item, index) => (
                 <Button
                   type="button"
@@ -208,8 +206,7 @@ const EducationForm = () => {
                                         border-r-2
                                         flex        
                                         h-12
-                                        min-w-32
-                                        w-48
+                                        min-w-48
                                         items-center 
                                         px-5`}
                 >
@@ -265,10 +262,8 @@ const EducationForm = () => {
               );
             })}
 
-            <Buttons 
-              isMutating={isMutating}
-              isSubmitting={isSubmitting}
-            />
+            <Buttons isMutating={isMutating} isSubmitting={isSubmitting} />
+            
           </div>
         </form>
       </Form>

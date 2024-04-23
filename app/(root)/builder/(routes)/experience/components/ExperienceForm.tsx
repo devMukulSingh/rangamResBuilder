@@ -1,17 +1,16 @@
 "use client";
 import { Form } from "@/components/ui/form";
 import {
-
   useFieldArray,
   useForm,
   UseFormReturn,
   FieldValues,
 } from "react-hook-form";
 import { Button } from "@/components/ui/button";
-import { setAiSuggestedComp, setExperience } from "@/redux/slice/userSlice";
+import {  setExperience } from "@/redux/slice/userSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
-import { FC, useEffect, useState } from "react";
-import { Loader, Plus, X } from "lucide-react";
+import {  useEffect, useState } from "react";
+import {  Plus, X } from "lucide-react";
 import toast from "react-hot-toast";
 import { Iexperience } from "@/lib/types";
 import Competences from "./formFields/Competences";
@@ -43,8 +42,10 @@ const ExperienceForm = () => {
   const router = useRouter();
   const [selected, setSelected] = useState<string | false>("");
   const dispatch = useAppDispatch();
-  const isFetchingCompetenceDescription = useIsFetching({ queryKey: ['compDescription'] })
-     
+  const isFetchingCompetenceDescription = useIsFetching({
+    queryKey: ["compDescription"],
+  });
+
   const experience =
     useAppSelector((state) => state.persistedReducer.experience) || [];
 
@@ -178,10 +179,10 @@ const ExperienceForm = () => {
     <Form {...form}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col ">
-          <div className="flex overflow-auto">
+          <div className="flex overflow-auto hidden-scrollbar">
             {controlledFields.map((item, index) => (
               <Button
-                disabled={ isFetchingCompetenceDescription === 0 ? false:true}
+                disabled={isFetchingCompetenceDescription === 0 ? false : true}
                 type="button"
                 key={index}
                 onClick={() => setSelected(item.id)}
@@ -195,7 +196,7 @@ const ExperienceForm = () => {
                                         border-r-2
                                         flex 
                                         h-12
-                                        w-48
+                                        min-w-48
                                         items-center 
                                         px-5`}
               >
@@ -287,7 +288,7 @@ const ExperienceForm = () => {
                   )}
                 </>
               );
-            }
+            },
           )}
 
           <Buttons isSubmitting={isSubmitting} />

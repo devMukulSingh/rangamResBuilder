@@ -1,16 +1,16 @@
-import Loader from '@/components/commons/Loader';
-import { Button } from '@/components/ui/button';
-import LinkComp from '@/components/ui/LinkComp';
-import React, { FC } from 'react'
+import Loader from "@/components/commons/Loader";
+import { Button } from "@/components/ui/button";
+import LinkComp from "@/components/ui/LinkComp";
+import React, { FC } from "react";
 
 interface ButtonProps {
   isSubmitting: boolean;
-  isMutating:boolean
+  isMutating: boolean;
 }
 
-const Buttons:FC<ButtonProps> = ({ isSubmitting,isMutating }) => {
+const Buttons: FC<ButtonProps> = ({ isSubmitting, isMutating }) => {
   return (
-    <div className="mt-auto flex justify-between">
+    <div className="mt-auto flex justify-between gap-5">
       <LinkComp
         disabled={isSubmitting}
         className="w-40 bg-gray-400 text-[#000] hover:bg-gray-300"
@@ -24,10 +24,10 @@ const Buttons:FC<ButtonProps> = ({ isSubmitting,isMutating }) => {
         disabled={isSubmitting || isMutating}
       >
         Submit
-        {(isSubmitting || isMutating) && <Loader/>}
+        {(isSubmitting || isMutating) && <Loader />}
       </Button>
     </div>
   );
 };
 
-export default Buttons
+export default Buttons;
