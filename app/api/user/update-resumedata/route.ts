@@ -62,7 +62,7 @@ export async function PUT(req: NextRequest, res: NextResponse) {
 
     await prisma.experience.createMany({
       data: experience.map((item, index) => ({
-        userId: user.id,
+        userId: newUser.id,
         companyName: item.companyName,
         startDate: item.startDate.toLocaleString(),
         endDate: item.endDate.toLocaleString(),
@@ -77,50 +77,51 @@ export async function PUT(req: NextRequest, res: NextResponse) {
 
     const experiences = await prisma.experience.findMany({
       where: {
-        userId: newUser.id
-      }
+        userId: newUser.id,
+      },
     });
-
 
     await prisma.jobTitle.createMany({
       data: experience.map((item, index) => ({
         name: item.jobTitle,
-        experienceId: experiences[index].id
-      }))
-
+        experienceId: experiences[index].id,
+      })),
     });
 
     const jobTitles = await prisma.jobTitle.findMany({
       where: {
         experienceId: {
-          in: experiences.map(item => item.id),
+          in: experiences.map((item) => item.id),
         },
       },
       include: {
-        experience: true
-      }
+        experience: true,
+      },
     });
 
     const jobTitleToExpId = new Map();
 
-    jobTitles.forEach((item) => jobTitleToExpId.set(item.name, item.experienceId));
+    jobTitles.forEach((item) =>
+      jobTitleToExpId.set(item.name, item.experienceId),
+    );
 
     const competences = experience
-      .map(exp => exp.competences.map(item => ({
-        name: item.name,
-        description: item.description,
-        experienceId: jobTitleToExpId.get(exp.jobTitle)
-      })))
+      .map((exp) =>
+        exp.competences.map((item) => ({
+          name: item.name,
+          description: item.description,
+          experienceId: jobTitleToExpId.get(exp.jobTitle),
+        })),
+      )
       .flat();
-
 
     await prisma.competence.createMany({
       data: competences.map((item, index) => ({
         experienceId: item.experienceId,
         description: item.description,
-        name: item.name
-      }))
-    })
+        name: item.name,
+      })),
+    });
 
     const user = await prisma.user.update({
       data: {
@@ -198,7 +199,6 @@ export async function PUT(req: NextRequest, res: NextResponse) {
               checkboxPursuing: item.checkboxPursuing,
               schoolLocation: item.schoolLocation,
             })),
- 
           },
         },
         achievements: {
@@ -209,14 +209,12 @@ export async function PUT(req: NextRequest, res: NextResponse) {
           },
         },
         contacts: {
- 
           create: {
             github: contact?.github,
             linkedIn: contact?.linkedIn,
             portfolio: contact?.portfolio,
             twitter: contact?.twitter,
           },
- 
         },
         languages: {
           createMany: {

@@ -60,51 +60,52 @@ export async function POST(req: NextRequest, res: NextResponse) {
     });
 
     const experiences = await prisma.experience.findMany({
-      where:{
-        userId:user.id
-      }
+      where: {
+        userId: user.id,
+      },
     });
 
-
     await prisma.jobTitle.createMany({
-      data: experience.map( (item,index) => ({
-        name:item.jobTitle,
-        experienceId:experiences[index].id
-      }))
-
+      data: experience.map((item, index) => ({
+        name: item.jobTitle,
+        experienceId: experiences[index].id,
+      })),
     });
 
     const jobTitles = await prisma.jobTitle.findMany({
-      where:{
-        experienceId:{
-          in:experiences.map(item => item.id),
+      where: {
+        experienceId: {
+          in: experiences.map((item) => item.id),
         },
       },
-      include:{
-        experience:true
-      }
+      include: {
+        experience: true,
+      },
     });
 
     const jobTitleToExpId = new Map();
 
-    jobTitles.forEach((item) => jobTitleToExpId.set(item.name,item.experienceId) );
+    jobTitles.forEach((item) =>
+      jobTitleToExpId.set(item.name, item.experienceId),
+    );
 
     const competences = experience
-      .map(exp => exp.competences.map( item => ({
-          name:item.name,
-          description:item.description,
-        experienceId: jobTitleToExpId.get(exp.jobTitle)
-      })))
+      .map((exp) =>
+        exp.competences.map((item) => ({
+          name: item.name,
+          description: item.description,
+          experienceId: jobTitleToExpId.get(exp.jobTitle),
+        })),
+      )
       .flat();
 
-
     await prisma.competence.createMany({
-      data: competences.map((item,index) => ({
-        experienceId:item.experienceId,
-        description:item.description,
-        name:item.name
-      }))
-    })
+      data: competences.map((item, index) => ({
+        experienceId: item.experienceId,
+        description: item.description,
+        name: item.name,
+      })),
+    });
 
     const userUpdate = await prisma.user.update({
       data: {
