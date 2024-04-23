@@ -14,7 +14,7 @@ const SkillsPage = async () => {
         min-h-[calc(100vh-6rem)]
         lg:px-20
         sm:px-15
-        px-10
+        px-5
         py-10
         w-full
         "

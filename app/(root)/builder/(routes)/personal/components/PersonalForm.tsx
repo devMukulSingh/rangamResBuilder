@@ -14,9 +14,9 @@ import Email from "./formFields/Email";
 import Profession from "./formFields/Profession";
 import Mobile from "./formFields/Mobile";
 import FieldSkeleton from "./FieldSkeleton";
-import { Loader } from "lucide-react";
 import { useEffect } from "react";
 import { personalSchema } from "@/lib/formSchemas";
+import Loader from "@/components/commons/Loader";
 const CountryCode = dynamic(() => import("./formFields/CountryCode"), {
   loading: () => <FieldSkeleton />,
 });
@@ -89,7 +89,7 @@ const PersonalForm = () => {
               className="mt-auto w-full py-3 flex gap-2"
             >
               Next
-              {isSubmitting && <Loader className="animate-spin" />}
+              {isSubmitting && <Loader />}
             </Button>
           </div>
         </form>

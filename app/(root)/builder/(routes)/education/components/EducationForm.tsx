@@ -27,6 +27,7 @@ import useSWR from "swr";
 import axios from "axios";
 import useSWRMutation from "swr/mutation";
 import { educationSchema } from "@/lib/formSchemas";
+import Buttons from "./Buttons";
 export interface IeducationForm {
   handleChange?: () => void;
   form: UseFormReturn<
@@ -189,7 +190,9 @@ const EducationForm = () => {
       <Form {...form}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col gap-5">
-            <div className="flex">
+            <div
+              className="flex overflow-auto hidden-scrollbar "
+            >
               {controlledFields.map((item, index) => (
                 <Button
                   type="button"
@@ -205,6 +208,7 @@ const EducationForm = () => {
                                         border-r-2
                                         flex        
                                         h-12
+                                        min-w-32
                                         w-48
                                         items-center 
                                         px-5`}
@@ -261,25 +265,10 @@ const EducationForm = () => {
               );
             })}
 
-            <div className="mt-auto flex justify-between">
-              <LinkComp
-                disabled={isSubmitting}
-                className="w-40 bg-gray-400 text-[#000] hover:bg-gray-300"
-                href={"/builder/prosummary"}
-              >
-                Back
-              </LinkComp>
-              <Button
-                type="submit"
-                className="flex gap-2 w-40"
-                disabled={isSubmitting || isMutating}
-              >
-                Submit
-                {(isSubmitting || isMutating) && (
-                  <Loader className="animate-spin" />
-                )}
-              </Button>
-            </div>
+            <Buttons 
+              isMutating={isMutating}
+              isSubmitting={isSubmitting}
+            />
           </div>
         </form>
       </Form>

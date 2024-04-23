@@ -27,8 +27,9 @@ const SingleGoal: React.FC<SingleGoalProps> = ({
     <motion.div
       initial={{ opacity: 0, scale: 0.5 }}
       animate={{ opacity: [0, 1], scale: 1 }}
-      transition={{ duration: 0.5, ease: "easeInOut" }}
-    >
+      transition={{ duration: 0.5, ease: "easeInOut" }} 
+      className="flex justify-center">
+
       <div
         onClick={handleGoalSelect}
         className={`
@@ -45,30 +46,31 @@ const SingleGoal: React.FC<SingleGoalProps> = ({
         w-[15rem] 
       bg-red-100
       rounded-lg
-        h-[16rem]
+      h-[16rem]
         ${selected === goal.title ? "bg-red-300 transition scale-90" : ""}
         `}
-      >
+        >
         <figure
           className="
-        relative
-        w-[10rem]
-        h-[10rem]
-        "
-        >
+          relative
+          w-[10rem]
+          h-[10rem]
+          "
+          >
           <Image alt="goalImg" fill className="object-contain" src={goal.img} />
         </figure>
         <h1
           className="mt-auto
-                text-xl
-                text-neutral-600 
+          text-xl
+          text-neutral-600 
                 font-semibold
                 text-center
                 "
-        >
+                >
           {goal.title}
         </h1>
-      </div>
+
+          </div>
     </motion.div>
   );
 };

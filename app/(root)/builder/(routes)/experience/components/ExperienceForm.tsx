@@ -1,7 +1,7 @@
 "use client";
 import { Form } from "@/components/ui/form";
 import {
-  FieldArray,
+
   useFieldArray,
   useForm,
   UseFormReturn,
@@ -23,11 +23,9 @@ import Description from "./formFields/Description";
 import CheckboxWorkingStatus from "./formFields/CheckboxWorkingStatus";
 import EndDate from "./formFields/EndDate";
 import StartDate from "./formFields/StartDate";
-import LinkComp from "@/components/ui/LinkComp";
 import { useRouter } from "next/navigation";
-import * as z from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { parseISO } from "date-fns";
+import Buttons from "./Buttons";
+import { useIsFetching, useQueryClient } from "@tanstack/react-query";
 
 export interface IExperienceForm {
   form: UseFormReturn<
@@ -45,6 +43,8 @@ const ExperienceForm = () => {
   const router = useRouter();
   const [selected, setSelected] = useState<string | false>("");
   const dispatch = useAppDispatch();
+  const isFetchingCompetenceDescription = useIsFetching({ queryKey: ['compDescription'] })
+     
   const experience =
     useAppSelector((state) => state.persistedReducer.experience) || [];
 
@@ -83,7 +83,6 @@ const ExperienceForm = () => {
     formState: { isSubmitting },
     control,
     watch,
-    setValue,
     getValues,
   } = form;
 
@@ -179,9 +178,10 @@ const ExperienceForm = () => {
     <Form {...form}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col ">
-          <div className="flex">
+          <div className="flex overflow-auto">
             {controlledFields.map((item, index) => (
               <Button
+                disabled={ isFetchingCompetenceDescription === 0 ? false:true}
                 type="button"
                 key={index}
                 onClick={() => setSelected(item.id)}
@@ -287,25 +287,10 @@ const ExperienceForm = () => {
                   )}
                 </>
               );
-            },
+            }
           )}
-          <div className="mt-5 flex justify-between h-10">
-            <LinkComp
-              disabled={isSubmitting}
-              className="w-40 bg-gray-400 text-[#000] hover:bg-gray-300"
-              href={`/builder/skills`}
-            >
-              Back
-            </LinkComp>
-            <Button
-              disabled={isSubmitting}
-              type="submit"
-              className="w-40 flex gap-2"
-            >
-              Next
-              {isSubmitting && <Loader className="animate-spin" />}
-            </Button>
-          </div>
+
+          <Buttons isSubmitting={isSubmitting} />
         </div>
       </form>
     </Form>

@@ -12,17 +12,17 @@ const GoalsPage = async ({
       className="
         flex 
         flex-col 
-        gap-5 
-        border
-        h-[calc(100vh-6rem)]
+        gap-14 
+        min-h-[calc(100vh-6rem)]
         md:px-20
-        px-10
+        sm:px-10
+        px-5
         py-10
         w-full
         "
     >
       <header className="flex flex-col gap-5">
-        <div className="flex gap-5">
+        <div className="flex gap-3 sm:gap-5">
           <Circle>2</Circle>
           <h1
             className="

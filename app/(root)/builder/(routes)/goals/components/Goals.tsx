@@ -41,7 +41,6 @@ const Goals = () => {
     sm:grid-cols-2
     grid-cols-1 
     gap-10 
-    mt-10
     
     "
       >
@@ -55,7 +54,7 @@ const Goals = () => {
         ))}
       </div>
 
-      <div className="mt-auto flex justify-between">
+      <div className="mt-auto flex justify-between gap-5">
         <LinkComp
           className="w-40 bg-[#C7C3C3] text-[#000] hover:bg-gray-300"
           href={"/builder/personal"}

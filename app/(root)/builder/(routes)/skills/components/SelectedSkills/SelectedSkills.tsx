@@ -8,7 +8,7 @@ const SelectedSkills = () => {
   );
 
   return (
-    <div className="flex flex-col gap-5 ">
+    <div className="flex flex-col gap-5 md:h-auto h-[28rem] ">
       <h1
         className="
           text-black

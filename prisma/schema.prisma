@@ -91,7 +91,7 @@ model Experience{
   checkboxWorkingStatus           Boolean?
   checkboxVolunteering            Boolean?
   checkboxInternship              Boolean?
-  description                     String?                    @db.VarChar(400)    
+  description                     String?                    @db.VarChar(800)    
   address                         String?
   employer                        String?
 }

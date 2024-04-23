@@ -31,10 +31,8 @@ const Competence: React.FC<competenceProps> = ({
   index,
   form,
   competenceIndex,
-  onChange,
 }) => {
   const {
-    control,
     setValue,
     getValues,
     formState: { isSubmitting },

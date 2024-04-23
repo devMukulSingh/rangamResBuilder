@@ -5,10 +5,11 @@ import { Plus } from "lucide-react";
 import Competence from "./Competence";
 import CompetenceSkeleton from "../CompetenceSkeleton";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
-import { setCompLoading } from "@/redux/slice/commonSlice";
 import axios from "axios";
 import { Iexperience } from "@/lib/types";
 import { ControllerRenderProps } from "react-hook-form";
+import { useIsFetching } from "@tanstack/react-query";
+import { Button } from "@/components/ui/button";
 
 type Tfield = ControllerRenderProps<
   {
@@ -26,10 +27,13 @@ const Competences: FC<IExperienceForm> = ({ form, index }) => {
   } = form;
   const dispatch = useAppDispatch();
   const jobTitle = getValues().experience[index].jobTitle;
+  const isFetchingCompetenceDescription = useIsFetching({
+    queryKey: ["compDescription"],
+  });
+
 
   const handleLoadMore = async () => {
     try {
-      dispatch(setCompLoading(true));
       const { data } = await axios.get("/api/ai/get-competences", {
         params: {
           jobTitle,
@@ -42,9 +46,7 @@ const Competences: FC<IExperienceForm> = ({ form, index }) => {
       ]);
     } catch (e) {
       console.log(`Error in getCompetences ${e}`);
-    } finally {
-      dispatch(setCompLoading(false));
-    }
+    } 
   };
   const isLoading = useAppSelector(
     (state) => state.commonSlice.competenceLoading,
@@ -74,16 +76,18 @@ const Competences: FC<IExperienceForm> = ({ form, index }) => {
               </FormItem>
             ))}
           </div>
-          <div
+          <Button
+            variant="ghost"
+            disabled={isFetchingCompetenceDescription === 0 ? false : true}
             onClick={handleLoadMore}
             className={`
+            hover:bg-transparent
             w-fit
             flex
             items-center
             gap-2
             col-span-2
-            cursor-pointer
-             ${getValues().experience[index].competences[0]?.name === "" ? "hidden" : ""}
+            ${getValues().experience[index].competences[0]?.name === "" ? "hidden" : ""}
             ${getValues().experience[index].competences.length === 14 ? "hidden" : ""}
             `}
           >
@@ -95,7 +99,7 @@ const Competences: FC<IExperienceForm> = ({ form, index }) => {
             >
               Load More key responsibility
             </h1>
-          </div>
+          </Button>
         </>
       )}
     />
