@@ -11,9 +11,10 @@ const Buttons = () => {
   const selectedBio = useAppSelector(
     (state) => state.persistedReducer.personalInfo.bio,
   );
+  
   const parsed = selectedBio?.replace(/(<([^>]+)>)/gi, "");
   const handleNavigation = () => {
-    if (parsed !== "") {
+    if (parsed && parsed !== "") {
       router.push(`/builder/education`);
     } else {
       toast.error("Bio is required");
@@ -32,7 +33,7 @@ const Buttons = () => {
           Back
         </LinkComp>
         <Button
-          disabled={parsed === "" ? true : false}
+          disabled={(!parsed || parsed==="") ? true : false}
           className="w-40"
           onClick={handleNavigation}
         >

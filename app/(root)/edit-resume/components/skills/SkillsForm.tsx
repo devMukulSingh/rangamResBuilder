@@ -9,9 +9,9 @@ import useSWR from "swr";
 
 const SkillsForm = () => {
   const dispatch = useAppDispatch();
-    const profession = useAppSelector(
-      (state) => state.persistedReducer.personalInfo.profession
-    );
+  const profession = useAppSelector(
+    (state) => state.persistedReducer.personalInfo.profession,
+  );
   const { data: aiSuggestedSkills } = useSWR(
     ["/api/ai/get-skills", profession],
     {
@@ -20,8 +20,8 @@ const SkillsForm = () => {
       revalidateOnReconnect: false,
       refreshWhenOffline: false,
       refreshWhenHidden: false,
-      revalidateOnMount:false
-    }
+      revalidateOnMount: false,
+    },
   );
 
   return (
@@ -34,7 +34,7 @@ const SkillsForm = () => {
         <section>
           <h1 className=" font-semibold mb-5">Select AI Suggested Skill</h1>
           <div className="grid grid-cols-2 gap-5">
-            {aiSuggestedSkills?.map((skill:string) => (
+            {aiSuggestedSkills?.map((skill: string) => (
               <Skill skill={skill} key={skill} />
             ))}
           </div>

@@ -42,8 +42,7 @@ const JobTitle: FC<IExperienceForm> = ({ form, index }) => {
       }
     } catch (e) {
       console.log(`Error in getCompetences ${e}`);
-    }
-    finally{
+    } finally {
       dispatch(setCompLoading(false));
     }
   }, 2000);

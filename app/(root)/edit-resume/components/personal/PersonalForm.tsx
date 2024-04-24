@@ -1,15 +1,12 @@
 "use client";
+import dynamic from "next/dynamic";
 import { setFormComp, setValidatedOptions } from "@/redux/slice/commonSlice";
 import { motion } from "framer-motion";
 import Name from "@/app/(root)/builder/(routes)/personal/components/formFields/Name";
 import Email from "@/app/(root)/builder/(routes)/personal/components/formFields/Email";
 import Profession from "@/app/(root)/builder/(routes)/personal/components/formFields/Profession";
 import Address from "./formFields/Address";
-import CountryCode from "@/app/(root)/builder/(routes)/personal/components/formFields/CountryCode";
 import Mobile from "@/app/(root)/builder/(routes)/personal/components/formFields/Mobile";
-import City from "./formFields/City";
-import State from "./formFields/State";
-import DOB from "./formFields/DOB";
 import { Form } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -18,10 +15,16 @@ import { setPersonalInfo } from "@/redux/slice/userSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
 import { Button } from "@/components/ui/button";
 import { personalSchema } from "@/lib/formSchemas";
+import FieldSkeleton from "../commons/FieldSkeleton";
+const City = dynamic(() => import("./formFields/City"));
+const State = dynamic(() => import("./formFields/State"))
+const DOB = dynamic(() => import("./formFields/DOB"))
+const CountryCode = dynamic(() => import("@/app/(root)/builder/(routes)/personal/components/formFields/CountryCode",),{
+  loading : () => <FieldSkeleton/>
+})
 
 const PersonalForm = () => {
   const dispatch = useAppDispatch();
-
   type formSchema = z.infer<typeof personalSchema>;
   const personalInfo = useAppSelector(
     (state) => state.persistedReducer.personalInfo,

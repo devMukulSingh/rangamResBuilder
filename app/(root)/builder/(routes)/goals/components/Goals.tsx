@@ -4,10 +4,24 @@ import SingleGoal from "./SingleGoal";
 import LinkComp from "@/components/ui/LinkComp";
 import { setGoal } from "@/redux/slice/userSlice";
 import { useAppDispatch } from "@/redux/hooks/hooks";
-import { setGoalInCookies } from "@/actions/set-goal";
+import axios from "axios";
+import useSWRMutation from "swr/mutation";
+import Loader from "@/components/commons/Loader";
 
 const Goals = () => {
-  const [selected, setSelected] = useState("");
+  async function sendRequest(
+    url: string,
+    { arg }: { arg: { selectedGoal: string } }
+  ) {
+    return await axios.post(url, {
+      goal: arg.selectedGoal,
+    });
+  }
+    const { trigger, isMutating } = useSWRMutation(
+      `/api/set-goal`,
+      sendRequest,
+    );
+  const [selectedGoal, setSelectedGoal] = useState("");
   const goals = [
     {
       title: "Experienced",
@@ -28,8 +42,8 @@ const Goals = () => {
   ];
   const dispatch = useAppDispatch();
   const handleGoalSelect = async () => {
-    await setGoalInCookies(selected);
-    dispatch(setGoal(selected));
+    dispatch(setGoal(selectedGoal));
+    await trigger({selectedGoal});
   };
   return (
     <>
@@ -46,8 +60,8 @@ const Goals = () => {
       >
         {goals.map((goal, index) => (
           <SingleGoal
-            selected={selected}
-            setSelected={setSelected}
+            selectedGoal={selectedGoal}
+            setSelectedGoal={setSelectedGoal}
             key={index}
             goal={goal}
           />
@@ -62,11 +76,15 @@ const Goals = () => {
           Back
         </LinkComp>
         <LinkComp
+          className="flex gap-5"
           onClick={handleGoalSelect}
-          disabled={selected === "" ? true : false}
+          disabled={(selectedGoal === "" || isMutating) ? true : false}
           href={"/builder/skills"}
         >
           Next
+          {
+            isMutating && <Loader/>
+          }
         </LinkComp>
       </div>
     </>

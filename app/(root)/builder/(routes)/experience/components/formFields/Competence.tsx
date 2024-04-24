@@ -46,7 +46,7 @@ const Competence: React.FC<competenceProps> = ({
     queryKey: ["compDescription"],
     enabled: false,
     refetchOnWindowFocus: false,
-    refetchOnReconnect:false,
+    refetchOnReconnect: false,
     queryFn: async () => {
       const { data } = await axios.get(`/api/ai/get-compdescription`, {
         params: {

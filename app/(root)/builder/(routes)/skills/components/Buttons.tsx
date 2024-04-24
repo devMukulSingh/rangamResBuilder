@@ -22,7 +22,7 @@ const Buttons = () => {
     router.prefetch(`/builder/experience`);
   }, []);
   return (
-    <div>
+    <>
       <div className="mt-auto flex justify-between gap-5">
         <LinkComp
           className="w-40  bg-gray-400 text-[#000] hover:bg-gray-300"
@@ -34,7 +34,7 @@ const Buttons = () => {
           Next
         </Button>
       </div>
-    </div>
+    </>
   );
 };
 

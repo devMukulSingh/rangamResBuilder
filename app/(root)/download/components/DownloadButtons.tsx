@@ -7,8 +7,6 @@ import { useAppSelector } from "@/redux/hooks/hooks";
 const DownloadButtons = () => {
   const resumeData = useAppSelector((state) => state.persistedReducer);
 
-
-
   const handlePdfDownload = () => {
     // document.addEventListener('p')
     globalThis.print();

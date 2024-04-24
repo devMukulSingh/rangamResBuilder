@@ -18,7 +18,6 @@ import CompanyName from "./formFields/CompanyName";
 import JobTitle from "./formFields/JobTitle";
 import CheckboxInternship from "./formFields/CheckboxInternship";
 import CheckboxVolunteering from "./formFields/CheckboxVolunteering";
-import Description from "./formFields/Description";
 import CheckboxWorkingStatus from "./formFields/CheckboxWorkingStatus";
 import EndDate from "./formFields/EndDate";
 import StartDate from "./formFields/StartDate";
@@ -26,6 +25,10 @@ import { useRouter } from "next/navigation";
 import Buttons from "./Buttons";
 import { useIsFetching, useQueryClient } from "@tanstack/react-query";
 import useSWR, { useSWRConfig } from "swr";
+import dynamic from "next/dynamic";
+const Description = dynamic(() => import("./formFields/Description"),{
+
+})
 
 export interface IExperienceForm {
   form: UseFormReturn<
@@ -40,10 +43,6 @@ export interface IExperienceForm {
   handleChange?: () => void;
 }
 const ExperienceForm = () => {
-    const profession = useAppSelector(
-      (state) => state.persistedReducer.personalInfo.profession
-    );
-
 
   const router = useRouter();
   const [selected, setSelected] = useState<string | false>("");

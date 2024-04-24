@@ -1,12 +1,12 @@
-import { Loader } from "lucide-react";
-import React from "react";
+import React from 'react'
+import { LuLoader2 } from 'react-icons/lu'
 
 const loading = () => {
   return (
-    <div className="flex items-center justify-center w-full ">
-      <Loader size={35} className="mt-10  animate-spin " />
+    <div className='w-[100vw] flex mt-20 justify-center'>
+        <LuLoader2 className='animate-spin' size={35}/>
     </div>
-  );
-};
+  )
+}
 
-export default loading;
+export default loading

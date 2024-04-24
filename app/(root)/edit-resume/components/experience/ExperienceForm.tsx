@@ -18,12 +18,13 @@ import CompanyName from "@/app/(root)/builder/(routes)/experience/components/for
 import JobTitle from "@/app/(root)/builder/(routes)/experience/components/formFields/JobTitle";
 import CheckboxInternship from "@/app/(root)/builder/(routes)/experience/components/formFields/CheckboxInternship";
 import CheckboxVolunteering from "@/app/(root)/builder/(routes)/experience/components/formFields/CheckboxVolunteering";
-import Description from "@/app/(root)/builder/(routes)/experience/components/formFields/Description";
 import CheckboxWorkingStatus from "@/app/(root)/builder/(routes)/experience/components/formFields/CheckboxWorkingStatus";
-import StartDate from "@/app/(root)/builder/(routes)/experience/components/formFields/StartDate";
-import EndDate from "@/app/(root)/builder/(routes)/experience/components/formFields/EndDate";
 import Employer from "./formFields/Employer";
 import Address from "./formFields/Address";
+import dynamic from "next/dynamic";
+const StartDate = dynamic(() => import("@/app/(root)/builder/(routes)/experience/components/formFields/StartDate"))
+const EndDate = dynamic(() => import("@/app/(root)/builder/(routes)/experience/components/formFields/EndDate"))
+const Description = dynamic(() => import("@/app/(root)/builder/(routes)/experience/components/formFields/Description"))
 
 const ExperienceForm = () => {
   const [expanded, setExpanded] = useState<string | false>("");

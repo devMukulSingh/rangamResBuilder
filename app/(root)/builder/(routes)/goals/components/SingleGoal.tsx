@@ -7,20 +7,20 @@ interface SingleGoalProps {
     title: string;
     img: string;
   };
-  selected: string;
-  setSelected: (selected: string) => void;
+  selectedGoal: string;
+  setSelectedGoal: (selectedGoal: string) => void;
 }
 
 const SingleGoal: React.FC<SingleGoalProps> = ({
   goal,
-  selected,
-  setSelected,
+  selectedGoal,
+  setSelectedGoal,
 }) => {
   const handleGoalSelect = () => {
-    if (selected === goal.title) {
-      setSelected("");
+    if (selectedGoal === goal.title) {
+      setSelectedGoal("");
     } else {
-      setSelected(goal.title);
+      setSelectedGoal(goal.title);
     }
   };
   return (
@@ -47,7 +47,7 @@ const SingleGoal: React.FC<SingleGoalProps> = ({
       bg-red-100
       rounded-lg
       h-[16rem]
-        ${selected === goal.title ? "bg-red-300 transition scale-90" : ""}
+        ${selectedGoal === goal.title ? "bg-red-300 transition scale-90" : ""}
         `}
       >
         <figure

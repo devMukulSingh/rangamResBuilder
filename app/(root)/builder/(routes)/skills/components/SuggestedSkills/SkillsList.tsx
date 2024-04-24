@@ -4,7 +4,7 @@ import Skill from "./Skill";
 import CustomSkill from "./CustomSkill";
 import axios from "axios";
 import SkillsSkeleton from "./SkillsSkeleton";
-import {  useAppSelector } from "@/redux/hooks/hooks";
+import { useAppSelector } from "@/redux/hooks/hooks";
 import useSWR from "swr";
 
 export type Ifetcher = [url: string, profession: string];
@@ -15,7 +15,7 @@ const SkillsList = () => {
   );
   const fetcher = ([url, profession]: Ifetcher) =>
     axios.get(url, { params: { profession } }).then((res) => res.data);
-  
+
   const { data, error, isLoading } = useSWR(
     ["/api/ai/get-skills", profession],
     fetcher,
@@ -24,7 +24,7 @@ const SkillsList = () => {
       revalidateOnFocus: false,
       revalidateOnReconnect: false,
       refreshWhenOffline: false,
-      refreshWhenHidden:false,
+      refreshWhenHidden: false,
     },
   );
 

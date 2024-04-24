@@ -1,5 +1,4 @@
 import Circle from "@/components/commons/Circle";
-import LinkComp from "@/components/ui/LinkComp";
 import Skills from "./components/Skills";
 import Buttons from "./components/Buttons";
 

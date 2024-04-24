@@ -20,14 +20,14 @@ import * as z from "zod";
 import SchoolName from "@/app/(root)/builder/(routes)/education/components/formFields/SchoolName";
 import Degree from "@/app/(root)/builder/(routes)/education/components/formFields/Degree";
 import Speciality from "@/app/(root)/builder/(routes)/education/components/formFields/Speciality";
-import StartDate from "@/app/(root)/builder/(routes)/education/components/formFields/StartDate";
-import EndDate from "@/app/(root)/builder/(routes)/education/components/formFields/EndDate";
-import { parseISO } from "date-fns";
 import CheckboxPursuing from "./components/CheckboxPursuing";
 import useSWRMutation from "swr/mutation";
 import axios from "axios";
 import { Ifetcher } from "@/app/(root)/builder/(routes)/education/components/EducationForm";
 import { educationSchema } from "@/lib/formSchemas";
+import dynamic from "next/dynamic";
+const StartDate = dynamic(() => import("@/app/(root)/builder/(routes)/education/components/formFields/StartDate"));
+const EndDate = dynamic(()=>import("@/app/(root)/builder/(routes)/education/components/formFields/EndDate"))
 
 const fetcher = ([url, resumeData]: Ifetcher) =>
   axios.put(url, resumeData).then((res) => res.data);

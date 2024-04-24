@@ -20,30 +20,33 @@ type Tfield = ControllerRenderProps<
 >;
 
 const Competences: FC<IExperienceForm> = ({ form, index }) => {
-  const [isFetching, setIsFetching] = useState(false)
-  const {
-    control,
-    getValues,
-    setValue,
-  } = form;
+  const [isFetching, setIsFetching] = useState(false);
+  const { control, getValues, setValue } = form;
   const jobTitle = getValues().experience[index].jobTitle;
-  const fetcher = (url:string) => axios.get(url, {
-    params: {
+  const fetcher = (url: string) =>
+    axios
+      .get(url, {
+        params: {
           jobTitle,
-        }}).then((res) => res.data);
-  const { isLoading, error } = useSWR(isFetching ? "/api/ai/get-competences":null,fetcher,{
-    revalidateIfStale:false,
-    revalidateOnReconnect:false,
-    revalidateOnFocus:false,
-    onSuccess(data, key, config) {
+        },
+      })
+      .then((res) => res.data);
+  const { isLoading, error } = useSWR(
+    isFetching ? "/api/ai/get-competences" : null,
+    fetcher,
+    {
+      revalidateIfStale: false,
+      revalidateOnReconnect: false,
+      revalidateOnFocus: false,
+      onSuccess(data, key, config) {
         const prevCompetences = getValues(`experience.${index}.competences`);
         setValue(`experience.${index}.competences`, [
           ...prevCompetences,
           ...data,
         ]);
+      },
     },
- 
-  });
+  );
   const isFetchingCompetenceDescription = useIsFetching({
     queryKey: ["compDescription"],
   });
@@ -51,7 +54,7 @@ const Competences: FC<IExperienceForm> = ({ form, index }) => {
     (state) => state.commonSlice.competenceLoading,
   );
   if (isCompetencesLoading || isLoading) return <CompetenceSkeleton />;
-  if(error){
+  if (error) {
     console.log(`error in getCompetences ${error}`);
   }
   return (
