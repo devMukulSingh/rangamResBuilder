@@ -11,7 +11,7 @@ const Buttons = () => {
   const selectedBio = useAppSelector(
     (state) => state.persistedReducer.personalInfo.bio,
   );
-  
+
   const parsed = selectedBio?.replace(/(<([^>]+)>)/gi, "");
   const handleNavigation = () => {
     if (parsed && parsed !== "") {
@@ -33,7 +33,7 @@ const Buttons = () => {
           Back
         </LinkComp>
         <Button
-          disabled={(!parsed || parsed==="") ? true : false}
+          disabled={!parsed || parsed === "" ? true : false}
           className="w-40"
           onClick={handleNavigation}
         >

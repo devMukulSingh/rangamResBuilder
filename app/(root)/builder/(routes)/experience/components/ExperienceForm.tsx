@@ -26,9 +26,7 @@ import Buttons from "./Buttons";
 import { useIsFetching, useQueryClient } from "@tanstack/react-query";
 import useSWR, { useSWRConfig } from "swr";
 import dynamic from "next/dynamic";
-const Description = dynamic(() => import("./formFields/Description"),{
-
-})
+const Description = dynamic(() => import("./formFields/Description"), {});
 
 export interface IExperienceForm {
   form: UseFormReturn<
@@ -43,7 +41,6 @@ export interface IExperienceForm {
   handleChange?: () => void;
 }
 const ExperienceForm = () => {
-
   const router = useRouter();
   const [selected, setSelected] = useState<string | false>("");
   const dispatch = useAppDispatch();

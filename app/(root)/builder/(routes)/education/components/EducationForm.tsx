@@ -2,7 +2,7 @@
 import { Form } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
-import { IinitialState, setEducation } from "@/redux/slice/userSlice";
+import { IinitialState, setEducation, setUserId } from "@/redux/slice/userSlice";
 import { useEffect, useState } from "react";
 import {
   FieldValues,
@@ -57,6 +57,11 @@ const EducationForm = () => {
   const { trigger, isMutating, error } = useSWRMutation(
     [`/api/user/set-resumedata`, resumeData],
     fetcher,
+    {
+      onSuccess(data) {
+        dispatch(setUserId(data.id))
+      },
+    }
   );
   const [selected, setSelected] = useState<string>("");
   const education = useAppSelector((state) => state.persistedReducer.education);

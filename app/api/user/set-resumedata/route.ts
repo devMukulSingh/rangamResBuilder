@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { IinitialState } from "@/redux/slice/userSlice";
-import exp from "constants";
+import { format } from "date-fns";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest, res: NextResponse) {
@@ -48,8 +48,8 @@ export async function POST(req: NextRequest, res: NextResponse) {
       data: experience.map((item, index) => ({
         userId: user.id,
         companyName: item.companyName,
-        startDate: item.startDate.toLocaleString(),
-        endDate: item.endDate.toLocaleString(),
+        startDate: item.startDate !=="" ? format(item.startDate,"yyyy-MM-dd") : "",
+        endDate: item.endDate !=="" ? format(item.endDate, "yyyy-MM-dd") : "",
         checkboxWorkingStatus: item.checkboxWorkingStatus,
         checkboxVolunteering: item.checkboxVolunteering,
         checkboxInternship: item.checkboxInternship,
@@ -107,7 +107,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
       })),
     });
 
-    const userUpdate = await prisma.user.update({
+    const updatedUser = await prisma.user.update({
       data: {
         personalInfo: {
           create: {
@@ -155,8 +155,8 @@ export async function POST(req: NextRequest, res: NextResponse) {
               schoolName: item.schoolName,
               degree: item.degree,
               speciality: item.speciality,
-              startDate: item.startDate,
-              endDate: item.endDate,
+              startDate: item.startDate !== "" ? format(item.startDate, "yyyy-MM-dd") : "",
+              endDate: item.endDate !=="" ? format(item.endDate, "yyyy-MM-dd") : "",
               checkboxPursuing: item.checkboxPursuing,
               schoolLocation: item.schoolLocation,
             })),
@@ -168,7 +168,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
         projects: {},
       },
       where: {
-        email,
+        id:user.id,
       },
       include: {
         educations: true,
@@ -191,7 +191,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
       },
     });
 
-    return NextResponse.json(userUpdate, {
+    return NextResponse.json(updatedUser, {
       status: 201,
     });
   } catch (e) {

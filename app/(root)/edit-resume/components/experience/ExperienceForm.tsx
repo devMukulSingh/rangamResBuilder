@@ -22,9 +22,24 @@ import CheckboxWorkingStatus from "@/app/(root)/builder/(routes)/experience/comp
 import Employer from "./formFields/Employer";
 import Address from "./formFields/Address";
 import dynamic from "next/dynamic";
-const StartDate = dynamic(() => import("@/app/(root)/builder/(routes)/experience/components/formFields/StartDate"))
-const EndDate = dynamic(() => import("@/app/(root)/builder/(routes)/experience/components/formFields/EndDate"))
-const Description = dynamic(() => import("@/app/(root)/builder/(routes)/experience/components/formFields/Description"))
+const StartDate = dynamic(
+  () =>
+    import(
+      "@/app/(root)/builder/(routes)/experience/components/formFields/StartDate"
+    ),
+);
+const EndDate = dynamic(
+  () =>
+    import(
+      "@/app/(root)/builder/(routes)/experience/components/formFields/EndDate"
+    ),
+);
+const Description = dynamic(
+  () =>
+    import(
+      "@/app/(root)/builder/(routes)/experience/components/formFields/Description"
+    ),
+);
 
 const ExperienceForm = () => {
   const [expanded, setExpanded] = useState<string | false>("");

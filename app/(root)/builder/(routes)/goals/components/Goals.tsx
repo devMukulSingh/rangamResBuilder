@@ -11,16 +11,13 @@ import Loader from "@/components/commons/Loader";
 const Goals = () => {
   async function sendRequest(
     url: string,
-    { arg }: { arg: { selectedGoal: string } }
+    { arg }: { arg: { selectedGoal: string } },
   ) {
     return await axios.post(url, {
       goal: arg.selectedGoal,
     });
   }
-    const { trigger, isMutating } = useSWRMutation(
-      `/api/set-goal`,
-      sendRequest,
-    );
+  const { trigger, isMutating } = useSWRMutation(`/api/set-goal`, sendRequest);
   const [selectedGoal, setSelectedGoal] = useState("");
   const goals = [
     {
@@ -43,7 +40,7 @@ const Goals = () => {
   const dispatch = useAppDispatch();
   const handleGoalSelect = async () => {
     dispatch(setGoal(selectedGoal));
-    await trigger({selectedGoal});
+    await trigger({ selectedGoal });
   };
   return (
     <>
@@ -78,13 +75,11 @@ const Goals = () => {
         <LinkComp
           className="flex gap-5"
           onClick={handleGoalSelect}
-          disabled={(selectedGoal === "" || isMutating) ? true : false}
+          disabled={selectedGoal === "" || isMutating ? true : false}
           href={"/builder/skills"}
         >
           Next
-          {
-            isMutating && <Loader/>
-          }
+          {isMutating && <Loader />}
         </LinkComp>
       </div>
     </>

@@ -25,11 +25,13 @@ import toast from "react-hot-toast";
 import useSWRMutation from "swr/mutation";
 import { Ifetcher } from "@/app/(root)/builder/(routes)/education/components/EducationForm";
 import axios from "axios";
+import useSWR from "swr";
 
 const fetcher = ([url, resumeData]: Ifetcher) =>
   axios.put(url, resumeData).then((res) => res.data);
-const LanguageForm = () => {
+  const LanguageForm = () => {
   const resumeData = useAppSelector((state) => state.persistedReducer);
+  
   const { trigger, isMutating, error } = useSWRMutation(
     [`/api/user/update-resumedata`, resumeData],
     fetcher,

@@ -1,11 +1,13 @@
 import { prisma } from "@/lib/prisma";
 import { IinitialState } from "@/redux/slice/userSlice";
+import { format } from "date-fns";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function PUT(req: NextRequest, res: NextResponse) {
   try {
     const resumeData: IinitialState = await req.json();
     const {
+      userId,
       achievements,
       contact,
       languages,
@@ -39,7 +41,7 @@ export async function PUT(req: NextRequest, res: NextResponse) {
       );
     const deletedUser = await prisma.user.delete({
       where: {
-        email,
+        id:userId,
       },
     });
     if (!deletedUser)
@@ -64,8 +66,8 @@ export async function PUT(req: NextRequest, res: NextResponse) {
       data: experience.map((item, index) => ({
         userId: newUser.id,
         companyName: item.companyName,
-        startDate: item.startDate.toLocaleString(),
-        endDate: item.endDate.toLocaleString(),
+        startDate: item.startDate !== "" ? format(item.startDate, "yyyy-MM-dd") : "",
+        endDate: item.endDate !== "" ? format(item.endDate, "yyyy-MM-dd") : "",
         checkboxWorkingStatus: item.checkboxWorkingStatus,
         checkboxVolunteering: item.checkboxVolunteering,
         checkboxInternship: item.checkboxInternship,
@@ -165,37 +167,14 @@ export async function PUT(req: NextRequest, res: NextResponse) {
             skillName: item,
           })),
         },
-
-        //   createMany: {
-        //     data: experience.map((item) => ({
-        //       companyName: item.companyName,
-        //       jobTitle: item.jobTitle,
-        //       startDate: item.startDate.toLocaleString(),
-        //       endDate: item.endDate.toLocaleString(),
-        //       checkboxWorkingStatus: item.checkboxWorkingStatus,
-        //       checkboxVolunteering: item.checkboxVolunteering,
-        //       checkboxInternship: item.checkboxInternship,
-        //       description: item.description,
-        //       address: item.address || "",
-        //       employer: item.employer || "",
-        //       competences: item.competences
-        //         .filter((item) => item.isSelected == true)
-        //         .map((item) => ({
-        //           name: item.name,
-        //           description: item.description,
-        //         }))
-        //         .flat(),
-        //     })),
-        //   },
-        // },
         educations: {
           createMany: {
             data: education.map((item) => ({
               schoolName: item.schoolName,
               degree: item.degree,
               speciality: item.speciality,
-              startDate: item.startDate,
-              endDate: item.endDate,
+              startDate: item.startDate !== "" ? format(item.startDate, "yyyy-MM-dd") : "",
+              endDate: item.endDate !== "" ? format(item.startDate, "yyyy-MM-dd") : "",
               checkboxPursuing: item.checkboxPursuing,
               schoolLocation: item.schoolLocation,
             })),

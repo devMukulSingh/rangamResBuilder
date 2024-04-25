@@ -17,11 +17,17 @@ import { Button } from "@/components/ui/button";
 import { personalSchema } from "@/lib/formSchemas";
 import FieldSkeleton from "../commons/FieldSkeleton";
 const City = dynamic(() => import("./formFields/City"));
-const State = dynamic(() => import("./formFields/State"))
-const DOB = dynamic(() => import("./formFields/DOB"))
-const CountryCode = dynamic(() => import("@/app/(root)/builder/(routes)/personal/components/formFields/CountryCode",),{
-  loading : () => <FieldSkeleton/>
-})
+const State = dynamic(() => import("./formFields/State"));
+const DOB = dynamic(() => import("./formFields/DOB"));
+const CountryCode = dynamic(
+  () =>
+    import(
+      "@/app/(root)/builder/(routes)/personal/components/formFields/CountryCode"
+    ),
+  {
+    loading: () => <FieldSkeleton />,
+  },
+);
 
 const PersonalForm = () => {
   const dispatch = useAppDispatch();

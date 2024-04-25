@@ -1,9 +1,9 @@
 import dynamic from "next/dynamic";
 import SuggestedSummary from "./SuggestedSummary";
 import Loader from "@/components/commons/Loader";
-const Editor = dynamic(() => import("./Editor"),{
-  loading : () => <Loader/>
-} )
+const Editor = dynamic(() => import("./Editor"), {
+  loading: () => <Loader />,
+});
 
 const MainSummary = ({}) => {
   return (

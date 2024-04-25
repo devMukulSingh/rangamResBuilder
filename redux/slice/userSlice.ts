@@ -12,6 +12,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export interface IresumeData extends IinitialState {}
 
 export interface IinitialState {
+  userId:string,
   personalInfo: IpersonalInfo;
   experience: Iexperience[] | [];
   technicalSkills: string[];
@@ -33,6 +34,7 @@ export interface IinitialState {
 }
 
 const initialState: IinitialState = {
+  userId:"",
   personalInfo: {
     fullName: "",
     email: "",
@@ -134,6 +136,9 @@ export const userSlice = createSlice({
     setDescription: (state, action) => {
       state.description = action.payload;
     },
+    setUserId : (state,action) => {
+      state.userId = action.payload;
+    }
   },
 });
 
@@ -157,4 +162,5 @@ export const {
   resetCompetences,
   setAiSuggestedCompDesc,
   setDescription,
+  setUserId
 } = userSlice.actions;

@@ -26,8 +26,18 @@ import axios from "axios";
 import { Ifetcher } from "@/app/(root)/builder/(routes)/education/components/EducationForm";
 import { educationSchema } from "@/lib/formSchemas";
 import dynamic from "next/dynamic";
-const StartDate = dynamic(() => import("@/app/(root)/builder/(routes)/education/components/formFields/StartDate"));
-const EndDate = dynamic(()=>import("@/app/(root)/builder/(routes)/education/components/formFields/EndDate"))
+const StartDate = dynamic(
+  () =>
+    import(
+      "@/app/(root)/builder/(routes)/education/components/formFields/StartDate"
+    ),
+);
+const EndDate = dynamic(
+  () =>
+    import(
+      "@/app/(root)/builder/(routes)/education/components/formFields/EndDate"
+    ),
+);
 
 const fetcher = ([url, resumeData]: Ifetcher) =>
   axios.put(url, resumeData).then((res) => res.data);
