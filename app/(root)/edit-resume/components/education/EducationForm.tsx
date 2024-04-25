@@ -1,9 +1,9 @@
 "use client";
 import { Form } from "@/components/ui/form";
-import { FieldValues, useFieldArray, useForm } from "react-hook-form";
+import {  useFieldArray, useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
-import { setEducation } from "@/redux/slice/userSlice";
+import { setEducation, setUserId } from "@/redux/slice/userSlice";
 import { useEffect, useState } from "react";
 import {
   Collapsible,
@@ -11,7 +11,7 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import { useParams, useRouter } from "next/navigation";
-import { Loader, PlusCircle, Trash } from "lucide-react";
+import { PlusCircle, Trash } from "lucide-react";
 import toast from "react-hot-toast";
 import { setFormComp, setValidatedOptions } from "@/redux/slice/commonSlice";
 import { motion } from "framer-motion";
@@ -26,6 +26,7 @@ import axios from "axios";
 import { Ifetcher } from "@/app/(root)/builder/(routes)/education/components/EducationForm";
 import { educationSchema } from "@/lib/formSchemas";
 import dynamic from "next/dynamic";
+import Loader from "@/components/commons/Loader";
 const StartDate = dynamic(
   () =>
     import(
@@ -47,6 +48,11 @@ const EducationForm = () => {
   const { trigger, isMutating, error } = useSWRMutation(
     [`/api/user/update-resumedata`, resumeData],
     fetcher,
+    {
+      onSuccess(data){
+        dispatch(setUserId(data.id))
+      }
+    }
   );
   const [expanded, setExpanded] = useState<string | false>("");
   const showSidebarOptions = useAppSelector(
@@ -54,77 +60,6 @@ const EducationForm = () => {
   );
   const dispatch = useAppDispatch();
   const education = useAppSelector((state) => state.persistedReducer.education);
-  // const formSchema = z.object({
-  //   education: z
-  //     .object({
-  //       id: z.string(),
-  //       schoolName: z
-  //         .string({
-  //           required_error: "School name is required",
-  //           invalid_type_error: "Invalid string",
-  //         })
-  //         .trim()
-  //         .min(1, {
-  //           message: "University/School name is required",
-  //         }),
-  //       degree: z
-  //         .string({
-  //           required_error: "Degree is required",
-  //           invalid_type_error: "Invalid string",
-  //         })
-  //         .trim()
-  //         .min(1, {
-  //           message: "Degree is required",
-  //         }),
-  //       speciality: z
-  //         .string({
-  //           required_error: "Speciality is required",
-  //           invalid_type_error: "Invalid string",
-  //         })
-  //         .trim()
-  //         .min(1, {
-  //           message: "Speciality is required",
-  //         }),
-  //       startDate: z
-  //         .any({
-  //           required_error: "Start date is required",
-  //         })
-  //         .refine(
-  //           (data) => {
-  //             if (data) return true;
-  //           },
-  //           {
-  //             message: "Start date is required",
-  //           },
-  //         ),
-  //       endDate: z.any().optional(),
-  //       checkboxPursuing: z.boolean(),
-  //     })
-  //     .refine(
-  //       (data) => {
-  //         let startDate = data.startDate;
-  //         let endDate = data?.endDate;
-  //         if (typeof startDate === "string") {
-  //           startDate = parseISO(startDate);
-  //         }
-  //         if (endDate && typeof endDate === "string") {
-  //           endDate = parseISO(endDate);
-  //         }
-  //         if (
-  //           data.checkboxPursuing ||
-  //           startDate < endDate ||
-  //           !startDate ||
-  //           !endDate
-  //         )
-  //           return true;
-  //       },
-  //       {
-  //         message: `End date must be greater than start date`,
-  //         path: ["endDate"],
-  //       },
-  //     )
-  //     .array(),
-  // });
 
   const router = useRouter();
   const form = useForm<z.infer<typeof educationSchema>>({
@@ -142,8 +77,6 @@ const EducationForm = () => {
                 endDate: "",
                 checkboxPursuing: false,
                 id: Math.floor(Math.random() * 100).toString(),
-                // schoolLocation: '',
-                // percentage: 0
               },
             ],
     },
@@ -163,11 +96,15 @@ const EducationForm = () => {
   });
 
   const onSubmit = async () => {
-    // try {
-    //   if (!showSidebarOptions) await trigger();
-    // } catch (e) {
-    //   console.log(`Error in onSubmit PUT req ${e}`);
-    // }
+    try {
+      if (!showSidebarOptions) await trigger();
+    } catch (e) {
+      console.log(`Error in onSubmit PUT req ${e}`);
+    }
+    finally{
+      if(!showSidebarOptions)
+      router.push("/download");
+    }
     dispatch(
       setValidatedOptions({
         name: "Education",
@@ -175,11 +112,8 @@ const EducationForm = () => {
         index: 0,
       }),
     );
-    if (!showSidebarOptions) {
-      router.push("/download");
-    } else {
-      dispatch(setFormComp("Social Links"));
-    }
+    if(showSidebarOptions)
+    dispatch(setFormComp("Social Links"));
   };
 
   const handleChange = () => {
@@ -365,7 +299,7 @@ const EducationForm = () => {
                   disabled={isMutating}
                 >
                   {showSidebarOptions ? "Next" : "Submit"}
-                  {isMutating && <Loader className="animate-spine" />}
+                  {isMutating && <Loader/>}
                 </Button>
               </div>
             </div>

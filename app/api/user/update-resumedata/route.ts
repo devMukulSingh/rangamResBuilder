@@ -139,7 +139,7 @@ export async function PUT(req: NextRequest, res: NextResponse) {
             email,
             profession: {
               create: {
-                name: countryCode,
+                name: profession,
               },
             },
             mobile,
@@ -218,7 +218,9 @@ export async function PUT(req: NextRequest, res: NextResponse) {
           },
         },
       },
-
+      where: {
+        id: newUser.id,
+      },
       include: {
         educations: true,
         experiences: {
@@ -230,16 +232,18 @@ export async function PUT(req: NextRequest, res: NextResponse) {
             },
           },
         },
-        personalInfo: true,
+        personalInfo: {
+          include: {
+            profession: true,
+            countryCode: true
+          }
+        },
         skills: true,
         achievements: true,
         contacts: true,
         goal: true,
         languages: true,
         projects: true,
-      },
-      where: {
-        id: newUser.id,
       },
     });
 

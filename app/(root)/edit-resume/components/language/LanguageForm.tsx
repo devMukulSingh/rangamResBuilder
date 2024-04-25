@@ -18,7 +18,7 @@ import {
 import { languagesData, strengths } from "@/lib/constants";
 import { Loader, PlusCircle } from "lucide-react";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
-import { setLanguages } from "@/redux/slice/userSlice";
+import { setLanguages, setUserId } from "@/redux/slice/userSlice";
 import { useParams, useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import toast from "react-hot-toast";
@@ -35,6 +35,11 @@ const LanguageForm = () => {
   const { trigger, isMutating, error } = useSWRMutation(
     [`/api/user/update-resumedata`, resumeData],
     fetcher,
+    {
+      onSuccess(data) {
+        dispatch(setUserId(data.id));
+      },
+    }
   );
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -68,7 +73,6 @@ const LanguageForm = () => {
     } finally {
       router.push(`/download`);
     }
-    // router.push(`/download`);
   };
 
   const handleChange = () => {

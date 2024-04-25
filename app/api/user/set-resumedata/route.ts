@@ -186,7 +186,12 @@ export async function POST(req: NextRequest, res: NextResponse) {
             },
           },
         },
-        personalInfo: true,
+        personalInfo: {
+          include:{
+            profession:true,
+            countryCode:true
+          }
+        },
         skills: true,
         achievements: true,
         contacts: true,
