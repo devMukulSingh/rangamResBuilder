@@ -41,7 +41,7 @@ export async function PUT(req: NextRequest, res: NextResponse) {
       );
     const deletedUser = await prisma.user.delete({
       where: {
-        id:userId,
+        id: userId,
       },
     });
     if (!deletedUser)
@@ -66,7 +66,8 @@ export async function PUT(req: NextRequest, res: NextResponse) {
       data: experience.map((item, index) => ({
         userId: newUser.id,
         companyName: item.companyName,
-        startDate: item.startDate !== "" ? format(item.startDate, "yyyy-MM-dd") : "",
+        startDate:
+          item.startDate !== "" ? format(item.startDate, "yyyy-MM-dd") : "",
         endDate: item.endDate !== "" ? format(item.endDate, "yyyy-MM-dd") : "",
         checkboxWorkingStatus: item.checkboxWorkingStatus,
         checkboxVolunteering: item.checkboxVolunteering,
@@ -173,8 +174,12 @@ export async function PUT(req: NextRequest, res: NextResponse) {
               schoolName: item.schoolName,
               degree: item.degree,
               speciality: item.speciality,
-              startDate: item.startDate !== "" ? format(item.startDate, "yyyy-MM-dd") : "",
-              endDate: item.endDate !== "" ? format(item.startDate, "yyyy-MM-dd") : "",
+              startDate:
+                item.startDate !== ""
+                  ? format(item.startDate, "yyyy-MM-dd")
+                  : "",
+              endDate:
+                item.endDate !== "" ? format(item.startDate, "yyyy-MM-dd") : "",
               checkboxPursuing: item.checkboxPursuing,
               schoolLocation: item.schoolLocation,
             })),

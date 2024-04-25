@@ -9,7 +9,7 @@ datasource db {
 }
 
 model User{
-  id              String            @id@default(uuid())
+  id              String            @id@default(cuid())
   email           String           
   goalId          String
   goal            Goal              @relation("userToGoal",fields: [goalId],references: [id],onDelete: Cascade)
@@ -21,14 +21,15 @@ model User{
   languages       Language[]        @relation("userToLanguage")
   contacts        Contact?          @relation("userToContact")
   achievements    Achievement[]     @relation("userToAchievement")
+  createdAt       DateTime          @default(now())
 }
 model Goal{
-  id                  String             @id@default(uuid())
+  id                  String             @id@default(cuid())
   name                String              
   users               User[]             @relation("userToGoal")
 }
 model PersonalInfo{
-  id                    String            @id@default(uuid())
+  id                    String            @id@default(cuid())
   professionId          String
   countryCodeId         String
   userId                String            @unique
@@ -46,42 +47,42 @@ model PersonalInfo{
   city                  City?             @relation("personalInfoToCity") 
 }
 model BirthPlace{
-   id                   String            @id@default(uuid())
+   id                   String            @id@default(cuid())
   name                  String?
   personalId            String            @unique
   personalInfo          PersonalInfo      @relation("personalInfoToBirthPlace",fields: [personalId],references: [id],onDelete: Cascade)
 }
 model City{
-   id                    String           @id@default(uuid())
+   id                    String           @id@default(cuid())
   name                  String?
   personalId            String            @unique
   personalInfo          PersonalInfo      @relation("personalInfoToCity",fields: [personalId],references: [id],onDelete: Cascade)
 }
 model State{
-   id                    String           @id@default(uuid())
+   id                    String           @id@default(cuid())
   name                  String?
   personalId            String            @unique
   personalInfo          PersonalInfo      @relation("personalInfoToState",fields: [personalId],references: [id],onDelete: Cascade)
 }
 model Profession{
-  id                    String            @id@default(uuid())
+  id                    String            @id@default(cuid())
   name                  String
   personalInfos          PersonalInfo[]   @relation("personalInfoToProfession")
 }
 model CountryCode{
-   id                    String            @id@default(uuid())
+   id                    String            @id@default(cuid())
   code                  String
   personalInfos         PersonalInfo[]     @relation("personalInfoToCountryCode")
 }
 
 model Skill{
-  id                      String                    @id@default(uuid())
+  id                      String                    @id@default(cuid())
   skillName               String
   users                   User[]                    @relation("_UserToSkill")
 }
 
 model Experience{
-  id                              String                    @id@default(uuid())
+  id                              String                    @id@default(cuid())
   userId                          String                    
   user                            User                      @relation("userToExperience",references: [id],fields: [userId],onDelete: Cascade)
   companyName                     String                  
@@ -97,21 +98,21 @@ model Experience{
 }
 
 model JobTitle{
-    id                              String                    @id@default(uuid())
+    id                              String                    @id@default(cuid())
     name                            String?                   
     competences                     Competence[]              @relation("jobTitleToCompetence")
     experienceId                    String                    @unique
     experience                     Experience                 @relation("experienceToJobTitle",fields: [experienceId],references: [id],onDelete: Cascade)
 }
 model Competence{
-  id                              String                      @id@default(uuid())
+  id                              String                      @id@default(cuid())
   name                            String?
   description                     String?                     @db.VarChar(800)    
   experienceId                    String                   
   jobTitle                        JobTitle                    @relation("jobTitleToCompetence",fields: [experienceId],references: [experienceId],onDelete: Cascade)
 }
 model Education{
-  id                              String                      @id@default(uuid())
+  id                              String                      @id@default(cuid())
   schoolName                      String
   degree                          String
   speciality                      String
@@ -124,7 +125,7 @@ model Education{
 }
 
 model Contact{
-  id                              String                    @id@default(uuid())
+  id                              String                    @id@default(cuid())
   userId                          String                    @unique
   user                            User                      @relation("userToContact",references: [id],fields: [userId] ,onDelete: Cascade)
   linkedIn                        String?
@@ -134,14 +135,14 @@ model Contact{
 }
 
 model Achievement{
-  id                              String                    @id@default(uuid())
+  id                              String                    @id@default(cuid())
   userId                          String                       
   user                            User                      @relation("userToAchievement",references: [id],fields: [userId],onDelete: Cascade)
   name                            String?
 }
 
 model Project{
-  id                              String                    @id@default(uuid())
+  id                              String                    @id@default(cuid())
   userId                          String                      
   user                            User                      @relation("userToProject",references: [id],fields: [userId],onDelete: Cascade)
   projectName                     String?
@@ -150,7 +151,7 @@ model Project{
 }
 
 model Language{
-  id                              String                     @id@default(uuid())
+  id                              String                     @id@default(cuid())
   userId                          String                       
   user                            User                       @relation("userToLanguage",references: [id],fields: [userId],onDelete: Cascade)
   name                            String?

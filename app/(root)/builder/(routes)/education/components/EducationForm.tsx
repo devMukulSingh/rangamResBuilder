@@ -2,7 +2,11 @@
 import { Form } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
-import { IinitialState, setEducation, setUserId } from "@/redux/slice/userSlice";
+import {
+  IinitialState,
+  setEducation,
+  setUserId,
+} from "@/redux/slice/userSlice";
 import { useEffect, useState } from "react";
 import {
   FieldValues,
@@ -59,9 +63,9 @@ const EducationForm = () => {
     fetcher,
     {
       onSuccess(data) {
-        dispatch(setUserId(data.id))
+        dispatch(setUserId(data.id));
       },
-    }
+    },
   );
   const [selected, setSelected] = useState<string>("");
   const education = useAppSelector((state) => state.persistedReducer.education);

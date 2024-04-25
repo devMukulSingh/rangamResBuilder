@@ -48,8 +48,9 @@ export async function POST(req: NextRequest, res: NextResponse) {
       data: experience.map((item, index) => ({
         userId: user.id,
         companyName: item.companyName,
-        startDate: item.startDate !=="" ? format(item.startDate,"yyyy-MM-dd") : "",
-        endDate: item.endDate !=="" ? format(item.endDate, "yyyy-MM-dd") : "",
+        startDate:
+          item.startDate !== "" ? format(item.startDate, "yyyy-MM-dd") : "",
+        endDate: item.endDate !== "" ? format(item.endDate, "yyyy-MM-dd") : "",
         checkboxWorkingStatus: item.checkboxWorkingStatus,
         checkboxVolunteering: item.checkboxVolunteering,
         checkboxInternship: item.checkboxInternship,
@@ -155,8 +156,12 @@ export async function POST(req: NextRequest, res: NextResponse) {
               schoolName: item.schoolName,
               degree: item.degree,
               speciality: item.speciality,
-              startDate: item.startDate !== "" ? format(item.startDate, "yyyy-MM-dd") : "",
-              endDate: item.endDate !=="" ? format(item.endDate, "yyyy-MM-dd") : "",
+              startDate:
+                item.startDate !== ""
+                  ? format(item.startDate, "yyyy-MM-dd")
+                  : "",
+              endDate:
+                item.endDate !== "" ? format(item.endDate, "yyyy-MM-dd") : "",
               checkboxPursuing: item.checkboxPursuing,
               schoolLocation: item.schoolLocation,
             })),
@@ -168,7 +173,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
         projects: {},
       },
       where: {
-        id:user.id,
+        id: user.id,
       },
       include: {
         educations: true,
