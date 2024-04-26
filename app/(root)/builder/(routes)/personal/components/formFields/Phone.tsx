@@ -30,7 +30,7 @@ const Phone: FC<IForm> = ({ form, handleChange }) => {
             inputStyle={{
               height: "40px",
               border: "0.5px solid #e4e4e4",
-              width:"100%"
+              width: "100%",
             }}
             dropdownStyle={{ background: "white" }}
             dropdownClass="bg-white"

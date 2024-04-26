@@ -81,8 +81,8 @@ const PersonalForm = () => {
             <Profession form={form} />
 
             {/* <div className="flex gap-5 w-full"> */}
-              <Phone form={form} />
-              {/* <Mobile form={form} /> */}
+            <Phone form={form} />
+            {/* <Mobile form={form} /> */}
             {/* </div> */}
 
             <Button

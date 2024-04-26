@@ -133,7 +133,7 @@ export async function PUT(req: NextRequest, res: NextResponse) {
             bio,
             countryCode: {
               create: {
-                code: countryCode,
+                code: "",
               },
             },
             email,
