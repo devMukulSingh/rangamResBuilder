@@ -30,7 +30,7 @@ const PersonalSection: React.FC<PersonalSection> = ({}) => {
         <h1 className="text-2xl font-semibold">{personalInfo?.fullName}</h1>
         <h1>
           {personalInfo.countryCode}&nbsp;
-          {personalInfo?.mobile}{" "}
+          {personalInfo?.phone}{" "}
           {`${personalInfo?.email ? `|| ${personalInfo.email}` : ""}`}
         </h1>
       </div>

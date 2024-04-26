@@ -38,7 +38,7 @@ const About = () => {
         <div className="flex flex-col">
           <div className="flex items-center gap-1">
             <Phone size={20} />
-            {personalInfo?.mobile || "9808088888"}
+            {personalInfo?.phone || "9808088888"}
           </div>
           <div className={`flex items-center gap-2`}>
             {contact?.linkedIn !== "" && contact?.linkedIn && (

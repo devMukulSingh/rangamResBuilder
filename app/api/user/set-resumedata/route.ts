@@ -24,7 +24,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
         countryCode,
         email,
         fullName,
-        mobile,
+        phone,
         profession,
         address,
         birthPlace,
@@ -124,7 +124,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
                 name: profession,
               },
             },
-            mobile,
+            mobile:phone,
             fullName,
             address,
             birthPlace: {

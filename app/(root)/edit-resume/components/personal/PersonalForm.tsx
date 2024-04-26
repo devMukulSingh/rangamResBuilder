@@ -6,7 +6,7 @@ import Name from "@/app/(root)/builder/(routes)/personal/components/formFields/N
 import Email from "@/app/(root)/builder/(routes)/personal/components/formFields/Email";
 import Profession from "@/app/(root)/builder/(routes)/personal/components/formFields/Profession";
 import Address from "./formFields/Address";
-import Mobile from "@/app/(root)/builder/(routes)/personal/components/formFields/Mobile";
+import Phone from "@/app/(root)/builder/(routes)/personal/components/formFields/Phone";
 import { Form } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -22,18 +22,18 @@ const DOB = dynamic(() => import("./formFields/DOB"));
 const CountryCode = dynamic(
   () =>
     import(
-      "@/app/(root)/builder/(routes)/personal/components/formFields/CountryCode"
+      "@/app/(root)/builder/(routes)/personal/components/formFields/Phone"
     ),
   {
     loading: () => <FieldSkeleton />,
-  },
+  }
 );
 
 const PersonalForm = () => {
   const dispatch = useAppDispatch();
   type formSchema = z.infer<typeof personalSchema>;
   const personalInfo = useAppSelector(
-    (state) => state.persistedReducer.personalInfo,
+    (state) => state.persistedReducer.personalInfo
   );
 
   const form = useForm<formSchema>({
@@ -59,7 +59,7 @@ const PersonalForm = () => {
         name: "Personal Information",
         isValidated: true,
         index: 0,
-      }),
+      })
     );
   };
   const handleChange = () => {
@@ -85,8 +85,8 @@ const PersonalForm = () => {
               <Address form={form} />
 
               <div className="flex gap-5 w-full">
-                <CountryCode form={form} handleChange={handleChange} />
-                <Mobile form={form} />
+                {/* <CountryCode form={form} handleChange={handleChange} /> */}
+                <Phone form={form} />
               </div>
 
               <div className="flex gap-5 w-full">

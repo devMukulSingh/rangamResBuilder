@@ -3,7 +3,7 @@ export interface IpersonalInfo {
   email: string;
   profession: string;
   countryCode: string;
-  mobile: string;
+  phone: string;
   bio: string;
   state?: string | undefined;
   address?: string | undefined;

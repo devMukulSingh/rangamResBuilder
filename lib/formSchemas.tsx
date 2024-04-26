@@ -37,21 +37,22 @@ export const personalSchema = z.object({
     .max(30, {
       message: "Profession must be max 30 characters",
     }),
-  countryCode: z
-    .string({
-      required_error: "Country code is required",
-    })
-    .trim()
-    .min(2, {
-      message: "CountryCode must be minimum 2 numbers",
-    }),
-  mobile: z
+  // countryCode: z
+  //   .string({
+  //     required_error: "Country code is required",
+  //   })
+  //   .trim()
+  //   .min(2, {
+  //     message: "CountryCode must be minimum 2 numbers",
+  //   }),
+  phone: z
     .string({
       required_error: "Mobile no is required",
       invalid_type_error: "must be a number",
-    })
-    .trim()
-    .refine(validator.isMobilePhone),
+    }),
+    // .trim()
+    // .refine(validator.isMobilePhone),
+    
   state: z.string().optional(),
   city: z.string().optional(),
   address: z.string().optional(),

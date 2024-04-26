@@ -12,14 +12,16 @@ import dynamic from "next/dynamic";
 import Name from "./formFields/Name";
 import Email from "./formFields/Email";
 import Profession from "./formFields/Profession";
-import Mobile from "./formFields/Mobile";
 import FieldSkeleton from "./FieldSkeleton";
 import { useEffect } from "react";
 import { personalSchema } from "@/lib/formSchemas";
 import Loader from "@/components/commons/Loader";
-const CountryCode = dynamic(() => import("./formFields/CountryCode"), {
-  loading: () => <FieldSkeleton />,
-});
+import Phone from "./formFields/Phone";
+// import Mobile from "./formFields/Mobile";
+// const CountryCode = dynamic(() => import("./formFields/CountryCode"), {
+//   loading: () => <FieldSkeleton />,
+//   ssr:false
+// });
 
 export interface IForm {
   handleChange?: () => void;
@@ -28,8 +30,8 @@ export interface IForm {
       fullName: string;
       email: string;
       profession: string;
-      countryCode: string;
-      mobile: string;
+      // countryCode: string;
+      phone: string;
       state?: string | undefined;
       address?: string | undefined;
       dob?: string;
@@ -47,7 +49,7 @@ const PersonalForm = () => {
 
   type formSchema = z.infer<typeof personalSchema>;
   const personalInfo = useAppSelector(
-    (state) => state.persistedReducer.personalInfo,
+    (state) => state.persistedReducer.personalInfo
   );
   const form = useForm<formSchema>({
     resolver: zodResolver(personalSchema),
@@ -79,8 +81,8 @@ const PersonalForm = () => {
             <Profession form={form} />
 
             <div className="flex gap-5 w-full">
-              <CountryCode form={form} />
-              <Mobile form={form} />
+              <Phone form={form} />
+              {/* <Mobile form={form} /> */}
             </div>
 
             <Button
