@@ -39,7 +39,7 @@ const Index = () => {
                 min-h-[100vh]
                 "
       >
-        <hr className="h-4 bg-blue-400 w-full border-none" />
+        <hr className="h-4 bg-blue-400 w-full print:w-screen border-none" />
         <div className="flex flex-col gap-5 py-5 px-14">
           <About />
           <Experience />

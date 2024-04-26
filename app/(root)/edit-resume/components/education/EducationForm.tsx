@@ -96,20 +96,20 @@ const EducationForm = () => {
   });
 
   const onSubmit = async () => {
+     dispatch(
+       setValidatedOptions({
+         name: "Education",
+         isValidated: true,
+         index: 0,
+       })
+     );
+    if (!showSidebarOptions) router.push("/download");
     try {
       if (!showSidebarOptions) await trigger();
     } catch (e) {
       console.log(`Error in onSubmit PUT req ${e}`);
-    } finally {
-      if (!showSidebarOptions) router.push("/download");
     }
-    dispatch(
-      setValidatedOptions({
-        name: "Education",
-        isValidated: true,
-        index: 0,
-      }),
-    );
+   
     if (showSidebarOptions) dispatch(setFormComp("Social Links"));
   };
 

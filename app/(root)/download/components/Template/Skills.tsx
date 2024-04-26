@@ -9,16 +9,18 @@ const Skills = () => {
   );
 
   return (
-    <section className="space-y-2">
+    <section className="space-y-3">
       <div className="flex items-center gap-5 ">
         <hr className="h-2 border-none bg-blue-400 w-14" />
         <h1 className=" font-bold">SKILLS</h1>
       </div>
-      <div className="grid grid-cols-4 gap-5">
+      <div className="grid grid-cols-4 gap-3">
         {skills?.map((skill, index) => {
           return (
-            <div className="flex gap-4 items-center" key={index}>
-              {/* <CheckCircle className="shrink-0" /> */}
+            <div 
+            className="flex items-center border px-2 py-2 text-xs rounded-md" 
+            key={index}
+            >
               {skill}
             </div>
           );

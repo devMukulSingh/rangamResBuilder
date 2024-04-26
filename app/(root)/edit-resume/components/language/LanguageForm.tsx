@@ -66,13 +66,12 @@ const LanguageForm = () => {
   const watchFieldsArray = form.watch("languageInfo");
 
   const onSubmit = async () => {
+    router.push(`/download`);
     try {
       await trigger();
     } catch (e) {
       console.log(`Error in onSubmit PUT req ${e}`);
-    } finally {
-      router.push(`/download`);
-    }
+    } 
   };
 
   const handleChange = () => {

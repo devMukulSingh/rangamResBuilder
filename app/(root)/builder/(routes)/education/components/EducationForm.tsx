@@ -158,13 +158,12 @@ const EducationForm = () => {
   };
   const onSubmit = async (data: FieldValues) => {
     dispatch(setEducation(data.education));
+    router.push("/download");
     try {
       await trigger();
     } catch (e) {
       console.log(`Error in onSubmit POST resumedata req ${e}`);
-    } finally {
     }
-    router.push("/download");
   };
   useEffect(() => {
     router.prefetch("/download");

@@ -16,7 +16,7 @@ const About = () => {
         <h1 className="text-2xl font-semibold text-blue-400">
           {personalInfo?.fullName}
         </h1>
-        <HTMLRenderer htmlString={personalInfo?.bio} className="text-sm" />
+        <HTMLRenderer htmlString={personalInfo?.bio} className="" />
       </div>
 
       <div className="flex gap-5 ">

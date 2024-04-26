@@ -23,7 +23,7 @@ export const HTMLRenderer = ({
                 {dToReact.map((item, index) => {
                   if (!item.props.children) return null;
                   return (
-                    <li key={index} className={``}>
+                    <li key={index} style={{"fontSize":12}} className="!text-xs">
                       {item.props.children}
                     </li>
                   );
@@ -33,7 +33,9 @@ export const HTMLRenderer = ({
           } else {
             return (
               <ol className="list-decimal pl-5">
-                <li>{dToReact.props.children}</li>
+                <li style={{ fontSize: 12 }} className="!text-xs">
+                  {dToReact.props.children}
+                </li>
               </ol>
             );
           }
@@ -43,5 +45,5 @@ export const HTMLRenderer = ({
       },
     });
   }, [htmlString]);
-  return <div>{parsedElement}</div>;
+  return <div className="">{parsedElement}</div>;
 };
