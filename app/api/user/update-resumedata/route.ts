@@ -142,7 +142,7 @@ export async function PUT(req: NextRequest, res: NextResponse) {
                 name: profession,
               },
             },
-            mobile:phone,
+            mobile: phone,
             fullName,
             address,
             birthPlace: {

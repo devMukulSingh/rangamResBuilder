@@ -124,7 +124,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
                 name: profession,
               },
             },
-            mobile:phone,
+            mobile: phone,
             fullName,
             address,
             birthPlace: {

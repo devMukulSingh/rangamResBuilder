@@ -49,7 +49,7 @@ const PersonalForm = () => {
 
   type formSchema = z.infer<typeof personalSchema>;
   const personalInfo = useAppSelector(
-    (state) => state.persistedReducer.personalInfo
+    (state) => state.persistedReducer.personalInfo,
   );
   const form = useForm<formSchema>({
     resolver: zodResolver(personalSchema),
@@ -70,20 +70,20 @@ const PersonalForm = () => {
     router.prefetch(`/builder/goals`);
   }, []);
   return (
-    <div className=" text-neutral-500 lg:w-fit w-full flex justify-center md:justify-end h-[30rem] ">
+    <div className=" text-neutral-500  sm:w-[25rem] w-auto flex h-[30rem] ">
       <Form {...form}>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="px-10 py-10 bg-[#E0F3FF] flex flex-col gap-3 h-full w-full lg:w-[85%]  rounded-lg ">
+        <form onSubmit={handleSubmit(onSubmit)} className="w-full">
+          <div className="px-5 sm:px-10 py-10 bg-[#E0F3FF] flex flex-col gap-3 h-full w-full rounded-lg ">
             <Name form={form} />
 
             <Email form={form} />
 
             <Profession form={form} />
 
-            <div className="flex gap-5 w-full">
+            {/* <div className="flex gap-5 w-full"> */}
               <Phone form={form} />
               {/* <Mobile form={form} /> */}
-            </div>
+            {/* </div> */}
 
             <Button
               disabled={isSubmitting}

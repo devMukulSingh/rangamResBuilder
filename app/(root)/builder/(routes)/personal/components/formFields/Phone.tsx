@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import {
@@ -30,12 +30,15 @@ const Phone: FC<IForm> = ({ form, handleChange }) => {
             inputStyle={{
               height: "40px",
               border: "0.5px solid #e4e4e4",
-              
+              width:"100%"
             }}
-            dropdownStyle={{ background:"white"}}
+            dropdownStyle={{ background: "white" }}
             dropdownClass="bg-white"
             country={"us"}
-            onChange={(val,country,e,formattedValue) => field.onChange(formattedValue)}
+            onChange={(val, country, e, formattedValue) =>
+              field.onChange(formattedValue)
+            }
+            value={field.value}
           />
           <FormMessage />
         </FormItem>
@@ -46,7 +49,8 @@ const Phone: FC<IForm> = ({ form, handleChange }) => {
 
 export default Phone;
 
-{/* <Popover open={open} onOpenChange={setOpen}>
+{
+  /* <Popover open={open} onOpenChange={setOpen}>
   <PopoverTrigger asChild>
     <FormControl>
       <Button
@@ -101,4 +105,5 @@ export default Phone;
       </CommandGroup>
     </Command>
   </PopoverContent>
-</Popover> */}
+</Popover> */
+}

@@ -45,14 +45,13 @@ export const personalSchema = z.object({
   //   .min(2, {
   //     message: "CountryCode must be minimum 2 numbers",
   //   }),
-  phone: z
-    .string({
-      required_error: "Mobile no is required",
-      invalid_type_error: "must be a number",
-    }),
-    // .trim()
-    // .refine(validator.isMobilePhone),
-    
+  phone: z.string({
+    required_error: "Mobile no is required",
+    invalid_type_error: "must be a number",
+  }),
+  // .trim()
+  // .refine(validator.isMobilePhone),
+
   state: z.string().optional(),
   city: z.string().optional(),
   address: z.string().optional(),
