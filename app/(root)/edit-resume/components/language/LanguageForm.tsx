@@ -39,7 +39,7 @@ const LanguageForm = () => {
       onSuccess(data) {
         dispatch(setUserId(data.id));
       },
-    }
+    },
   );
   const dispatch = useAppDispatch();
   const router = useRouter();

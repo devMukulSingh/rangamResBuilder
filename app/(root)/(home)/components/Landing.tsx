@@ -17,7 +17,7 @@ const Landing = () => {
             Hi Candidate,
           </h1>
           <h1 className="sm:text-xl text-lg">
-            RANGAM will help you build an AI-enabled resume to allow employers
+            Rangam will help you build an AI-enabled resume to allow employers
             contact you easily.
           </h1>
           <h1 className="text-lg sm:text-xl mt-5">

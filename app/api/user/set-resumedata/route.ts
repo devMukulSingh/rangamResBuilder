@@ -187,10 +187,10 @@ export async function POST(req: NextRequest, res: NextResponse) {
           },
         },
         personalInfo: {
-          include:{
-            profession:true,
-            countryCode:true
-          }
+          include: {
+            profession: true,
+            countryCode: true,
+          },
         },
         skills: true,
         achievements: true,

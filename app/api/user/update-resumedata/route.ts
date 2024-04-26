@@ -235,9 +235,9 @@ export async function PUT(req: NextRequest, res: NextResponse) {
         personalInfo: {
           include: {
             profession: true,
-            countryCode: true
-          }
-        },
+            countryCode: true,
+          },
+          },
         skills: true,
         achievements: true,
         contacts: true,

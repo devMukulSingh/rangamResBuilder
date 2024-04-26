@@ -18,7 +18,7 @@ const Skills = () => {
         {skills?.map((skill, index) => {
           return (
             <div className="flex gap-4 items-center" key={index}>
-              <CheckCircle className="shrink-0" />
+              {/* <CheckCircle className="shrink-0" /> */}
               {skill}
             </div>
           );

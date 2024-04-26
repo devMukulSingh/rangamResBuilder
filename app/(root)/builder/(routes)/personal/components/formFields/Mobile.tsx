@@ -21,7 +21,7 @@ const Mobile: FC<IForm> = ({ form }) => {
       control={control}
       render={({ field }) => (
         <FormItem className="w-1/2">
-          <FormLabel>Mobile</FormLabel>
+          <FormLabel>Phone</FormLabel>
           <FormControl>
             <Input
               disabled={isSubmitting}

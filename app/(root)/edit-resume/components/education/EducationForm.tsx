@@ -1,6 +1,6 @@
 "use client";
 import { Form } from "@/components/ui/form";
-import {  useFieldArray, useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
 import { setEducation, setUserId } from "@/redux/slice/userSlice";
@@ -49,10 +49,10 @@ const EducationForm = () => {
     [`/api/user/update-resumedata`, resumeData],
     fetcher,
     {
-      onSuccess(data){
-        dispatch(setUserId(data.id))
-      }
-    }
+      onSuccess(data) {
+        dispatch(setUserId(data.id));
+      },
+    },
   );
   const [expanded, setExpanded] = useState<string | false>("");
   const showSidebarOptions = useAppSelector(
@@ -100,10 +100,8 @@ const EducationForm = () => {
       if (!showSidebarOptions) await trigger();
     } catch (e) {
       console.log(`Error in onSubmit PUT req ${e}`);
-    }
-    finally{
-      if(!showSidebarOptions)
-      router.push("/download");
+    } finally {
+      if (!showSidebarOptions) router.push("/download");
     }
     dispatch(
       setValidatedOptions({
@@ -112,8 +110,7 @@ const EducationForm = () => {
         index: 0,
       }),
     );
-    if(showSidebarOptions)
-    dispatch(setFormComp("Social Links"));
+    if (showSidebarOptions) dispatch(setFormComp("Social Links"));
   };
 
   const handleChange = () => {
@@ -299,7 +296,7 @@ const EducationForm = () => {
                   disabled={isMutating}
                 >
                   {showSidebarOptions ? "Next" : "Submit"}
-                  {isMutating && <Loader/>}
+                  {isMutating && <Loader />}
                 </Button>
               </div>
             </div>
