@@ -131,11 +131,11 @@ export async function PUT(req: NextRequest, res: NextResponse) {
         personalInfo: {
           create: {
             bio,
-            countryCode: {
-              create: {
-                code: "",
-              },
-            },
+            // countryCode: {
+            //   create: {
+            //     code: "",
+            //   },
+            // },
             email,
             profession: {
               create: {

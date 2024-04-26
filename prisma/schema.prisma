@@ -31,14 +31,14 @@ model Goal{
 model PersonalInfo{
   id                    String            @id@default(cuid())
   professionId          String
-  countryCodeId         String
+  // countryCodeId         String
   userId                String            @unique
   user                  User              @relation("userToPersonalInfo",fields: [userId],references: [id],onDelete: Cascade)
   fullName              String
   email                 String            
   bio                   String            @db.VarChar(400)    
   profession            Profession        @relation("personalInfoToProfession",fields: [professionId],references: [id],onDelete: Cascade)
-  countryCode           CountryCode       @relation("personalInfoToCountryCode",fields: [countryCodeId],references: [id],onDelete: Cascade) 
+  // countryCode           CountryCode       @relation("personalInfoToCountryCode",fields: [countryCodeId],references: [id],onDelete: Cascade) 
   mobile                String
   state                 State?            @relation("personalInfoToState") 
   address               String? 
@@ -69,11 +69,11 @@ model Profession{
   name                  String
   personalInfos          PersonalInfo[]   @relation("personalInfoToProfession")
 }
-model CountryCode{
-   id                    String            @id@default(cuid())
-  code                  String
-  personalInfos         PersonalInfo[]     @relation("personalInfoToCountryCode")
-}
+// model CountryCode{
+//    id                    String            @id@default(cuid())
+//   code                  String
+//   personalInfos         PersonalInfo[]     @relation("personalInfoToCountryCode")
+// }
 
 model Skill{
   id                      String                    @id@default(cuid())
