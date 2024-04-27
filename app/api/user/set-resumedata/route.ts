@@ -36,7 +36,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
     } = resumeData;
     const user = await prisma.user.create({
       data: {
-        email,
         goal: {
           create: {
             name: goal,

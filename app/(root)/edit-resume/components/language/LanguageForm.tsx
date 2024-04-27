@@ -71,7 +71,7 @@ const LanguageForm = () => {
       await trigger();
     } catch (e) {
       console.log(`Error in onSubmit PUT req ${e}`);
-    } 
+    }
   };
 
   const handleChange = () => {

@@ -9,10 +9,8 @@ datasource db {
 }
 
 model User{
-  id              String            @id@default(cuid())
-  email           String           
-  goalId          String
-  goal            Goal              @relation("userToGoal",fields: [goalId],references: [id],onDelete: Cascade)
+  id              String            @id@default(cuid())       
+  goal            Goal?             @relation("userToGoal")
   skills          Skill[]           @relation("_UserToSkill")
   personalInfo    PersonalInfo?     @relation("userToPersonalInfo")
   experiences     Experience[]      @relation("userToExperience")
@@ -26,11 +24,12 @@ model User{
 model Goal{
   id                  String             @id@default(cuid())
   name                String              
-  users               User[]             @relation("userToGoal")
+  userId              String             @unique          
+  user                User               @relation("userToGoal",fields: [userId],references: [id],onDelete: Cascade)
 }
 model PersonalInfo{
   id                    String            @id@default(cuid())
-  professionId          String
+  professionId          String            @unique
   // countryCodeId         String
   userId                String            @unique
   user                  User              @relation("userToPersonalInfo",fields: [userId],references: [id],onDelete: Cascade)
@@ -67,7 +66,7 @@ model State{
 model Profession{
   id                    String            @id@default(cuid())
   name                  String
-  personalInfos          PersonalInfo[]   @relation("personalInfoToProfession")
+  personalInfo         PersonalInfo?      @relation("personalInfoToProfession")
 }
 // model CountryCode{
 //    id                    String            @id@default(cuid())

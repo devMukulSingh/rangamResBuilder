@@ -23,7 +23,11 @@ export const HTMLRenderer = ({
                 {dToReact.map((item, index) => {
                   if (!item.props.children) return null;
                   return (
-                    <li key={index} style={{"fontSize":12}} className="!text-xs">
+                    <li
+                      key={index}
+                      style={{ fontSize: 12 }}
+                      className="!text-xs"
+                    >
                       {item.props.children}
                     </li>
                   );

@@ -75,11 +75,10 @@ const Goals = () => {
         <LinkComp
           className="flex gap-5"
           onClick={handleGoalSelect}
-          disabled={selectedGoal === "" || isMutating ? true : false}
           href={"/builder/skills"}
         >
           Next
-          {isMutating && <Loader />}
+          {/* {isMutating && <Loader />} */}
         </LinkComp>
       </div>
     </>

@@ -17,9 +17,9 @@ const Skills = () => {
       <div className="grid grid-cols-4 gap-3">
         {skills?.map((skill, index) => {
           return (
-            <div 
-            className="flex items-center border px-2 py-2 text-xs rounded-md" 
-            key={index}
+            <div
+              className="flex items-center border px-2 py-2 text-xs rounded-md"
+              key={index}
             >
               {skill}
             </div>

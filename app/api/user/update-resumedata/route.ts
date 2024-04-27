@@ -47,13 +47,13 @@ export async function PUT(req: NextRequest, res: NextResponse) {
     if (!deletedUser)
       return NextResponse.json(
         {
-          error: "Unauthorised, user doesn't exists",
+          error: "User not found",
         },
-        { status: 401 },
+        { status: 400 },
       );
     const newUser = await prisma.user.create({
       data: {
-        email,
+        
         goal: {
           create: {
             name: goal,
@@ -131,11 +131,6 @@ export async function PUT(req: NextRequest, res: NextResponse) {
         personalInfo: {
           create: {
             bio,
-            // countryCode: {
-            //   create: {
-            //     code: "",
-            //   },
-            // },
             email,
             profession: {
               create: {
@@ -248,7 +243,7 @@ export async function PUT(req: NextRequest, res: NextResponse) {
     });
 
     return NextResponse.json(user, {
-      status: 201,
+      status: 200,
     });
   } catch (e) {
     console.log(`Error in PUT resumeData req ${e}`);
