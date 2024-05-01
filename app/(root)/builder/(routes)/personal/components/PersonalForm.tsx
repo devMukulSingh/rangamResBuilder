@@ -17,11 +17,7 @@ import { useEffect } from "react";
 import { personalSchema } from "@/lib/formSchemas";
 import Loader from "@/components/commons/Loader";
 import Phone from "./formFields/Phone";
-// import Mobile from "./formFields/Mobile";
-// const CountryCode = dynamic(() => import("./formFields/CountryCode"), {
-//   loading: () => <FieldSkeleton />,
-//   ssr:false
-// });
+ 
 
 export interface IForm {
   handleChange?: () => void;
@@ -65,6 +61,7 @@ const PersonalForm = () => {
     dispatch(resetForm());
     dispatch(setPersonalInfo(data));
     await axios.post("/api/set-profession", { profession: data.profession });
+    localStorage.removeItem("app-cache")
   };
   useEffect(() => {
     router.prefetch(`/builder/goals`);

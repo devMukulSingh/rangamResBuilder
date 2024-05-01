@@ -36,7 +36,7 @@ const Index = () => {
                 print:h-screen
                 print:w-screen
                 print:p-0
-                min-h-[100vh]
+                h-[1075px]
                 "
       >
         <hr className="h-4 bg-blue-400 w-full print:w-screen border-none" />

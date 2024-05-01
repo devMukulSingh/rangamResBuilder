@@ -53,7 +53,6 @@ export async function PUT(req: NextRequest, res: NextResponse) {
       );
     const newUser = await prisma.user.create({
       data: {
-        
         goal: {
           create: {
             name: goal,
