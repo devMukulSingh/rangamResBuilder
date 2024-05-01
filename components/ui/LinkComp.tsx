@@ -22,7 +22,7 @@ const LinkComp: FC<LinkProps> = ({
 }) => {
   return (
     <Link
-      prefetch={true}
+      prefetch={prefetch}
       onClick={onClick}
       aria-disabled={disabled}
       className={cn(

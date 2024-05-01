@@ -38,13 +38,13 @@ export interface IForm {
 }
 
 const PersonalForm = () => {
-  const { cache } = useSWRConfig()
+  const { cache, mutate } = useSWRConfig();
   const dispatch = useAppDispatch();
   const router = useRouter();
 
   type formSchema = z.infer<typeof personalSchema>;
   const personalInfo = useAppSelector(
-    (state) => state.persistedReducer.personalInfo,
+    (state) => state.persistedReducer.personalInfo
   );
   const form = useForm<formSchema>({
     resolver: zodResolver(personalSchema),
@@ -60,7 +60,12 @@ const PersonalForm = () => {
     dispatch(resetForm());
     dispatch(setPersonalInfo(data));
     await axios.post("/api/set-profession", { profession: data.profession });
-    localStorage.setItem("app-cache","[]");
+
+    mutate(
+      (key) => true, 
+      undefined, 
+      { revalidate: false } 
+    );
   };
   useEffect(() => {
     router.prefetch(`/builder/goals`);

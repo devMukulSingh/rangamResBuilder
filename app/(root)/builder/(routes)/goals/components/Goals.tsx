@@ -73,6 +73,7 @@ const Goals = () => {
           Back
         </LinkComp>
         <LinkComp
+          prefetch={false}
           className="flex gap-5"
           onClick={handleGoalSelect}
           href={"/builder/skills"}
