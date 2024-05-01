@@ -8,16 +8,14 @@ import { resetForm, setPersonalInfo } from "@/redux/slice/userSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import dynamic from "next/dynamic";
 import Name from "./formFields/Name";
 import Email from "./formFields/Email";
 import Profession from "./formFields/Profession";
-import FieldSkeleton from "./FieldSkeleton";
 import { useEffect } from "react";
 import { personalSchema } from "@/lib/formSchemas";
 import Loader from "@/components/commons/Loader";
 import Phone from "./formFields/Phone";
- 
+import { useSWRConfig } from "swr";
 
 export interface IForm {
   handleChange?: () => void;
@@ -40,6 +38,7 @@ export interface IForm {
 }
 
 const PersonalForm = () => {
+  const { cache } = useSWRConfig()
   const dispatch = useAppDispatch();
   const router = useRouter();
 
@@ -61,7 +60,7 @@ const PersonalForm = () => {
     dispatch(resetForm());
     dispatch(setPersonalInfo(data));
     await axios.post("/api/set-profession", { profession: data.profession });
-    localStorage.removeItem("app-cache")
+    localStorage.setItem("app-cache","[]");
   };
   useEffect(() => {
     router.prefetch(`/builder/goals`);
