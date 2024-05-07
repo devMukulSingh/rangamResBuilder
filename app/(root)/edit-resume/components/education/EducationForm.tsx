@@ -23,7 +23,6 @@ import Speciality from "@/app/(root)/builder/(routes)/education/components/formF
 import CheckboxPursuing from "./components/CheckboxPursuing";
 import useSWRMutation from "swr/mutation";
 import axios from "axios";
-import { Ifetcher } from "@/app/(root)/builder/(routes)/education/components/EducationForm";
 import { educationSchema } from "@/lib/formSchemas";
 import dynamic from "next/dynamic";
 import Loader from "@/components/commons/Loader";
@@ -40,28 +39,33 @@ const EndDate = dynamic(
     ),
 );
 
-const fetcher = ([url, resumeData]: Ifetcher) =>
-  axios.put(url, resumeData).then((res) => res.data);
+type formFieldValues = z.infer<typeof educationSchema>;
+
+export async function updateResumeData(
+  url: string,
+  { arg }: { arg: formFieldValues }
+) {
+  return await axios.put(url, arg);
+}
 
 const EducationForm = () => {
   const resumeData = useAppSelector((state) => state.persistedReducer);
-  const { trigger, isMutating, error } = useSWRMutation(
-    [`/api/user/update-resumedata`, resumeData],
-    fetcher,
-    {
-      onSuccess(data) {
-        dispatch(setUserId(data.id));
-      },
-    },
-  );
   const [expanded, setExpanded] = useState<string | false>("");
   const showSidebarOptions = useAppSelector(
     (state) => state.commonSlice.showSidebarOptions,
   );
   const dispatch = useAppDispatch();
   const education = useAppSelector((state) => state.persistedReducer.education);
-
   const router = useRouter();
+  const { trigger, isMutating, error } = useSWRMutation(
+    `/api/user/update-resumedata`,
+    updateResumeData,
+    {
+      onSuccess(data) {
+        dispatch(setUserId(data.data.id));
+      },
+    }
+  );
   const form = useForm<z.infer<typeof educationSchema>>({
     resolver: zodResolver(educationSchema),
     defaultValues: {
@@ -103,13 +107,14 @@ const EducationForm = () => {
         index: 0,
       }),
     );
-    if (!showSidebarOptions) router.push("/download");
     try {
-      if (!showSidebarOptions) await trigger();
+      if (!showSidebarOptions) await trigger(resumeData);
     } catch (e) {
       console.log(`Error in onSubmit PUT req ${e}`);
     }
-
+    finally{
+      if (!showSidebarOptions) router.push("/download");
+    }
     if (showSidebarOptions) dispatch(setFormComp("Social Links"));
   };
 

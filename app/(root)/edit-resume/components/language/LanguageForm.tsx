@@ -19,31 +19,28 @@ import { languagesData, strengths } from "@/lib/constants";
 import { Loader, PlusCircle } from "lucide-react";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
 import { setLanguages, setUserId } from "@/redux/slice/userSlice";
-import { useParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import toast from "react-hot-toast";
 import useSWRMutation from "swr/mutation";
-import { Ifetcher } from "@/app/(root)/builder/(routes)/education/components/EducationForm";
-import axios from "axios";
-import useSWR from "swr";
+import { updateResumeData } from "../education/EducationForm";
 
-const fetcher = ([url, resumeData]: Ifetcher) =>
-  axios.put(url, resumeData).then((res) => res.data);
+
 const LanguageForm = () => {
   const resumeData = useAppSelector((state) => state.persistedReducer);
-
-  const { trigger, isMutating, error } = useSWRMutation(
-    [`/api/user/update-resumedata`, resumeData],
-    fetcher,
-    {
-      onSuccess(data) {
-        dispatch(setUserId(data.id));
-      },
-    },
-  );
   const dispatch = useAppDispatch();
   const router = useRouter();
   const languages = useAppSelector((state) => state.persistedReducer.languages);
+
+  const { trigger, isMutating, error } = useSWRMutation(
+    `/api/user/update-resumedata`,
+    updateResumeData,
+    {
+      onSuccess(data) {
+        dispatch(setUserId(data.data.id));
+      },
+    },
+  );
 
   const form = useForm({
     defaultValues: {
@@ -66,11 +63,13 @@ const LanguageForm = () => {
   const watchFieldsArray = form.watch("languageInfo");
 
   const onSubmit = async () => {
-    router.push(`/download`);
     try {
-      await trigger();
+      await trigger(resumeData);
     } catch (e) {
       console.log(`Error in onSubmit PUT req ${e}`);
+    }
+    finally{
+      router.push(`/download`);
     }
   };
 

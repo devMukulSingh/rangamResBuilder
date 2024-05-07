@@ -44,7 +44,7 @@ const PersonalForm = () => {
 
   type formSchema = z.infer<typeof personalSchema>;
   const personalInfo = useAppSelector(
-    (state) => state.persistedReducer.personalInfo
+    (state) => state.persistedReducer.personalInfo,
   );
   const form = useForm<formSchema>({
     resolver: zodResolver(personalSchema),
@@ -61,11 +61,7 @@ const PersonalForm = () => {
     dispatch(setPersonalInfo(data));
     await axios.post("/api/set-profession", { profession: data.profession });
 
-    mutate(
-      (key) => true, 
-      undefined, 
-      { revalidate: false } 
-    );
+    mutate((key) => true, undefined, { revalidate: false });
   };
   useEffect(() => {
     router.prefetch(`/builder/goals`);

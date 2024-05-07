@@ -32,6 +32,8 @@ import axios from "axios";
 import useSWRMutation from "swr/mutation";
 import { educationSchema } from "@/lib/formSchemas";
 import Buttons from "./Buttons";
+import { Ieducation } from "@/lib/types";
+
 export interface IeducationForm {
   handleChange?: () => void;
   form: UseFormReturn<
@@ -51,19 +53,19 @@ export interface IeducationForm {
   >;
   index: number;
 }
-export type Ifetcher = [url: string, resumeData: IinitialState];
-
-export const fetcher = ([url, resumeData]: Ifetcher) =>
-  axios.post(url, resumeData).then((res) => res.data);
+type formFieldValues = z.infer<typeof educationSchema>
+export async function setResumeData(url: string, { arg }: { arg: formFieldValues }) {
+  return await axios.post(url, arg);
+}
 
 const EducationForm = () => {
   const resumeData = useAppSelector((state) => state.persistedReducer);
   const { trigger, isMutating, error } = useSWRMutation(
-    [`/api/user/set-resumedata`, resumeData],
-    fetcher,
+    `/api/user/set-resumedata`,
+    setResumeData,
     {
       onSuccess(data) {
-        dispatch(setUserId(data.id));
+        dispatch(setUserId(data.data.id));
       },
     },
   );
@@ -71,9 +73,8 @@ const EducationForm = () => {
   const education = useAppSelector((state) => state.persistedReducer.education);
   const dispatch = useAppDispatch();
   const router = useRouter();
-  type formSchema = z.infer<typeof educationSchema>;
 
-  const form = useForm<formSchema>({
+  const form = useForm<formFieldValues>({
     resolver: zodResolver(educationSchema),
     defaultValues: {
       education:
@@ -156,13 +157,17 @@ const EducationForm = () => {
       fieldArray.remove(index);
     }
   };
-  const onSubmit = async (data: FieldValues) => {
+  const onSubmit = async (data:formFieldValues) => {
     dispatch(setEducation(data.education));
-    router.push("/download");
     try {
-      await trigger();
+      await trigger({
+        ...resumeData,
+        education:data.education
+      });
     } catch (e) {
       console.log(`Error in onSubmit POST resumedata req ${e}`);
+    } finally {
+      router.push("/download");
     }
   };
   useEffect(() => {
