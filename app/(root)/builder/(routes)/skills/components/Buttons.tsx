@@ -15,7 +15,7 @@ const Buttons = () => {
     // if (selectedSkills.length < 6) {
     //   toast.error("Select atleast 6 skills");
     // } else {
-      router.push(`/builder/experience`);
+    router.push(`/builder/experience`);
     // }
   };
   useEffect(() => {
