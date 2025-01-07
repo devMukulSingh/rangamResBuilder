@@ -43,7 +43,7 @@ type formFieldValues = z.infer<typeof educationSchema>;
 
 export async function updateResumeData(
   url: string,
-  { arg }: { arg: formFieldValues }
+  { arg }: { arg: formFieldValues },
 ) {
   return await axios.put(url, arg);
 }
@@ -64,7 +64,7 @@ const EducationForm = () => {
       onSuccess(data) {
         dispatch(setUserId(data.data.id));
       },
-    }
+    },
   );
   const form = useForm<z.infer<typeof educationSchema>>({
     resolver: zodResolver(educationSchema),
@@ -111,8 +111,7 @@ const EducationForm = () => {
       if (!showSidebarOptions) await trigger(resumeData);
     } catch (e) {
       console.log(`Error in onSubmit PUT req ${e}`);
-    }
-    finally{
+    } finally {
       if (!showSidebarOptions) router.push("/download");
     }
     if (showSidebarOptions) dispatch(setFormComp("Social Links"));

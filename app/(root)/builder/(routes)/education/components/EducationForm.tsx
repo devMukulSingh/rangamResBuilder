@@ -53,8 +53,11 @@ export interface IeducationForm {
   >;
   index: number;
 }
-type formFieldValues = z.infer<typeof educationSchema>
-export async function setResumeData(url: string, { arg }: { arg: formFieldValues }) {
+type formFieldValues = z.infer<typeof educationSchema>;
+export async function setResumeData(
+  url: string,
+  { arg }: { arg: formFieldValues },
+) {
   return await axios.post(url, arg);
 }
 
@@ -157,12 +160,12 @@ const EducationForm = () => {
       fieldArray.remove(index);
     }
   };
-  const onSubmit = async (data:formFieldValues) => {
+  const onSubmit = async (data: formFieldValues) => {
     dispatch(setEducation(data.education));
     try {
       await trigger({
         ...resumeData,
-        education:data.education
+        education: data.education,
       });
     } catch (e) {
       console.log(`Error in onSubmit POST resumedata req ${e}`);

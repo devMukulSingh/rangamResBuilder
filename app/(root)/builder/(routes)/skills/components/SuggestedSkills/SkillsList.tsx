@@ -20,11 +20,8 @@ const SkillsList = () => {
     ["/api/ai/get-skills", profession],
     fetcher,
     {
-      revalidateIfStale: false,
       revalidateOnFocus: false,
       revalidateOnReconnect: false,
-      refreshWhenOffline: false,
-      refreshWhenHidden: false,
     },
   );
 

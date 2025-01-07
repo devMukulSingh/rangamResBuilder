@@ -25,7 +25,6 @@ import toast from "react-hot-toast";
 import useSWRMutation from "swr/mutation";
 import { updateResumeData } from "../education/EducationForm";
 
-
 const LanguageForm = () => {
   const resumeData = useAppSelector((state) => state.persistedReducer);
   const dispatch = useAppDispatch();
@@ -67,8 +66,7 @@ const LanguageForm = () => {
       await trigger(resumeData);
     } catch (e) {
       console.log(`Error in onSubmit PUT req ${e}`);
-    }
-    finally{
+    } finally {
       router.push(`/download`);
     }
   };

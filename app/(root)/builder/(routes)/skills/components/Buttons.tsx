@@ -12,11 +12,11 @@ const Buttons = () => {
     (state) => state.persistedReducer.technicalSkills,
   );
   const handleNavigation = () => {
-    if (selectedSkills.length < 6) {
-      toast.error("Select atleast 6 skills");
-    } else {
+    // if (selectedSkills.length < 6) {
+    //   toast.error("Select atleast 6 skills");
+    // } else {
       router.push(`/builder/experience`);
-    }
+    // }
   };
   useEffect(() => {
     router.prefetch(`/builder/experience`);

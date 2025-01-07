@@ -34,8 +34,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
       },
       technicalSkills,
     } = resumeData;
-    console.log(education);
-    
+
     const user = await prisma.user.create({
       data: {
         goal: {
@@ -201,7 +200,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
         projects: true,
       },
     });
-
     return NextResponse.json(updatedUser, {
       status: 201,
     });
