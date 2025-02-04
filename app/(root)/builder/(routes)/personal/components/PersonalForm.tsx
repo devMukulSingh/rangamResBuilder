@@ -12,7 +12,7 @@ import Name from "./formFields/Name";
 import Email from "./formFields/Email";
 import Profession from "./formFields/Profession";
 import { useEffect } from "react";
-import { personalSchema } from "@/lib/formSchemas";
+import { personalSchema } from "@/lib/schema/formSchemas";
 import Loader from "@/components/commons/Loader";
 import Phone from "./formFields/Phone";
 import { useSWRConfig } from "swr";
@@ -44,7 +44,7 @@ const PersonalForm = () => {
 
   type formSchema = z.infer<typeof personalSchema>;
   const personalInfo = useAppSelector(
-    (state) => state.persistedReducer.personalInfo,
+    (state) => state.persistedReducer.personalInfo
   );
   const form = useForm<formSchema>({
     resolver: zodResolver(personalSchema),

@@ -1,6 +1,6 @@
 import parseHtmlStringToHtml, { domToReact, Text } from "html-react-parser";
 import { useMemo } from "react";
-import { cn } from "./utils";
+import { cn } from "../../lib/utils";
 import { View } from "@react-pdf/renderer";
 
 export const HTMLRenderer = ({

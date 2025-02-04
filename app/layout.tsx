@@ -4,9 +4,9 @@ import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import Providers from "@/redux/providers/Providers";
 import PersistProvider from "@/redux/providers/PersistProvider";
-import QueryProviders from "@/lib/QueryProviders";
+import QueryProviders from "@/lib/providers/QueryProviders";
 import { SWRConfig } from "swr";
-import { SWRProvider } from "@/lib/SWRProvider";
+import { SWRProvider } from "@/lib/providers/SWRProvider";
 
 const inter = Roboto({ subsets: ["latin"], weight: "400" });
 

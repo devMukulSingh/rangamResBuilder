@@ -1,4 +1,4 @@
-import { ChatGPT } from "@/lib/ChatGPT";
+import { Gemini } from "@/lib/utils";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -13,7 +13,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
 
     const skillPrompt = `give me only a list of 13 skills as a ${profession} to add in resume in max 3 words, and exclude slash and brackets`;
 
-    const skills = await ChatGPT(skillPrompt);
+    const skills = await Gemini(skillPrompt);
     console.log(skills);
     const parsedSkills =
       skills

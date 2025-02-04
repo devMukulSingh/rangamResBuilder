@@ -1,4 +1,4 @@
-import { HTMLRenderer } from "@/lib/HTMLRenderer";
+import { HTMLRenderer } from "@/components/commons/HTMLRenderer";
 import { useAppSelector } from "@/redux/hooks/hooks";
 
 interface ProjectSectionProps {}

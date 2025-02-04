@@ -14,7 +14,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { setPersonalInfo } from "@/redux/slice/userSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
 import { Button } from "@/components/ui/button";
-import { personalSchema } from "@/lib/formSchemas";
+import { personalSchema } from "@/lib/schema/formSchemas";
 import FieldSkeleton from "../commons/FieldSkeleton";
 const City = dynamic(() => import("./formFields/City"));
 const State = dynamic(() => import("./formFields/State"));
@@ -26,14 +26,14 @@ const CountryCode = dynamic(
     ),
   {
     loading: () => <FieldSkeleton />,
-  },
+  }
 );
 
 const PersonalForm = () => {
   const dispatch = useAppDispatch();
   type formSchema = z.infer<typeof personalSchema>;
   const personalInfo = useAppSelector(
-    (state) => state.persistedReducer.personalInfo,
+    (state) => state.persistedReducer.personalInfo
   );
 
   const form = useForm<formSchema>({
@@ -59,7 +59,7 @@ const PersonalForm = () => {
         name: "Personal Information",
         isValidated: true,
         index: 0,
-      }),
+      })
     );
   };
   const handleChange = () => {

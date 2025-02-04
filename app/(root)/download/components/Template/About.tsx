@@ -1,12 +1,12 @@
 "use client";
-import { HTMLRenderer } from "@/lib/HTMLRenderer";
+import { HTMLRenderer } from "@/components/commons/HTMLRenderer";
 import { useAppSelector } from "@/redux/hooks/hooks";
 import { Mail, Phone } from "lucide-react";
 import { FaLinkedin, FaLocationPin } from "react-icons/fa6";
 import { IoLocationOutline } from "react-icons/io5";
 const About = () => {
   const personalInfo = useAppSelector(
-    (state) => state.persistedReducer.personalInfo,
+    (state) => state.persistedReducer.personalInfo
   );
   const contact = useAppSelector((state) => state.persistedReducer.contact);
 

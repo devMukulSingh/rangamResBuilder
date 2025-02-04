@@ -1,5 +1,5 @@
 "use client";
-import { HTMLRenderer } from "@/lib/HTMLRenderer";
+import { HTMLRenderer } from "@/components/commons/HTMLRenderer";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
 import { setSelectedBio } from "@/redux/slice/userSlice";
 import "react-quill/dist/quill.snow.css";
@@ -8,7 +8,7 @@ const RichTextEditor = dynamic(
   () => import("@/components/commons/RichTextEditor"),
   {
     ssr: false,
-  },
+  }
 );
 
 interface PersonalSection {}
@@ -16,11 +16,11 @@ interface PersonalSection {}
 const PersonalSection: React.FC<PersonalSection> = ({}) => {
   const dispatch = useAppDispatch();
   const personalInfo = useAppSelector(
-    (state) => state.persistedReducer.personalInfo,
+    (state) => state.persistedReducer.personalInfo
   );
   const formComp = useAppSelector((state) => state.commonSlice.formComp);
   const selectedBio = useAppSelector(
-    (state) => state.persistedReducer?.personalInfo?.bio,
+    (state) => state.persistedReducer?.personalInfo?.bio
   );
 
   return (

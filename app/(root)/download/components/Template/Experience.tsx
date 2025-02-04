@@ -1,11 +1,11 @@
 "use client";
-import { HTMLRenderer } from "@/lib/HTMLRenderer";
+import { HTMLRenderer } from "@/components/commons/HTMLRenderer";
 import { useAppSelector } from "@/redux/hooks/hooks";
 import { format } from "date-fns";
 
 const Experience = () => {
   const experience = useAppSelector(
-    (state) => state.persistedReducer.experience,
+    (state) => state.persistedReducer.experience
   );
 
   return (

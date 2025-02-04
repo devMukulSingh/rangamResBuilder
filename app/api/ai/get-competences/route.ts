@@ -1,4 +1,4 @@
-import { ChatGPT } from "@/lib/ChatGPT";
+import { Gemini } from "@/lib/utils";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest, res: NextResponse) {
@@ -12,7 +12,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
 
     const prompt = `Generate 7 key competences or responsibilities whose profession is ${jobTitle},in maximum 3 words`;
 
-    const competences = await ChatGPT(prompt);
+    const competences = await Gemini(prompt);
 
     const parsedCompetences =
       competences

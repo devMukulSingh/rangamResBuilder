@@ -15,7 +15,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { languagesData, strengths } from "@/lib/constants";
+import { languagesData, strengths } from "@/lib/constants/constants";
 import { Loader, PlusCircle } from "lucide-react";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
 import { setLanguages, setUserId } from "@/redux/slice/userSlice";

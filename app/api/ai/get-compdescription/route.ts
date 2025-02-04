@@ -1,4 +1,4 @@
-import { ChatGPT } from "@/lib/ChatGPT";
+import { Gemini } from "@/lib/utils";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -21,7 +21,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
 
     const prompt = `i have worked as a ${profession} to add highlights in my resume elaborate ${competence} in a single line as point`;
 
-    const description = await ChatGPT(prompt);
+    const description = await Gemini(prompt);
 
     return NextResponse.json(description, { status: 200 });
   } catch (e) {

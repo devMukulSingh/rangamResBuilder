@@ -6,7 +6,7 @@ import Competence from "./Competence";
 import CompetenceSkeleton from "../CompetenceSkeleton";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
 import axios from "axios";
-import { Iexperience } from "@/lib/types";
+import { Iexperience } from "@/lib/types/types";
 import { ControllerRenderProps } from "react-hook-form";
 import { useIsFetching } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
@@ -45,13 +45,13 @@ const Competences: FC<IExperienceForm> = ({ form, index }) => {
           ...data,
         ]);
       },
-    },
+    }
   );
   const isFetchingCompetenceDescription = useIsFetching({
     queryKey: ["compDescription"],
   });
   const isCompetencesLoading = useAppSelector(
-    (state) => state.commonSlice.competenceLoading,
+    (state) => state.commonSlice.competenceLoading
   );
   if (isCompetencesLoading || isLoading) return <CompetenceSkeleton />;
   if (error) {

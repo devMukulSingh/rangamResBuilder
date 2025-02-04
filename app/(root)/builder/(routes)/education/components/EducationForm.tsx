@@ -30,9 +30,9 @@ import { parseISO } from "date-fns";
 import useSWR from "swr";
 import axios from "axios";
 import useSWRMutation from "swr/mutation";
-import { educationSchema } from "@/lib/formSchemas";
+import { educationSchema } from "@/lib/schema/formSchemas";
 import Buttons from "./Buttons";
-import { Ieducation } from "@/lib/types";
+import { Ieducation } from "@/lib/types/types";
 
 export interface IeducationForm {
   handleChange?: () => void;
@@ -56,7 +56,7 @@ export interface IeducationForm {
 type formFieldValues = z.infer<typeof educationSchema>;
 export async function setResumeData(
   url: string,
-  { arg }: { arg: formFieldValues },
+  { arg }: { arg: formFieldValues }
 ) {
   return await axios.post(url, arg);
 }
@@ -70,7 +70,7 @@ const EducationForm = () => {
       onSuccess(data) {
         dispatch(setUserId(data.data.id));
       },
-    },
+    }
   );
   const [selected, setSelected] = useState<string>("");
   const education = useAppSelector((state) => state.persistedReducer.education);

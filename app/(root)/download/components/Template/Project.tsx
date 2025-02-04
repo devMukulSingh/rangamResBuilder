@@ -1,5 +1,5 @@
 "use client";
-import { HTMLRenderer } from "@/lib/HTMLRenderer";
+import { HTMLRenderer } from "@/components/commons/HTMLRenderer";
 import { useAppSelector } from "@/redux/hooks/hooks";
 import React from "react";
 

@@ -12,7 +12,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
 import { useEffect, useState } from "react";
 import { Plus, X } from "lucide-react";
 import toast from "react-hot-toast";
-import { Iexperience } from "@/lib/types";
+import { Iexperience } from "@/lib/types/types";
 import Competences from "./formFields/Competences";
 import CompanyName from "./formFields/CompanyName";
 import JobTitle from "./formFields/JobTitle";
@@ -289,7 +289,7 @@ const ExperienceForm = () => {
                   )}
                 </>
               );
-            },
+            }
           )}
 
           <Buttons isSubmitting={isSubmitting} />
