@@ -30,20 +30,20 @@ const StartDate = dynamic(
   () =>
     import(
       "@/app/(root)/builder/(routes)/education/components/formFields/StartDate"
-    )
+    ),
 );
 const EndDate = dynamic(
   () =>
     import(
       "@/app/(root)/builder/(routes)/education/components/formFields/EndDate"
-    )
+    ),
 );
 
 type formFieldValues = z.infer<typeof educationSchema>;
 
 export async function updateResumeData(
   url: string,
-  { arg }: { arg: formFieldValues }
+  { arg }: { arg: formFieldValues },
 ) {
   return await axios.put(url, arg);
 }
@@ -52,7 +52,7 @@ const EducationForm = () => {
   const resumeData = useAppSelector((state) => state.persistedReducer);
   const [expanded, setExpanded] = useState<string | false>("");
   const showSidebarOptions = useAppSelector(
-    (state) => state.commonSlice.showSidebarOptions
+    (state) => state.commonSlice.showSidebarOptions,
   );
   const dispatch = useAppDispatch();
   const education = useAppSelector((state) => state.persistedReducer.education);
@@ -64,7 +64,7 @@ const EducationForm = () => {
       onSuccess(data) {
         dispatch(setUserId(data.data.id));
       },
-    }
+    },
   );
   const form = useForm<z.infer<typeof educationSchema>>({
     resolver: zodResolver(educationSchema),
@@ -105,7 +105,7 @@ const EducationForm = () => {
         name: "Education",
         isValidated: true,
         index: 0,
-      })
+      }),
     );
     try {
       if (!showSidebarOptions) await trigger(resumeData);

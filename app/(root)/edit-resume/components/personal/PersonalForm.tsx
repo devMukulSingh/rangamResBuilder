@@ -26,14 +26,14 @@ const CountryCode = dynamic(
     ),
   {
     loading: () => <FieldSkeleton />,
-  }
+  },
 );
 
 const PersonalForm = () => {
   const dispatch = useAppDispatch();
   type formSchema = z.infer<typeof personalSchema>;
   const personalInfo = useAppSelector(
-    (state) => state.persistedReducer.personalInfo
+    (state) => state.persistedReducer.personalInfo,
   );
 
   const form = useForm<formSchema>({
@@ -59,7 +59,7 @@ const PersonalForm = () => {
         name: "Personal Information",
         isValidated: true,
         index: 0,
-      })
+      }),
     );
   };
   const handleChange = () => {

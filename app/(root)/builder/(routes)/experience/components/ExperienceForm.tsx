@@ -289,7 +289,7 @@ const ExperienceForm = () => {
                   )}
                 </>
               );
-            }
+            },
           )}
 
           <Buttons isSubmitting={isSubmitting} />

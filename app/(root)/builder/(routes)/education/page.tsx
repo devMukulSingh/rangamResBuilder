@@ -5,16 +5,16 @@ const EducationPage = () => {
   return (
     <div
       className="
-flex 
-flex-col
-gap-5 
-border
-min-h-[calc(100vh-6rem)]
-lg:px-20
-md:px-10
-px-5
-py-10
-w-full
+        flex 
+        flex-col
+        gap-5 
+        border
+        min-h-[calc(100vh-6rem)]
+        lg:px-20
+        md:px-10
+        px-5
+        py-10
+        w-full
 "
     >
       <header className="flex flex-col gap-5">

@@ -5,7 +5,7 @@ import { format } from "date-fns";
 
 const Experience = () => {
   const experience = useAppSelector(
-    (state) => state.persistedReducer.experience
+    (state) => state.persistedReducer.experience,
   );
 
   return (

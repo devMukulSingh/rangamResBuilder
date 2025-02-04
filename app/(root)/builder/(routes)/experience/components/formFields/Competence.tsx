@@ -39,7 +39,7 @@ const Competence: React.FC<competenceProps> = ({
   } = form;
 
   const profession = useAppSelector(
-    (state) => state.persistedReducer.personalInfo.profession
+    (state) => state.persistedReducer.personalInfo.profession,
   );
 
   const { isError, error, refetch, isFetching } = useQuery({
@@ -55,7 +55,7 @@ const Competence: React.FC<competenceProps> = ({
         },
       });
       let previousDescription = getValues(
-        `experience.${index}.description`
+        `experience.${index}.description`,
       ).replace("<br>", "");
 
       //description to be added in bullet points, feature
@@ -92,12 +92,12 @@ const Competence: React.FC<competenceProps> = ({
       setValue(`experience.${index}.description`, filteredString);
       setValue(
         `experience.${index}.competences.${competenceIndex}.isSelected`,
-        false
+        false,
       );
     } else {
       setValue(
         `experience.${index}.competences.${competenceIndex}.isSelected`,
-        true
+        true,
       );
       refetch();
     }

@@ -45,13 +45,13 @@ const Competences: FC<IExperienceForm> = ({ form, index }) => {
           ...data,
         ]);
       },
-    }
+    },
   );
   const isFetchingCompetenceDescription = useIsFetching({
     queryKey: ["compDescription"],
   });
   const isCompetencesLoading = useAppSelector(
-    (state) => state.commonSlice.competenceLoading
+    (state) => state.commonSlice.competenceLoading,
   );
   if (isCompetencesLoading || isLoading) return <CompetenceSkeleton />;
   if (error) {

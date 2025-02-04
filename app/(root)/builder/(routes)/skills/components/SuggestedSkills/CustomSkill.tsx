@@ -26,7 +26,7 @@ const CustomSkill = () => {
     resolver: zodResolver(customSkillSchema),
   });
   const skillFromState = useAppSelector(
-    (state) => state.persistedReducer.technicalSkills
+    (state) => state.persistedReducer.technicalSkills,
   );
 
   const onSubmit = (data: formSchema, e?: React.BaseSyntheticEvent) => {
@@ -48,7 +48,7 @@ const CustomSkill = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(
-          (data: formSchema, e?: React.BaseSyntheticEvent) => onSubmit(data, e)
+          (data: formSchema, e?: React.BaseSyntheticEvent) => onSubmit(data, e),
         )}
         className="cols-span-1 sm:col-span-2"
       >

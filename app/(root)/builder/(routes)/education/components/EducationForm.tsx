@@ -3,7 +3,6 @@ import { Form } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/hooks";
 import {
-  IinitialState,
   setEducation,
   setUserId,
 } from "@/redux/slice/userSlice";
@@ -22,17 +21,13 @@ import StartDate from "./formFields/StartDate";
 import EndDate from "./formFields/EndDate";
 import Degree from "./formFields/Degree";
 import CheckboxPursuing from "./formFields/CheckboxPursuing";
-import LinkComp from "@/components/ui/LinkComp";
 import { useRouter } from "next/navigation";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { parseISO } from "date-fns";
-import useSWR from "swr";
 import axios from "axios";
 import useSWRMutation from "swr/mutation";
 import { educationSchema } from "@/lib/schema/formSchemas";
 import Buttons from "./Buttons";
-import { Ieducation } from "@/lib/types/types";
 
 export interface IeducationForm {
   handleChange?: () => void;
@@ -56,7 +51,7 @@ export interface IeducationForm {
 type formFieldValues = z.infer<typeof educationSchema>;
 export async function setResumeData(
   url: string,
-  { arg }: { arg: formFieldValues }
+  { arg }: { arg: formFieldValues },
 ) {
   return await axios.post(url, arg);
 }
@@ -70,7 +65,7 @@ const EducationForm = () => {
       onSuccess(data) {
         dispatch(setUserId(data.data.id));
       },
-    }
+    },
   );
   const [selected, setSelected] = useState<string>("");
   const education = useAppSelector((state) => state.persistedReducer.education);

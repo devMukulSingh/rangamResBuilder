@@ -9,7 +9,7 @@ import {
 } from "@/lib/types/types";
 import { createSlice } from "@reduxjs/toolkit";
 
-export interface IresumeData extends IinitialState { }
+export interface IresumeData extends IinitialState {}
 
 export interface IinitialState {
   userId: string;
